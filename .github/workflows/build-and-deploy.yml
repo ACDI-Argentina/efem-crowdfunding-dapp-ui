@@ -14,6 +14,8 @@ jobs:
           node-version: '10.23.0'
       - run: npm install
       - run: npm run build:staging
+      - name: generate version file
+        run: echo ${{ github.sha }} > build/version.html
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
