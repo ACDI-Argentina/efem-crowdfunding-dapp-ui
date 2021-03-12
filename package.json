@@ -116,7 +116,7 @@
     "start:hybrid": "env-cmd -f .env.hybrid npm-run-all -p watch-css start-js",
     "start:localhost": "env-cmd -f .env.localhost npm-run-all -p watch-css start-js",
     "build:localhost": "NODE_OPTIONS='--max-old-space-size=8192' env-cmd -f .env.localhost npm run build",
-    "build:staging": "NODE_OPTIONS='--max-old-space-size=8192' env-cmd -f .env.staging npm run build",
+    "build:staging": "CI=false NODE_OPTIONS='--max-old-space-size=8192' env-cmd -f .env.staging npm run build",
     "build:production": "NODE_OPTIONS='--max-old-space-size=8192' env-cmd -f .env.production npm run build",
     "serve:localhost": "pm2 serve --name efem-dapp --port 3012 ./build",
     "serve": "npm run build && pm2 serve -s build",
