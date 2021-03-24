@@ -125,7 +125,7 @@ class FormsyImageUploader extends Component {
           name="picture"
           label={t('imageAdd')}
           accept=".png,.jpeg,.jpg"
-          onChange={this.loadAndPreviewImage}
+          changeCallback={this.loadAndPreviewImage}
           help={t('imageAddHelp')}
           validations="minLength: 1"
           validationErrors={{

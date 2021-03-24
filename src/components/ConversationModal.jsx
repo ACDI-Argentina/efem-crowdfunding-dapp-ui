@@ -127,7 +127,7 @@ class ConversationModal extends Component {
   }
 
   triggerRouteBlocking() {
-    const form = this.form.current.formsyForm;
+    const form = this.form.current.formsyForm.current;
     // we only block routing if the form state is not submitted
     this.setState(prevState => ({
       isBlocking:

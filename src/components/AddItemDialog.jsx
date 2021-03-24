@@ -68,7 +68,8 @@ class AddItemDialog extends Component {
     // Formsy doesn't like nesting, even when using Portals
     // So we're manually fetching and submitting the model
     // We need to call getModel here to set values on the MilestoneItem
-    this.form.current.formsyForm.getModel();
+    //this.form.current.formsyForm.getModel();
+    this.form.current.formsyForm.current.getModel();
     // Get MilestoneItem
     this.props.onAddItem(this.state.item);
     this.reset();

@@ -59,7 +59,7 @@ class EditMilestone extends Component {
       isLoading: true,
       isSaving: false,
       formIsValid: false,
-      milestone: new Milestone({}),
+      milestone: new Milestone(),
       isBlocking: false,
     };
 
@@ -94,7 +94,7 @@ class EditMilestone extends Component {
         } else {
           try {
             const milestone = new Milestone();
-            
+
             this.setState({
               isLoading: false,             
               milestone,
@@ -115,18 +115,6 @@ class EditMilestone extends Component {
           ErrorPopup('Something went wrong. Please try again.', err);
         }
       });
-  }
-
-  componentDidUpdate(prevProps) {
-    /*if (prevProps.currentUser !== this.props.currentUser) {
-      this.checkUser().then(() => {
-        if (false
-          //!isOwner(this.state.milestone.managerAddress, this.props.user) ||
-          //!isOwner(this.state.milestone.campaign.managerAddress, this.props.user)
-        )
-          this.props.history.goBack();
-      });
-    }*/
   }
 
   onAddItem(item) {
@@ -264,7 +252,7 @@ class EditMilestone extends Component {
   }
 
   triggerRouteBlocking() {
-    const form = this.form.current.formsyForm;
+    const form = this.form.current.formsyForm.current;
     // we only block routing if the form state is not submitted
     this.setState({ isBlocking: form && (!form.state.formSubmitted || form.state.isSubmitting) });
   }
@@ -275,7 +263,7 @@ class EditMilestone extends Component {
     const { isLoading, isSaving, formIsValid, campaign, isBlocking, milestone } = this.state;
     const { classes } = this.props;
     const { ...rest } = this.props;
-    const fiatAmountTarget = FiatUtils.centToDollar(milestone.fiatAmountTarget);
+    const fiatAmountTarget = FiatUtils.centToDollar(milestone.fiatAmountTarget).toFixed();
 
     return (
       <div id="edit-milestone-view">
@@ -473,7 +461,7 @@ class EditMilestone extends Component {
                                 className="btn btn-info"
                                 formNoValidate
                                 type="submit"
-                                //disabled={isSaving || !formIsValid}
+                                disabled={isSaving || !formIsValid}
                                 isLoading={isSaving}
                                 loadingText="Saving..."
                               >
