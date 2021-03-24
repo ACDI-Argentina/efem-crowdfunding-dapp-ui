@@ -127,6 +127,7 @@ class QuillFormsy extends Component {
           placeholder={placeholder}
           onChange={setValue}
           id="quill-formsy"
+          theme="snow"
         />
         <span className="help-block validation-message">{errorMessage}</span>
       </div>
