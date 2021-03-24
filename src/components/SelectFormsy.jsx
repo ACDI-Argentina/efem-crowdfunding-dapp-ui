@@ -16,12 +16,12 @@ class SelectFormsy extends React.Component {
 
   render() {
     let reqError = '';
-    if (this.props.showRequired()) reqError = 'required';
-    else if (this.props.showError()) reqError = 'error';
+    if (this.props.showRequired) reqError = 'required';
+    else if (this.props.showError) reqError = 'error';
 
     const className = `form-group ${this.props.className} ${reqError}`;
 
-    const errorMessage = this.props.getErrorMessage();
+    const errorMessage = this.props.errorMessage;
 
     const options = this.props.options.map(option => (
       <option
@@ -49,12 +49,12 @@ class SelectFormsy extends React.Component {
     return (
       <div className={`form-group ${className}`}>
         <label htmlFor={this.props.name}>
-          {this.props.label} {this.props.isRequired() ? '*' : null}
+          {this.props.label} {this.props.isRequired ? '*' : null}
           <select
             className="form-control"
             name={this.props.name}
             onChange={this.changeValue}
-            value={this.props.getValue()}
+            value={this.props.value}
             disabled={this.props.disabled}
           >
             {options}
@@ -71,12 +71,12 @@ class SelectFormsy extends React.Component {
 
 SelectFormsy.propTypes = {
   // Formsy proptypes
-  getValue: PropTypes.func.isRequired,
-  setValue: PropTypes.func.isRequired,
-  isRequired: PropTypes.func.isRequired,
-  getErrorMessage: PropTypes.func.isRequired,
-  showError: PropTypes.func.isRequired,
-  showRequired: PropTypes.func.isRequired,
+  //value: PropTypes.func.isRequired,
+  //setValue: PropTypes.func.isRequired,
+  //isRequired: PropTypes.func.isRequired,
+  //getErrorMessage: PropTypes.func.isRequired,
+  //showError: PropTypes.func.isRequired,
+  //showRequired: PropTypes.func.isRequired,
 
   helpText: PropTypes.string,
   name: PropTypes.string,
