@@ -15,7 +15,7 @@ jobs:
       - run: npm install
       - run: npm run build:staging
       - name: generate version file
-        run: echo ${{ github.sha }} > build/version.html
+        run: echo $(date +"%Y-%m-%dT%H:%M:%S%z") - ${{ github.sha }} > build/version.html
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
