@@ -68,7 +68,7 @@ const styles = theme => ({
   logo: {
     width: theme.spacing(6),
     height: theme.spacing(6),
-  },
+  }
 });
 
 export default withStyles(styles)(

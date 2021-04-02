@@ -19,15 +19,18 @@ import TextField from '@material-ui/core/TextField';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import config from '../configuration';
-import TokenBalance from './TokenBalance';
+import TokenUserBalance from './TokenUserBalance';
+import TokenAvatar from './TokenAvatar';
 import Web3Utils from '../lib/blockchain/Web3Utils';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import ProfileCard from './ProfileCard';
 import ProfilePopup from './ProfilePopup';
-
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -42,11 +45,13 @@ class Donate extends Component {
     this.state = {
       open: false,
       showProfilePopup: false,
+      tokenAddress: config.nativeToken.address,
       amount: 0
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleDonate = this.handleDonate.bind(this);
+    this.handleTokenChange = this.handleTokenChange.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
     this.handleAmountBlur = this.handleAmountBlur.bind(this);
     this.open = this.open.bind(this);
@@ -61,6 +66,13 @@ class Donate extends Component {
     this.close();
   };
 
+  handleTokenChange = (event) => {
+    this.setState({
+      tokenAddress: event.target.value,
+      amount: 0
+    });
+  };
+
   handleAmountChange(event) {
     this.setState({
       amount: event.target.value === '' ? '' : Number(event.target.value)
@@ -72,22 +84,22 @@ class Donate extends Component {
     const { currentUser } = this.props;
     const max = Web3Utils.weiToEther(currentUser.balance);
     if (amount < 0) {
-      this.setState({amount: 0,});
+      this.setState({ amount: 0 });
     } else if (amount > max) {
-      this.setState({amount: max});
+      this.setState({ amount: max });
     }
   };
 
   handleDonate() {
-    const { amount } = this.state;
-    const { entityId, currentUser, tokenAddress, addDonation, rate } = this.props;
-    
+    const { tokenAddress, amount } = this.state;
+    const { entityId, currentUser, addDonation, rate } = this.props;
+
     const amountWei = Web3Utils.etherToWei(amount);
     const centsFiatAmount = amountWei.dividedBy(rate);
     const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
 
-    if(dollarsAmount > ANONYMOUS_DONATION_THRESHOLD && !currentUser.hasCompleteProfile()){ 
-      this.setState({showProfilePopup:true})
+    if (dollarsAmount > ANONYMOUS_DONATION_THRESHOLD && !currentUser.hasCompleteProfile()) {
+      this.setState({ showProfilePopup: true })
     } else {
       const donation = new Donation();
       donation.entityId = entityId;
@@ -95,7 +107,7 @@ class Donate extends Component {
       donation.amount = Web3Utils.etherToWei(amount);
       donation.giverAddress = currentUser.address;
       addDonation(donation);
-      this.close(); 
+      this.close();
     }
   };
 
@@ -112,7 +124,7 @@ class Donate extends Component {
   }
 
   render() {
-    const { open, amount, showProfilePopup } = this.state;
+    const { open, tokenAddress, amount, showProfilePopup } = this.state;
     const { title, description, entityCard, enabled, currentUser, classes, t, rate } = this.props;
 
     // TODO Definir parametrización de donación.
@@ -126,14 +138,25 @@ class Donate extends Component {
       size: 31
     };
 
-    let tokenConfig = config.tokens[this.props.tokenAddress];
-    let tokenSymbol = tokenConfig.symbol;
+    let tokenSelectedSymbol = config.tokens[tokenAddress].symbol;
 
     let donationIsValid = false;
     if (amount > 0) {
       donationIsValid = true;
     }
-    let amountWei = Web3Utils.etherToWei(amount||0);
+    let amountWei = Web3Utils.etherToWei(amount || 0);
+
+    let tokenOptions = Object.keys(config.tokens).map(tokenAddress => 
+      <MenuItem value={tokenAddress}>
+        <ListItemAvatar>
+          <TokenAvatar tokenAddress={tokenAddress} />
+        </ListItemAvatar>
+        <Typography variant="inherit" noWrap>
+          {config.tokens[tokenAddress].symbol}
+        </Typography>
+      </MenuItem>
+    );
+
     return (
       <div>
         {enabled && (
@@ -181,7 +204,10 @@ class Donate extends Component {
                     {description}
                   </Typography>
                   <ProfileCard address={currentUser.address} />
-                  <TokenBalance balance={balance}></TokenBalance>
+                  <TokenUserBalance tokenAddress={tokenAddress} />
+                  <Select value={tokenAddress} onChange={this.handleTokenChange} >
+                    {tokenOptions}
+                  </Select>
                   <TextField
                     id="donate-amount"
                     label={t('donateAmount')}
@@ -197,24 +223,24 @@ class Donate extends Component {
                     }
                     InputProps={
                       {
-                        startAdornment: <InputAdornment position="start">{tokenSymbol}</InputAdornment>
+                        startAdornment: <InputAdornment position="start">{tokenSelectedSymbol}</InputAdornment>
                       }
                     }
                     inputProps={inputProps}
                   />
-                  <FiatAmountByToken amount={amountWei}/>
+                  <FiatAmountByToken amount={amountWei} />
                 </Grid>
               </Grid>
             </Grid>
           </div>
-        {showProfilePopup && 
+          {showProfilePopup &&
             (
-            <ProfilePopup 
-              open={true}
-              requireFullProfile={true}
-              handleClose = {() => {this.setState({showProfilePopup:false})}}
-              handleSubmit = {() => {this.setState({showProfilePopup:false})}}
-             ></ProfilePopup> 
+              <ProfilePopup
+                open={true}
+                requireFullProfile={true}
+                handleClose={() => { this.setState({ showProfilePopup: false }) }}
+                handleSubmit={() => { this.setState({ showProfilePopup: false }) }}
+              ></ProfilePopup>
             )}
         </Dialog>
 
@@ -252,6 +278,10 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(0.5),
+  },
+  logo: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   }
 });
 
