@@ -46,6 +46,12 @@ class Donate extends Component {
       open: false,
       showProfilePopup: false,
       tokenAddress: config.nativeToken.address,
+      donateInputProps: {
+        step: 0.0001,
+        min: 0,
+        max: Web3Utils.weiToEther(props.currentUser.balance),
+        size: 31
+      },
       amount: 0
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -67,9 +73,16 @@ class Donate extends Component {
   };
 
   handleTokenChange = (event) => {
+
+    let tokenAddress = event.target.value;
+    let donateInputProps = this.state.donateInputProps;
+    let balance = this.props.currentUser.tokenBalances[tokenAddress];
+    donateInputProps.max = balance;
+
     this.setState({
-      tokenAddress: event.target.value,
-      amount: 0
+      tokenAddress: tokenAddress,
+      amount: 0,
+      donateInputProps: donateInputProps
     });
   };
 
@@ -124,19 +137,8 @@ class Donate extends Component {
   }
 
   render() {
-    const { open, tokenAddress, amount, showProfilePopup } = this.state;
-    const { title, description, entityCard, enabled, currentUser, classes, t, rate } = this.props;
-
-    // TODO Definir parametrización de donación.
-    const balance = currentUser.balance;
-
-    const max = Web3Utils.weiToEther(balance);
-    const inputProps = {
-      step: 0.0001,
-      min: 0,
-      max: max,
-      size: 31
-    };
+    const { open, tokenAddress, amount, donateInputProps, showProfilePopup } = this.state;
+    const { title, description, entityCard, enabled, currentUser, classes, t } = this.props;
 
     let tokenSelectedSymbol = config.tokens[tokenAddress].symbol;
 
@@ -146,13 +148,13 @@ class Donate extends Component {
     }
     let amountWei = Web3Utils.etherToWei(amount || 0);
 
-    let tokenOptions = Object.keys(config.tokens).map(tokenAddress => 
-      <MenuItem value={tokenAddress}>
+    let tokenOptions = Object.keys(config.tokens).map(tokenKey => 
+      <MenuItem value={config.tokens[tokenKey].address}>
         <ListItemAvatar>
-          <TokenAvatar tokenAddress={tokenAddress} />
+          <TokenAvatar tokenAddress={config.tokens[tokenKey].address} />
         </ListItemAvatar>
         <Typography variant="inherit" noWrap>
-          {config.tokens[tokenAddress].symbol}
+          {config.tokens[tokenKey].symbol}
         </Typography>
       </MenuItem>
     );
@@ -226,7 +228,7 @@ class Donate extends Component {
                         startAdornment: <InputAdornment position="start">{tokenSelectedSymbol}</InputAdornment>
                       }
                     }
-                    inputProps={inputProps}
+                    inputProps={donateInputProps}
                   />
                   <FiatAmountByToken amount={amountWei} />
                 </Grid>

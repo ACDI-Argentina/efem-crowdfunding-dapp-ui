@@ -11,6 +11,7 @@ import { feathersClient } from '../feathersClient';
 import Web3Utils from "./Web3Utils";
 import { history } from '../helpers';
 import { utils } from 'web3';
+import erc20ContractApi from '../../lib/blockchain/ERC20ContractApi';
 
 const POLL_ACCOUNTS_INTERVAL = 3000;
 
@@ -213,7 +214,7 @@ class AppTransaction extends React.Component {
           this.initCurrentUser();
 
           // After account is complete, get the balance
-          this.getAccountBalance(account);
+          this.getAccountBalances(account);
 
           // Watch for account change
           this.pollAccountUpdates();
@@ -235,7 +236,7 @@ class AppTransaction extends React.Component {
         console.log("fallback wallet address:", this.state.account);
 
         // After account is complete, get the balance
-        this.getAccountBalance(account);
+        this.getAccountBalances(account);
 
         // Watch for account change
         // TODO: This type of wallet browser probably doesn't inject window.ethereum
@@ -258,9 +259,10 @@ class AppTransaction extends React.Component {
   }
 
   updateCurrentUserBalance = async () => {
-    const { accountBalance } = this.state;
+    const { accountBalance, accountTokenBalances } = this.state;
     this.props.updateCurrentUserBalance({
-      balance: accountBalance
+      balance: accountBalance,
+      tokenBalances: accountTokenBalances
     });
   }
 
@@ -272,37 +274,49 @@ class AppTransaction extends React.Component {
     this.setState({ modals });
   };
 
-  getAccountBalance = async account => {
+  getAccountBalances = async account => {
     const localAccount = account ? account : this.state.account;
     if (localAccount) {
+
       try {
+
+        let accountTokenBalances = this.state.accountTokenBalances;
+
+        // Se obtiene el balance del token nativo.
         await this.state.web3.eth
           .getBalance(localAccount)
           .then(accountBalance => {
             if (!isNaN(accountBalance)) {
-              /*accountBalance = this.state.web3.utils.fromWei(
-                accountBalance,
-                "ether"
-              );
-              accountBalance = parseFloat(accountBalance);*/
               accountBalance = new BigNumber(accountBalance);
-
               // Only update if changed
               if (!accountBalance.isEqualTo(this.state.accountBalance)) {
                 this.setState({ accountBalance });
-                this.updateCurrentUserBalance();
-                this.determineAccountLowBalance();
+                accountTokenBalances[config.nativeToken.address] = balance;
+                //this.determineAccountLowBalance();
               }
             } else {
               this.setState({ accountBalance: "--" });
-              console.log("account balance FAILED", accountBalance);
+              console.error("Error al obtener el balance.", accountBalance);
             }
           });
+
+        // Se obtienen los balances de cada ERC20 token.        
+        Object.keys(config.tokens).map(tokenKey => {
+          if(!config.tokens[tokenKey].isNative) {
+            let address = config.tokens[tokenKey].address;
+            let balance = await erc20ContractApi.getBalance(address, localAccount);
+            accountTokenBalances[address] = balance;
+          }            
+        });
+        this.setState({ accountTokenBalances: accountTokenBalances });
+
+        this.updateCurrentUserBalance();
+
       } catch (error) {
-        console.log("Failed to get account balance." + error);
+        console.error("Error al obtener los balances.", error);
       }
     } else {
-      console.log("No account on which to get balance");
+      console.warn("No hay cuenta para obtener los balances.");
       return false;
     }
   };
@@ -530,7 +544,7 @@ class AppTransaction extends React.Component {
           requiresUpdate = true;
         }
 
-        this.getAccountBalance();
+        this.getAccountBalances();
 
         if (requiresUpdate) {
           clearInterval(accountInterval);
@@ -1117,6 +1131,7 @@ class AppTransaction extends React.Component {
     contract: {},
     account: null,
     accountBalance: null,
+    accountTokenBalances: [],
     accountBalanceLow: null,
     web3: null,
     web3Fallback: null,

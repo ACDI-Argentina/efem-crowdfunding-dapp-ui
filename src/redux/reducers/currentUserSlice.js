@@ -22,8 +22,9 @@ export const currentUserSlice = createSlice({
       return state;
     },
     updateCurrentUserBalance: (state, action) => {
-      const { balance } = action.payload;
+      const { balance, tokenBalances } = action.payload;
       state.balance = balance;
+      state.tokenBalances = tokenBalances;
       return state;
     },
     setCurrentUser: (state, action) => {

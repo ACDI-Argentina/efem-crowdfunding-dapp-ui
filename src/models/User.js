@@ -17,6 +17,7 @@ import Status from './Status';
  *
  * @attribute address       Ethereum address of the user
  * @attribute balance       Balance de la cuenta del usuario medida en Wei.
+ * @attribute tokenBalances Balances de los diferentes tokens de la cuenta del usuario medida en Wei.
  * @attribute avatar        URL to user avatar
  * @attribute commitTime
  * @attribute email         Email address of the user
@@ -39,6 +40,7 @@ class User extends Model {
       url = '',
       roles = [],
       balance = new BigNumber(0),
+      tokenBalances = [],
       authenticated = false,
       registered = false, //exists on mongodb?
       status = User.UNREGISTERED.toStore()
@@ -53,6 +55,7 @@ class User extends Model {
       this._url = url;
       this._roles = roles;
       this._balance = balance;
+      this._tokenBalances = tokenBalances;
       this._authenticated = authenticated;
       this._registered = registered;
       this._status = StatusUtils.build(status.name, status.isLocal);
@@ -96,6 +99,7 @@ class User extends Model {
       avatar: this._avatar,
       roles: this._roles,
       balance: this._balance,
+      tokenBalances: this._tokenBalances;
       authenticated: this._authenticated,
       registered: this._registered,
       status: this._status.toStore()
@@ -230,6 +234,14 @@ class User extends Model {
   set balance(value) {
     this.checkInstanceOf(value, BigNumber, 'balance');
     this._balance = value;
+  }
+
+  get tokenBalance() {
+    return this._tokenBalance;
+  }
+
+  set tokenBalance(value) {
+    this._tokenBalance = tokenBalance;
   }
 
   hasRole(role){
