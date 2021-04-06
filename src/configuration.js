@@ -216,4 +216,7 @@ config.anonymousDonationThreshold = REACT_APP_ANONYMOUS_DONATION_THRESHOLD ||  c
 
 
 //config.sendErrors = ['develop', 'release', 'beta', 'rsk_testnet'].includes(REACT_APP_ENVIRONMENT);
+
+console.log('Configuración', config);
+
 export default config;

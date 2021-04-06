@@ -1175,7 +1175,7 @@ class CrowdfundingContractApi {
             try {
                 const exchangeRateProvider = await this.getExchangeRateProvider();
                 const rate = await exchangeRateProvider.methods.getExchangeRate(config.nativeToken.address).call();
-                console.log(`RBTC/USD rate: ${rate}`);
+                console.log('RBTC/USD rate', config.nativeToken.address, rate);
                 // TODO Obtener otros Exchage Rates desde el smart contract.
                 let exchangeRates = [];
 

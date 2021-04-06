@@ -52,13 +52,13 @@ class QuillFormsy extends Component {
     const {
       label,
       helpText,
-      getValue,
+      value,
       placeholder,
       setValue,
       isRequired,
       isPristine,
       isValid,
-      getErrorMessage,
+      errorMessage,
     } = this.props;
 
     // Set a specific className based on the validation
@@ -67,14 +67,14 @@ class QuillFormsy extends Component {
     // passed to the input. showError() is true when the
     // value typed is invalid
     let errorClass = '';
-    if (!isPristine()) {
-      if (isValid()) errorClass = 'is-valid';
+    if (!isPristine) {
+      if (isValid) errorClass = 'is-valid';
       else errorClass = 'has-error';
     }
 
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
-    const errorMessage = getErrorMessage();
+    //const errorMessage = errorMessage;
 
     const modules = {
       toolbar: [
@@ -112,7 +112,7 @@ class QuillFormsy extends Component {
           }}
         />
         <div className="label">
-          {label} {isRequired() ? '*' : null}
+          {label} {isRequired ? '*' : null}
         </div>
         <small className="form-text">{helpText}</small>
         <ReactQuill
@@ -122,11 +122,12 @@ class QuillFormsy extends Component {
           }}
           modules={modules}
           formats={formats}
-          value={getValue()}
+          value={value}
           name="description"
           placeholder={placeholder}
           onChange={setValue}
           id="quill-formsy"
+          theme="snow"
         />
         <span className="help-block validation-message">{errorMessage}</span>
       </div>
@@ -136,12 +137,12 @@ class QuillFormsy extends Component {
 
 QuillFormsy.propTypes = {
   // Formsy proptypes
-  getValue: PropTypes.func.isRequired,
-  setValue: PropTypes.func.isRequired,
-  isRequired: PropTypes.func.isRequired,
-  isPristine: PropTypes.func.isRequired,
-  isValid: PropTypes.func.isRequired,
-  getErrorMessage: PropTypes.func.isRequired,
+  //value: PropTypes.func.isRequired,
+  //setValue: PropTypes.func.isRequired,
+  //isRequired: PropTypes.func.isRequired,
+  //isPristine: PropTypes.func.isRequired,
+  //isValid: PropTypes.func.isRequired,
+  //getErrorMessage: PropTypes.func.isRequired,
 
   helpText: PropTypes.string,
   placeholder: PropTypes.string,

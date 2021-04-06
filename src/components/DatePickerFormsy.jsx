@@ -30,14 +30,14 @@ class DatePickerFormsy extends React.Component {
     // passed to the input. showError() is true when the
     // value typed is invalid
     let reqError = '';
-    if (this.props.showRequired()) reqError = 'required';
+    if (this.props.showRequired) reqError = 'required';
     else if (this.props.showError()) reqError = 'error';
 
     const className = `form-group ${this.props.className} ${reqError}`;
 
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
-    const errorMessage = this.props.getErrorMessage();
+    const errorMessage = this.props.errorMessage;
 
     return (
       <div className={`form-group ${className}`}>
@@ -69,7 +69,7 @@ DatePickerFormsy.propTypes = {
   // Formsy proptypes
   getValue: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
-  getErrorMessage: PropTypes.func.isRequired,
+  //getErrorMessage: PropTypes.func.isRequired,
   showRequired: PropTypes.func.isRequired,
   showError: PropTypes.func.isRequired,
   startDate: PropTypes.shape({}),

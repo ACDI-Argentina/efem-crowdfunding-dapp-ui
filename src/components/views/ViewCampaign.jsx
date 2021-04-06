@@ -146,7 +146,7 @@ class ViewCampaign extends Component {
         tabContent: (
           <span>
             <img src={campaign.imageCidUrl} style={{width: '100%', height: 'auto'}} alt="Campaign image" />
-            <DateTimeViewer value={campaign.createdAt} style={{textAlign: 'right'}}/>
+            <DateTimeViewer value={campaign.createdAt} style={{textAlign: 'right', marginBottom: '1em' }}/>
             {ReactHtmlParser(campaign.description)}
             {campaign.beneficiaries && (
               <p>
@@ -297,9 +297,9 @@ class ViewCampaign extends Component {
                     <ResponsiveMasonry
                       columnsCountBreakPoints={{
                         0: 1,
-                        470: 2,
-                        900: 3,
-                        1200: 4,
+                        470: 1,
+                        900: 1,
+                        1200: 1,
                       }}
                     >
                       <Masonry gutter="10px">

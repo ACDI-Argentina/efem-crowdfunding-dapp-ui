@@ -1,0 +1,28 @@
+name: Build and deploy dapp - production
+
+on:
+  push:
+    tags: [ '[0-9]+.[0-9]+.[0-9]+' ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV   
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: '10.23.0'
+      - run: npm install
+      - run: npm run build:production
+      - name: generate version file
+        run: echo $(date +"%Y-%m-%dT%H:%M:%S%z") - ${{env.RELEASE_VERSION}} - ${{ github.sha }}  > build/version.html
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          path: build/
+          remote_path: /home/deployer/${{env.RELEASE_VERSION}}
+          remote_host: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          remote_user: ${{ secrets.PRODUCTION_DEPLOY_USER }}
+          remote_key: ${{ secrets.PRODUCTION_DEPLOY_KEY }}

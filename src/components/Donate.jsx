@@ -172,10 +172,10 @@ class Donate extends Component {
           </AppBar>
           <div className={classes.root}>
             <Grid container spacing={3}>
-              <Grid item xs={5}>
+              <Grid item sm={5} xs={12}>
                 {entityCard}
               </Grid>
-              <Grid item xs={7}>
+              <Grid item sm={7} xs={12}>
                 <Grid container>
                   <Typography variant="subtitle1" gutterBottom>
                     {description}
