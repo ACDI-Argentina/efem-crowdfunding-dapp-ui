@@ -3,7 +3,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import BigNumber from 'bignumber.js';
 import config from '../configuration';
-import CryptoUtils from 'utils/CryptoUtils';
+import TokenUtils from 'utils/TokenUtils';
 
 /**
  * Presenta una cantidad de dinero crypto.
@@ -12,7 +12,7 @@ import CryptoUtils from 'utils/CryptoUtils';
 class CryptoAmount extends Component {
 
     render() {
-        return CryptoUtils.format(this.props.tokenAddress, this.props.amount)
+        return TokenUtils.format(this.props.tokenAddress, this.props.amount)
     }
 }
 

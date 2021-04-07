@@ -12,6 +12,7 @@ import Web3Utils from "./Web3Utils";
 import { history } from '../helpers';
 import { utils } from 'web3';
 import erc20ContractApi from '../../lib/blockchain/ERC20ContractApi';
+const { Map } = require('immutable');
 
 const POLL_ACCOUNTS_INTERVAL = 3000;
 
@@ -285,27 +286,27 @@ class AppTransaction extends React.Component {
         // Se obtiene el balance del token nativo.
         await this.state.web3.eth
           .getBalance(localAccount)
-          .then(accountBalance => {
-            if (!isNaN(accountBalance)) {
-              accountBalance = new BigNumber(accountBalance);
+          .then(balance => {
+            if (!isNaN(balance)) {
+              balance = new BigNumber(balance);
               // Only update if changed
-              if (!accountBalance.isEqualTo(this.state.accountBalance)) {
-                this.setState({ accountBalance });
-                accountTokenBalances[config.nativeToken.address] = balance;
+              if (!balance.isEqualTo(this.state.accountBalance)) {
+                this.setState({ accountBalance: balance });
+                accountTokenBalances.set(config.nativeToken.address, balance);
                 //this.determineAccountLowBalance();
               }
             } else {
               this.setState({ accountBalance: "--" });
-              console.error("Error al obtener el balance.", accountBalance);
+              console.error("Error al obtener el balance.", balance);
             }
           });
 
         // Se obtienen los balances de cada ERC20 token.        
-        Object.keys(config.tokens).map(tokenKey => {
+        Object.keys(config.tokens).map(async tokenKey => {
           if(!config.tokens[tokenKey].isNative) {
             let address = config.tokens[tokenKey].address;
             let balance = await erc20ContractApi.getBalance(address, localAccount);
-            accountTokenBalances[address] = balance;
+            accountTokenBalances.set(address, balance);
           }            
         });
         this.setState({ accountTokenBalances: accountTokenBalances });
@@ -1131,7 +1132,7 @@ class AppTransaction extends React.Component {
     contract: {},
     account: null,
     accountBalance: null,
-    accountTokenBalances: [],
+    accountTokenBalances: Map(),
     accountBalanceLow: null,
     web3: null,
     web3Fallback: null,

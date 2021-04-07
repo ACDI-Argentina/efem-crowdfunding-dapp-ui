@@ -16,7 +16,7 @@ class ERC20ContractApi {
             return new BigNumber(balance);
         } catch (err) {
             console.error("Error obteniendo balance de ERC20 Token.", err);
-            return 0;
+            return new BigNumber(0);
         }
     }    
 

@@ -12,13 +12,14 @@ import CryptoAmount from './CryptoAmount'
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import { connect } from 'react-redux'
 import TokenAvatar from './TokenAvatar'
+import TokenUtils from 'utils/TokenUtils'
 
 class TokenUserBalance extends Component {
 
   render() {
     const { tokenAddress, currentUser, classes, t } = this.props;
 
-    let tokenConfig = config.tokens[tokenAddress];
+    let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
     let symbol = tokenConfig.symbol;
 
     const balance = currentUser.balance;

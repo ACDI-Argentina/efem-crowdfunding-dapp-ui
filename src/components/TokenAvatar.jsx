@@ -5,12 +5,13 @@ import { withTranslation } from 'react-i18next';
 import config from '../configuration';
 import PropTypes from 'prop-types';
 import ipfsService from '../ipfs/IpfsService';
+import TokenUtils from 'utils/TokenUtils';
 
 class TokenAvatar extends Component {
 
   render() {
     const { tokenAddress, classes, t } = this.props;
-    let tokenConfig = config.tokens[tokenAddress];
+    let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
     let symbol = tokenConfig.symbol;
     let logo = ipfsService.resolveUrl(tokenConfig.logoCid);
 

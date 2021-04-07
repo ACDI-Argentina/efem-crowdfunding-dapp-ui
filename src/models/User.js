@@ -40,7 +40,7 @@ class User extends Model {
       url = '',
       roles = [],
       balance = new BigNumber(0),
-      tokenBalances = [],
+      tokenBalances = new Map(),
       authenticated = false,
       registered = false, //exists on mongodb?
       status = User.UNREGISTERED.toStore()
@@ -99,7 +99,7 @@ class User extends Model {
       avatar: this._avatar,
       roles: this._roles,
       balance: this._balance,
-      tokenBalances: this._tokenBalances;
+      tokenBalances: this._tokenBalances,
       authenticated: this._authenticated,
       registered: this._registered,
       status: this._status.toStore()
@@ -236,12 +236,12 @@ class User extends Model {
     this._balance = value;
   }
 
-  get tokenBalance() {
-    return this._tokenBalance;
+  get tokenBalances() {
+    return this._tokenBalances;
   }
 
-  set tokenBalance(value) {
-    this._tokenBalance = tokenBalance;
+  set tokenBalances(value) {
+    this._tokenBalances = value;
   }
 
   hasRole(role){

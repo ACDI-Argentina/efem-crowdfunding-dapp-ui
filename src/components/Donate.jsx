@@ -31,6 +31,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import TokenUtils from 'utils/TokenUtils';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -140,7 +141,7 @@ class Donate extends Component {
     const { open, tokenAddress, amount, donateInputProps, showProfilePopup } = this.state;
     const { title, description, entityCard, enabled, currentUser, classes, t } = this.props;
 
-    let tokenSelectedSymbol = config.tokens[tokenAddress].symbol;
+    let tokenSelectedSymbol = TokenUtils.getTokenConfig(tokenAddress).symbol;
 
     let donationIsValid = false;
     if (amount > 0) {

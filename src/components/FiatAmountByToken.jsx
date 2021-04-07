@@ -14,7 +14,6 @@ const FiatAmountByToken = ({ tokenAddress = nativeToken.address, amount: tokenAm
     const [fiatAmount, setFiatAmount] = useState();
     const [tokenAmount, setTokenAmount] = useState();
     const { rate } = useSelector(state => selectExchangeRateByToken(state, tokenAddress)); 
-    const {symbol} = config.tokens[tokenAddress];
 
 
     useEffect(() => {
