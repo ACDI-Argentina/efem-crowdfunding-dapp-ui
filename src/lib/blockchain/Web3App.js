@@ -155,6 +155,7 @@ class AppTransaction extends React.Component {
   // Initialize a web3 provider
   // TODO: Make async work
   initWeb3 = async () => {
+    console.log("INIT WEB3")
     this.checkModernBrowser();
 
     let web3 = await getWeb3();
@@ -167,7 +168,7 @@ class AppTransaction extends React.Component {
       this.checkNetwork();
     });
 
-    console.log("Finished initWeb3");
+    console.log("%cFinished initWeb3","color:green");
   };
 
   initContract = async (address, abi) => {
@@ -201,26 +202,31 @@ class AppTransaction extends React.Component {
     // First try EIP 1102 Connect method
     if (window.ethereum) {
       try {
+        const { ethereum } = window;
         // Request account access if needed
-        await window.ethereum.enable().then(wallets => {
-          const account = wallets[0];
-
-          this.closeConnectionPendingModal();
-          this.setState({ account });
-
-          console.log("wallet address:", this.state.account);
-
-          this.initCurrentUser();
-
-          // After account is complete, get the balance
-          this.getAccountBalance(account);
-
-          // Watch for account change
-          this.pollAccountUpdates();
+        //https://eips.ethereum.org/EIPS/eip-1102
+        //https://eips.ethereum.org/EIPS/eip-1193
+        const response = await ethereum.request({
+          method: "eth_requestAccounts",
         });
+    
+        const wallets = response || [];
+        console.log(wallets);
+        const account = wallets[0];
+
+        this.closeConnectionPendingModal();
+        this.setState({ account });
+
+        this.initCurrentUser();
+        // After account is complete, get the balance
+        this.getAccountBalance(account);
+
+        // Watch for account change
+        this.pollAccountUpdates(); //TODO: cambiar esto por un handler ethereum.on("accountsChanged",..
+
       } catch (error) {
-        // User denied account access...
         console.log("User cancelled connect request. Error:", error);
+        this.closeConnectionPendingModal();
 
         // Reject Connect
         this.rejectAccountConnect(error);
@@ -986,7 +992,7 @@ class AppTransaction extends React.Component {
 
 
   authenticateIfPossible = async (currentUser) => {
-    
+
     if (currentUser && currentUser.address && currentUser.authenticated) {
       return true;
     }

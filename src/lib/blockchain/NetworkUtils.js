@@ -1,5 +1,4 @@
 import Bowser from 'bowser';
-import getWeb3 from './getWeb3';
 
 // Validates user's browser is web3 capable
 const funcs = {
@@ -22,11 +21,6 @@ const funcs = {
 
     return web3Capable;
   },
-
-  /*getNetworkId = async () => {
-    const web3 = await getWeb3();
-    return web3.eth.net.getId();
-  },*/
 
   // Returns a network name based on a network ID
   getEthNetworkNameById: networkId => {

@@ -22,7 +22,10 @@ import config from '../../configuration';
  */
 class CrowdfundingContractApi {
 
-    constructor() { }
+    constructor() {
+        this.crowdfunding = undefined;
+        this.networkPromise = undefined;
+    }
 
     async canPerformRole(address, role) {
         try {
@@ -56,7 +59,7 @@ class CrowdfundingContractApi {
 
             const clientId = dac.clientId;
 
-            const method = crowdfunding.methods.saveDac(infoCid,dacId);
+            const method = crowdfunding.methods.saveDac(infoCid, dacId);
 
             const gasEstimated = await method.estimateGas({
                 from: dac.delegateAddress
@@ -67,37 +70,37 @@ class CrowdfundingContractApi {
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
-                    key: isNew?'transactionCreatedTitleCreateDac':'transactionCreatedTitleUpdateDac',
+                    key: isNew ? 'transactionCreatedTitleCreateDac' : 'transactionCreatedTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 createdSubtitle: {
-                    key:isNew?'transactionCreatedSubtitleCreateDac':'transactionCreatedSubtitleUpdateDac',
+                    key: isNew ? 'transactionCreatedSubtitleCreateDac' : 'transactionCreatedSubtitleUpdateDac',
                 },
                 pendingTitle: {
-                    key: isNew? 'transactionPendingTitleCreateDac':'transactionPendingTitleUpdateDac',
+                    key: isNew ? 'transactionPendingTitleCreateDac' : 'transactionPendingTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 confirmedTitle: {
-                    key: isNew?'transactionConfirmedTitleCreateDac':'transactionConfirmedTitleUpdateDac',
+                    key: isNew ? 'transactionConfirmedTitleCreateDac' : 'transactionConfirmedTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 confirmedDescription: {
-                    key: isNew?'transactionConfirmedDescriptionCreateDac':'transactionConfirmedDescriptionUpdateDac'
+                    key: isNew ? 'transactionConfirmedDescriptionCreateDac' : 'transactionConfirmedDescriptionUpdateDac'
                 },
                 failuredTitle: {
-                    key: isNew?'transactionFailuredTitleCreateDac':'transactionFailuredTitleUpdateDac',
+                    key: isNew ? 'transactionFailuredTitleCreateDac' : 'transactionFailuredTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 failuredDescription: {
-                    key: isNew?'transactionFailuredDescriptionCreateDac':'transactionFailuredDescriptionUpdateDac'
+                    key: isNew ? 'transactionFailuredDescriptionCreateDac' : 'transactionFailuredDescriptionUpdateDac'
                 }
             });
 
@@ -268,7 +271,7 @@ class CrowdfundingContractApi {
             managerAddress: users[0],
             reviewerAddress: users[1],
             beneficiaries: beneficiaries,
-            categories: categories, 
+            categories: categories,
             status: this.mapCampaignStatus(parseInt(status))
         });
     }
@@ -491,37 +494,37 @@ class CrowdfundingContractApi {
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
-                    key: isNew?'transactionCreatedTitleCreateMilestone':'transactionCreatedTitleUpdateMilestone',
+                    key: isNew ? 'transactionCreatedTitleCreateMilestone' : 'transactionCreatedTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 createdSubtitle: {
-                    key: isNew?'transactionCreatedSubtitleCreateMilestone':'transactionCreatedSubtitleUpdateMilestone',
+                    key: isNew ? 'transactionCreatedSubtitleCreateMilestone' : 'transactionCreatedSubtitleUpdateMilestone',
                 },
                 pendingTitle: {
-                    key: isNew?'transactionPendingTitleCreateMilestone':'transactionPendingTitleUpdateMilestone',
+                    key: isNew ? 'transactionPendingTitleCreateMilestone' : 'transactionPendingTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 confirmedTitle: {
-                    key: isNew?'transactionConfirmedTitleCreateMilestone':'transactionConfirmedTitleUpdateMilestone',
+                    key: isNew ? 'transactionConfirmedTitleCreateMilestone' : 'transactionConfirmedTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 confirmedDescription: {
-                    key: isNew?'transactionConfirmedDescriptionCreateMilestone':'transactionConfirmedDescriptionUpdateMilestone',
+                    key: isNew ? 'transactionConfirmedDescriptionCreateMilestone' : 'transactionConfirmedDescriptionUpdateMilestone',
                 },
                 failuredTitle: {
-                    key: isNew?'transactionFailuredTitleCreateMilestone':'transactionFailuredTitleUpdateMilestone',
+                    key: isNew ? 'transactionFailuredTitleCreateMilestone' : 'transactionFailuredTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 failuredDescription: {
-                    key: isNew?'transactionFailuredDescriptionCreateMilestone':'transactionFailuredDescriptionUpdateMilestone',
+                    key: isNew ? 'transactionFailuredDescriptionCreateMilestone' : 'transactionFailuredDescriptionUpdateMilestone',
                 }
             });
 
@@ -1258,18 +1261,28 @@ class CrowdfundingContractApi {
     }
 
     async getGasPrice() {
+        console.log("CrowdfundingContractApi (getGasPrice)");
         const web3 = await getWeb3();
         const gasPrice = await web3.eth.getGasPrice();
         return new BigNumber(gasPrice);
     }
 
     async getCrowdfunding() {
-        const network = await getNetwork();
-        const { crowdfunding } = network;
-        return crowdfunding;
+        if (this.crowdfunding) {
+            return this.crowdfunding;
+        } else if(this.networkPromise){
+            const { crowdfunding } = await this.networkPromise;
+            this.crowdfunding = crowdfunding;
+        } else if(!this.networkPromise){
+            console.log(`%c [${new Date().toISOString()}]GET CROWDFUNDING`, "color:violet");
+            this.networkPromise = getNetwork();
+            const { crowdfunding } = await this.networkPromise;
+            this.crowdfunding = crowdfunding;
+        }
+        return this.crowdfunding;
     }
 
-    async getExchangeRateProvider(){
+    async getExchangeRateProvider() {
         const network = await getNetwork();
         const { exchangeRateProvider } = network;
         return exchangeRateProvider;

@@ -2,21 +2,25 @@ import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-cro
 import getWeb3 from './getWeb3';
 import config from '../../configuration';
 
+let web3Promise;
 let network;
 
-export default async () => {
-
-  if (!network) {
-
-    const web3 = await getWeb3();
-
-    let newNetwork = Object.assign({}, config);
-
-    newNetwork.crowdfunding = new web3.eth.Contract(CrowdfundingAbi, newNetwork.crowdfundingAddress);
-    newNetwork.exchangeRateProvider = new web3.eth.Contract(ExchangeRateProviderAbi, newNetwork.exchangeRateProviderAddress);
-
-    network = newNetwork;
+const getNetwork = async () => {
+  if (network) {
+    return network;
+  } else if (!web3Promise) {
+    console.log(`%c[${new Date().toISOString()}] get Network -`, "color:tomato"); 
+    web3Promise = getWeb3();
   }
+  const web3 = await web3Promise;
 
+  let newNetwork = Object.assign({}, config);
+
+  newNetwork.crowdfunding = new web3.eth.Contract(CrowdfundingAbi, newNetwork.crowdfundingAddress);
+  newNetwork.exchangeRateProvider = new web3.eth.Contract(ExchangeRateProviderAbi, newNetwork.exchangeRateProviderAddress);
+
+  network = newNetwork;
   return network;
 };
+
+export default getNetwork;
