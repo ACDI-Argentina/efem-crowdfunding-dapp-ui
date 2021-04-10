@@ -33,6 +33,7 @@ const signUpSwal = () => {
  */
 class MainMenu extends Component {
   
+  
   componentDidMount() {
     // when route changes, close the menu
     history.listen(() => this.setState({ showMobileMenu: false }));
@@ -46,10 +47,23 @@ class MainMenu extends Component {
     const { classes, currentUser } = this.props;
     const registered =  currentUser && currentUser.registered || false;
     const { validProvider, isEnabled, failedToLoad } = this.context;
+
+    const addr = currentUser?.address;
     
     return (
       <List className={classes.list}>
         
+        <ListItem className={classes.listItem}>
+          
+          { currentUser.address && (
+            `${addr.slice(0,4)}...${addr.slice(-4)}`
+          )}
+          {!currentUser.address && (
+            <button onClick={() => this.context.initAccount()}>
+              Connect
+            </button> 
+          )}
+        </ListItem>
         <ListItem className={classes.listItem}>
           <LanguageSelector ></LanguageSelector>
         </ListItem>

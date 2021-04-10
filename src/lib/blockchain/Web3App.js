@@ -155,7 +155,6 @@ class AppTransaction extends React.Component {
   // Initialize a web3 provider
   // TODO: Make async work
   initWeb3 = async () => {
-    console.log("INIT WEB3")
     this.checkModernBrowser();
 
     let web3 = await getWeb3();
@@ -168,7 +167,7 @@ class AppTransaction extends React.Component {
       this.checkNetwork();
     });
 
-    console.log("%cFinished initWeb3","color:green");
+    console.log("Finished initWeb3");
   };
 
   initContract = async (address, abi) => {
@@ -342,7 +341,6 @@ class AppTransaction extends React.Component {
   };
 
   validateAccount = async () => {
-    console.log("validateAccount");
     // Get account wallet if none exist
     if (!this.state.account) {
       await this.initAccount();
@@ -512,7 +510,7 @@ class AppTransaction extends React.Component {
     this.setState({ network }, () => {
       // Is there a wallet?
       if (!this.state.web3Fallback) {
-        this.initAccount();
+        //this.initAccount(); // A este init account tenemos que llamarlo como resultado de una acción del usuario 
       }
     });
   };
