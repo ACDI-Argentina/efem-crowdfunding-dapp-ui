@@ -5,10 +5,10 @@ import Web3App from '../Web3App'
 import { connect } from 'react-redux'
 import config from '../../../configuration'
 import CircularProgressWithLabel from '../../../components/CircularProgressWithLabel'
-import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { Flash } from 'rimble-ui';
+import { Box } from '@material-ui/core';
+
 /**
  * https://reactjs.org/docs/state-and-lifecycle.html
  */
@@ -62,31 +62,31 @@ class TransactionProgressBanner extends React.Component {
           ({
             network
           }) =>
-            <Flash variant="info">
-              <Grid container
-                spacing={2}
-                alignItems="center">
-                <Grid item xs={1}>
-                  <CircularProgressWithLabel value={progress} />
-                </Grid>
-                <Grid item xs={9}>
-                  <Typography variant="h6">
-                    {t(transaction.pendingTitle.key, transaction.pendingTitle.args)}
-                  </Typography>
-                  <Typography variant="body2">
-                    {t('transactionEstimatedTimeValue', {
-                      transactionEstimatedTime: config.network.transactionEstimatedTime
-                    })}
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <Link href={config.network.explorer + 'tx/' + transaction.hash} onClick={preventDefault}>
+            <Box
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center">
+              <Box my={2}>
+                <CircularProgressWithLabel value={progress} />
+              </Box>
+              <Box my={1}>
+                <Typography variant="subtitle1">
+                  {t(transaction.pendingTitle.key, transaction.pendingTitle.args)}
+                </Typography>
+                <Typography variant="caption">
+                  {t('transactionEstimatedTimeValue', {
+                    transactionEstimatedTime: config.network.transactionEstimatedTime
+                  })}
+                </Typography>
+              </Box>
+              <Box my={1}>
+                <Link href={config.network.explorer + 'tx/' + transaction.hash} onClick={preventDefault}>
+                  <Typography variant="caption">
                     {t('transactionExplore')}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Flash>
-
+                  </Typography>
+                </Link>
+              </Box>
+            </Box>
         }
       </Web3App.Consumer>
     );

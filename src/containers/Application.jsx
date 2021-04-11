@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext, Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import { Helmet } from 'react-helmet';
@@ -38,8 +38,10 @@ import { fetchExchangeRates } from '../redux/reducers/exchangeRatesSlice'
 import MessageViewer from '../components/MessageViewer';
 import SwitchRoutes from './SwitchRoutes';
 import initExchangeRateListener from "../lib/blockchain/listeners/exchangeRateListener"
-import Web3App from "../lib/blockchain/Web3App";
 import TransactionViewer from 'components/TransactionViewer';
+import Web3Banner from 'lib/blockchain/Web3Banner';
+import Web3App from 'lib/blockchain/Web3App';
+import { AppTransactionContext } from 'lib/blockchain/Web3App';
 
 /* global document */
 /**
@@ -105,6 +107,7 @@ class Application extends Component {
     const { web3Loading, whiteListLoading } = this.state;
     const { currentUser } = this.props;
     const userLoading = false; //TODO: pass to a currentUserSlice
+    const { network, web3Fallback } = this.context;/*useContext(AppTransactionContext);*/
 
     return (
       <ErrorBoundary>
@@ -170,6 +173,12 @@ class Application extends Component {
                                       closeOnClick
                                       pauseOnHover
                                     />
+                                    <Web3Banner
+                                      currentNetwork={network.current.id}
+                                      requiredNetwork={config.network.requiredId}
+                                      isCorrectNetwork={network.isCorrectNetwork}
+                                      onWeb3Fallback={web3Fallback}
+                                    />
                                   </div>
                                 </Router>
                               </ConversionRateProvider>
@@ -202,5 +211,7 @@ const mapDispatchToProps = {
   fetchUsers,
   fetchExchangeRates
 }
+
+Application.contextType = AppTransactionContext;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application)

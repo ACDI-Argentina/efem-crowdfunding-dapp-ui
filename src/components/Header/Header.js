@@ -15,8 +15,6 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import { NavLink } from "react-router-dom";
-import Web3Banner from '../../lib/blockchain/Web3Banner';
-import { AppTransactionContext } from '../../lib/blockchain/Web3App';
 import config from '../../configuration';
 
 const useStyles = makeStyles(styles);
@@ -66,7 +64,6 @@ export default function Header(props) {
   const brandComponent = <NavLink className={classes.title} to="/">
     {brand}
   </NavLink>;
-  const { network, web3Fallback } = useContext(AppTransactionContext);
 
   return (
 
@@ -82,13 +79,6 @@ export default function Header(props) {
               brandComponent
             )}
         </div>}
-
-        <Web3Banner
-          currentNetwork={network.current.id}
-          requiredNetwork={config.network.requiredId}
-          isCorrectNetwork={network.isCorrectNetwork}
-          onWeb3Fallback={web3Fallback}
-        />
 
         <Hidden smDown implementation="css">
           {rightLinks}

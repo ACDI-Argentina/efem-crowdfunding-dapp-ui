@@ -176,12 +176,12 @@
     "status": "Estado",
 
     "web3InstallMetaMask": "Instale MetaMask",
-    "web3NotWeb3BrowserTitle": "Su browser no soporta nuestras características blockchain",
-    "web3NotWeb3BrowserDescription": "Cambie a Brave, FireFox, Opera, o Chrome",
-    "web3NotWeb3BrowserDescriptionMobile": "Intente con un wallet browser como Status, Coinbase wallet o Cipher",
-    "web3WrongNetworkTitle": "Cambie a la red {{requiredNetwork}} en MetaMask",
-    "web3WrongNetworkDescription": "Para usar nuestras funcionalidades blockchain, debes estar en la red {{requiredNetwork}}. Estás actualmente en la red {{currentNetwork}}.",
-    "web3NoNetwork": "Instale la extensión del explorador MetaMask usar nuestras funcionalidades blockchain",
+    "web3NotWeb3BrowserTitle": "Su navegador no soporta nuestras características blockchain.",
+    "web3NotWeb3BrowserDescription": "Cambie a:",
+    "web3NotWeb3BrowserDescriptionMobile": "Intente con un wallet browser:",
+    "web3WrongNetworkTitle": "Cambie a la red {{requiredNetwork}}",
+    "web3WrongNetworkDescription": "Para usar nuestras funcionalidades blockchain, debes cambiar a la red {{requiredNetwork}} en Metamask.",
+    "web3NoNetwork": "Instale la extensión del explorador MetaMask para usar nuestras funcionalidades blockchain",
 
     "web3ConnectionPendingTitle": "Conecte una cuenta RSK",
     "web3ConnectionPendingDescriptionMetaMask": "Confirme la solicitud que acaba de aparecer. Si no puede ver una solicitud, abra su extensión MetaMask.",
