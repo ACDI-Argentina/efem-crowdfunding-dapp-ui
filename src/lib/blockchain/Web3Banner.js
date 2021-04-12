@@ -9,6 +9,9 @@ import { connect } from 'react-redux'
 import { selectLastCreated, selectFirstPending, deleteTransaction } from '../../redux/reducers/transactionsSlice';
 import TransactionProgressBanner from './components/TransactionProgressBanner';
 import { Box } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import styles from "assets/jss/material-kit-react/components/web3BannerStyle.js";
+
 
 const WrongNetwork = ({
   currentNetwork,
@@ -258,14 +261,12 @@ class Web3Banner extends Component {
     const { currentNetwork,
       requiredNetwork,
       onWeb3Fallback,
-      transactionFirstPending } = this.props;
+      transactionFirstPending, classes } = this.props;
     const {
       notWeb3CapableBrowserMessage,
       noNetworkAvailableMessage,
       onWrongNetworkMessage,
     } = this.props.children;
-
-    const bkgImg = require("assets/img/notificacion-bkg.png");
 
     console.log(this.state.browserIsWeb3Capable === false);
     console.log(onWeb3Fallback === true || currentNetwork === null);
@@ -281,27 +282,11 @@ class Web3Banner extends Component {
     return (
         <Box
           alignItems="flex-end"
+          className={classes.notificationLayout}
           style={{
-            display: display,
-            position: 'fixed',
-            bottom: '0',
-            zIndex: '10',
-            textAlign: 'center',
-            backgroundImage: "url(" + bkgImg + ")",
-            backgroundPosition: "0% 100%",
-            backgroundSize: "auto 100%",
-            heigth: '300px',
-            maxHeigth: '300px',
-            width: '100%',
-          }}
-        >
-          <Box style={{
-              width: '320px',
-              minWidth: '300px',
-              padding: '16px 28px',
-              marginLeft: '56px',
-              height: '250px'
-            }}>
+            display: display}}
+          >
+          <Box className={classes.notificationBox}>
               {this.state.browserIsWeb3Capable === false ? (
                 <NotWeb3Browser
                   notWeb3CapableBrowserMessage={notWeb3CapableBrowserMessage}
@@ -320,7 +305,6 @@ class Web3Banner extends Component {
                 transaction={transactionFirstPending}>
               </TransactionProgressBanner>
           </Box>
-          <Box flexGrow={1}></Box>
         </Box>
     );
   }
@@ -336,5 +320,5 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = { deleteTransaction }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withTranslation()(Web3Banner)
-)
+  (withStyles(styles)(withTranslation() (Web3Banner)))
+);
