@@ -150,7 +150,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/status.svg")}
-                    aria-label="Warning"
+                    aria-label="Status"
                     size="28px"
                   />
                 </a>
@@ -158,7 +158,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/coinbase.png")}
-                    aria-label="Warning"
+                    aria-label="Coinbase"
                     size="28px"
                   />
                 </a>
@@ -166,7 +166,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/cipher.jpg")}
-                    aria-label="Warning"
+                    aria-label="Cipher"
                     size="28px"
                   />
                 </a>
@@ -180,7 +180,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/opera.svg")}
-                    aria-label="Warning"
+                    aria-label="Opera"
                     size="28px"
                   />
                 </a>
@@ -188,7 +188,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/brave.svg")}
-                    aria-label="Warning"
+                    aria-label="Brave"
                     size="28px"
                   />
                 </a>
@@ -196,7 +196,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/firefox.svg")}
-                    aria-label="Warning"
+                    aria-label="Firefox"
                     size="28px"
                   />
                 </a>
@@ -204,7 +204,7 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
                   style={{margin: "1em"}}>
                   <Image
                     src={require("assets/img/logos/chrome.svg")}
-                    aria-label="Warning"
+                    aria-label="Chrome"
                     size="28px"
                   />
                 </a>
@@ -219,6 +219,12 @@ const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
 };
 
 class Web3Banner extends Component {
+
+  constructor(props) {
+    super(props);
+    this.toogleShowNotificationIcon = this.toogleShowNotificationIcon.bind(this);
+  }
+
   static propTypes = {
     currentNetwork: PropTypes.number,
     requiredNetwork: PropTypes.number,
@@ -257,6 +263,10 @@ class Web3Banner extends Component {
     }
   }
 
+  toogleShowNotificationIcon(val) {
+    this.setState({ showNotificationIcon: val });
+  }
+
   render() {
     const { currentNetwork,
       requiredNetwork,
@@ -268,25 +278,37 @@ class Web3Banner extends Component {
       onWrongNetworkMessage,
     } = this.props.children;
 
-    console.log(this.state.browserIsWeb3Capable === false);
-    console.log(onWeb3Fallback === true || currentNetwork === null);
-    console.log(this.props.isCorrectNetwork === false);
-    console.log(transactionFirstPending !== undefined);
-    
     const show = this.state.browserIsWeb3Capable === false ||
         (onWeb3Fallback === true || currentNetwork === null) ||
         this.props.isCorrectNetwork === false ||
         transactionFirstPending !== undefined;
-    const display = show ? 'flex' : 'none';
+    const boxDisplay = show ? 'flex' : 'none';
 
     return (
-        <Box
-          alignItems="flex-end"
-          className={classes.notificationLayout}
-          style={{
-            display: display}}
+      <div>
+        {this.state.showNotificationIcon ?
+          <Image
+            src={require("assets/img/icons/warning-icon.png")}
+            aria-label="Warning"
+            className={classes.toggleShowButton}
+            onClick={() => this.toogleShowNotificationIcon(false)}
+          />
+          : null}
+        {!this.state.showNotificationIcon ?
+          <Box
+            alignItems="flex-end"
+            className={classes.notificationLayout}
+            style={{
+              display: boxDisplay
+            }}
           >
-          <Box className={classes.notificationBox}>
+            <Image
+              src={require("assets/img/icons/close-icon.png")}
+              aria-label="Close"
+              className={classes.closeButton}
+              onClick={() => this.toogleShowNotificationIcon(true)}
+            />
+            <Box className={classes.notificationBox}>
               {this.state.browserIsWeb3Capable === false ? (
                 <NotWeb3Browser
                   notWeb3CapableBrowserMessage={notWeb3CapableBrowserMessage}
@@ -304,8 +326,10 @@ class Web3Banner extends Component {
               <TransactionProgressBanner
                 transaction={transactionFirstPending}>
               </TransactionProgressBanner>
+            </Box>
           </Box>
-        </Box>
+          : null}
+      </div>
     );
   }
 }

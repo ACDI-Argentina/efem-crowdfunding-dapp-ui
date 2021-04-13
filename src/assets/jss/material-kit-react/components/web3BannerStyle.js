@@ -33,10 +33,34 @@ const web3BannerStyle = theme => ({
       width: '100%',
       height: '200px',
       minWidth: '100%',
-      padding: '1em 0',
+      padding: '1em',
       marginLeft: '0',
     }
+  },
+  toggleShowButton: {
+    width: '70px',
+    position: 'fixed',
+    bottom: '60px',
+    left: '60px',
+    cursor: 'pointer',
+    zIndex: '50',
+    [theme.breakpoints.down("sm")]: {
+      width: '60px',
+    }
+  },
+  closeButton: {
+    width: '30px',
+    position: 'fixed',
+    bottom: '210px',
+    left: '100px',
+    cursor: 'pointer',
+    [theme.breakpoints.down("sm")]: {
+      top: '10px',
+      left: '10px',
+      position: 'absolute'
+    }
   }
+
 });
 
 export default web3BannerStyle;
