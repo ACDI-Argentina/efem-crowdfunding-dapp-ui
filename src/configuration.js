@@ -80,6 +80,9 @@ const configurations = {
         showDecimals: 5
       }
     },
+    tokenExchangeRate: {
+      updateInterval: 60000
+    },
     anonymousDonationThreshold: 5000
   },
   rsk_testnet: {
@@ -141,6 +144,9 @@ const configurations = {
         showDecimals: 5
       }
     },
+    tokenExchangeRate: {
+      updateInterval: 60000
+    },
     anonymousDonationThreshold: 10000
   },
   rsk_mainnet: {
@@ -201,6 +207,9 @@ const configurations = {
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
         showDecimals: 5
       }
+    },
+    tokenExchangeRate: {
+      updateInterval: 60000
     },
     anonymousDonationThreshold: 10000
   }  

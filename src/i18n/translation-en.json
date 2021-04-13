@@ -260,6 +260,14 @@
     "transactionFailuredTitleDonate": "The donation was not confirmed",
     "transactionFailuredDescriptionDonate": "A failure occurred during donation.",
 
+    "transactionCreatedTitleApproveTokenDonate": "Confirm your approve to transfer your tokens as donation in the wallet",
+    "transactionCreatedSubtitleApproveTokenDonate": "Double check the details here – your approval can't be refunded.",
+    "transactionPendingTitleApproveTokenDonate": "Approving token donation...",
+    "transactionConfirmedTitleApproveTokenDonate": "The approval donation has been confirmed",
+    "transactionConfirmedDescriptionApproveTokenDonate": "Thank you very much for your approval!",
+    "transactionFailuredTitleApproveTokenDonate": "Token donation approval was not confirmed",
+    "transactionFailuredDescriptionApproveTokenDonate": "A failure occurred during approve donation.",
+
     "transactionCreatedTitleTransfer": "Confirm your funds transfer in the wallet",
     "transactionCreatedSubtitleTransfer": "Double check the details here – your funds transfer can't be refunded.",
     "transactionPendingTitleTransfer": "Transferring funds...",

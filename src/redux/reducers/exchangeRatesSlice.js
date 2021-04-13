@@ -9,10 +9,12 @@ export const exchangeRatesSlice = createSlice({
       // Solo se obtiene el estado actual.
     },
     updateExchangeRate: (state, action) => {
-      const exchangeRate = action.payload.toStore();
-      const idx = state.findIndex(exr => exr.tokenAddress === exchangeRate.tokenAddress);
+      const exchangeRateStore = action.payload.toStore();
+      const idx = state.findIndex(exr => exr.tokenAddress === exchangeRateStore.tokenAddress);
       if(idx > -1){
-        state[idx] = exchangeRate;
+        state[idx] = exchangeRateStore;
+      } else {
+        state.push(exchangeRateStore);
       }
     },
     resetExchangeRates: (state, action) => {

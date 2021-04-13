@@ -231,7 +231,7 @@ class Donate extends Component {
                     }
                     inputProps={donateInputProps}
                   />
-                  <FiatAmountByToken amount={amountWei} />
+                  <FiatAmountByToken tokenAddress={tokenAddress} amount={amountWei} />
                 </Grid>
               </Grid>
             </Grid>

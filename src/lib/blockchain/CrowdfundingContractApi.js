@@ -16,6 +16,7 @@ import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
 import getWeb3 from './getWeb3';
 import config from '../../configuration';
+import erc20ContractApi from './ERC20ContractApi';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -56,7 +57,7 @@ class CrowdfundingContractApi {
 
             const clientId = dac.clientId;
 
-            const method = crowdfunding.methods.saveDac(infoCid,dacId);
+            const method = crowdfunding.methods.saveDac(infoCid, dacId);
 
             const gasEstimated = await method.estimateGas({
                 from: dac.delegateAddress
@@ -67,37 +68,37 @@ class CrowdfundingContractApi {
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
-                    key: isNew?'transactionCreatedTitleCreateDac':'transactionCreatedTitleUpdateDac',
+                    key: isNew ? 'transactionCreatedTitleCreateDac' : 'transactionCreatedTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 createdSubtitle: {
-                    key:isNew?'transactionCreatedSubtitleCreateDac':'transactionCreatedSubtitleUpdateDac',
+                    key: isNew ? 'transactionCreatedSubtitleCreateDac' : 'transactionCreatedSubtitleUpdateDac',
                 },
                 pendingTitle: {
-                    key: isNew? 'transactionPendingTitleCreateDac':'transactionPendingTitleUpdateDac',
+                    key: isNew ? 'transactionPendingTitleCreateDac' : 'transactionPendingTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 confirmedTitle: {
-                    key: isNew?'transactionConfirmedTitleCreateDac':'transactionConfirmedTitleUpdateDac',
+                    key: isNew ? 'transactionConfirmedTitleCreateDac' : 'transactionConfirmedTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 confirmedDescription: {
-                    key: isNew?'transactionConfirmedDescriptionCreateDac':'transactionConfirmedDescriptionUpdateDac'
+                    key: isNew ? 'transactionConfirmedDescriptionCreateDac' : 'transactionConfirmedDescriptionUpdateDac'
                 },
                 failuredTitle: {
-                    key: isNew?'transactionFailuredTitleCreateDac':'transactionFailuredTitleUpdateDac',
+                    key: isNew ? 'transactionFailuredTitleCreateDac' : 'transactionFailuredTitleUpdateDac',
                     args: {
                         dacTitle: dac.title
                     }
                 },
                 failuredDescription: {
-                    key: isNew?'transactionFailuredDescriptionCreateDac':'transactionFailuredDescriptionUpdateDac'
+                    key: isNew ? 'transactionFailuredDescriptionCreateDac' : 'transactionFailuredDescriptionUpdateDac'
                 }
             });
 
@@ -268,7 +269,7 @@ class CrowdfundingContractApi {
             managerAddress: users[0],
             reviewerAddress: users[1],
             beneficiaries: beneficiaries,
-            categories: categories, 
+            categories: categories,
             status: this.mapCampaignStatus(parseInt(status))
         });
     }
@@ -491,37 +492,37 @@ class CrowdfundingContractApi {
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
-                    key: isNew?'transactionCreatedTitleCreateMilestone':'transactionCreatedTitleUpdateMilestone',
+                    key: isNew ? 'transactionCreatedTitleCreateMilestone' : 'transactionCreatedTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 createdSubtitle: {
-                    key: isNew?'transactionCreatedSubtitleCreateMilestone':'transactionCreatedSubtitleUpdateMilestone',
+                    key: isNew ? 'transactionCreatedSubtitleCreateMilestone' : 'transactionCreatedSubtitleUpdateMilestone',
                 },
                 pendingTitle: {
-                    key: isNew?'transactionPendingTitleCreateMilestone':'transactionPendingTitleUpdateMilestone',
+                    key: isNew ? 'transactionPendingTitleCreateMilestone' : 'transactionPendingTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 confirmedTitle: {
-                    key: isNew?'transactionConfirmedTitleCreateMilestone':'transactionConfirmedTitleUpdateMilestone',
+                    key: isNew ? 'transactionConfirmedTitleCreateMilestone' : 'transactionConfirmedTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 confirmedDescription: {
-                    key: isNew?'transactionConfirmedDescriptionCreateMilestone':'transactionConfirmedDescriptionUpdateMilestone',
+                    key: isNew ? 'transactionConfirmedDescriptionCreateMilestone' : 'transactionConfirmedDescriptionUpdateMilestone',
                 },
                 failuredTitle: {
-                    key: isNew?'transactionFailuredTitleCreateMilestone':'transactionFailuredTitleUpdateMilestone',
+                    key: isNew ? 'transactionFailuredTitleCreateMilestone' : 'transactionFailuredTitleUpdateMilestone',
                     args: {
                         milestoneTitle: milestone.title
                     }
                 },
                 failuredDescription: {
-                    key: isNew?'transactionFailuredDescriptionCreateMilestone':'transactionFailuredDescriptionUpdateMilestone',
+                    key: isNew ? 'transactionFailuredDescriptionCreateMilestone' : 'transactionFailuredDescriptionUpdateMilestone',
                 }
             });
 
@@ -558,7 +559,7 @@ class CrowdfundingContractApi {
                     transactionUtils.updateTransaction(transaction);
 
                     error.milestone = milestone;
-                    console.error(`Error procesando transacción de almacenamiento de dac.`, error);
+                    console.error(`Error procesando transacción de almacenamiento de milestone.`, error);
                     subscriber.error(error);
                 });
         });
@@ -644,6 +645,21 @@ class CrowdfundingContractApi {
      * @param donation a almacenar.
      */
     saveDonation(donation) {
+        if (donation.tokenAddress === config.tokens.rbtc.address) {
+            // Donación en token nativo
+            return this.saveDonationNative(donation);
+        } else {
+            // Donación en ERC20 token
+            return this.saveDonationToken(donation);
+        }
+    }
+
+    /**
+     * Almacena una Donación Nativa en el Smart Contarct.
+     * 
+     * @param donation a almacenar.
+     */
+    saveDonationNative(donation) {
 
         return new Observable(async subscriber => {
 
@@ -724,8 +740,118 @@ class CrowdfundingContractApi {
                     transactionUtils.updateTransaction(transaction);
 
                     error.donation = donation;
-                    console.error(`Error procesando transacción de almacenamiento de dac.`, error);
+                    console.error(`Error procesando transacción de almacenamiento de donación.`, error);
                     subscriber.error(error);
+                });
+        });
+    }
+
+    /**
+     * Almacena una Donacón de ERC20 Token en el Smart Contarct.
+     * 
+     * La donación con ERC20 Token requiere de la aprobación previa para que
+     * el smart contract de Crowdfunding pueda transferir los fondos al vault
+     * en nombre del donante. 
+     * 
+     * @param donation a almacenar.
+     */
+    saveDonationToken(donation) {
+
+        let thisApi = this;
+
+        return new Observable(async subscriber => {
+
+            erc20ContractApi.approve(
+                donation.tokenAddress,
+                config.crowdfundingAddress,
+                donation.amount,
+                donation.giverAddress).subscribe(async approved => {
+
+                    if (approved) {
+
+                        // Se aprobó la transferencia de fondos desde el token.
+
+                        const crowdfunding = await this.getCrowdfunding();
+
+                        let clientId = donation.clientId;
+
+                        const method = crowdfunding.methods.donate(
+                            donation.entityId,
+                            donation.tokenAddress,
+                            donation.amount);
+
+                        const gasEstimated = await method.estimateGas({
+                            from: donation.giverAddress
+                        });
+                        const gasPrice = await this.getGasPrice();
+
+                        let transaction = transactionUtils.addTransaction({
+                            gasEstimated: new BigNumber(gasEstimated),
+                            gasPrice: gasPrice,
+                            createdTitle: {
+                                key: 'transactionCreatedTitleDonate'
+                            },
+                            createdSubtitle: {
+                                key: 'transactionCreatedSubtitleDonate'
+                            },
+                            pendingTitle: {
+                                key: 'transactionPendingTitleDonate'
+                            },
+                            confirmedTitle: {
+                                key: 'transactionConfirmedTitleDonate'
+                            },
+                            confirmedDescription: {
+                                key: 'transactionConfirmedDescriptionDonate'
+                            },
+                            failuredTitle: {
+                                key: 'transactionFailuredTitleDonate'
+                            },
+                            failuredDescription: {
+                                key: 'transactionFailuredDescriptionDonate'
+                            }
+                        });
+
+                        const promiEvent = method.send({
+                            from: donation.giverAddress
+                        });
+
+                        promiEvent
+                            .once('transactionHash', (hash) => { // La transacción ha sido creada.
+
+                                transaction.submit(hash);
+                                transactionUtils.updateTransaction(transaction);
+
+                                donation.txHash = hash;
+                                subscriber.next(donation);
+                            })
+                            .once('confirmation', (confNumber, receipt) => {
+
+                                transaction.confirme();
+                                transactionUtils.updateTransaction(transaction);
+
+                                // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
+                                // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
+                                const idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
+                                thisApi.getDonationById(idFromEvent).then(donation => {
+                                    donation.clientId = clientId;
+                                    subscriber.next(donation);
+                                });
+                                entityUtils.refreshEntity(donation.entityId);
+                            })
+                            .on('error', function (error) {
+
+                                transaction.fail();
+                                transactionUtils.updateTransaction(transaction);
+
+                                error.donation = donation;
+                                console.error(`Error procesando transacción de almacenamiento de donación.`, error);
+                                subscriber.error(error);
+                            });
+
+                    } else {
+                        // No se aprobó la transferencia de fondos desde el token.
+                        subscriber.error('No se aprobó la transferencia de fondos desde el token.');
+                    }
                 });
         });
     }
@@ -1269,7 +1395,7 @@ class CrowdfundingContractApi {
         return crowdfunding;
     }
 
-    async getExchangeRateProvider(){
+    async getExchangeRateProvider() {
         const network = await getNetwork();
         const { exchangeRateProvider } = network;
         return exchangeRateProvider;
