@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from "styled-components";
 import { NavLink, withRouter } from 'react-router-dom';
 import { history } from '../lib/helpers';
 import { connect } from 'react-redux';
@@ -11,6 +12,30 @@ import CustomDropdown from './CustomDropdown/CustomDropdown';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { withStyles } from '@material-ui/core/styles';
 import { AppTransactionContext } from 'lib/blockchain/Web3App';
+
+
+
+const AddressLabel = styled.div`
+  font-weight: bold;
+  font-size: 16px;
+  color: #53a653;
+  cursor: pointer;
+  padding: 15px;
+`
+const ConnectButton = styled.button`
+  margin: 10px;
+  background-color: #53a653;
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 0px;
+  color: white;
+  text-transform: capitalize;
+  font-weight: bold;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+`;
 
 const signUpSwal = () => {
   React.swal({
@@ -56,13 +81,14 @@ class MainMenu extends Component {
         <ListItem className={classes.listItem}>
           
           { currentUser.address && (
-            `${addr.slice(0,4)}...${addr.slice(-4)}`
+            <AddressLabel>{`${addr.slice(0,4)}...${addr.slice(-4)}`}</AddressLabel>
           )}
           {!currentUser.address && (
-            <button onClick={() => this.context.initAccount()}>
+            <ConnectButton onClick={() => this.context.initAccount()}>
               Connect
-            </button> 
+            </ConnectButton> 
           )}
+          
         </ListItem>
         <ListItem className={classes.listItem}>
           <LanguageSelector ></LanguageSelector>
