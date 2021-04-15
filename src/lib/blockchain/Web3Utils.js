@@ -53,7 +53,7 @@ class Web3Utils {
    * https://github.com/rsksmart/RSKIPs/blob/master/IPs/RSKIP60.md
    * 
    */
-function toChecksumAddress(address) {
+export function toChecksumAddress(address) {
   if(address == null && address == undefined) {
     return null;
   }

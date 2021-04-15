@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
 import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
 
-const Wrapper = styled.div`
-  
-`;
+const Wrapper = styled.div``;
 
 const AddressLabel = styled.div`
   font-weight: bold;
@@ -14,12 +13,12 @@ const AddressLabel = styled.div`
   color: #53a653;
   cursor: pointer;
   padding: 3px 20px;
-  border:1px solid #53a653;
-  background-color:#48d24838;
+  border: 1px solid #53a653;
+  background-color: #48d24838;
   border-radius: 24px;
 `;
 const ConnectButton = styled.button`
-  font-size:16px;
+  font-size: 16px;
   margin: 10px;
   background-color: #53a653;
   cursor: pointer;
@@ -35,15 +34,14 @@ const ConnectButton = styled.button`
 
 const Connect = ({}) => {
   const currentUser = useSelector(selectCurrentUser);
-  const addr = currentUser?.address;
+  const addr = toChecksumAddress(currentUser?.address);
   const { initAccount } = useContext(AppTransactionContext);
 
   return (
     <Wrapper>
       {currentUser?.address && (
-        <AddressLabel 
-          title={currentUser?.address}>
-            {`${addr.slice(0, 4)}...${addr.slice(-4)}`}
+        <AddressLabel title={addr}>
+          {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
         </AddressLabel>
       )}
       {!currentUser.address && <ConnectButton onClick={() => initAccount()}>Connect</ConnectButton>}
