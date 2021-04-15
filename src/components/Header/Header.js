@@ -16,6 +16,7 @@ import Menu from "@material-ui/icons/Menu";
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import { NavLink } from "react-router-dom";
 import config from '../../configuration';
+import Connect from "components/Connect";
 
 const useStyles = makeStyles(styles);
 
@@ -80,7 +81,10 @@ export default function Header(props) {
             )}
         </div>}
 
+        <Connect/>
+
         <Hidden smDown implementation="css">
+
           {rightLinks}
         </Hidden>
         <Hidden mdUp>
