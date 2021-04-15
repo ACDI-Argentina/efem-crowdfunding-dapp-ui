@@ -28,6 +28,7 @@ import ProfileCard from './ProfileCard';
 import ProfilePopup from './ProfilePopup';
 
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
+import { AppTransactionContext } from 'lib/blockchain/Web3App';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -54,7 +55,15 @@ class Donate extends Component {
   }
 
   handleClickOpen() {
-    this.open();
+    const {currentUser} = this.props;
+    if(currentUser.address){
+      this.open();
+    } else {
+      this.context.initAccount()
+          .then(() =>this.open())
+          .catch(err => console.log(err));
+    }
+    
   };
 
   handleClose() {
@@ -263,6 +272,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = { addDonation }
+
+Donate.contextType = AppTransactionContext;
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(
