@@ -150,7 +150,8 @@ class Donate extends Component {
     let amountWei = Web3Utils.etherToWei(amount || 0);
 
     let tokenOptions = Object.keys(config.tokens).map(tokenKey => 
-      <MenuItem value={config.tokens[tokenKey].address}>
+      <MenuItem key={config.tokens[tokenKey].address}
+          value={config.tokens[tokenKey].address}>
         <ListItemAvatar>
           <TokenAvatar tokenAddress={config.tokens[tokenKey].address} />
         </ListItemAvatar>

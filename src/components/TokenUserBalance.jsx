@@ -22,7 +22,10 @@ class TokenUserBalance extends Component {
     let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
     let symbol = tokenConfig.symbol;
 
-    const balance = currentUser.balance;
+    let balance = currentUser.balance;
+    if(!tokenConfig.isNative) {
+      balance = currentUser.tokenBalances[tokenAddress];
+    }
 
     return (
       <ListItem alignItems="flex-start" className={classes.root}>

@@ -5,6 +5,7 @@ const {
   REACT_APP_NODE_CONNECTION_URL,
   REACT_APP_CROWDFUNDING_ADDRESS,
   REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS,
+  REACT_APP_TOKEN_RIF_ADDRESS,
   REACT_APP_TOKEN_DOC_ADDRESS,
   REACT_APP_LIQUIDPLEDGING_ADDRESS,
   REACT_APP_CAMPAIGN_FACTORY_ADDRESS,
@@ -72,8 +73,15 @@ const configurations = {
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
         showDecimals: 5
       },
-      doc: {
+      rif: { // ERC677 Token
         address: '0x1111111111111111111111111111111111111111',
+        isNative: false,
+        symbol: 'dRIF',
+        logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
+        showDecimals: 5
+      },
+      doc: {
+        address: '0x2222222222222222222222222222222222222222',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
@@ -134,6 +142,13 @@ const configurations = {
         isNative: true,
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
+        showDecimals: 5
+      },
+      rif: { // ERC677 Token
+        address: '0x19f64674d8a5b4e652319f5e239efd3bc969a1fe',
+        isNative: false,
+        symbol: 'tRIF',
+        logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
         showDecimals: 5
       },
       doc: {
@@ -200,13 +215,22 @@ const configurations = {
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
         showDecimals: 5
       },
+      rif: { // ERC677 Token
+        address: '0x2acc95758f8b5f583470ba265eb685a8f45fc9d5',
+        isNative: false,
+        symbol: 'RIF',
+        logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
+        showDecimals: 5
+      },
       doc: {
-        address: '0x1111111111111111111111111111111111111111',
+        address: '0x2222222222222222222222222222222222222222',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
         showDecimals: 5
       }
+
+      
     },
     tokenExchangeRate: {
       updateInterval: 60000
@@ -230,6 +254,7 @@ const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
 config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
 config.exchangeRateProviderAddress = REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS || config.exchangeRateProviderAddress;
 config.tokens.doc.address = REACT_APP_TOKEN_DOC_ADDRESS || config.tokens.doc.address;
+config.tokens.rif.address = REACT_APP_TOKEN_RIF_ADDRESS || config.tokens.rif.address;
 config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
 config.campaignFactoryAddress =
   REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;

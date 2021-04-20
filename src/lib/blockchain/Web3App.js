@@ -303,11 +303,16 @@ class AppTransaction extends React.Component {
 
         // Se obtienen los balances de cada ERC20 token.        
         Object.keys(config.tokens).map(async tokenKey => {
-          if(!config.tokens[tokenKey].isNative) {
-            let address = config.tokens[tokenKey].address;
-            let balance = await erc20ContractApi.getBalance(address, localAccount);
-            accountTokenBalances.set(address, balance);
-          }            
+          try {
+            if(config.tokens[tokenKey].isNative === false) {
+              let address = config.tokens[tokenKey].address;
+              let balance = await erc20ContractApi.getBalance(address, localAccount);
+              accountTokenBalances[address] = balance;
+              console.log('Balance de usuario.', address, balance, accountTokenBalances);
+            } 
+          } catch(e) {
+            console.error('Error obteniendo balance de ERC Token.', config.tokens[tokenKey], e);
+          } 
         });
         this.setState({ accountTokenBalances: accountTokenBalances });
 

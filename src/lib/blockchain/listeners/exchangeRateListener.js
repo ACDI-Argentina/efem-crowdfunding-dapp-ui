@@ -22,17 +22,23 @@ async function initExchangeRateListener() {
     const { exchangeRateProvider } = await getNetwork();
 
     async function fetchExchangeRate() {
+
         let tokenKeys = Object.keys(config.tokens);
         for (let i = 0; i < tokenKeys.length; i++) {
-            const tokenAddress = config.tokens[tokenKeys[i]].address
-            const rate = await exchangeRateProvider.methods.getExchangeRate(tokenAddress).call();
-            const exchangeRate = new ExchangeRate({
-                tokenAddress: tokenAddress,
-                rate: new BigNumber(rate),
-                date: Date.now()
-            });
-            console.log('Actualización de Exchange Rate.', exchangeRate);
-            exchangeRateUtils.updateExchangeRate(exchangeRate);
+            let tokenKey = tokenKeys[i];
+            try {
+                const tokenAddress = config.tokens[tokenKey].address
+                const rate = await exchangeRateProvider.methods.getExchangeRate(tokenAddress).call();
+                const exchangeRate = new ExchangeRate({
+                    tokenAddress: tokenAddress,
+                    rate: new BigNumber(rate),
+                    date: Date.now()
+                });
+                console.log('Actualización de Exchange Rate.', exchangeRate);
+                exchangeRateUtils.updateExchangeRate(exchangeRate);
+            } catch (e) {
+                console.error('Error actualizando exchange rate.', tokenKey);
+            }
         }
     }
 
@@ -43,7 +49,7 @@ async function initExchangeRateListener() {
     setInterval(
         fetchExchangeRate,
         config.tokenExchangeRate.updateInterval
-        );
+    );
 }
 
 export default initExchangeRateListener;
