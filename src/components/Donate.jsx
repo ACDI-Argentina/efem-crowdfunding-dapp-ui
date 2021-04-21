@@ -43,12 +43,13 @@ class Donate extends Component {
 
   constructor(props) {
     super(props);
+    let tokenConfig = TokenUtils.getTokenConfig(config.nativeToken.address);
     this.state = {
       open: false,
       showProfilePopup: false,
-      tokenAddress: config.nativeToken.address,
+      tokenAddress: tokenConfig.address,
       donateInputProps: {
-        step: 0.0001,
+        step: tokenConfig.donateStep,
         min: 0,
         max: Web3Utils.weiToEther(props.currentUser.balance),
         size: 31
@@ -77,7 +78,9 @@ class Donate extends Component {
 
     let tokenAddress = event.target.value;
     let donateInputProps = this.state.donateInputProps;
+    let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
     let balance = this.props.currentUser.tokenBalances[tokenAddress];
+    donateInputProps.step = tokenConfig.donateStep;
     donateInputProps.max = balance;
 
     this.setState({
@@ -152,12 +155,20 @@ class Donate extends Component {
     let tokenOptions = Object.keys(config.tokens).map(tokenKey => 
       <MenuItem key={config.tokens[tokenKey].address}
           value={config.tokens[tokenKey].address}>
-        <ListItemAvatar>
-          <TokenAvatar tokenAddress={config.tokens[tokenKey].address} />
-        </ListItemAvatar>
-        <Typography variant="inherit" noWrap>
-          {config.tokens[tokenKey].symbol}
-        </Typography>
+        <Grid container
+            spacing={2}
+            justify="flex-start"
+            alignItems="center"
+            className={classes.selectToken}>
+          <Grid item xs={5}>
+            <TokenAvatar tokenAddress={config.tokens[tokenKey].address} />
+          </Grid>
+          <Grid item xs={7}>
+            <Typography variant="inherit" noWrap>
+              {config.tokens[tokenKey].symbol}
+            </Typography>
+          </Grid>
+        </Grid>
       </MenuItem>
     );
 
@@ -208,10 +219,19 @@ class Donate extends Component {
                     {description}
                   </Typography>
                   <ProfileCard address={currentUser.address} />
-                  <TokenUserBalance tokenAddress={tokenAddress} />
-                  <Select value={tokenAddress} onChange={this.handleTokenChange} >
-                    {tokenOptions}
-                  </Select>
+                  <Grid container
+                      spacing={2}
+                      justify="flex-start"
+                      alignItems="center">
+                    <Grid item xs={4}>
+                      <Select value={tokenAddress} onChange={this.handleTokenChange} >
+                        {tokenOptions}
+                      </Select>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <TokenUserBalance tokenAddress={tokenAddress} />
+                    </Grid>
+                  </Grid>
                   <TextField
                     id="donate-amount"
                     label={t('donateAmount')}
@@ -286,6 +306,9 @@ const styles = theme => ({
   logo: {
     width: theme.spacing(6),
     height: theme.spacing(6),
+  },
+  selectToken: {
+    width: '8em'
   }
 });
 

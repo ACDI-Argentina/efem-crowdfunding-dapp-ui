@@ -71,21 +71,24 @@ const configurations = {
         isNative: true,
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        showDecimals: 5,
+        donateStep: 0.00001
       },
       rif: { // ERC677 Token
         address: '0x1111111111111111111111111111111111111111',
         isNative: false,
         symbol: 'dRIF',
         logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       },
       doc: {
         address: '0x2222222222222222222222222222222222222222',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       }
     },
     tokenExchangeRate: {
@@ -142,21 +145,24 @@ const configurations = {
         isNative: true,
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        showDecimals: 5,
+        donateStep: 0.00001
       },
       rif: { // ERC677 Token
         address: '0x19f64674d8a5b4e652319f5e239efd3bc969a1fe',
         isNative: false,
         symbol: 'tRIF',
         logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       },
       doc: {
         address: '0x1111111111111111111111111111111111111111',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       }
     },
     tokenExchangeRate: {
@@ -213,24 +219,25 @@ const configurations = {
         isNative: true,
         symbol: 'RBTC',
         logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        showDecimals: 5,
+        donateStep: 0.00001
       },
       rif: { // ERC677 Token
         address: '0x2acc95758f8b5f583470ba265eb685a8f45fc9d5',
         isNative: false,
         symbol: 'RIF',
         logoCid: '/ipfs/QmRPth8V7cHX7vKTHn6DZXS7zt7guZtt8Gm4JdTL5cmvwz',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       },
       doc: {
         address: '0x2222222222222222222222222222222222222222',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmPgg4ZyNcRgC53H2jYPwRK6tKGtZiffzE2FwKYxkYCdLg',
-        showDecimals: 5
+        showDecimals: 2,
+        donateStep: 0.01
       }
-
-      
     },
     tokenExchangeRate: {
       updateInterval: 60000
