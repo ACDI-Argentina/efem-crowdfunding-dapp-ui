@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
 import { AppTransactionContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
+import AccountDialog from 'components/Dialogs/AccountDialog' 
+
 
 const Wrapper = styled.div``;
 
@@ -33,19 +35,32 @@ const ConnectButton = styled.button`
 `;
 
 const Connect = ({}) => {
+  const [showModal, setShowModal] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
   const { initAccount } = useContext(AppTransactionContext);
 
   return (
+    <>
     <Wrapper>
       {currentUser?.address && (
-        <AddressLabel title={addr}>
+        <AddressLabel 
+          onClick={() => setShowModal(true)}
+          title={addr}>
           {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
         </AddressLabel>
       )}
       {!currentUser.address && <ConnectButton onClick={() => initAccount()}>Connect</ConnectButton>}
     </Wrapper>
+    <AccountDialog
+      address={addr}
+      fullWidth={true}
+      maxWidth="md"
+      open={showModal}
+      onClose={() => setShowModal(false)}>
+    </AccountDialog>
+
+    </>
   );
 };
 
