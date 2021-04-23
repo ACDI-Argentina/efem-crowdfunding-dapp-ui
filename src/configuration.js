@@ -129,7 +129,7 @@ const configurations = {
       requiredId: 30,
       nodeUrl: 'https://node.b4h.world',
       timeout: 20000,
-      explorer: 'https://explorer.testnet.rsk.co/',
+      explorer: 'https://explorer.rsk.co/',
       transactionEstimatedTime: 1, // Minutos
       transactionEstimatedTimeMilliseconds: 60000
     },
