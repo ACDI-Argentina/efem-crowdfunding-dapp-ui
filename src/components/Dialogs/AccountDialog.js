@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import styled from 'styled-components';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
-import { Toolbar, Grid, IconButton, Typography } from '@material-ui/core';
-
+import { Toolbar, Grid, IconButton, Typography, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+
+import { AppTransactionContext } from 'lib/blockchain/Web3App';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -82,9 +83,20 @@ const CopyAddress = styled.div`
 
 const AccountDialog = ({ address, onClose, ...props }) => {
   const classes = useStyles();
-  const addressRef = useRef();
   const title = "Your wallet";
-  const explorer = "https://explorer.testnet.rsk.co"; //TODO: Read from context
+  const { explorer, closeAccount } = useContext(AppTransactionContext);
+
+  const sanitizedExplorer = explorer?.endsWith("/") ? explorer?.slice(0, -1) : explorer;
+  const explorerLink = `${sanitizedExplorer}/address/${address}`;
+
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(address);
+    //show popup copied!by a seconds
+    setShowTooltip(true);
+    setTimeout(() => setShowTooltip(false), 1000);
+  }
 
   return (
     <Dialog
@@ -113,14 +125,17 @@ const AccountDialog = ({ address, onClose, ...props }) => {
           <Grid container justify="center" align="center" item sm={4} xs={12}>
             <LinkButton
               target="_blank"
-              href={`${explorer}/address/${address}`}>
+              href={explorerLink}>
               View on RSK explorer
             </LinkButton>
 
           </Grid>
           <Grid container justify="center" align="center" item sm={4} xs={12}>
-            <input ref={addressRef} type="hidden" value={address} />
-            <CopyAddress>Copy address <i class="far fa-copy"></i></CopyAddress>
+            <Tooltip open={showTooltip} title="Copied!" placement="top">
+              <CopyAddress onClick={copyToClipboard}>
+                Copy address <i className="far fa-copy"></i>
+              </CopyAddress>
+            </Tooltip>
           </Grid>
           <Grid
             container
@@ -129,8 +144,13 @@ const AccountDialog = ({ address, onClose, ...props }) => {
             xs={12}
           >
             <Footer>
-            <LogoutButton>
-              Logout
+              <LogoutButton
+                onClick={() => {
+                  closeAccount();
+                  onClose();
+                }}
+              >
+                Logout
             </LogoutButton>
             </Footer>
           </Grid>
