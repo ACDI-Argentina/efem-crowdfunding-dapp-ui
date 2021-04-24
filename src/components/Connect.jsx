@@ -12,12 +12,23 @@ const Wrapper = styled.div``;
 const AddressLabel = styled.div`
   font-weight: bold;
   font-size: 16px;
-  color: #53a653;
   cursor: pointer;
   padding: 3px 20px;
-  border: 1px solid #53a653;
-  background-color: #48d24838;
   border-radius: 24px;
+
+  ${props => props.success && `
+    color: #53a653;
+    border: 1px solid #53a653;
+    background-color: #48d24838;
+  `}
+
+  ${props => props.warning && `
+    color: #ffc107;
+    border: 1px solid #ffc107;
+    background-color: #ffc10738;
+  `}
+
+
 `;
 const ConnectButton = styled.button`
   font-size: 16px;
@@ -38,15 +49,21 @@ const Connect = ({}) => {
   const [showModal, setShowModal] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
-  const { initAccount } = useContext(AppTransactionContext);
+  const { initAccount, network } = useContext(AppTransactionContext);
+  const isCorrectNetwork = network?.isCorrectNetwork || false;
+  const success = isCorrectNetwork;
+  const warning = !isCorrectNetwork;
+
 
   return (
     <>
     <Wrapper>
       {currentUser?.address && (
         <AddressLabel 
+          success={success}
+          warning={warning}
           onClick={() => setShowModal(true)}
-          title={addr}>
+          title={isCorrectNetwork?`${addr}`:`INCORRECT NETWORK - ${addr}`}>
           {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
         </AddressLabel>
       )}
