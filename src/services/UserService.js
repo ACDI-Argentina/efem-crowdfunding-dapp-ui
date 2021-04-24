@@ -38,7 +38,7 @@ class UserService {
             currentUser.url = url;
             subscriber.next(currentUser);
           }).catch(err => {
-            console.error('Error obteniendo datos del usuario desde Feathers.', err);
+            console.log('Error obteniendo datos del usuario desde Feathers:', err.message);
             if (err.code === 404) {
               currentUser.registered = false;
               currentUser.name = undefined;

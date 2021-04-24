@@ -5,7 +5,7 @@ import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
 import config from '../../configuration';
 import { connect } from 'react-redux';
-import { initCurrentUser, updateCurrentUserBalance } from '../../redux/reducers/currentUserSlice';
+import { initCurrentUser, updateCurrentUserBalance, clearCurrentUser } from '../../redux/reducers/currentUserSlice';
 import BigNumber from 'bignumber.js';
 import { feathersClient } from '../feathersClient';
 import Web3Utils from "./Web3Utils";
@@ -38,6 +38,7 @@ export const AppTransactionContext = React.createContext({
     isCorrectNetwork: null,
     checkNetwork: () => { }
   },
+  explorer: undefined,
   modals: {
     data: {
       noWeb3BrowserModalIsOpen: {},
@@ -87,8 +88,13 @@ class AppTransaction extends React.Component {
     super(props);
     this.config = {
       requiredNetwork: config.network.requiredId,
+      explorer: config?.network?.explorer,
       accountBalanceMinimum: 0.001
     }
+
+    this.pollAccountsRef = React.createRef();
+    this.listenEthereumChangesRef = React.createRef();
+    this.connectedRef = React.createRef();
   }
 
   web3Preflight = () => {
@@ -195,6 +201,30 @@ class AppTransaction extends React.Component {
     }
   };
 
+
+  onAccountsChanged = (accounts) => {
+    if(!this.connectedRef.current){
+      return;
+    }
+    
+    console.log("accounts changed!")
+    const account = accounts[0];
+    if (account) {
+      this.setState({ account }, () => {
+        this.initCurrentUser(); //Esto a veces puede demorar, y hace que se nos cargue un usuario cuando ya estaá desconectado
+        // After account is complete, get the balance
+        this.getAccountBalance(account);
+      });
+    } else {
+      this.closeAccount();
+    }
+  };
+
+  onChainChanged = (chainID) => {
+    console.log("Update dapp - new network:",chainID)
+  }
+
+
   initAccount = async () => {
     this.openConnectionPendingModal();
 
@@ -208,11 +238,11 @@ class AppTransaction extends React.Component {
         const response = await ethereum.request({
           method: "eth_requestAccounts",
         });
-    
         const wallets = response || [];
         console.log(wallets);
         const account = wallets[0];
 
+        this.connectedRef.current = true;
         this.closeConnectionPendingModal();
         this.setState({ account });
 
@@ -221,7 +251,12 @@ class AppTransaction extends React.Component {
         this.getAccountBalance(account);
 
         // Watch for account change
-        this.pollAccountUpdates(); //TODO: cambiar esto por un handler ethereum.on("accountsChanged",..
+        //this.pollAccountUpdates(); //TODO: cambiar esto por un handler ethereum.on("accountsChanged",..
+        if(!this.listenEthereumChangesRef.current){
+          ethereum.on('accountsChanged', this.onAccountsChanged);
+          ethereum.on('chainChanged', this.onChainChanged);
+          this.listenEthereumChangesRef.current = true;
+        }
 
       } catch (error) {
         console.log("User cancelled connect request. Error:", error);
@@ -254,6 +289,16 @@ class AppTransaction extends React.Component {
       }
     }
   };
+
+
+  closeAccount = () => {
+    console.log("closeAccount")
+    clearInterval(this.pollAccountsRef.current);
+    this.props.clearCurrentUser();
+    this.connectedRef.current = false;
+  }
+
+
 
   initCurrentUser = async () => {
     const { account } = this.state;
@@ -516,6 +561,7 @@ class AppTransaction extends React.Component {
   };
 
   pollAccountUpdates = () => {
+    console.log("poll account updates")
     let account = this.state.account;
     let requiresUpdate = false;
 
@@ -527,7 +573,6 @@ class AppTransaction extends React.Component {
         return;
       }
       if (window.ethereum.isConnected()) {
-        /* const updatedAccount = window.web3.eth.accounts[0]; */
         const updatedAccount = (await window.ethereum.request({ method: 'eth_accounts' }))[0];
 
         if (updatedAccount && (updatedAccount.toLowerCase() !== account.toLowerCase())) {
@@ -536,7 +581,7 @@ class AppTransaction extends React.Component {
 
         this.getAccountBalance();
 
-        if (requiresUpdate) {
+        if (requiresUpdate && this.pollAccountsRef.current) {
           clearInterval(accountInterval);
           let modals = { ...this.state.modals };
           modals.data.userRejectedConnect = null;
@@ -555,6 +600,7 @@ class AppTransaction extends React.Component {
         }
       }
     }, POLL_ACCOUNTS_INTERVAL);
+    this.pollAccountsRef.current = accountInterval;
   };
 
   contractMethodSendWrapper = (contractMethod, callback) => {
@@ -1129,6 +1175,7 @@ class AppTransaction extends React.Component {
     initWeb3: this.initWeb3,
     initContract: this.initContract,
     initAccount: this.initAccount,
+    closeAccount: this.closeAccount,
     contractMethodSendWrapper: this.contractMethodSendWrapper,
     rejectAccountConnect: this.rejectAccountConnect,
     accountValidated: null,
@@ -1196,6 +1243,8 @@ class AppTransaction extends React.Component {
     this.initWeb3().then(() => {
       console.log('Web3 configurado');
     });
+
+    this.setState({ explorer: config?.network.explorer });
   }
 
   render() {
@@ -1219,4 +1268,4 @@ class AppTransaction extends React.Component {
   }
 }
 
-export default connect(null, { initCurrentUser, updateCurrentUserBalance })(AppTransaction);
+export default connect(null, { initCurrentUser, updateCurrentUserBalance, clearCurrentUser })(AppTransaction);
