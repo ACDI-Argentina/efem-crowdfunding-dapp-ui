@@ -16,7 +16,10 @@ class TokenAvatar extends Component {
     let logo = ipfsService.resolveUrl(tokenConfig.logoCid);
 
     return (
-      <Avatar alt={symbol} src={logo} className={classes.logo} />
+      <Avatar alt={symbol}
+        src={logo}
+        variant="square"
+        className={classes.logo} />
     );
   }
 }

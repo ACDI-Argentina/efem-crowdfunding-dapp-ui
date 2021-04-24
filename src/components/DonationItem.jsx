@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import makeEntitySelect from '../redux/selectors/entitiesSelector';
 import TokenUtils from 'utils/TokenUtils';
+import TokenAvatar from './TokenAvatar';
 
 class DonationItem extends Component {
 
@@ -55,7 +56,10 @@ class DonationItem extends Component {
             className={classes.text}
             primary={
               <Grid container spacing={1}>
-                <Grid item xs={9}>
+                <Grid item xs={1}>
+                  <TokenAvatar tokenAddress={donation.tokenAddress}></TokenAvatar>
+                </Grid>
+                <Grid item xs={8}>
                   <Typography variant="h6">
                     <CryptoAmount amount={donation.amountRemainding} tokenAddress={donation.tokenAddress} />
                   </Typography>

@@ -97,9 +97,9 @@ class Donate extends Component {
   };
 
   handleAmountBlur() {
-    const { amount } = this.state;
+    const { amount, tokenAddress } = this.state;
     const { currentUser } = this.props;
-    const max = Web3Utils.weiToEther(currentUser.balance);
+    const max = Web3Utils.weiToEther(currentUser.tokenBalances[tokenAddress]);
     if (amount < 0) {
       this.setState({ amount: 0 });
     } else if (amount > max) {

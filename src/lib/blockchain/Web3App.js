@@ -292,7 +292,7 @@ class AppTransaction extends React.Component {
               // Only update if changed
               if (!balance.isEqualTo(this.state.accountBalance)) {
                 this.setState({ accountBalance: balance });
-                accountTokenBalances.set(config.nativeToken.address, balance);
+                accountTokenBalances[config.nativeToken.address] = balance;
                 //this.determineAccountLowBalance();
               }
             } else {
