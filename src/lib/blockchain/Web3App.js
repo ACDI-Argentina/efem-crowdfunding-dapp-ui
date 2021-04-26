@@ -1,4 +1,6 @@
 import React from "react";
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import Web3 from 'web3';
 import getWeb3 from './getWeb3';
 import NetworkUtils from "./NetworkUtils";
 import ConnectionModalUtil from "./ConnectionModalsUtil";
@@ -13,6 +15,9 @@ import { history } from '../helpers';
 import { utils } from 'web3';
 import erc20ContractApi from '../../lib/blockchain/ERC20ContractApi';
 const { Map } = require('immutable');
+import Web3Manager from "./Web3Manager";
+
+const web3Manager = new Web3Manager();
 
 const POLL_ACCOUNTS_INTERVAL = 3000;
 
@@ -164,8 +169,7 @@ class AppTransaction extends React.Component {
   // TODO: Make async work
   initWeb3 = async () => {
     this.checkModernBrowser();
-
-    let web3 = await getWeb3();
+    const web3 = await web3Manager.getWeb3();
 
     // Set fallback property, used to show modal
     this.setState({ web3Fallback: !web3.isThereWallet });
@@ -227,6 +231,37 @@ class AppTransaction extends React.Component {
   }
 
 
+  walletConnect = async () => {
+    console.log('Init wallet connect Provider');
+    const provider = new WalletConnectProvider({
+      rpc:{
+        30: "https://public-node.rsk.co",
+        31:"https://public-node.testnet.rsk.co"
+      }
+    });
+
+    await provider.enable();
+    
+    provider.on('connect', () => {
+      console.log('connected!');
+    });
+
+    provider.on("disconnect", (code, reason) => {
+      console.log("provider disconnected!",code,reason)
+    });
+
+    web3Manager.updateWeb3(provider); 
+
+    const web3 = await web3Manager.getWeb3();
+    const accounts = await web3.eth.getAccounts();
+    console.log(accounts)
+    this.setState({ web3 }, () => console.log("new web3"));
+
+    //init account,
+    
+  }
+
+  
   initAccount = async () => {
     this.openConnectionPendingModal();
 
@@ -240,9 +275,10 @@ class AppTransaction extends React.Component {
         const response = await ethereum.request({
           method: "eth_requestAccounts",
         });
-        const wallets = response || [];
-        console.log(wallets);
-        const account = wallets[0];
+    
+        const accounts = response || [];
+        console.log(accounts);
+        const account = accounts[0];
 
         this.connectedRef.current = true;
         this.closeConnectionPendingModal();
@@ -1198,6 +1234,7 @@ class AppTransaction extends React.Component {
     initContract: this.initContract,
     initAccount: this.initAccount,
     closeAccount: this.closeAccount,
+    walletConnect: this.walletConnect, //TODO: REFACT
     contractMethodSendWrapper: this.contractMethodSendWrapper,
     rejectAccountConnect: this.rejectAccountConnect,
     accountValidated: null,
