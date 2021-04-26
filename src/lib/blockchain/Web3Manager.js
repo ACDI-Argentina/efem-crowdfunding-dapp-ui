@@ -14,6 +14,7 @@ class Web3Manager {
   }
 
   async initWeb3() {
+    console.log("init web3!")
     let web3;
 
     let web3Wallet;
@@ -55,6 +56,7 @@ class Web3Manager {
 
     console.log('Configuración Web3', web3);
     this.web3 = web3;
+    this.events.emit('web3',this.web3);
     return web3;
   }
 
@@ -75,6 +77,7 @@ class Web3Manager {
   }
 
   getWeb3Observable(){
+    console.log("getWeb3Observable!")
     this.web3Observable = new Observable(subscriber => {
       if(this.web3){
         subscriber.next(this.web3);

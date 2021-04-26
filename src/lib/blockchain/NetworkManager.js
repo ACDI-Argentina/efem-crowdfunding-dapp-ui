@@ -20,9 +20,12 @@ class NetworkManager {
   }
 
   listenWeb3Changes(){
-    console.log("listenWeb3Changes")
-    web3Manager.getWeb3Observable().subscribe({
+    console.log("[Network manager] listenWeb3Changes")
+    const obs = web3Manager.getWeb3Observable();
+    window.web3Obs = obs;
+    obs.subscribe({
       next: web3 => { 
+        console.log("%cSetting web3 on network manager","color:yellow;font-weigth:bold")
         this.web3 = web3;
         this.updateContracts();
         console.log(this.web3);
@@ -40,7 +43,24 @@ class NetworkManager {
 
     this.events.emit("crowdfunding", this.crowdfunding);
     this.events.emit("exchangeRateProvider", this.exchangeRateProvider);
+    console.log("%ccontracts updated","color:yellow")
+
   }
+
+  getCrowdfunding(){
+    console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING`, "color:violet");
+    if(this.crowdfunding){
+      console.log(`%c [${new Date().toISOString()}] return instance`, "color:violet");
+      window.crowdfunding = this.crowdfunding;
+      return this.crowdfunding;
+    } else {
+      console.log(`%c [${new Date().toISOString()}] return promise`, "color:violet");
+      return new Promise((resolve,reject) => {
+        this.events.on("crowdfunding", (crowdfunding) => resolve(crowdfunding));
+      });
+    }
+  }
+
 
 /* 
   async getNetwork() {

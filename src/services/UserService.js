@@ -81,11 +81,12 @@ class UserService {
         userdata.registered = true;
         subscriber.next(new User({ ...userdata }));
       } catch (e) {
-        console.error(`Error obteniendo usuario por address ${address}.`, e);
+        
         if (e.name === 'NotFound') {
           // El usuario no está registrado.
           subscriber.next(new User({ address: address }));
         } else {
+          console.error(`Error obteniendo usuario por address ${address}.`, e);
           subscriber.error(e);
         }
       }

@@ -99,7 +99,7 @@ class TransactionCreatedModal extends React.Component {
                       pb={3}
                     >
                       <Image
-                        src={require("assets/img/MetaMaskIcon.svg")}
+                        src={require("assets/img/MetaMaskIcon.svg")} //WalletConnectIcon
                         aria-label="MetaMask extension icon"
                         size="24px"
                       />

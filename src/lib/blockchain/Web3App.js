@@ -254,10 +254,14 @@ class AppTransaction extends React.Component {
 
     const web3 = await web3Manager.getWeb3();
     const accounts = await web3.eth.getAccounts();
-    console.log(accounts)
-    this.setState({ web3 }, () => console.log("new web3"));
-
-    //init account,
+    if (accounts.length && accounts[0]) {
+      const account = accounts[0];
+      this.setState({ web3, account, provider:"walletConnect" }, () => {
+        console.log(`%c[${new Date().toISOString()}] New account over wallet connect`,"color:yellow;font-weight:bold;");
+        this.initCurrentUser(); 
+        this.getAccountBalance(account);
+      });
+    }
     
   }
 

@@ -19,6 +19,11 @@ import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
 import Web3Utils from './Web3Utils';
 
+import NetworkManager from "../blockchain/NetworkManager";
+const networkManager = new NetworkManager();
+
+
+
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
  */
@@ -666,14 +671,15 @@ class CrowdfundingContractApi {
     saveDonationNative(donation) {
 
         return new Observable(async subscriber => {
-
+            console.log("save donation - observable");
             let thisApi = this;
 
             const crowdfunding = await this.getCrowdfunding();
 
+
             let clientId = donation.clientId;
 
-            const method = crowdfunding.methods.donate(
+            const method = crowdfunding.methods.donate( 
                 donation.entityId,
                 donation.tokenAddress,
                 donation.amount);
@@ -1395,18 +1401,20 @@ class CrowdfundingContractApi {
     }
 
     async getCrowdfunding() {
-        if (this.crowdfunding) {
+        return await networkManager.getCrowdfunding();
+        /* 
+        if (this.crowdfunding) { //Esto no nos va a permitir obtener nuevas versiones del smart contract!
             return this.crowdfunding;
         } else if(this.networkPromise){
             const { crowdfunding } = await this.networkPromise;
             this.crowdfunding = crowdfunding;
         } else if(!this.networkPromise){
-            console.log(`%c [${new Date().toISOString()}]GET CROWDFUNDING`, "color:violet");
             this.networkPromise = getNetwork();
             const { crowdfunding } = await this.networkPromise;
             this.crowdfunding = crowdfunding;
         }
-        return this.crowdfunding;
+        return this.crowdfunding; 
+        */
     }
 
     async getExchangeRateProvider() {
