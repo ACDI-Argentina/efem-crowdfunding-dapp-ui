@@ -6,20 +6,26 @@ import { Typography, Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
   padding:10px;
-  height:30vh;
+  min-height:30vh;
+  display: flex;
+  flex-direction: column;
+  
 `
-const CardContainer = styled.div`
+const TitleContainer = styled.div`
+  padding:10px;
+`
+const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-
+  justify-content:center;
+  padding:25px 40px;
 `
 const SCard = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   height: 100px;
   width: 100px;
-  border: 1px solid gray;
-  padding: 10px;
+  padding: 5px;
   margin: 10px;
   border-radius: 10px;
   cursor:pointer;
@@ -31,7 +37,6 @@ const SCard = styled.div`
 
   :hover{
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    border:1px solid cyan;
   } 
 
 `
@@ -84,12 +89,14 @@ const ProviderDialog = ({ ...props }) => {
   return (
     <Dialog {...props}>
       <Wrapper>
-        <Typography variant="h5">Select a provider</Typography>
-        <CardContainer>
-          <Card name="Metamask" image={MetamaskImage}/>
-          <Card name="Wallet Connect" image={WalletConnectImage}/> 
-          <Card name="Portis" image={PortisImage}/>
-        </CardContainer>
+        <TitleContainer>
+          <Typography variant="h5">Select a provider</Typography>
+        </TitleContainer>
+        <CardsContainer>
+          <Card name="Metamask" image={MetamaskImage} />
+          <Card name="Wallet Connect" image={WalletConnectImage} />
+          <Card name="Portis" image={PortisImage} />
+        </CardsContainer>
       </Wrapper>
     </Dialog>
   )
