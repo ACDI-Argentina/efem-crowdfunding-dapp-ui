@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { AppTransactionContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
 import AccountDialog from 'components/Dialogs/AccountDialog';
+import ProviderDialog from './Dialogs/ProviderDialog';
 
 const Wrapper = styled.div``;
 
@@ -55,7 +56,8 @@ const ConnectButton = styled.button`
 `;
 
 const Connect = ({}) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showProviderDialog, setShowProviderDialog] = useState(true);
+  const [showAccountDialog, setShowAccountDialog] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
   const { initAccount, network, walletConnect, provider } = useContext(AppTransactionContext);
@@ -86,7 +88,7 @@ const Connect = ({}) => {
             <AddressLabel
               success={success}
               warning={warning}
-              onClick={() => setShowModal(true)}
+              onClick={() => setShowAccountDialog(true)}
               title={isCorrectNetwork ? `${addr}` : `INCORRECT NETWORK - ${addr}`}
             >
               {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
@@ -97,12 +99,19 @@ const Connect = ({}) => {
           <ConnectButton onClick={() => initAccount()}>Connect</ConnectButton>
         )}
       </Wrapper>
+      
+      <ProviderDialog
+        fullWidth={true}
+        maxWidth="sm"
+        open={showProviderDialog}
+      ></ProviderDialog>
+
       <AccountDialog
         address={addr}
         fullWidth={true}
         maxWidth="md"
-        open={showModal}
-        onClose={() => setShowModal(false)}
+        open={showAccountDialog}
+        onClose={() => setShowAccountDialog(false)}
       ></AccountDialog>
     </>
   );
