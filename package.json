@@ -30,6 +30,7 @@
     "giveth-liquidpledging": "2.0.0-beta.4",
     "history": "4.10.1",
     "i18next": "^19.7.0",
+    "immutable": "^4.0.0-rc.12",
     "is-ipfs": "^0.4.2",
     "localforage": "^1.5.0",
     "lpp-campaign": "2.0.0-beta.0",

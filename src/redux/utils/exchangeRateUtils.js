@@ -19,6 +19,6 @@ class ExchangeRateUtils {
 
 
 const instance = new ExchangeRateUtils();
-window.updateExchangeRate = instance.updateExchangeRate;
+//window.updateExchangeRate = instance.updateExchangeRate;
 
 export default instance;

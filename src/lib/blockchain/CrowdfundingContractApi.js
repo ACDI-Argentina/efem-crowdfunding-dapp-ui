@@ -16,6 +16,7 @@ import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
 import getWeb3 from './getWeb3';
 import config from '../../configuration';
+import erc20ContractApi from './ERC20ContractApi';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -561,7 +562,7 @@ class CrowdfundingContractApi {
                     transactionUtils.updateTransaction(transaction);
 
                     error.milestone = milestone;
-                    console.error(`Error procesando transacción de almacenamiento de dac.`, error);
+                    console.error(`Error procesando transacción de almacenamiento de milestone.`, error);
                     subscriber.error(error);
                 });
         });
@@ -647,6 +648,21 @@ class CrowdfundingContractApi {
      * @param donation a almacenar.
      */
     saveDonation(donation) {
+        if (donation.tokenAddress === config.tokens.rbtc.address) {
+            // Donación en token nativo
+            return this.saveDonationNative(donation);
+        } else {
+            // Donación en ERC20 token
+            return this.saveDonationToken(donation);
+        }
+    }
+
+    /**
+     * Almacena una Donación Nativa en el Smart Contarct.
+     * 
+     * @param donation a almacenar.
+     */
+    saveDonationNative(donation) {
 
         return new Observable(async subscriber => {
 
@@ -727,8 +743,118 @@ class CrowdfundingContractApi {
                     transactionUtils.updateTransaction(transaction);
 
                     error.donation = donation;
-                    console.error(`Error procesando transacción de almacenamiento de dac.`, error);
+                    console.error(`Error procesando transacción de almacenamiento de donación.`, error);
                     subscriber.error(error);
+                });
+        });
+    }
+
+    /**
+     * Almacena una Donacón de ERC20 Token en el Smart Contarct.
+     * 
+     * La donación con ERC20 Token requiere de la aprobación previa para que
+     * el smart contract de Crowdfunding pueda transferir los fondos al vault
+     * en nombre del donante. 
+     * 
+     * @param donation a almacenar.
+     */
+    saveDonationToken(donation) {
+
+        let thisApi = this;
+
+        return new Observable(async subscriber => {
+
+            erc20ContractApi.approve(
+                donation.tokenAddress,
+                config.crowdfundingAddress,
+                donation.amount,
+                donation.giverAddress).subscribe(async approved => {
+
+                    if (approved) {
+
+                        // Se aprobó la transferencia de fondos desde el token.
+
+                        const crowdfunding = await this.getCrowdfunding();
+
+                        let clientId = donation.clientId;
+
+                        const method = crowdfunding.methods.donate(
+                            donation.entityId,
+                            donation.tokenAddress,
+                            donation.amount);
+
+                        const gasEstimated = await method.estimateGas({
+                            from: donation.giverAddress
+                        });
+                        const gasPrice = await this.getGasPrice();
+
+                        let transaction = transactionUtils.addTransaction({
+                            gasEstimated: new BigNumber(gasEstimated),
+                            gasPrice: gasPrice,
+                            createdTitle: {
+                                key: 'transactionCreatedTitleDonate'
+                            },
+                            createdSubtitle: {
+                                key: 'transactionCreatedSubtitleDonate'
+                            },
+                            pendingTitle: {
+                                key: 'transactionPendingTitleDonate'
+                            },
+                            confirmedTitle: {
+                                key: 'transactionConfirmedTitleDonate'
+                            },
+                            confirmedDescription: {
+                                key: 'transactionConfirmedDescriptionDonate'
+                            },
+                            failuredTitle: {
+                                key: 'transactionFailuredTitleDonate'
+                            },
+                            failuredDescription: {
+                                key: 'transactionFailuredDescriptionDonate'
+                            }
+                        });
+
+                        const promiEvent = method.send({
+                            from: donation.giverAddress
+                        });
+
+                        promiEvent
+                            .once('transactionHash', (hash) => { // La transacción ha sido creada.
+
+                                transaction.submit(hash);
+                                transactionUtils.updateTransaction(transaction);
+
+                                donation.txHash = hash;
+                                subscriber.next(donation);
+                            })
+                            .once('confirmation', (confNumber, receipt) => {
+
+                                transaction.confirme();
+                                transactionUtils.updateTransaction(transaction);
+
+                                // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
+                                // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
+                                const idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
+                                thisApi.getDonationById(idFromEvent).then(donation => {
+                                    donation.clientId = clientId;
+                                    subscriber.next(donation);
+                                });
+                                entityUtils.refreshEntity(donation.entityId);
+                            })
+                            .on('error', function (error) {
+
+                                transaction.fail();
+                                transactionUtils.updateTransaction(transaction);
+
+                                error.donation = donation;
+                                console.error(`Error procesando transacción de almacenamiento de donación.`, error);
+                                subscriber.error(error);
+                            });
+
+                    } else {
+                        // No se aprobó la transferencia de fondos desde el token.
+                        subscriber.error('No se aprobó la transferencia de fondos desde el token.');
+                    }
                 });
         });
     }

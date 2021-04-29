@@ -5,6 +5,8 @@ const {
   REACT_APP_NODE_CONNECTION_URL,
   REACT_APP_CROWDFUNDING_ADDRESS,
   REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS,
+  REACT_APP_TOKEN_RIF_ADDRESS,
+  REACT_APP_TOKEN_DOC_ADDRESS,
   REACT_APP_LIQUIDPLEDGING_ADDRESS,
   REACT_APP_CAMPAIGN_FACTORY_ADDRESS,
   REACT_APP_CAPPED_MILESTONE_FACTORY_ADDRESS,
@@ -64,11 +66,33 @@ const configurations = {
     },
     tokens: {
       // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+      rbtc: {
+        address: '0x0000000000000000000000000000000000000000',
+        isNative: true,
         symbol: 'RBTC',
-        logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        logoCid: '/ipfs/QmRqPw4gVDv4uNaMzpJ1tjwm85CZysQAKTR8KfqzQzrr8B',
+        showDecimals: 5,
+        donateStep: 0.00001
+      },
+      rif: { // ERC677 Token
+        address: '0x1111111111111111111111111111111111111111',
+        isNative: false,
+        symbol: 'dRIF',
+        logoCid: '/ipfs/QmcvQL7Yj4tryAmZPEB8qgeU1JwJNZAVN4zCcdWBNBkbQ9',
+        showDecimals: 2,
+        donateStep: 0.01
+      },
+      doc: {
+        address: '0x2222222222222222222222222222222222222222',
+        isNative: false,
+        symbol: 'DOC',
+        logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
+        showDecimals: 2,
+        donateStep: 0.01
       }
+    },
+    tokenExchangeRate: {
+      updateInterval: 60000
     },
     anonymousDonationThreshold: 5000
   },
@@ -116,11 +140,33 @@ const configurations = {
     },
     tokens: {
       // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+      rbtc: {
+        address: '0x0000000000000000000000000000000000000000',
+        isNative: true,
         symbol: 'RBTC',
-        logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        logoCid: '/ipfs/QmRqPw4gVDv4uNaMzpJ1tjwm85CZysQAKTR8KfqzQzrr8B',
+        showDecimals: 5,
+        donateStep: 0.00001
+      },
+      rif: { // ERC677 Token
+        address: '0x19f64674d8a5b4e652319f5e239efd3bc969a1fe',
+        isNative: false,
+        symbol: 'tRIF',
+        logoCid: '/ipfs/QmcvQL7Yj4tryAmZPEB8qgeU1JwJNZAVN4zCcdWBNBkbQ9',
+        showDecimals: 2,
+        donateStep: 0.01
+      },
+      doc: {
+        address: '0x1111111111111111111111111111111111111111',
+        isNative: false,
+        symbol: 'DOC',
+        logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
+        showDecimals: 2,
+        donateStep: 0.01
       }
+    },
+    tokenExchangeRate: {
+      updateInterval: 60000
     },
     anonymousDonationThreshold: 10000
   },
@@ -168,14 +214,36 @@ const configurations = {
     },
     tokens: {
       // Token Nativo
-      '0x0000000000000000000000000000000000000000': {
+      rbtc: {
+        address: '0x0000000000000000000000000000000000000000',
+        isNative: true,
         symbol: 'RBTC',
-        logoCid: '/ipfs/QmTsctkHWeVcuz6z2AWdi5zv3YCcVWSbmg2XF3tVs8jfn1',
-        showDecimals: 5
+        logoCid: '/ipfs/QmRqPw4gVDv4uNaMzpJ1tjwm85CZysQAKTR8KfqzQzrr8B',
+        showDecimals: 5,
+        donateStep: 0.00001
+      },
+      rif: { // ERC677 Token
+        address: '0x2acc95758f8b5f583470ba265eb685a8f45fc9d5',
+        isNative: false,
+        symbol: 'RIF',
+        logoCid: '/ipfs/QmcvQL7Yj4tryAmZPEB8qgeU1JwJNZAVN4zCcdWBNBkbQ9',
+        showDecimals: 2,
+        donateStep: 0.01
+      },
+      doc: {
+        address: '0x2222222222222222222222222222222222222222',
+        isNative: false,
+        symbol: 'DOC',
+        logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
+        showDecimals: 2,
+        donateStep: 0.01
       }
-    }
-  },
-  anonymousDonationThreshold: 10000
+    },
+    tokenExchangeRate: {
+      updateInterval: 60000
+    },
+    anonymousDonationThreshold: 10000
+  }  
 };
 
 // Unknown environment
@@ -192,6 +260,8 @@ const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
 // Overwrite the environment values with parameters
 config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
 config.exchangeRateProviderAddress = REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS || config.exchangeRateProviderAddress;
+config.tokens.doc.address = REACT_APP_TOKEN_DOC_ADDRESS || config.tokens.doc.address;
+config.tokens.rif.address = REACT_APP_TOKEN_RIF_ADDRESS || config.tokens.rif.address;
 config.liquidPledgingAddress = REACT_APP_LIQUIDPLEDGING_ADDRESS || config.liquidPledgingAddress;
 config.campaignFactoryAddress =
   REACT_APP_CAMPAIGN_FACTORY_ADDRESS || config.lppCampaignFactoryAddress;

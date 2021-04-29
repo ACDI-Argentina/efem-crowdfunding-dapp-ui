@@ -15,8 +15,8 @@ import { selectDonation } from '../redux/reducers/donationsSlice'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import makeEntitySelect from '../redux/selectors/entitiesSelector';
-import Avatar from '@material-ui/core/Avatar';
-import CryptoUtils from 'utils/CryptoUtils';
+import TokenUtils from 'utils/TokenUtils';
+import TokenAvatar from './TokenAvatar';
 
 class DonationItem extends Component {
 
@@ -56,7 +56,10 @@ class DonationItem extends Component {
             className={classes.text}
             primary={
               <Grid container spacing={1}>
-                <Grid item xs={9}>
+                <Grid item xs={1}>
+                  <TokenAvatar tokenAddress={donation.tokenAddress}></TokenAvatar>
+                </Grid>
+                <Grid item xs={8}>
                   <Typography variant="h6">
                     <CryptoAmount amount={donation.amountRemainding} tokenAddress={donation.tokenAddress} />
                   </Typography>
@@ -76,7 +79,7 @@ class DonationItem extends Component {
                 <Grid item xs={12}>
                   <Typography variant="subtitle1">
                     {t('donationInitial', {
-                      amount: CryptoUtils.format(donation.tokenAddress, donation.amount),
+                      amount: TokenUtils.format(donation.tokenAddress, donation.amount),
                       entity: entity.title
                     })}
                   </Typography>

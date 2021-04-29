@@ -260,6 +260,14 @@
     "transactionFailuredTitleDonate": "La donación no fue confirmada",
     "transactionFailuredDescriptionDonate": "Ocurrió una falla durante la donación.",
 
+    "transactionCreatedTitleApproveTokenDonate": "Confirme su aprobación para transferir sus tokens como donación en la billetera",
+    "transactionCreatedSubtitleApproveTokenDonate": "Verifique los detalles aquí - su aprobación no se puede reembolsar.",
+    "transactionPendingTitleApproveTokenDonate": "Aprobando la donación de tokens...",
+    "transactionConfirmedTitleApproveTokenDonate": "La aprobación de la donación ha sido confirmada.",
+    "transactionConfirmedDescriptionApproveTokenDonate": "Muchas gracias por tu aprobación",
+    "transactionFailuredTitleApproveTokenDonate": "No se confirmó la aprobación de donación del token",
+    "transactionFailuredDescriptionApproveTokenDonate": "Se produjo un error durante la aprobación de la donación.",
+
     "transactionCreatedTitleTransfer": "Confirme su transferencia de fondos en la billetera",
     "transactionCreatedSubtitleTransfer": "Verifique los detalles aquí - su transferencia de fondos no se puede reembolsar.",
     "transactionPendingTitleTransfer": "Transfiriendo fondos...",
