@@ -273,6 +273,7 @@ config.tokenAddresses = REACT_APP_TOKEN_ADDRESSES
 config.etherscan = REACT_APP_BLOCKEXPLORER || config.etherscan;
 config.feathersConnection = REACT_APP_FEATHERJS_CONNECTION_URL || config.feathersConnection;
 config.network.nodeUrl = REACT_APP_NODE_CONNECTION_URL || config.network.nodeUrl;
+config.network.requiredId = (REACT_APP_NODE_ID && Number.parseInt(REACT_APP_NODE_ID, 10)) || config.nodeId;
 config.decimals = REACT_APP_DECIMALS;
 config.bugsEmail = REACT_APP_BUGS_EMAIL;
 config.networkName = REACT_APP_NETWORK_NAME || config.networkName;
