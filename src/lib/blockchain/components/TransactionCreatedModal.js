@@ -66,6 +66,30 @@ class TransactionCreatedModal extends React.Component {
     }
   }
 
+  providerImage = provider => {
+    
+    switch (provider) {
+      case "WalletConnect": {
+        return (
+          <Image
+            src={require("assets/img/WalletConnectIcon.svg")} 
+            aria-label="Wallet Connect icon"
+            size="24px"
+          />
+        )
+      }
+      default:
+        return (
+          <Image
+            src={require("assets/img/MetaMaskIcon.svg")} 
+            aria-label="MetaMask extension icon"
+            size="24px"
+          />
+        )
+    }
+  
+  }
+
   closeModal = e => {
     if (typeof e !== "undefined") {
       e.preventDefault();
@@ -85,6 +109,7 @@ class TransactionCreatedModal extends React.Component {
       <Web3App.Consumer>
         {
           ({
+            web3Provider,
             network
           }) =>
             <Modal isOpen={isOpen}>
@@ -98,11 +123,7 @@ class TransactionCreatedModal extends React.Component {
                       borderColor="near-white"
                       pb={3}
                     >
-                      <Image
-                        src={require("assets/img/MetaMaskIcon.svg")} //WalletConnectIcon
-                        aria-label="MetaMask extension icon"
-                        size="24px"
-                      />
+                      {this.providerImage(web3Provider)}
                       <Heading textAlign="center" as="h1" fontSize={[2, 3]} px={[3, 0]}>
                         {t(transaction.createdTitle.key, transaction.createdTitle.args)}
                       </Heading>
