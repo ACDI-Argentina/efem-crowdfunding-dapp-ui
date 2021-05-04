@@ -157,7 +157,7 @@ const configurations = {
         donateStep: 0.01
       },
       doc: {
-        address: '0x1111111111111111111111111111111111111111',
+        address: '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
@@ -231,7 +231,7 @@ const configurations = {
         donateStep: 0.01
       },
       doc: {
-        address: '0x2222222222222222222222222222222222222222',
+        address: '0xe700691dA7b9851F2F35f8b8182c69c53CcaD9Db',
         isNative: false,
         symbol: 'DOC',
         logoCid: '/ipfs/QmS3XYpbPycRUmtqogrnr4REEF3St2Yu4MqUwjSoxBDjUE',
