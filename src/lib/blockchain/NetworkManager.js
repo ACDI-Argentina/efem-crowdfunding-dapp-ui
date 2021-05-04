@@ -48,13 +48,12 @@ class NetworkManager {
   }
 
   getCrowdfunding(){
-    console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING`, "color:violet");
     if(this.crowdfunding){
-      console.log(`%c [${new Date().toISOString()}] return instance`, "color:violet");
+      /* console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING - return instance`, "color:violet"); */
       window.crowdfunding = this.crowdfunding;
       return this.crowdfunding;
     } else {
-      console.log(`%c [${new Date().toISOString()}] return promise`, "color:violet");
+      /* console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING - return promise`, "color:violet"); */
       return new Promise((resolve,reject) => {
         this.events.on("crowdfunding", (crowdfunding) => resolve(crowdfunding));
       });
