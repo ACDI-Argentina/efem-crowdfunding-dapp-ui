@@ -49,7 +49,8 @@ export const currentUserSlice = createSlice({
       return action.payload.toStore();
     },
     clearCurrentUser: (state, action) => {
-      const initial = User.UNREGISTERED.toStore();
+      const initial = {};
+      initial.status = User.UNREGISTERED.toStore();
       initial.authenticated = false;
       initial.roles = [];
       return initial;
