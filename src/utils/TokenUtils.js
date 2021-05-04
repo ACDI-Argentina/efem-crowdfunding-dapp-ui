@@ -29,7 +29,7 @@ class TokenUtils {
     let tokenKeys = Object.keys(config.tokens);
     for (let i = 0; i < tokenKeys.length; i++) {
       const tokenKey = tokenKeys[i];
-      if(config.tokens[tokenKey].address == tokenAddress) {
+      if(Web3Utils.addressEquals(config.tokens[tokenKey].address, tokenAddress)) {
         tokenConfig = config.tokens[tokenKey];
         break;
       } 
