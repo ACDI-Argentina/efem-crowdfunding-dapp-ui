@@ -53,16 +53,16 @@
     "blockchainSecurityBenefitTitle": "Security and anonymity",
     "blockchainSecurityBenefitDescription": "No one will ask you for more information than you want to give.",
 
-    # "relatedServices": "Related services",
+    "relatedServices": "Related services",
 
-    #"avalDAO": "AvalDAO",
-    #"decentralizedInvestments": "Decentralized investments",
+    "avalDAO": "AvalDAO",
+    "decentralizedInvestments": "Decentralized investments",
     
     "contactUs": "Contact us",
 
     "iniciativeOf": "A collaboration of: ",
-    # "argentina": "ARGENTINA ",
-    # "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
+    "argentina": "ARGENTINA ",
+    "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
     "termsAndConditions": "Terms and conditions. ",
     "dataHandlingPolicy": "Data handling policy. ",
 

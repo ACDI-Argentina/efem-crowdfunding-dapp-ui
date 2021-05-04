@@ -51,16 +51,16 @@
     "blockchainSecurityBenefitTitle": "Seguridad y anonimato",
     "blockchainSecurityBenefitDescription": "Nadie te pedirá más información de la que quieras dar. ",
 
-    # "relatedServices": "Servicios relacionados",
+    "relatedServices": "Servicios relacionados",
 
-    # "avalDAO": "AvalDAO",
-    # "decentralizedInvestments": "Inversiones descentralizadas",
+    "avalDAO": "AvalDAO",
+    "decentralizedInvestments": "Inversiones descentralizadas",
     
     "contactUs": "Contáctanos",
     
     "iniciativeOf": "Con la colaboración de: ",
-    # "argentina": "ARGENTINA ",
-    # "disclaimer": "Copyright 2021 | RSK - El futuro está en el monte | Todos los derechos reservados. ",
+    "argentina": "ARGENTINA ",
+    "disclaimer": "Copyright 2021 | RSK - El futuro está en el monte | Todos los derechos reservados. ",
     "termsAndConditions": "Terminos y condiciones. ",
     "dataHandlingPolicy": "Política de tratamiento de datos. ",
 
