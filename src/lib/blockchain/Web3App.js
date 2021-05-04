@@ -27,6 +27,7 @@ export const AppTransactionContext = React.createContext({
   accountBalance: {},
   accountBalanceLow: {},
   web3: {},
+  web3Provider: {},
   web3Fallback: {},
   transactions: {},
   checkPreflight: () => { },
@@ -230,6 +231,7 @@ class AppTransaction extends React.Component {
     console.log("Update dapp - new network:",chainID)
   }
 
+  
 
   walletConnect = async () => {
     console.log('Init wallet connect Provider');
@@ -241,13 +243,15 @@ class AppTransaction extends React.Component {
     });
 
     await provider.enable();
-    
+
     provider.on('connect', () => {
       console.log('connected!');
     });
 
     provider.on("disconnect", (code, reason) => {
-      console.log("provider disconnected!",code,reason)
+      console.log("provider disconnected!",code,reason);
+      this.setState({web3Provider: undefined});
+      this.closeAccount();
     });
 
     web3Manager.updateWeb3(provider); 
@@ -256,7 +260,7 @@ class AppTransaction extends React.Component {
     const accounts = await web3.eth.getAccounts();
     if (accounts.length && accounts[0]) {
       const account = accounts[0];
-      this.setState({ web3, account, provider:"walletConnect" }, () => {
+      this.setState({ web3, account, web3Provider:"WalletConnect" }, () => {
         console.log(`%c[${new Date().toISOString()}] New account over wallet connect`,"color:yellow;font-weight:bold;");
         this.initCurrentUser(); 
         this.getAccountBalance(account);
@@ -289,6 +293,10 @@ class AppTransaction extends React.Component {
         this.setState({ account });
 
         this.initCurrentUser();
+
+
+        //set provider
+        this.setState({web3Provider: "Metamask"});
 
         // Watch for account change
         //this.pollAccountUpdates(); //TODO: cambiar esto por un handler ethereum.on("accountsChanged",..
@@ -1231,6 +1239,7 @@ class AppTransaction extends React.Component {
     accountTokenBalances: Map(),
     accountBalanceLow: null,
     web3: null,
+    web3Provider: null,
     web3Fallback: null,
     transactions: {},
     checkPreflight: this.checkPreflight,
