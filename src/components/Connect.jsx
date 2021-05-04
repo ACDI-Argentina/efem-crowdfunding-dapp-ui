@@ -51,23 +51,31 @@ const ConnectButton = styled.button`
   color: white;
   text-transform: capitalize;
   font-weight: bold;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+  transition: 0.3s;
+
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+  :hover{
+    box-shadow: 0 4px 2px 0 rgba(0,0,0,0.2);
+  } 
 `;
 
 const Connect = ({}) => {
-  const [showProviderDialog, setShowProviderDialog] = useState(true);
+  const [showProviderDialog, setShowProviderDialog] = useState(false);
   const [showAccountDialog, setShowAccountDialog] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
-  const { initAccount, network, walletConnect, provider } = useContext(AppTransactionContext);
+  const { initAccount, network, walletConnect, web3Provider } = useContext(AppTransactionContext);
   const isCorrectNetwork = network?.isCorrectNetwork || false;
   const success = isCorrectNetwork;
   const warning = !isCorrectNetwork;
 
   let walletIndicator = null;
 
-  if(provider === "walletConnect"){
+  if(web3Provider === "WalletConnect"){
     walletIndicator = (
       <WalletIndicator>
         <img src="/img/walletconnect-logo.svg" style={{ width: '30px' }} />
@@ -79,8 +87,6 @@ const Connect = ({}) => {
   return (
     <>
       <Wrapper>
-        <button onClick={walletConnect}>Wallet connect</button>
-        
         {currentUser?.address && (
           <AddressWrapper>
             {walletIndicator}
@@ -96,16 +102,25 @@ const Connect = ({}) => {
           </AddressWrapper>
         )}
         {!currentUser.address && (
-          <ConnectButton onClick={() => initAccount()}>Connect</ConnectButton>
+          <ConnectButton onClick={() => setShowProviderDialog(true)}>Connect</ConnectButton>
         )}
       </Wrapper>
-      
       <ProviderDialog
         fullWidth={true}
         maxWidth="sm"
         open={showProviderDialog}
+        onClose={() => setShowProviderDialog(false)}
+        onSelect={ provider => {
+          console.log(`provider selected: ${provider}`)
+          if(provider === "WalletConnect"){
+            walletConnect(); //once connected close provider dialog also
+          } else {
+            initAccount();
+          }
+          setShowProviderDialog(false);
+          
+        }}
       ></ProviderDialog>
-
       <AccountDialog
         address={addr}
         fullWidth={true}
