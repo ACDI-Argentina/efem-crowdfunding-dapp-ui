@@ -3,47 +3,46 @@
 
     "landingPageTitle": "Crypto-funds that connect us with the planet",
 
-    "landingPagesSubtitle1": "We mobilize donations and contributions through ",
-    "landingPagesSubtitle2": "Blockchain",
-    "landingPagesSubtitle3": " to promote ",
-    "landingPagesSubtitle4": "sustainable and conscious",
-    "landingPagesSubtitle5": " development of the communities that need it most. ",
+    "landingPagesSubtitle1": "We mobilize cryptocurrency donations ",
+    "landingPagesSubtitle2": "to promote the development of communities ",
+    "landingPagesSubtitle3": "that inhabit and care for forests.",
+    
 
     "landingPageFinanceProject": "Finance your project",
     "landingPageMakeDonation": "Make your donation",
 
     "platformFeaturesTitle1": "",
-    "platformFeaturesTitle2": "Sustainable growth",
-    "platformFeaturesTitle3": " is a ",
-    "platformFeaturesTitle4": "holistic",
-    "platformFeaturesTitle5": " revolution",
+    "platformFeaturesTitle2": "Sustainable development ",
+    "platformFeaturesTitle3": "needs ",
+    "platformFeaturesTitle4": "technological revolution ",
+    "platformFeaturesTitle5": "and human evolution",
     "platformFeaturesTitle6": "",
     
-    "platformFeaturesDescription1": "Blockchain technology by itself will not produce a revolution. ",
-    "platformFeaturesDescription2": "Sustainable growth",
-    "platformFeaturesDescription3": " will begin when we become ",
-    "platformFeaturesDescription4": "aware of who we are and our connection to nature.",
+    "platformFeaturesDescription1": "Blockchain by itself won't change the world. ",
+    "platformFeaturesDescription2": "The true holistic revolution will be ",
+    "platformFeaturesDescription3": " when recognizing who we are  ",
+    "platformFeaturesDescription4": "and our connection with the planet. ",
 
-    "colaboration": "Colaboration",
+    "colaboration": "Collaboration",
     "colaborationDescription1": "We join forces in a ",
     "colaborationDescription2": "decentralized",
     "colaborationDescription3": " network for the construction of the common and collective good.",
 
     "connection": "Connection",
     "connectionDescription1": "We connect ",
-    "connectionDescription2": "digital assets",
-    "connectionDescription3": " with the ",
-    "connectionDescription4": "sustainable and integral growth",
-    "connectionDescription5": " of our planet.",
+    "connectionDescription2": "digital assets ",
+    "connectionDescription3": "with the ",
+    "connectionDescription4": "sustainable development ",
+    "connectionDescription5": "of our planet.",
 
     "intimacy": "Intimacy",
     "intimacyDescription1": "We create spaces for ",
     "intimacyDescription2": "thinking",
-    "intimacyDescription3": " and ",
+    "intimacyDescription3": "and ",
     "intimacyDescription4": "awareness",
     "intimacyDescription5": " that connect us with nature.",
 
-    "blockchainBenefitsTitle": "Blockchain benefits in fundraising for development",
+    "blockchainBenefitsTitle": "Blockchain benefits in fundraising for Development",
 
     "blockchainHelpBenefitTitle": "Help without borders",
     "blockchainHelpBenefitDescription": "Make your donation from anywhere in the world, without intermediaries and with lower transaction costs",
@@ -51,19 +50,19 @@
     "blockchainTrustBenefitTitle": "Trust and openness",
     "blockchainTrustBenefitDescription": "You will be able to review the registry and status of your donations from the moment they are made and until they reach the final beneficiary",
 
-    "blockchainSecurityBenefitTitle": "Security",
-    "blockchainSecurityBenefitDescription": "Blockchain technology guarantees that only you can make your donations and that they will not be modified.",
+    "blockchainSecurityBenefitTitle": "Security and anonymity",
+    "blockchainSecurityBenefitDescription": "No one will ask you for more information than you want to give.",
 
-    "relatedServices": "Related services",
+    # "relatedServices": "Related services",
 
-    "avalDAO": "AvalDAO",
-    "decentralizedInvestments": "Decentralized investments",
+    #"avalDAO": "AvalDAO",
+    #"decentralizedInvestments": "Decentralized investments",
     
     "contactUs": "Contact us",
 
-    "iniciativeOf": "Iniciative of: ",
-    "argentina": "ARGENTINA ",
-    "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
+    "iniciativeOf": "A collaboration of: ",
+    # "argentina": "ARGENTINA ",
+    # "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
     "termsAndConditions": "Terms and conditions. ",
     "dataHandlingPolicy": "Data handling policy. ",
 

@@ -3,26 +3,23 @@
 
     "landingPageTitle": "Crypto-fondos que nos conectan con el planeta",
 
-    "landingPagesSubtitle1": "Movilizamos donaciones y aportes a través de ",
-    "landingPagesSubtitle2": "Blockchain",
-    "landingPagesSubtitle3": " para fomentar el desarrollo ",
-    "landingPagesSubtitle4": "sostenible y consciente",
-    "landingPagesSubtitle5": " de las comunidades que más lo necesitan. ",
+    "landingPagesSubtitle1": "Movilizamos donaciones en criptomonedas ",
+    "landingPagesSubtitle2": "para promover el desarrollo de comunidades ",
+    "landingPagesSubtitle3": " que habitan y cuidan los bosques. ",
 
     "landingPageFinanceProject": "Financia tu proyecto",
     "landingPageMakeDonation": "Haz tu donación",
 
     "platformFeaturesTitle1": "El ",
-    "platformFeaturesTitle2": "desarrollo sostenible",
-    "platformFeaturesTitle3": " es una ",
-    "platformFeaturesTitle4": "",
-    "platformFeaturesTitle5": "revolución",
-    "platformFeaturesTitle6": " holística",
+    "platformFeaturesTitle2": "crecimiento sostenible",
+    "platformFeaturesTitle3": "necesita una ",
+    "platformFeaturesTitle4": "revolución tecnológica",
+    "platformFeaturesTitle5": "y una evolución humana",
     
-    "platformFeaturesDescription1": "La tecnología blockchain por sí misma no producirá una revolución. El cambio hacia un ",
-    "platformFeaturesDescription2": "desarrollo sostenible",
-    "platformFeaturesDescription3": " comenzará cuando seamos ",
-    "platformFeaturesDescription4": "conscientes de quiénes somos y nuestra conexión con la naturaleza.",
+    "platformFeaturesDescription1": "Una cadena de bloques por sí sola no cambiará el mundo. ",
+    "platformFeaturesDescription2": "La verdadera revolución será posible ",
+    "platformFeaturesDescription3": "cuando usemos las nuevas tecnologías ",
+    "platformFeaturesDescription4": "para conectarnos íntimamente con el planeta. ",
 
     "colaboration": "Colaboración",
     "colaborationDescription1": "Unimos fuerzas en una red ",
@@ -33,17 +30,17 @@
     "connectionDescription1": "Conectamos ",
     "connectionDescription2": "activos digitales",
     "connectionDescription3": " con el ",
-    "connectionDescription4": "desarrollo sostenible e integral",
+    "connectionDescription4": "crecimiento sostenible",
     "connectionDescription5": " de nuestro planeta.",
 
     "intimacy": "Intimidad",
     "intimacyDescription1": "Creamos espacios de ",
-    "intimacyDescription2": "reflexión",
+    "intimacyDescription2": "pensamiento",
     "intimacyDescription3": " y ",
     "intimacyDescription4": "conciencia",
     "intimacyDescription5": " que nos conectan con la naturaleza.",
 
-    "blockchainBenefitsTitle": "Beneficios de blockchain en la recolección de fondos para el desarrollo",
+    "blockchainBenefitsTitle": "Beneficios de blockchain en la recolección de fondos para el Desarrollo",
 
     "blockchainHelpBenefitTitle": "Ayuda sin fonteras",
     "blockchainHelpBenefitDescription": "Haz tu donación desde cualquier lugar del mundo, sin intermediarios y con menores costos por transacción",
@@ -51,19 +48,19 @@
     "blockchainTrustBenefitTitle": "Confianza y transparencia",
     "blockchainTrustBenefitDescription": "Podrás revisar el registro y estado de tus donaciones desde que se realizan y hasta llegar al beneficiario final",
 
-    "blockchainSecurityBenefitTitle": "Seguridad",
-    "blockchainSecurityBenefitDescription": "La tecnología blockchain brinda las garantías de que sólo tu puedas realizar tus donaciones y que las mismas no se modificarán.",
+    "blockchainSecurityBenefitTitle": "Seguridad y anonimato",
+    "blockchainSecurityBenefitDescription": "Nadie te pedirá más información de la que quieras dar. ",
 
-    "relatedServices": "Servicios relacionados",
+    # "relatedServices": "Servicios relacionados",
 
-    "avalDAO": "AvalDAO",
-    "decentralizedInvestments": "Inversiones descentralizadas",
+    # "avalDAO": "AvalDAO",
+    # "decentralizedInvestments": "Inversiones descentralizadas",
     
     "contactUs": "Contáctanos",
     
-    "iniciativeOf": "Una iniciativa de: ",
-    "argentina": "ARGENTINA ",
-    "disclaimer": "Copyright 2021 | RSK - El futuro está en el monte | Todos los derechos reservados. ",
+    "iniciativeOf": "Con la colaboración de: ",
+    # "argentina": "ARGENTINA ",
+    # "disclaimer": "Copyright 2021 | RSK - El futuro está en el monte | Todos los derechos reservados. ",
     "termsAndConditions": "Terminos y condiciones. ",
     "dataHandlingPolicy": "Política de tratamiento de datos. ",
 
