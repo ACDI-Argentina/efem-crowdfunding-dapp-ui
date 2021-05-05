@@ -17,6 +17,7 @@ import ExchangeRate from '../../models/ExchangeRate';
 import getWeb3 from './getWeb3';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
+import Web3Utils from './Web3Utils';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -648,7 +649,7 @@ class CrowdfundingContractApi {
      * @param donation a almacenar.
      */
     saveDonation(donation) {
-        if (donation.tokenAddress === config.tokens.rbtc.address) {
+        if (Web3Utils.addressEquals(donation.tokenAddress, config.tokens.rbtc.address)) {
             // Donación en token nativo
             return this.saveDonationNative(donation);
         } else {
