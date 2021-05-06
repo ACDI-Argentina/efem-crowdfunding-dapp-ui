@@ -11,6 +11,7 @@ const Wrapper = styled.div``;
 
 const AddressWrapper = styled.div`
   display: flex;
+  align-items:center;
 `;
 
 const WalletIndicator = styled.div`
@@ -79,6 +80,12 @@ const Connect = ({}) => {
     walletIndicator = (
       <WalletIndicator>
         <img src="/img/walletconnect-logo.svg" style={{ width: '30px' }} />
+      </WalletIndicator>
+    );
+  } else  if(web3Provider === "MetaMask"){
+    walletIndicator = (
+      <WalletIndicator>
+        <img src="/img/metamask-logo.svg" style={{ width: '25px' }} />
       </WalletIndicator>
     );
 
