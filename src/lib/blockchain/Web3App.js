@@ -103,6 +103,7 @@ class AppTransaction extends React.Component {
     this.pollAccountsRef = React.createRef();
     this.listenEthereumChangesRef = React.createRef();
     this.connectedRef = React.createRef();
+    this.web3ProviderRef = React.createRef();
   }
 
   web3Preflight = () => {
@@ -243,6 +244,7 @@ class AppTransaction extends React.Component {
     });
 
     await provider.enable();
+    
 
     provider.on('connect', () => {
       console.log('connected!');
@@ -253,6 +255,8 @@ class AppTransaction extends React.Component {
       this.setState({web3Provider: undefined});
       this.closeAccount();
     });
+
+    this.web3ProviderRef.current = provider;
 
     web3Manager.updateWeb3(provider); 
 
@@ -342,11 +346,15 @@ class AppTransaction extends React.Component {
   };
 
 
-  closeAccount = () => {
+  closeAccount = () => { //TODO: rename: logout
     console.log("closeAccount")
     clearInterval(this.pollAccountsRef.current);
     this.props.clearCurrentUser();
     this.connectedRef.current = false;
+    if(this.state.web3Provider === "WalletConnect"){
+      this.web3ProviderRef.current && this.web3ProviderRef.current.disconnect();
+    }
+
   }
 
 
