@@ -1,7 +1,5 @@
 import React from "react";
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import Web3 from 'web3';
-import getWeb3 from './getWeb3';
 import NetworkUtils from "./NetworkUtils";
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import TransactionUtil from "./TransactionUtil";
@@ -300,7 +298,7 @@ class AppTransaction extends React.Component {
 
 
         //set provider
-        this.setState({web3Provider: "Metamask"});
+        this.setState({web3Provider: "MetaMask"});
 
         // Watch for account change
         //this.pollAccountUpdates(); //TODO: cambiar esto por un handler ethereum.on("accountsChanged",..
@@ -1113,7 +1111,6 @@ class AppTransaction extends React.Component {
 
 
   authenticateIfPossible = async (currentUser) => {
-
     if (currentUser && currentUser.address && currentUser.authenticated) {
       return true;
     }
@@ -1124,7 +1121,7 @@ class AppTransaction extends React.Component {
   };
 
   authenticate = async (address, redirectOnFail = true) => {
-    const web3 = await getWeb3();
+    const web3 = await web3Manager.getWeb3();
     const authData = {
       strategy: 'web3',
       address,
@@ -1324,7 +1321,12 @@ class AppTransaction extends React.Component {
       console.log('Web3 configurado');
     });
 
-    this.setState({ explorer: config?.network.explorer });
+    this.setState({ explorer: config?.network.explorer });   
+  }
+  componentWillUnmount() {
+    if(this.web3Provider === "WalletConnect"){
+      this.web3ProviderRef && this.web3ProviderRef.current.disconnect();
+    }
   }
 
   render() {
