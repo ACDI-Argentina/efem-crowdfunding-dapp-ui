@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Dialog from '@material-ui/core/Dialog';
 import { Typography, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { Heading } from "rimble-ui";
 import NetworkUtils from '../../lib/blockchain/NetworkUtils';
+import { AppTransactionContext } from 'lib/blockchain/Web3App';
 
 const Wrapper = styled.div`
   padding:10px;
@@ -126,8 +127,13 @@ const Card = ({ onClick, name, image }) => (
   </SCard>
 )
 
+const ProviderSelectionModal = ({ onSelect, ...props }) => {
+  const { modals } = useContext(AppTransactionContext);
+  const providerSelectionModalIsOpen = modals.data.providerSelectionModalIsOpen;
+  const openProviderSelectionModal = modals.methods.openProviderSelectionModal;
+  const closeProviderSelectionModal = modals.methods.closeProviderSelectionModal;
 
-const ProviderDialog = ({ onSelect, onClose, ...props }) => {
+
   const isMobile = NetworkUtils.isMobileDevice(); //TODO: Agregarlo en el context
   const browserIsWeb3Capable = NetworkUtils.browserIsWeb3Capable(); //TODO: Agregarlo en el context
 
@@ -135,9 +141,9 @@ const ProviderDialog = ({ onSelect, onClose, ...props }) => {
     { key: "Metamask", name: "Metamask", image: MetamaskImage },
     { key: "WalletConnect", name: "Wallet Connect", image: WalletConnectImage }
   ];
-  
 
-  if(isMobile && !browserIsWeb3Capable){
+
+  if (isMobile && !browserIsWeb3Capable) {
     providersList = [
       { key: "WalletConnect", name: "Wallet Connect", image: WalletConnectImage }
     ]
@@ -145,7 +151,10 @@ const ProviderDialog = ({ onSelect, onClose, ...props }) => {
 
   return (
     <Dialog
-      onClose={onClose}
+      open={providerSelectionModalIsOpen}
+      onClose={closeProviderSelectionModal}
+      fullWidth={true}
+      maxWidth="sm"
       {...props}
     >
       <Wrapper>
@@ -153,7 +162,7 @@ const ProviderDialog = ({ onSelect, onClose, ...props }) => {
           <Heading.h3>
             Select a provider
           </Heading.h3>
-          <CloseContainer onClick={() => onClose()}>
+          <CloseContainer onClick={closeProviderSelectionModal}>
             <CloseIcon style={{ display: "block" }} />
           </CloseContainer>
         </TitleContainer>
@@ -162,16 +171,16 @@ const ProviderDialog = ({ onSelect, onClose, ...props }) => {
             const { key, name, image } = provider;
             return (
               <Card
-              key={key}
-              onClick={() => onSelect(key)}
-              name={name}
-              image={image} />    
+                key={key}
+                onClick={() => onSelect(key)}
+                name={name}
+                image={image} />
             )
           })}
-          
+
         </CardsContainer>
       </Wrapper>
     </Dialog>
   )
 }
-export default ProviderDialog;  
+export default ProviderSelectionModal;  

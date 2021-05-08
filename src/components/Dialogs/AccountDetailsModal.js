@@ -81,7 +81,7 @@ const CopyAddress = styled.div`
 `
 
 
-const AccountDialog = ({ address, onClose, ...props }) => {
+const AccountDetailsModal = ({ address, onClose, ...props }) => {
   const classes = useStyles();
   const title = "Your wallet";
   const { explorer, closeAccount } = useContext(AppTransactionContext);
@@ -162,4 +162,4 @@ const AccountDialog = ({ address, onClose, ...props }) => {
     </Dialog>
   )
 }
-export default AccountDialog;
+export default AccountDetailsModal;

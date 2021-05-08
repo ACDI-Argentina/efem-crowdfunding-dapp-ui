@@ -4,8 +4,8 @@ import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
 import { AppTransactionContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
-import AccountDialog from 'components/Dialogs/AccountDialog';
-import ProviderDialog from './Dialogs/ProviderDialog';
+import AccountDetailsModal from 'components/Dialogs/AccountDetailsModal';
+import ProviderSelectionModal from './Dialogs/ProviderSelectionModal';
 
 const Wrapper = styled.div``;
 
@@ -65,11 +65,19 @@ const ConnectButton = styled.button`
 `;
 
 const Connect = ({}) => {
-  const [showProviderDialog, setShowProviderDialog] = useState(false);
-  const [showAccountDialog, setShowAccountDialog] = useState(false);
+  const [showAccountDetailsModal, setShowAccountDetailsModal] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
-  const { initAccount, network, walletConnect, web3Provider } = useContext(AppTransactionContext);
+  const {
+    initAccount,
+    network,
+    walletConnect,
+    web3Provider,
+    modals
+  } = useContext(AppTransactionContext);
+  const openProviderSelectionModal = modals.methods.openProviderSelectionModal;
+  const closeProviderSelectionModal = modals.methods.closeProviderSelectionModal;
+
   const isCorrectNetwork = network?.isCorrectNetwork || false;
   const success = isCorrectNetwork;
   const warning = !isCorrectNetwork;
@@ -101,7 +109,7 @@ const Connect = ({}) => {
             <AddressLabel
               success={success}
               warning={warning}
-              onClick={() => setShowAccountDialog(true)}
+              onClick={() => setShowAccountDetailsModal(true)}
               title={isCorrectNetwork ? `${addr}` : `INCORRECT NETWORK - ${addr}`}
             >
               {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
@@ -109,32 +117,29 @@ const Connect = ({}) => {
           </AddressWrapper>
         )}
         {!currentUser.address && (
-          <ConnectButton onClick={() => setShowProviderDialog(true)}>Connect</ConnectButton>
+          <ConnectButton onClick={() => openProviderSelectionModal()}>Connect</ConnectButton>
         )}
       </Wrapper>
-      <ProviderDialog
-        fullWidth={true}
-        maxWidth="sm"
-        open={showProviderDialog}
-        onClose={() => setShowProviderDialog(false)}
+      <ProviderSelectionModal
         onSelect={ provider => {
           console.log(`provider selected: ${provider}`)
           if(provider === "WalletConnect"){
-            walletConnect(); //once connected close provider dialog also
+            walletConnect();
           } else {
             initAccount();
           }
-          setShowProviderDialog(false);
+          closeProviderSelectionModal();
           
         }}
-      ></ProviderDialog>
-      <AccountDialog
+      ></ProviderSelectionModal>
+
+      <AccountDetailsModal
         address={addr}
         fullWidth={true}
         maxWidth="md"
-        open={showAccountDialog}
-        onClose={() => setShowAccountDialog(false)}
-      ></AccountDialog>
+        open={showAccountDetailsModal}
+        onClose={() => setShowAccountDetailsModal(false)}
+      ></AccountDetailsModal>
     </>
   );
 };

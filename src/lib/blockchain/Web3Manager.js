@@ -13,6 +13,7 @@ class Web3Manager {
     return Web3Manager._instance;
   }
 
+  //TODO: hacer que este método reciba el provider
   async initWeb3() {
     console.log("init web3!")
     let web3;
@@ -28,11 +29,19 @@ class Web3Manager {
       web3Wallet = new Web3(window.ethereum);
       isThereWallet = true;
       walletNetworkId = await web3Wallet.eth.net.getId();
+    }  //TODO: considerar el caso de window.web3
+    
+    let walletIsCorrectNetwork = false;
+    if(isThereWallet){
+      walletIsCorrectNetwork = walletNetworkId === config.network.requiredId ;
+    } else {
+      //TODO:IMPORTANTE
+      //Esto es para poder usar temporalmente wallet connect.
+      //tener en cuenta que si usamos otro provider, de todas formas vamos a poder obtener el id de la red
+      walletIsCorrectNetwork = true;
     }
 
-    const walletIsCorrectNetwork = walletNetworkId === config.network.requiredId;
-
-    if (!walletIsCorrectNetwork) {// La wallet no está instalada o la red es incorrecta.
+    if (!isThereWallet || !walletIsCorrectNetwork) {// La wallet no está instalada o la red es incorrecta.
         web3HttpProvider = new Web3HttpProvider(config.network.nodeUrl, {
         keepAlive: true,
         timeout: config.network.timeout,

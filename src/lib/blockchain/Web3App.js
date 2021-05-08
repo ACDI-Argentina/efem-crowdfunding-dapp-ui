@@ -57,7 +57,8 @@ export const AppTransactionContext = React.createContext({
       userRejectedValidation: {},
       wrongNetworkModalIsOpen: {},
       transactionConnectionModalIsOpen: {},
-      lowFundsModalIsOpen: {}
+      lowFundsModalIsOpen: {},
+      providerSelectionModalIsOpen: {},
     },
     methods: {
       openNoWeb3BrowserModal: () => { },
@@ -75,7 +76,10 @@ export const AppTransactionContext = React.createContext({
       closeTransactionConnectionModal: () => { },
       openTransactionConnectionModal: () => { },
       closeLowFundsModal: () => { },
-      openLowFundsModal: () => { }
+      openLowFundsModal: () => { },
+      openProviderSelectionModal:() => { },
+      closeProviderSelectionModal:() => { },
+
     }
   },
   transaction: {
@@ -1099,6 +1103,18 @@ class AppTransaction extends React.Component {
     this.setState({ modals, callback: callback });
   };
 
+
+  openProviderSelectionModal = () => {
+    const modals = { ...this.state.modals };
+    modals.data.providerSelectionModalIsOpen = true;
+    this.setState({ modals });
+  }
+  closeProviderSelectionModal = () => {
+    const modals = { ...this.state.modals };
+    modals.data.providerSelectionModalIsOpen = false;
+    this.setState({ modals });
+  }
+
   /*isLoggedIn = async (currentUser) => {
     new Promise((resolve, reject) => {
       if (currentUser && currentUser.address && currentUser.authenticated) resolve();
@@ -1278,7 +1294,8 @@ class AppTransaction extends React.Component {
         userRejectedValidation: null,
         wrongNetworkModalIsOpen: null,
         transactionConnectionModalIsOpen: null,
-        lowFundsModalIsOpen: null
+        lowFundsModalIsOpen: null,
+        providerSelectionModalIsOpen: false,
       },
       methods: {
         openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
@@ -1303,7 +1320,9 @@ class AppTransaction extends React.Component {
         openLowFundsModal: this.openLowFundsModal,
         authenticateIfPossible: this.authenticateIfPossible,
         checkProfile: this.checkProfile,
-        checkBalance: this.checkBalance
+        checkBalance: this.checkBalance,
+        openProviderSelectionModal: this.openProviderSelectionModal,
+        closeProviderSelectionModal: this.closeProviderSelectionModal,
       }
     },
     transaction: {
