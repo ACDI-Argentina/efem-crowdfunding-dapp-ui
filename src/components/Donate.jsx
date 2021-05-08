@@ -71,9 +71,8 @@ class Donate extends Component {
     if(currentUser.address){
       this.open();
     } else {
-      this.context.initAccount()
-          .then(() =>this.open())
-          .catch(err => console.log(err));
+      this.context.openProviderSelectionModal();
+      //TODO: Listen for changes on currentUserAddress to open modal
     }
     
   };
