@@ -4,6 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import { Typography, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { Heading } from "rimble-ui";
+import NetworkUtils from '../../lib/blockchain/NetworkUtils';
 
 const Wrapper = styled.div`
   padding:10px;
@@ -127,6 +128,21 @@ const Card = ({ onClick, name, image }) => (
 
 
 const ProviderDialog = ({ onSelect, onClose, ...props }) => {
+  const isMobile = NetworkUtils.isMobileDevice(); //TODO: Agregarlo en el context
+  const browserIsWeb3Capable = NetworkUtils.browserIsWeb3Capable(); //TODO: Agregarlo en el context
+
+  let providersList = [
+    { key: "Metamask", name: "Metamask", image: MetamaskImage },
+    { key: "WalletConnect", name: "Wallet Connect", image: WalletConnectImage }
+  ];
+  
+
+  if(isMobile && !browserIsWeb3Capable){
+    providersList = [
+      { key: "WalletConnect", name: "Wallet Connect", image: WalletConnectImage }
+    ]
+  }
+
   return (
     <Dialog
       onClose={onClose}
@@ -142,16 +158,17 @@ const ProviderDialog = ({ onSelect, onClose, ...props }) => {
           </CloseContainer>
         </TitleContainer>
         <CardsContainer>
-          <Card
-            onClick={() => onSelect("Metamask")}
-            name="Metamask"
-            image={MetamaskImage} />
-          <Card
-            onClick={() => onSelect("WalletConnect")}
-            name="Wallet Connect"
-            image={WalletConnectImage}
-          />
-          {/* <Card name="Portis" image={PortisImage} /> */}
+          {providersList.map(provider => {
+            const { key, name, image } = provider;
+            return (
+              <Card
+              key={key}
+              onClick={() => onSelect(key)}
+              name={name}
+              image={image} />    
+            )
+          })}
+          
         </CardsContainer>
       </Wrapper>
     </Dialog>
