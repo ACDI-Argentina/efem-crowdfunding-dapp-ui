@@ -12,8 +12,9 @@ import Web3Utils from "./Web3Utils";
 import { history } from '../helpers';
 import { utils } from 'web3';
 import erc20ContractApi from '../../lib/blockchain/ERC20ContractApi';
-const { Map } = require('immutable');
 import Web3Manager from "./Web3Manager";
+
+const { Map } = require('immutable');
 
 const web3Manager = new Web3Manager();
 
