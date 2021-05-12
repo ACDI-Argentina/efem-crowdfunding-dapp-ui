@@ -13,8 +13,8 @@ import { history } from '../helpers';
 import { utils } from 'web3';
 import erc20ContractApi from '../../lib/blockchain/ERC20ContractApi';
 import Web3Manager from "./Web3Manager";
-
-const { Map } = require('immutable');
+import { Map } from "immutable";
+//const { Map } = require('immutable');
 
 const web3Manager = new Web3Manager();
 
@@ -270,7 +270,7 @@ class AppTransaction extends React.Component {
       this.setState({ web3, account, web3Provider:"WalletConnect" }, () => {
         console.log(`%c[${new Date().toISOString()}] New account over wallet connect`,"color:yellow;font-weight:bold;");
         this.initCurrentUser(); 
-        this.getAccountBalance(account);
+        this.getAccountBalances(account);
       });
     }
     
