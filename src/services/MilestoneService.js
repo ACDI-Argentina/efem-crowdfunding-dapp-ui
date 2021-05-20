@@ -1,11 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { utils } from 'web3';
 import { paramsForServer } from 'feathers-hooks-common';
-import { LPPCappedMilestone } from 'lpp-capped-native-milestone';
 import Milestone from 'models/Milestone';
 import { feathersClient } from 'lib/feathersClient';
-import getNetwork from 'lib/blockchain/getNetwork';
-import getWeb3 from 'lib/blockchain/getWeb3';
 import extraGas from 'lib/blockchain/extraGas';
 import Donation from '../models/Donation';
 
@@ -303,78 +300,6 @@ class MilestoneService {
   }
 
   /**
-   * Accept a proposed milestone
-   *
-   * @param milestone       a Milestone model
-   * @param from            (string) Ethereum address
-   * @param proof           A proof object:
-        message               Reason why the milestone was accepted
-        items                 Attached proof
-   * @param onTxHash        Callback function once the transaction was created
-   * @param onConfirmation  Callback function once the transaction was mined
-   * @param onError         Callback function if error is encountered
-   */
-  static acceptProposedMilestone({ milestone, from, proof, onTxHash, onConfirmation, onError }) {
-    let txHash;
-    let etherScanUrl;
-
-    getNetwork()
-      .then(network => {
-        etherScanUrl = network.etherscan;
-
-        const {
-          title,
-          maxAmount,
-          recipientAddress,
-          reviewerAddress,
-          owner, // TODO change this to managerAddress. There is no owner
-          campaignReviewerAddress,
-          token,
-        } = milestone;
-        const parentProjectId = milestone.campaign.projectId;
-
-        // TODO fix this hack
-        if (!parentProjectId || parentProjectId === '0') {
-          throw new Error('campaign-not-mined');
-        }
-
-        network.lppCappedMilestoneFactory
-          .newMilestone(
-            title,
-            '',
-            parentProjectId,
-            reviewerAddress,
-            recipientAddress,
-            campaignReviewerAddress,
-            owner.address,
-            utils.toWei(maxAmount.toFixed()),
-            token.address,
-            5 * 24 * 60 * 60, // 5 days in seconds
-            { from, $extraGas: extraGas() },
-          )
-          .once('transactionHash', hash => {
-            txHash = hash;
-
-            return milestones
-              .patch(milestone._id, {
-                status: Milestone.PENDING,
-                mined: false,
-                message: proof.message,
-                proofItems: proof.items,
-                txHash,
-              })
-              .then(() => onTxHash(`${etherScanUrl}tx/${txHash}`))
-              .catch(e => onError('patch-error', e));
-          })
-          .on('receipt', () => onConfirmation(`${etherScanUrl}tx/${txHash}`));
-      })
-      .catch(err => {
-        if (txHash && err.message && err.message.includes('unknown transaction')) onError(); // bug in web3 seems to constantly fail due to this error, but the tx is correct
-        onError(err, `${etherScanUrl}tx/${txHash}`);
-      });
-  }
-
-  /**
    * Repropose a proposed milestone that has been rejected
    *
    * @param milestone       a Milestone model
@@ -414,56 +339,6 @@ class MilestoneService {
     } catch (err) {
       onError(err);
     }
-  }
-
-  /**
-   * Cancel a milestone
-   *
-   * @param milestone       a Milestone model
-   * @param from            (string) Ethereum address
-   * @param proof           A proof object:
-        message               Reason why the milestone is canceled
-        items                 Attached proof
-   * @param onTxHash        Callback function once the transaction was created
-   * @param onConfirmation  Callback function once the transaction was mined
-   * @param onError         Callback function if error is encountered
-   */
-
-  static cancelMilestone({ milestone, from, proof, onTxHash, onConfirmation, onError }) {
-    let txHash;
-    let etherScanUrl;
-
-    Promise.all([getNetwork(), getWeb3()])
-      .then(([network, web3]) => {
-        etherScanUrl = network.etherscan;
-
-        const cappedMilestone = new LPPCappedMilestone(web3, milestone.pluginAddress);
-
-        return cappedMilestone
-          .cancelMilestone({
-            from,
-            $extraGas: extraGas(),
-          })
-          .once('transactionHash', hash => {
-            txHash = hash;
-
-            return milestones
-              .patch(milestone._id, {
-                status: Milestone.CANCELED,
-                message: proof.message,
-                proofItems: proof.items,
-                mined: false,
-                txHash,
-              })
-              .then(() => onTxHash(`${etherScanUrl}tx/${txHash}`))
-              .catch(e => onError('patch-error', e));
-          })
-          .on('receipt', () => onConfirmation(`${etherScanUrl}tx/${txHash}`));
-      })
-      .catch(err => {
-        if (txHash && err.message && err.message.includes('unknown transaction')) onError(); // bug in web3 seems to constantly fail due to this error, but the tx is correct
-        onError(err, `${etherScanUrl}tx/${txHash}`);
-      });
   }
 
   /**

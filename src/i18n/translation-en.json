@@ -179,7 +179,7 @@
     "web3NotWeb3BrowserDescription": "Switch to:",
     "web3NotWeb3BrowserDescriptionMobile": "Try a mobile wallet browser:",
     "web3WrongNetworkTitle": "Switch to {{requiredNetwork}} network",
-    "web3WrongNetworkDescription": "To use our blockchain features, you need to switch to the {{requiredNetwork}} network in Metamask.",
+    "web3WrongNetworkDescription": "To use our blockchain features, you need to switch to the {{requiredNetwork}} network in {{walletName}} and reconnect.",
     "web3NoNetwork": "Install the MetaMask browser extension to use our blockchain features",
 
     "web3ConnectionPendingTitle": "Connect RSK account",

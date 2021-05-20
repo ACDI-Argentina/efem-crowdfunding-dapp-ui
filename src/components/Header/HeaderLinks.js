@@ -28,27 +28,6 @@ export default function HeaderLinks(props) {
   return (
     <Web3App.Consumer>
       {({
-        needsPreflight,
-        validBrowser,
-        userAgent,
-        web3,
-        account,
-        accountBalance,
-        accountBalanceLow,
-        initAccount,
-        rejectAccountConnect,
-        userRejectedConnect,
-        accountValidated,
-        accountValidationPending,
-        rejectValidation,
-        userRejectedValidation,
-        validateAccount,
-        connectAndValidateAccount,
-        modals,
-        network,
-        transaction,
-        web3Fallback,
-        // Legacy
         validProvider,
         isEnabled,
         failedToLoad

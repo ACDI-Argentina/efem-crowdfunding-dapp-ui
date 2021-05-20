@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Dialog from '@material-ui/core/Dialog';
-import { Typography, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { Heading } from "rimble-ui";
 import NetworkUtils from '../../lib/blockchain/NetworkUtils';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const Wrapper = styled.div`
   padding:10px;
@@ -128,7 +127,7 @@ const Card = ({ onClick, name, image }) => (
 )
 
 const ProviderSelectionModal = ({ onSelect, ...props }) => {
-  const { modals } = useContext(AppTransactionContext);
+  const { modals } = useContext(Web3AppContext);
   const providerSelectionModalIsOpen = modals.data.providerSelectionModalIsOpen;
   const openProviderSelectionModal = modals.methods.openProviderSelectionModal;
   const closeProviderSelectionModal = modals.methods.closeProviderSelectionModal;
@@ -138,7 +137,7 @@ const ProviderSelectionModal = ({ onSelect, ...props }) => {
   const browserIsWeb3Capable = NetworkUtils.browserIsWeb3Capable(); //TODO: Agregarlo en el context
 
   let providersList = [
-    { key: "Metamask", name: "Metamask", image: MetamaskImage },
+    { key: "WalletBrowser", name: "MetaMask", image: MetamaskImage },
     { key: "WalletConnect", name: "Wallet Connect", image: WalletConnectImage }
   ];
 

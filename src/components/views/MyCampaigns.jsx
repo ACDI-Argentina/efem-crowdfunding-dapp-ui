@@ -8,7 +8,7 @@ import { getTruncatedText, history } from '../../lib/helpers';
 import CampaignService from '../../services/CampaignService';
 import Campaign from '../../models/Campaign';
 import AuthenticationWarning from '../AuthenticationWarning';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 /**
  * The my campaings view
@@ -263,7 +263,7 @@ class MyCampaigns extends Component {
   }
 }
 
-MyCampaigns.contextType = AppTransactionContext;
+MyCampaigns.contextType = Web3AppContext;
 
 MyCampaigns.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,

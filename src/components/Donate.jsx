@@ -30,7 +30,7 @@ import ProfilePopup from './ProfilePopup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
@@ -328,7 +328,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { addDonation }
 
-Donate.contextType = AppTransactionContext;
+Donate.contextType = Web3AppContext;
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(

@@ -28,7 +28,7 @@ export const currentUserSlice = createSlice({
       return state;
     },
     setCurrentUser: (state, action) => {
-      if(state.address != action.payload.address){
+      if (state.address != action.payload.address) {
         console.log("User has been updated in the meanwhile");
         return;
       }
@@ -58,7 +58,7 @@ export const currentUserSlice = createSlice({
   },
 });
 
-export const { registerCurrentUser, initCurrentUser, updateCurrentUserBalance, setCurrentUser,clearCurrentUser } = currentUserSlice.actions;
+export const { registerCurrentUser, initCurrentUser, updateCurrentUserBalance, setCurrentUser, clearCurrentUser } = currentUserSlice.actions;
 
 export const selectCurrentUser = state => new User(state.currentUser);
 export const selectRoles = state => state.currentUser.roles;

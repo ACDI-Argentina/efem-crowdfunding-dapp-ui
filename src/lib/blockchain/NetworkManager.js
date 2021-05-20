@@ -1,110 +1,109 @@
-import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
-import getWeb3 from './getWeb3';
+import { BehaviorSubject } from 'rxjs'
 import config from '../../configuration';
-import Web3Manager from './Web3Manager';
-import { Observable } from 'rxjs';
-import EventEmitter from 'events';
+import Network from 'models/Network';
+import web3Manager from './Web3Manager';
 
-const { crowdfundingAddress, exchangeRateProviderAddress } = config;
-const web3Manager = new Web3Manager();
-
-
-class NetworkManager {
-  constructor() {
-    if (!NetworkManager._instance) {
-      this.events = new EventEmitter();
-      this.listenWeb3Changes();
-      NetworkManager._instance = this;
-    }
-    return NetworkManager._instance;
-  }
-
-  listenWeb3Changes(){
-    console.log("[Network manager] listenWeb3Changes")
-    const obs = web3Manager.getWeb3Observable();
-    window.web3Obs = obs;
-    obs.subscribe({
-      next: web3 => { 
-        console.log("%cSetting web3 on network manager","color:yellow;font-weigth:bold")
-        this.web3 = web3;
-        this.updateContracts();
-        console.log(this.web3);
-       },
-      error: _ => { },
-      complete: _ => { },
-    });
-
-  }
-
-  updateContracts(){
-    const web3 = this.web3;
-    this.crowdfunding = new web3.eth.Contract(CrowdfundingAbi, crowdfundingAddress);
-    this.exchangeRateProvider = new web3.eth.Contract(ExchangeRateProviderAbi, exchangeRateProviderAddress);
-
-    this.events.emit("crowdfunding", this.crowdfunding);
-    this.events.emit("exchangeRateProvider", this.exchangeRateProvider);
-    console.log("%ccontracts updated","color:yellow")
-
-  }
-
-  getCrowdfunding(){
-    if(this.crowdfunding){
-      /* console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING - return instance`, "color:violet"); */
-      window.crowdfunding = this.crowdfunding;
-      return this.crowdfunding;
-    } else {
-      /* console.log(`%c [${new Date().toISOString()}] GET CROWDFUNDING - return promise`, "color:violet"); */
-      return new Promise((resolve,reject) => {
-        this.events.on("crowdfunding", (crowdfunding) => resolve(crowdfunding));
-      });
-    }
-  }
-
-
-/* 
-  async getNetwork() {
-    //needs web3, podemos devolver un observable?
-    if(this.crowdfunding && this.exchangeRateProvider){
-      return {
-        ...config,
-        crowdfunding: this.crowdfunding,
-        exchangeRateProvider: this.exchangeRateProvider,
-      }
-    }
-    if (!this.web3Promise) {
-      this.web3Promise = web3Manager.getWeb3();
-    }   
-
-    return {
-      ...config,
-      crowdfunding: this.crowdfunding,
-      exchangeRateProvider: this.exchangeRateProvider,
-    }
-  }
-
-  getConfig() {
-    return { ...config };
-  }
+/**
+ * Manager encargado de manejar el objeto Web3.
  */
-  getCrowdfundingObservable() {
-    return new Observable(subscriber => {
-      if(this.crowdfunding){
-        subscriber.next(this.crowdfunding);
+class NetworkManager {
+
+  constructor() {
+    this.initNetwork();
+    web3Manager.getWeb3().subscribe(web3 => {
+      // Se actualizó Web3, por lo que se actualiza la red actual.
+      let id = web3.networkId;
+      if (web3.wallet && web3.wallet.networkId) {
+        // Está definida la red desde la Wallet,
+        // por lo que se prioriza esta identificación.
+        id = web3.wallet.networkId;
       }
-      this.events.on('crowdfunding', crowdfunding => subscriber.next(crowdfunding));
+      let name = this.getNetworkNameById(id);
+      let isCorrect = id === config.network.requiredId;
+      let network = new Network({
+        id: id,
+        name: name,
+        isCorrect: isCorrect
+      });
+      this.networkSubject.next(network);
+      console.log('[Setup Network] Network.', network);
     });
   }
 
-  getExchangeRateProviderObservable() {
-    return new Observable(subscriber => {
-      if(this.exchangeRateProvider){
-        subscriber.next(this.exchangeRateProvider);
-      }
-      this.events.on('exchangeRateProvider', exchangeRateProvider => subscriber.next(exchangeRateProvider));
+  /**
+   * Inicializa la red.
+   */
+  initNetwork = () => {
+    const network = new Network();
+    this.networkSubject = new BehaviorSubject(network);
+    console.log('Set Network.', network);
+  }
+
+  /**
+   * Obtiene la red requerida según la configuración.
+   */
+  getNetworkRequired = () => {
+    const networkId = config.network.requiredId;
+    const networkName = this.getNetworkNameById(networkId);
+    let network = new Network({
+      id: networkId,
+      name: networkName
     });
+    return network;
+  };
+
+  /**
+   * Obtiene el nombre de la red a partir de su ID.
+   * 
+   * @param networkId ID de la red
+   * @returns Nombre de la Red
+   */
+  getNetworkNameById = (networkId) => {
+    let networkName = '';
+    switch (networkId) {
+      case 1:
+        networkName = 'Main';
+        break;
+      case 3:
+        networkName = 'Ropsten';
+        break;
+      case 4:
+        networkName = 'Rinkeby';
+        break;
+      case 5:
+        networkName = 'Goerli';
+        break;
+      case 30:
+        networkName = 'RSK Mainnet';
+        break;
+      case 31:
+        networkName = 'RSK Testnet';
+        break;
+      case 33:
+        networkName = 'RSK Regtest';
+        break;
+      case 42:
+        networkName = 'Kovan';
+        break;
+      case '':
+        networkName = 'None';
+        break;
+      default:
+        networkName = 'Custom';
+        break;
+    }
+    return networkName;
+  }
+
+  /**
+   * Obtiene la instancia de Network actual.
+   * 
+   * @returns web3 
+   */
+  getNetwork() {
+    return this.networkSubject.asObservable();
   }
 }
 
-export default NetworkManager;
+export default new NetworkManager();
 
-window.networkManager = new NetworkManager();

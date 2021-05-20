@@ -17,19 +17,19 @@ class WrongNetworkModal extends React.Component {
     return (
       <React.Fragment>
         <Heading.h2 my={3}>
-          Switch to the {this.props.network.required.name} network in{" "}
+          Switch to the {this.props.networkRequired.name} network in{" "}
           {GeneralUtil.hasMetaMask() ? `MetaMask` : `Settings`}
         </Heading.h2>
 
         <Text my={4}>
           The Rimble Demo App only works on the{" "}
           <Text.span style={{ textTransform: "capitalize" }}>
-            {this.props.network.required.name}
+            {this.props.networkRequired.name}
           </Text.span>{" "}
           network. You’re currently on the{" "}
           <Text.span style={{ textTransform: "capitalize" }}>
             {" "}
-            {this.props.network.current.name}
+            {this.props.network.name}
           </Text.span>{" "}
           network.
         </Text>

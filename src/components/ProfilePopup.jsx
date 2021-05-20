@@ -19,7 +19,7 @@ import ProfileForm from './ProfileForm';
 
 import { Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -114,7 +114,7 @@ class ProfilePopup extends Component {
   }
 }
 
-ProfilePopup.contextType = AppTransactionContext;
+ProfilePopup.contextType = Web3AppContext;
 
 ProfilePopup.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,

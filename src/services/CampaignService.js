@@ -1,13 +1,8 @@
-import { LPPCampaign } from 'lpp-campaign';
 import { paramsForServer } from 'feathers-hooks-common';
 import Milestone from 'models/Milestone';
-import getNetwork from '../lib/blockchain/getNetwork';
-import getWeb3 from '../lib/blockchain/getWeb3';
-import extraGas from '../lib/blockchain/extraGas';
 import { feathersClient } from '../lib/feathersClient';
 import Campaign from '../models/Campaign';
 import Donation from '../models/Donation';
-import ErrorPopup from '../components/ErrorPopup';
 
 const campaigns = feathersClient.service('campaigns');
 
@@ -151,55 +146,6 @@ class CampaignService {
         });
         onSuccess(newResp);
       }, onError);
-  }
-
-  /**
-   * Cancel Campaign in the blockchain and update it in feathers
-   * TODO: Handle error states properly
-   *
-   * @param campaign    Campaign to be cancelled
-   * @param from        Address of the user cancelling the Campaign
-   * @param afterCreate Callback to be triggered after the Campaign is cancelled in feathers
-   * @param afterMined  Callback to be triggered after the transaction is mined
-   */
-  static cancel(campaign, from, afterCreate = () => {}, afterMined = () => {}) {
-    let txHash;
-    let etherScanUrl;
-    Promise.all([getNetwork(), getWeb3()])
-      .then(([network, web3]) => {
-        const lppCampaign = new LPPCampaign(web3, campaign.pluginAddress);
-        etherScanUrl = network.etherscan;
-
-        lppCampaign
-          .cancelCampaign({ from, $extraGas: extraGas() })
-          .once('transactionHash', hash => {
-            txHash = hash;
-            campaigns
-              .patch(campaign.id, {
-                status: Campaign.CANCELED,
-                mined: false,
-                // txHash, // TODO create a transaction entry
-              })
-              .then(afterCreate(`${etherScanUrl}tx/${txHash}`))
-              .catch(err => {
-                ErrorPopup('Something went wrong with updating campaign', err);
-              });
-          })
-          .then(() => afterMined(`${etherScanUrl}tx/${txHash}`))
-          .catch(err => {
-            if (txHash && err.message && err.message.includes('unknown transaction')) return; // bug in web3 seems to constantly fail due to this error, but the tx is correct
-            ErrorPopup(
-              'Something went wrong with cancelling your campaign',
-              `${etherScanUrl}tx/${txHash} => ${JSON.stringify(err, null, 2)}`,
-            );
-          });
-      })
-      .catch(err => {
-        ErrorPopup(
-          'Something went wrong with cancelling your campaign',
-          `${etherScanUrl}tx/${txHash} => ${JSON.stringify(err, null, 2)}`,
-        );
-      });
   }
 }
 

@@ -1,114 +1,246 @@
 import Web3 from 'web3';
 import Web3HttpProvider from 'web3-providers-http';
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { BehaviorSubject } from 'rxjs'
 import config from '../../configuration';
-import { Observable } from 'rxjs'
-import EventEmitter from 'events';
+import ipfsService from '../../ipfs/IpfsService';
+import Wallet from 'models/Wallet';
 
+/**
+ * Manager encargado de manejar el objeto Web3.
+ */
 class Web3Manager {
+
   constructor() {
-    if (!Web3Manager._instance) {
-      this.events = new EventEmitter();
-      Web3Manager._instance = this;
-    }
-    return Web3Manager._instance;
+    this.connectWeb3ByHttp();
+    this.getWeb3().subscribe(async web3 => {
+      await this.handleWeb3Changed(web3);
+    });
   }
 
-  //TODO: hacer que este método reciba el provider
-  async initWeb3() {
-    console.log("init web3!")
-    let web3;
-
-    let web3Wallet;
-    let web3Http;
-    let isThereWallet = false;
-    let walletNetworkId = null;
-    let web3HttpProvider;
-
-    if (window.ethereum) {
-      this.provider = window.ethereum;
-      web3Wallet = new Web3(window.ethereum);
-      isThereWallet = true;
-      walletNetworkId = await web3Wallet.eth.net.getId();
-    }  //TODO: considerar el caso de window.web3
-    
-    let walletIsCorrectNetwork = false;
-    if(isThereWallet){
-      walletIsCorrectNetwork = walletNetworkId === config.network.requiredId ;
+  /**
+   * Conecta Web3 con HTTP Provider.
+   */
+  connectWeb3ByHttp = () => {
+    const provider = new Web3HttpProvider(config.network.nodeUrl, {
+      keepAlive: true,
+      timeout: config.network.timeout,
+    });
+    const web3 = new Web3(provider);
+    web3.providerName = "Http";
+    web3.networkId = config.network.requiredId;
+    web3.walletBrowserRequired = false;
+    // Almacenamiento de Web3
+    if (!this.web3Subject) {
+      this.web3Subject = new BehaviorSubject(web3);
     } else {
-      //TODO:IMPORTANTE
-      //Esto es para poder usar temporalmente wallet connect.
-      //tener en cuenta que si usamos otro provider, de todas formas vamos a poder obtener el id de la red
-      walletIsCorrectNetwork = true;
+      this.web3Subject.next(web3);
     }
-
-    if (!isThereWallet || !walletIsCorrectNetwork) {// La wallet no está instalada o la red es incorrecta.
-        web3HttpProvider = new Web3HttpProvider(config.network.nodeUrl, {
-        keepAlive: true,
-        timeout: config.network.timeout,
-      });
-      this.provider = web3HttpProvider;
-      web3Http = new Web3(web3HttpProvider);
-    }
-
-    if (web3Http) {
-      console.log('Configuración Web3: HTTP Provider.', web3HttpProvider);
-      web3 = web3Http;
+    // Almacenamiento de la dirección de la cuenta.
+    if (!this.accountAddressSubject) {
+      this.accountAddressSubject = new BehaviorSubject(null);
     } else {
-      console.log('Configuración Web3: Modern Browser Ethereum Provider.');
-      web3 = web3Wallet;
-    }
-
-    web3.isThereWallet = isThereWallet;
-    web3.walletNetworkId = walletNetworkId;
-    web3.walletIsCorrectNetwork = walletIsCorrectNetwork;
-    web3.ts = new Date().getTime();
-
-    console.log('Configuración Web3', web3);
-    this.web3 = web3;
-    this.events.emit('web3',this.web3);
+      this.accountAddressSubject.next(null);
+    }    
+    console.log('[Setup Web3] Conectado por HTTP Provider.', provider);
+    console.log('[Setup Web3] Web3.', web3);
     return web3;
   }
 
-  //devuelve el provider actual
-  getProvider() {
-    return this.provider;
-  }
+  /**
+   * Conecta Web3 a partir la Wallet del Browser si es posible.
+   */
+  async connectWeb3ByWalletBrowser() {
 
-  //actualiza el provider actual y también web3
-  updateWeb3(provider) {
-    console.log("update web3");
-    //check that is valid provider
-    window.providerx = provider;
-    this.provider = provider;
-    this.web3 = new Web3(provider);
-    this.events.emit('web3',this.web3);
-    return this.web3;
-  }
+    let web3;
+    let walletBrowserRequired = true;
+    let walletNetworkId = undefined;
+    let walletNetworkIsCorrect = false;
 
-  getWeb3Observable(){
-    console.log("getWeb3Observable!")
-    this.web3Observable = new Observable(subscriber => {
-      if(this.web3){
-        subscriber.next(this.web3);
+    if (window.ethereum) {
+      walletBrowserRequired = false;
+      try {
+        // Request account access if needed
+        // https://eips.ethereum.org/EIPS/eip-1102
+        // https://eips.ethereum.org/EIPS/eip-1193
+        const accounts = await window.ethereum.send('eth_requestAccounts');
+        console.log('[Setup Web3] Browser Wallet accounts.', accounts);
+        if (accounts.result && accounts.result.length > 0) {
+          web3 = new Web3(window.ethereum);
+          walletNetworkId = await web3.eth.net.getId();
+          web3.providerName = "WalletBrowser";
+          web3.networkId = walletNetworkId;
+          walletNetworkIsCorrect = walletNetworkId === config.network.requiredId;
+        } else {
+          console.warn('[Setup Web3] No hay cuenta habilitada en Browser Wallet.');
+        }
+      } catch (error) {
+        // User denied account access
+        console.warn('[Setup Web3] Acceso no autorizado a la dapp en Browser Wallet.');
       }
-      this.events.on('web3',web3 => subscriber.next(web3));
-    });
-    return this.web3Observable;
-  }
-
-  //Devuelve una instancia de Web3 con el provider actual
-  async getWeb3() {
-    if (!this.web3) {
-       await this.initWeb3();
     }
-    return this.web3;
+
+    if (walletBrowserRequired || !walletNetworkIsCorrect) {
+      // La wallet no está instalada o la red es incorrecta.
+      // Se inicializa Web3 a partir de HTTP Provider.
+      console.warn(`[Setup Web3] Wallet Browser - Requerida: ${walletBrowserRequired}; Red correcta: ${walletNetworkIsCorrect}.`);
+      web3 = this.connectWeb3ByHttp();
+    } else {
+      console.log('[Setup Web3] Conectado por Wallet Browser.');
+    }
+
+    // Propiedades propias de una wallet.
+    // Obtener el nombre y logo de la wallet en runtime o por la wallet seleccionada.
+    web3.wallet = new Wallet({
+      name: "MetaMask", 
+      logoUrl: ipfsService.resolveUrl('/ipfs/QmPXPzGjVAh6UJUh3MRTKTeXY4dhjZoLVCD225fLJiLeop'),
+      networkId: walletNetworkId
+    });
+    web3.walletBrowserRequired = walletBrowserRequired;
+
+    this.web3Subject.next(web3);
+    console.log('[Setup Web3] Web3.', web3);
+    return web3;
   }
 
-  
+  /**
+   * Conecta Web3 con Wallet Connect.
+   * 
+   * https://walletconnect.org
+   * 
+   */
+  connectWeb3ByWalletConnect = async () => {
 
+    let web3;
+    let walletBrowserRequired = false;
+    let walletNetworkId = undefined;
+    let walletNetworkIsCorrect = false;
+
+    const provider = new WalletConnectProvider({
+      rpc: {
+        30: "https://public-node.rsk.co",
+        31: "https://public-node.testnet.rsk.co",
+        33: config.network.nodeUrl
+      }
+    });
+
+    // Enable session (triggers QR Code modal)
+    await provider.enable();
+
+    web3 = new Web3(provider);
+
+    walletNetworkId = await web3.eth.net.getId();
+    web3.providerName = "WalletConnect";
+    web3.networkId = walletNetworkId;
+    walletNetworkIsCorrect = walletNetworkId === config.network.requiredId;
+
+    if (!walletNetworkIsCorrect) {
+      // La wallet no está en la red correcta.
+      // Se inicializa Web3 a partir de HTTP Provider.
+      console.warn(`[Setup Web3] Wallet Connect - Red correcta: ${walletNetworkIsCorrect}.`);
+      // Se fuerza la desconexión del provider.
+      await provider.disconnect();
+      web3 = this.connectWeb3ByHttp();
+    } else {
+      console.log('[Setup Web3] Conectado por Wallet Connect.');
+    }
+
+    // Propiedades propias de una wallet.
+    web3.wallet = new Wallet({
+      name: "WalletConnect",
+      logoUrl: ipfsService.resolveUrl('/ipfs/QmdgSn7DszmWnF7RWukPQjNYv4SN2qFwxMhrtJ8NYWqRxX'),
+      networkId: walletNetworkId
+    });
+    web3.walletBrowserRequired = walletBrowserRequired;
+
+    this.web3Subject.next(web3);
+    console.log('[Setup Web3] Web3.', web3);
+    return web3;
+  }
+
+  /**
+   * Desconecta la dapp del Web3 Provider.
+   */
+  disconnect = async () => {
+    let web3 = this.web3Subject.getValue();
+    if (web3.providerName === "WalletConnect") {
+      await web3.currentProvider.disconnect();
+    } else if (web3.providerName === "WalletBrowser") {
+      // No se encontró forma de desconectar una wallet browser.
+    }
+    console.log('[Setup Web3] Desconectado.');
+    this.connectWeb3ByHttp();
+  }
+
+  /**
+   * Manejador interno sobre los cambios en el objeto Web3.
+   */
+  handleWeb3Changed = async (web3) => {
+
+    if (web3.providerName !== "Http") {
+
+      // Web3 fue configurado a partir de un provider de una wallet.
+
+      // Se obtiene la cuenta.
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length > 0) {
+        this.accountAddressSubject.next(accounts[0]);
+      }
+
+      // Se configuran los listener de los EIP-1193 events.
+      // https://eips.ethereum.org/EIPS/eip-1193#events-1
+      let provider = web3.currentProvider;
+
+      console.log(`[Web3] EIP-1193 events listeners de provider ${web3.providerName}.`, provider);
+
+      // Event connect
+      provider.on('connect', (connectInfo) => {
+        console.log('[Web3] Provider event: connect.', connectInfo);
+      });
+
+      // Event disconnect
+      provider.on('disconnect', (error) => {
+        console.log('[Web3] Provider event: disconnect.', error);
+        this.connectWeb3ByHttp();
+      });
+
+      // Event chainChanged
+      provider.on("chainChanged", (chainId) => {
+        console.log('[Web3] Provider event: chainChanged.', parseInt(chainId));
+        // Se recarga la página por recomendación de MetaMask.
+        // https://docs.metamask.io/guide/ethereum-provider.html#chainchanged
+        // Correctly handling chain changes can be complicated.
+        // We recommend reloading the page unless you have good reason not to.
+        window.location.reload();
+      });
+
+      // Event accountsChanged
+      provider.on("accountsChanged", (accounts) => {
+        console.log('[Web3] Provider event: accountsChanged.', accounts);
+        if (accounts.length > 0) {
+          this.accountAddressSubject.next(accounts[0]);
+        }
+      });
+    }
+  }
+
+  /**
+   * Obtiene la instancia de Web3 actual.
+   * 
+   * @returns web3 
+   */
+  getWeb3() {
+    return this.web3Subject.asObservable();
+  }
+
+  /**
+   * Obtiene la dirección de la cuenta actual.
+   * 
+   * @returns accountAddress 
+   */
+   getAccountAddress() {
+    return this.accountAddressSubject.asObservable();
+  }
 }
 
-export default Web3Manager;
-
-window.web3Manager = new Web3Manager();
-
+export default new Web3Manager();

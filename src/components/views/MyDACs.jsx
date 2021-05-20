@@ -7,7 +7,7 @@ import Loader from '../Loader';
 import User from '../../models/User';
 import DACservice from '../../services/DACService';
 import DAC from '../../models/DAC';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 /**
  * The my dacs view
@@ -193,7 +193,7 @@ class MyDACs extends Component {
   }
 }
 
-MyDACs.contextType = AppTransactionContext;
+MyDACs.contextType = Web3AppContext;
 
 MyDACs.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,

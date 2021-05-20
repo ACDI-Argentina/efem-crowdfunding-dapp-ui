@@ -1,6 +1,5 @@
 import React from "react";
 import { Flex, Box, Text, Blockie, QR } from "rimble-ui";
-import ShortHash from "./ShortHash";
 
 class AccountOverview extends React.Component {
   trimEth = eth => {
@@ -14,7 +13,7 @@ class AccountOverview extends React.Component {
   };
 
   render() {
-    const roundedBalance = this.trimEth(this.props.accountBalance);
+    const roundedBalance = this.trimEth(this.props.account.balance);
     return (
       <Flex alignItems={"flex-start"}>
         <Flex mr={3}>
@@ -33,12 +32,6 @@ class AccountOverview extends React.Component {
               {this.props.account}
             </div>
           </Text.span>
-          <Text
-            fontSize={1}
-            color={this.props.accountBalanceLow ? 'red' : 'mid-gray'}
-            >
-              Balance: {roundedBalance} ETH
-          </Text>
         </Box>
       </Flex>
     );

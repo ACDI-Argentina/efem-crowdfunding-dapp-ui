@@ -45,6 +45,10 @@ class Web3Utils {
     }
     return null;
   }
+
+  static toKeccak256(value) {
+    return utils.keccak256(value);
+  }
 }
 
 /**

@@ -10,15 +10,10 @@ class ExchangeRateUtils {
   /**
    * @param data datos del exchange rate. should be an instance of ExchangeRate
    */
-  updateExchangeRate(exchangeRate) { 
+  updateExchangeRate(exchangeRate) {
     const action = updateExchangeRate(exchangeRate)
     store.dispatch(action);
   }
-
 }
 
-
-const instance = new ExchangeRateUtils();
-//window.updateExchangeRate = instance.updateExchangeRate;
-
-export default instance;
+export default new ExchangeRateUtils();

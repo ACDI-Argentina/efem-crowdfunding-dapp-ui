@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext, Component } from 'react';
 import PropTypes from 'prop-types';
 import NetworkUtils from './NetworkUtils';
 import { Image, MetaMaskButton } from 'rimble-ui';
@@ -11,7 +11,8 @@ import TransactionProgressBanner from './components/TransactionProgressBanner';
 import { Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/components/web3BannerStyle.js";
-
+import networkManager from './NetworkManager';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const WrongNetwork = ({
   currentNetwork,
@@ -19,8 +20,9 @@ const WrongNetwork = ({
   onWrongNetworkMessage,
 }) => {
   const { t } = useTranslation();
-  const requiredNetworkName = NetworkUtils.getEthNetworkNameById(requiredNetwork);
-  const currentNetworkName = NetworkUtils.getEthNetworkNameById(currentNetwork);
+  const requiredNetworkName = networkManager.getNetworkNameById(requiredNetwork);
+  const currentNetworkName = networkManager.getNetworkNameById(currentNetwork);
+  const { web3 } = useContext(Web3AppContext);
   return (
     <div>
       {onWrongNetworkMessage === null ? (
@@ -38,7 +40,7 @@ const WrongNetwork = ({
           </Box>
           <Box my={1}>
             <Image
-              src={require("assets/img/MetaMaskIcon.svg")}
+              src={web3.wallet.logoUrl}
               aria-label="MetaMask extension icon"
               size="40px"
             />
@@ -53,7 +55,8 @@ const WrongNetwork = ({
             <Typography variant="caption">
               {t('web3WrongNetworkDescription', {
                 requiredNetwork: requiredNetworkName,
-                currentNetwork: currentNetworkName
+                currentNetwork: currentNetworkName,
+                walletName: web3.wallet.name
               })}
             </Typography>
           </Box>
@@ -229,7 +232,7 @@ class Web3Banner extends Component {
     currentNetwork: PropTypes.number,
     requiredNetwork: PropTypes.number,
     isCorrectNetwork: PropTypes.bool,
-    onWeb3Fallback: PropTypes.bool,
+    walletBrowserRequired: PropTypes.bool,
     children: PropTypes.shape({
       notWeb3CapableBrowserMessage: PropTypes.node,
       noNetworkAvailableMessage: PropTypes.node,
@@ -240,7 +243,7 @@ class Web3Banner extends Component {
     currentNetwork: null,
     requiredNetwork: null,
     isCorrectNetwork: true,
-    onWeb3Fallback: false,
+    walletBrowserRequired: false,
     children: {
       notWeb3CapableBrowserMessage: null,
       noNetworkAvailableMessage: null,
@@ -270,7 +273,7 @@ class Web3Banner extends Component {
   render() {
     const { currentNetwork,
       requiredNetwork,
-      onWeb3Fallback,
+      walletBrowserRequired,
       transactionFirstPending, classes } = this.props;
     const {
       notWeb3CapableBrowserMessage,
@@ -279,7 +282,7 @@ class Web3Banner extends Component {
     } = this.props.children;
 
     const show = this.state.browserIsWeb3Capable === false ||
-        (onWeb3Fallback === true || currentNetwork === null) ||
+        (walletBrowserRequired === true) ||
         this.props.isCorrectNetwork === false ||
         transactionFirstPending !== undefined;
     const boxDisplay = show ? 'flex' : 'none';
@@ -313,7 +316,7 @@ class Web3Banner extends Component {
                 <NotWeb3Browser
                   notWeb3CapableBrowserMessage={notWeb3CapableBrowserMessage}
                 />
-              ) : onWeb3Fallback === true || currentNetwork === null ? (
+              ) : walletBrowserRequired === true ? (
                 <NoNetwork noNetworkAvailableMessage={noNetworkAvailableMessage} />
               ) : this.props.isCorrectNetwork === false ? (
                 <WrongNetwork

@@ -11,7 +11,7 @@ import Button from "components/CustomButtons/Button.js";
 import CustomDropdown from './CustomDropdown/CustomDropdown';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { withStyles } from '@material-ui/core/styles';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 
 const signUpSwal = () => {
@@ -91,7 +91,7 @@ class MainMenu extends Component {
   }
 }
 
-MainMenu.contextType = AppTransactionContext;
+MainMenu.contextType = Web3AppContext;
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: selectCurrentUser(state)

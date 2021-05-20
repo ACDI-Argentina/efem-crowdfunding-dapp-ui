@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
 import AccountDetailsModal from 'components/Dialogs/AccountDetailsModal';
 import ProviderSelectionModal from './Dialogs/ProviderSelectionModal';
@@ -69,28 +69,27 @@ const Connect = ({}) => {
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
   const {
-    initAccount,
+    loginAccount,
     network,
-    walletConnect,
-    web3Provider,
+    web3,
     modals
-  } = useContext(AppTransactionContext);
+  } = useContext(Web3AppContext);
   const openProviderSelectionModal = modals.methods.openProviderSelectionModal;
   const closeProviderSelectionModal = modals.methods.closeProviderSelectionModal;
 
-  const isCorrectNetwork = network?.isCorrectNetwork || false;
+  const isCorrectNetwork = network?.isCorrect || false;
   const success = isCorrectNetwork;
   const warning = !isCorrectNetwork;
 
   let walletIndicator = null;
 
-  if(web3Provider === "WalletConnect"){
+  if(web3.providerName === "WalletConnect"){
     walletIndicator = (
       <WalletIndicator>
         <img src="/img/walletconnect-logo.svg" style={{ width: '30px' }} />
       </WalletIndicator>
     );
-  } else  if(web3Provider === "MetaMask"){
+  } else  if(web3.providerName === "WalletBrowser"){
     walletIndicator = (
       <WalletIndicator>
         <img src="/img/metamask-logo.svg" style={{ width: '25px' }} />
@@ -121,15 +120,9 @@ const Connect = ({}) => {
         )}
       </Wrapper>
       <ProviderSelectionModal
-        onSelect={ provider => {
-          console.log(`provider selected: ${provider}`)
-          if(provider === "WalletConnect"){
-            walletConnect();
-          } else {
-            initAccount();
-          }
+        onSelect={ providerName => {
+          loginAccount(providerName);
           closeProviderSelectionModal();
-          
         }}
       ></ProviderSelectionModal>
 

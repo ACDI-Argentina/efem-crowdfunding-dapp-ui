@@ -17,7 +17,7 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import ProfileForm from 'components/ProfileForm';
 import Loader from '../Loader';
 import { connect } from 'react-redux';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
 
 /**
@@ -129,7 +129,7 @@ class EditProfile extends Component {
   }
 }
 
-EditProfile.contextType = AppTransactionContext;
+EditProfile.contextType = Web3AppContext;
 
 const mapStateToProps = (state, ownProps) => {
   return {

@@ -205,7 +205,7 @@ class TransactionCreatedModal extends React.Component {
                               fontWeight="bold"
                               lineHeight={"1em"}
                             >
-                              {network.current.name}
+                              {network.name}
                             </Text>
                           </Flex>
                         </Flex>

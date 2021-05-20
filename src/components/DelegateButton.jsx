@@ -17,7 +17,7 @@ import Milestone from 'models/Milestone';
 import Campaign from 'models/Campaign';
 
 import DonationService from '../services/DonationService';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const modalStyles = {
   content: {
@@ -285,6 +285,6 @@ DelegateButton.defaultProps = {
   milestoneOnly: false,
 };
 
-DelegateButton.contextType = AppTransactionContext;
+DelegateButton.contextType = Web3AppContext;
 
 export default DelegateButton;

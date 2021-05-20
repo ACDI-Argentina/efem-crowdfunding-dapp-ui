@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import Slide from '@material-ui/core/Slide';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,13 +6,11 @@ import AppBar from '@material-ui/core/AppBar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Toolbar, Grid, IconButton, Typography, Tooltip } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,11 +78,10 @@ const CopyAddress = styled.div`
   color: #53a653;
 `
 
-
 const AccountDetailsModal = ({ address, onClose, ...props }) => {
   const classes = useStyles();
   const title = "Your wallet";
-  const { explorer, closeAccount } = useContext(AppTransactionContext);
+  const { explorer, logoutAccount } = useContext(Web3AppContext);
 
   const sanitizedExplorer = explorer?.endsWith("/") ? explorer?.slice(0, -1) : explorer;
   const explorerLink = `${sanitizedExplorer}/address/${address}`;
@@ -146,7 +143,7 @@ const AccountDetailsModal = ({ address, onClose, ...props }) => {
             <Footer>
               <LogoutButton
                 onClick={() => {
-                  closeAccount();
+                  logoutAccount();
                   onClose();
                 }}
               >

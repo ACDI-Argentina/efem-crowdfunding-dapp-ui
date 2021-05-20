@@ -35,7 +35,7 @@ import { withTranslation } from 'react-i18next';
 import { Box } from '@material-ui/core';
 import CategorySelector from 'components/CategorySelector';
 
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 /**
  * View to create or edit a Campaign
@@ -347,7 +347,7 @@ class EditCampaign extends Component {
 }
 
 
-EditCampaign.contextType = AppTransactionContext;
+EditCampaign.contextType = Web3AppContext;
 
 EditCampaign.propTypes = {
   currentUser: PropTypes.instanceOf(User),
