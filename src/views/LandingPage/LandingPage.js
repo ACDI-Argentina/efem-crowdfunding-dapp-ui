@@ -52,7 +52,7 @@ export default withTranslation()(function LandingPage(props) {
               <div className={classes.titleContainer}>
                 <h2 className={classes.title}>{t('landingPageTitle')}</h2>
                 <h4 className={classes.subtitle}>
-                  {t('landingPagesSubtitle1')}<span className={classes.highlight}>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
+                  {t('landingPagesSubtitle1')}<span>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
                 </h4>
                 {/*<center>
                   <OnlyCorrectNetwork>

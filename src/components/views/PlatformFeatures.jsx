@@ -24,6 +24,10 @@ class PlatformFeatures extends Component {
           {t('platformFeaturesTitle3')}
           {t('platformFeaturesTitle4')}
           <span className={classes.colorHighlight}>{t('platformFeaturesTitle5')}</span>
+          {t('platformFeaturesTitle6')}
+          {t('platformFeaturesTitle7')}
+          <span className={classes.colorHighlight}>{t('platformFeaturesTitle8')}</span>
+          {t('platformFeaturesTitle9')}
         </h2>
         <h6 className={classes.description}>
           {t('platformFeaturesDescription1')}
