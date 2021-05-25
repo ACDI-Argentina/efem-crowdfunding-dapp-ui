@@ -39,7 +39,7 @@ export default withTranslation()(function LandingPage(props) {
     <div className={classes.landingPage}>
       <Header
         color="white"
-        brand={<img src={require("assets/img/logos/give4forest.svg")}
+        brand={<img src={require("assets/img/logos/give4forest.png")}
         alt={t('give4forest')}
         className={classes.dappLogo}/>}
         rightLinks={<MainMenu />}
@@ -52,7 +52,7 @@ export default withTranslation()(function LandingPage(props) {
               <div className={classes.titleContainer}>
                 <h2 className={classes.title}>{t('landingPageTitle')}</h2>
                 <h4 className={classes.subtitle}>
-                  {t('landingPagesSubtitle1')}<span className={classes.highlight}>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}<span className={classes.highlight}>{t('landingPagesSubtitle4')}</span>{t('landingPagesSubtitle5')}
+                  {t('landingPagesSubtitle1')}<span>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
                 </h4>
                 {/*<center>
                   <OnlyCorrectNetwork>

@@ -1,4 +1,5 @@
 const customTabsStyle = {
+
   cardTitle: {
     float: "left",
     padding: "10px 10px 10px 0px",
@@ -21,11 +22,11 @@ const customTabsStyle = {
     height: "unset !important",
     maxWidth: "unset !important",
     maxHeight: "unset !important",
-    padding: "10px 15px",
+    padding: "2px 20px",
     borderRadius: "3px",
     lineHeight: "24px",
     border: "0 !important",
-    color: "#fff !important",
+    color: "#000 !important",
     marginLeft: "4px",
     fontWeight: "500",
     fontSize: "12px",
@@ -35,7 +36,8 @@ const customTabsStyle = {
   },
   tabSelected: {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
-    transition: "0.2s background-color 0.1s"
+    /*transition: "0.2s background-color 0.1s",*/
+    fontWeight: "bold"
   },
   tabWrapper: {
     display: "inline-block",

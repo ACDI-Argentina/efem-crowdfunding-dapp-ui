@@ -26,19 +26,7 @@ class Footer extends Component {
           spacing={0}
         >
           <Grid item xs={8} sm={3}>
-            <img src={require("assets/img/logos/give4forest.svg")} alt={t('give4forest')} className={classes.dappLogo} />
-          </Grid>
-          <Grid item xs={8} sm={3} className={classes.rightSection}>
-            <h6 className={classes.title}>
-              {t('relatedServices')}
-            </h6>
-            <h6 className={classes.description}>
-              <a href="http://avaldao.com" target="_blank">
-                <b>{t('avalDAO')} {" >"}</b>
-              </a>
-              <br />
-              {t('decentralizedInvestments')}
-            </h6>
+            <img src={require("assets/img/logos/give4forest.png")} alt={t('give4forest')} className={classes.dappLogo} />
           </Grid>
           <Grid item xs={8} sm={3} className={classes.rightSection}>
             <h6 className={classes.title}>
@@ -65,15 +53,17 @@ class Footer extends Component {
             </h6>
           </Grid>
           <Grid item xs={8} sm={2}>
+            <img src={require("assets/img/logos/acdi.png")} alt={t('acdi')} className={classes.logo} />
+          </Grid>
+          <Grid item xs={8} sm={2}>
             <img src={require("assets/img/logos/rsk.svg")} alt={t('rsk')} className={classes.logo} />
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/efem-h.png")} alt={t('efem')} className={classes.logo} />
+            <img src={require("assets/img/logos/iovlabs.jpg")} alt={t('iovlabs')} className={classes.logo} />
           </Grid>
         </Grid>
         <br/>
         <h6 className={classes.disclaimer}>
-          <b>{t('argentina')}</b>{t('disclaimer')}
           <Link to="/termsandconditions" target="_blank" underline="always">
             {t('termsAndConditions')}
           </Link>

@@ -11,10 +11,10 @@ const footerStyle = {
     marginTop: "2em"
   },
   dappLogo: {
-    padding: "1em",
-    width: "50%",
+    padding: "1em 1em 1em 0em",
+    width: "100%",
     textAlign: "left",
-    maxWidth: "120px"
+    maxWidth: "170px"
   },
   rightSection: {
     borderLeft: "2px solid #999",
