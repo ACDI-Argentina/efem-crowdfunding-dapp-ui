@@ -25,17 +25,19 @@ const campaignsStyle = {
     width: "auto",
     border: "0",
     padding: "5px 2px",
-    borderRadius: "3px",
     textAlign: "center",
     marginTop: "0px",
     marginLeft: "0px",
     marginRight: "0px",
     marginBottom: "15px",
-    background: primaryColor,
+    background: "none",
+    borderTop: "1px solid black",
+    borderBottom: "1px solid black",
+    borderRadius: "0",
     "flexContainer": {
       display: "flex",
       flexWrap: "space-around"
-    }
+    },
   },
 
 };

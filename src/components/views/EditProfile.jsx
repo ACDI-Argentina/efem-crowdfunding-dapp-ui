@@ -64,7 +64,7 @@ class EditProfile extends Component {
       <div>
         <Header
           color="white"
-          brand={<img src={require("assets/img/logos/give4forest.svg")}
+          brand={<img src={require("assets/img/logos/give4forest.png")}
           alt={t('give4forest')}
           className={classes.dappLogo}/>}
           rightLinks={<MainMenu />}

@@ -1,5 +1,7 @@
 import { container, title } from "assets/jss/material-kit-react.js";
 
+const bkgImg = require("assets/img/burbuja.svg");
+
 const landingPageStyle = {
 
   landingPage: {
@@ -14,9 +16,11 @@ const landingPageStyle = {
     maxHeight: "2.5em"
   },
   titleContainer: {
-    backgroundColor: "rgba(0,0,0,0.3)",
-    borderRadius: "10px",
-    padding: "1em"
+    backgroundImage: "url(" + bkgImg + ")",
+    padding: "1em 2em 3em",
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
   },
   title: {
     ...title,
