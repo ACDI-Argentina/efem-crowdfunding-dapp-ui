@@ -7,20 +7,20 @@ const TermsAndConditions = () => (
       <div className="col-md-10 m-auto">
         <h1>Terms and Conditions</h1>
         <p>
-          <i>Last update: 10th of April 2019</i>
+          <i>Last update: 25th of May 2021</i>
         </p>
         <p>
           <strong>
-            This page explains our terms of use. When you use the b4H Dapp, you’re agreeing to all
+            This page explains our terms of use. When you use the Give4Forest Dapp, you’re agreeing to all
             the rules as explained in this page. We have tried to express these terms in a simple
             manner avoiding, for the most part, the complex legal jargon.
           </strong>
         </p>
         <p>
-          Welcome to the beta version of the b4H dapp. By using this website{' '}
-          <a href="https://dapp.b4h.world">dapp.b4h.world</a> (the “Dapp” and “Site”) offered by
-          Blockchain 4 Humanity (b4H) representatives, volunteers, consultants, contributors,
-          officers, and directors (collectively, “b4H,” “we,” or “us”), you’re agreeing to these
+          Welcome to the beta version of the Give4Forest dapp. By using this website{' '}
+          <a href="https://give4forest.org">give4forest.org</a> (the “Dapp” and “Site”) offered by
+          Give4Forest representatives, volunteers, consultants, contributors,
+          officers, and directors (collectively, “Give4Forest,” “we,” or “us”), you’re agreeing to these
           legally binding rules (the “Terms”). You’re also agreeing to our{' '}
           <Link to="/privacypolicy">Privacy Policy</Link> and agreeing to follow any other rules on
           the Site, like our Community Guidelines and on boarding new projects.
@@ -29,20 +29,20 @@ const TermsAndConditions = () => (
           We may change these terms from time to time. If we do, we’ll let you know about any
           material changes, either by notifying you on the Dapp or by sending you an email. New
           versions of the terms will never apply retroactively — we’ll tell you the exact date they
-          go into effect. If you keep using <a href="https://dapp.b4h.world">dapp.b4h.world</a>{' '}
+          go into effect. If you keep using <a href="https://give4forest.org">give4forest.org</a>{' '}
           after a change, that means you accept the new terms.
         </p>
         <p>
-          b4H dapp is for your personal, non-commercial use, except as explained in section 4 and
+          Give4Forest dapp is for your personal, non-commercial use, except as explained in section 4 and
           section 5 below.
         </p>
         <h1>1. Creating an Account</h1>
         <p>
-          To sign up for a b4H account, you need to be 18 or over. You’re responsible for your
+          To sign up for a Give4Forest account, you need to be 18 or over. You’re responsible for your
           account and all the activity on it.
         </p>
         <p>
-          You can browse b4 without registering for an account. But to use some of b4H’s functions,
+          You can browse b4 without registering for an account. But to use some of Give4Forest’s functions,
           you’ll need to register either using external web3 wallet provider or the embedded Portis
           wallet (please see their Terms of Service and Privacy Policy). Only then you are able to
           fill in your profile and when you do that, the information you give us has to be accurate
@@ -53,12 +53,12 @@ const TermsAndConditions = () => (
           When you create an account on the Dapp, you are responsible for maintaining the security
           of your account and you are fully responsible for all activities that occur under the
           account. You must immediately notify{' '}
-          <a href="mailto:support@b4h.world">support@b4h.world</a> of any unauthorized uses of your
+          <a href="mailto:give4forest@acdi.org.ar">give4forest@acdi.org.ar</a> of any unauthorized uses of your
           account or any other breaches of security. You’re responsible for all the activity on your
           account, and for keeping your connection method secured..
         </p>
         <p>
-          b4H will not be liable for any acts or omissions by you, including any damages of any kind
+          Give4Forest will not be liable for any acts or omissions by you, including any damages of any kind
           incurred as a result of such acts or omissions.
         </p>
         <h1>2. Things You must AVOID in general</h1>
@@ -82,7 +82,7 @@ const TermsAndConditions = () => (
           </li>
           <li>
             Don’t offer prohibited items. Don’t offer any rewards that are illegal, violate any of
-            b4H’s policies, rules, or guidelines, or violate any applicable law, statute, ordinance,
+            Give4Forest’s policies, rules, or guidelines, or violate any applicable law, statute, ordinance,
             or regulation.
           </li>
           <li>
@@ -97,13 +97,13 @@ const TermsAndConditions = () => (
           <li>
             Don’t harm anyone’s computer. Don’t distribute software viruses, or anything else (code,
             films, programs) designed to interfere with the proper function of any software,
-            hardware, or equipment on the Dapp (whether it belongs to b4H or another party).
+            hardware, or equipment on the Dapp (whether it belongs to Give4Forest or another party).
           </li>
           <li>
-            Don’t abuse other users’ personal information. When you use b4H — and especially if you
+            Don’t abuse other users’ personal information. When you use Give4Forest — and especially if you
             create a successful project — you may receive information about other users, including
             things like their names, email addresses, and postal addresses. This information is
-            provided for the purpose of participating in a b4H project: don’t use it for other
+            provided for the purpose of participating in a Give4Forest project: don’t use it for other
             purposes, and don’t abuse it.
           </li>
         </ul>
@@ -115,7 +115,7 @@ const TermsAndConditions = () => (
           </li>
           <li>
             Don’t try to damage or get unauthorized access to any system, data, password, or other
-            information, whether it belongs to b4H or another party.
+            information, whether it belongs to Give4Forest or another party.
           </li>
           <li>
             Don’t take any action that imposes an unreasonable load on our infrastructure, or on our
@@ -126,7 +126,7 @@ const TermsAndConditions = () => (
             or “spider” any part of the Site.
           </li>
           <li>
-            Don’t take apart or reverse engineer any aspect of b4H in an effort to access things
+            Don’t take apart or reverse engineer any aspect of Give4Forest in an effort to access things
             like source code, underlying ideas, or algorithms. Our code is open source.
           </li>
         </ul>
@@ -161,26 +161,26 @@ const TermsAndConditions = () => (
         </ul>
         <h1>4. What you should know about Projects and Campaigns</h1>
         <p>
-          Most of our Terms of Use explain your relationship with b4H. This section is different —
+          Most of our Terms of Use explain your relationship with Give4Forest. This section is different —
           it explains the relationship between Builders, the project creators and owners, and
-          Supporters (funding contributors) of b4H projects, and who’s responsible for what. This is
-          what you’re agreeing to when you create/own or support a b4h project.
+          Supporters (funding contributors) of Give4Forest projects, and who’s responsible for what. This is
+          what you’re agreeing to when you create/own or support a Give4Forest project.
         </p>
         <p>
-          b4h provides a funding vehicle for humanitarian, social and environmental impact projects
+          Give4Forest provides a funding vehicle for humanitarian, social and environmental impact projects
           that aim at addressing gaps and making life better for all. When a Builder posts a project
-          on b4H, they’re inviting other people to form a contract with them. Anyone who supports a
+          on Give4Forest, they’re inviting other people to form a contract with them. Anyone who supports a
           project is accepting the Builder’s offer, and forming that contract.
         </p>
         <p>
-          <strong>b4H is not a part of this contract</strong> — the contract is a direct legal
+          <strong>Give4Forest is not a part of this contract</strong> — the contract is a direct legal
           agreement between project creators and their supporters. Here are the terms that govern
           that agreement:
         </p>
         <p>
           When a project is successfully funded, the Builder must complete the milestones to fulfill
           the conditions and get rewarded. Once a Builder has done so, a designated reviewer (in
-          some cases b4H reserves the right to be the reviewer) will check how the conditions were
+          some cases Give4Forest reserves the right to be the reviewer) will check how the conditions were
           satisfied.
         </p>
         <p>
@@ -233,7 +233,7 @@ const TermsAndConditions = () => (
         <p>
           This section goes over the details of supporting and creating projects — things like how
           money gets collected, whether pledges can be changed or canceled, and how Builders can
-          contact supporters to provide updates and how b4H makes use of donated funds.
+          contact supporters to provide updates and how Give4Forest makes use of donated funds.
         </p>
         <p>These are the terms that apply when you’re supporting a project:</p>
         <ul>
@@ -258,37 +258,37 @@ const TermsAndConditions = () => (
           </li>
           <li>
             <strong>
-              b4H is not responsible for the donations given to the projects and has no access to
+              Give4Forest is not responsible for the donations given to the projects and has no access to
               the funds.
             </strong>{' '}
-            Responsibility for finishing a project lies entirely with the Builder. b4H doesn’t hold
+            Responsibility for finishing a project lies entirely with the Builder. Give4Forest doesn’t hold
             funds on Builders’ behalf, cannot guarantee Builder’s work, and does not offer refunds.
           </li>
           <li>
-            b4H offers total transparency in the use of funds allocated to support selected
-            projects. b4H does not guarantee funds will follow the intended process, contributors
+            Give4Forest offers total transparency in the use of funds allocated to support selected
+            projects. Give4Forest does not guarantee funds will follow the intended process, contributors
             may donate funds at their own discretion.
           </li>
         </ul>
-        <h3>Funds donated directly to the b4H Program Fund</h3>
+        <h3>Funds donated directly to the Give4Forest Program Fund</h3>
         <p>
-          This section explains how the b4H organization is also a user of the dapp to provide full
+          This section explains how the Give4Forest organization is also a user of the dapp to provide full
           transparency in the way funds from donations are being allocated through its program. The
-          b4H Catalyzing Program Identifies, help Build and Implement Global Impact projects:
+          Give4Forest Catalyzing Program Identifies, help Build and Implement Global Impact projects:
         </p>
         <ul>
           <li>
-            <strong>The b4H Program Fund and Campaign</strong> are one of the users of the b4H dapp
+            <strong>The Give4Forest Program Fund and Campaign</strong> are one of the users of the Give4Forest dapp
             as a Builder.
           </li>
           <li>
             Donors have visibility as to where their donation has been assigned similarly to any
             other projects on the platform.
           </li>
-          <li>Additionally, if requested b4H can provide a donation receipt to Contributors.</li>
+          <li>Additionally, if requested Give4Forest can provide a donation receipt to Contributors.</li>
           <li>
-            The funds pledged to the Program Fund are managed by the Builder (the B4H core team
-            wallet) and assigned to actions/milestones of the selected projects in the b4H Program.
+            The funds pledged to the Program Fund are managed by the Builder (the Give4Forest core team
+            wallet) and assigned to actions/milestones of the selected projects in the Give4Forest Program.
           </li>
           <li>
             The projects milestones are specific actions that will be completed to advance the
@@ -300,11 +300,11 @@ const TermsAndConditions = () => (
           </li>
           <li>Funds may be used to cover contractors or contributors incentives.</li>
           <li>
-            Funded project milestones can be collected only when both project and b4H team have
+            Funded project milestones can be collected only when both project and Give4Forest team have
             jointly completed the tasks.
           </li>
           <li>
-            Milestone Reviewers may be comprised of project team members under the program, b4h core
+            Milestone Reviewers may be comprised of project team members under the program, Give4Forest core
             team, mentors, board members and advisors.
           </li>
         </ul>
@@ -317,7 +317,7 @@ const TermsAndConditions = () => (
             obligation to that specific supporter, and no agreement exists between you.
           </li>
           <li>
-            We’ll charge our transaction fees after putting funds in your account. b4H and its
+            We’ll charge our transaction fees after putting funds in your account. Give4Forest and its
             partners may subtract fees before or after transmitting the proceeds of a campaign.
           </li>
           <li>
@@ -337,33 +337,33 @@ const TermsAndConditions = () => (
         </ul>
         <h3>How do we sustain our dapp operational cost</h3>
         <p>
-          b4H Fees are only charged on successfully funded projects (network transaction fees are
-          not included). After the official release of our production b4H Dapp, we may charge 3%, in
+          Give4Forest Fees are only charged on successfully funded projects (network transaction fees are
+          not included). After the official release of our production Give4Forest Dapp, we may charge 3%, in
           addition to any fees from our partners. This fee helps fund maintenance, technical support
           and fees related to on-chain transactions.
         </p>
         <p>
-          Creating an account on b4H is free (but excludes network transaction fee). If you create a
+          Creating an account on Give4Forest is free (but excludes network transaction fee). If you create a
           project that is successfully funded, we (and payment partners) may collect success fees.
           Partners’ fees may vary slightly based on your location.
         </p>
         <p>
           We will not collect any fees without giving you a chance to review and accept them. If our
           fees ever change, we’ll announce that on our Site. Some funds pledged by backers are
-          collected by payment providers. Each payment provider is its own company, and b4h isn’t
+          collected by payment providers. Each payment provider is its own company, and Give4Forest isn’t
           responsible for its performance.
         </p>
         <p>
           You’re responsible for paying any additional fees or taxes associated with your use of the
-          b4H Dapp.
+          Give4Forest Dapp.
         </p>
         <h1>6. Stuff We Don’t Do and Are Not Responsible For</h1>
         <p>
-          b4h isn’t liable for any damages or losses related to your use of the dapp. We don’t
+          Give4Forest isn’t liable for any damages or losses related to your use of the dapp. We don’t
           become involved in disputes between users, or between users and any third party relating
           to the use of the services. We don’t oversee the performance or punctuality of projects,
-          (unless they are projects supported by b4H programs) and we don’t endorse any content
-          users submit to the Site. When you use the Dapp, you release b4H from claims, damages, and
+          (unless they are projects supported by Give4Forest programs) and we don’t endorse any content
+          users submit to the Site. When you use the Dapp, you release Give4Forest from claims, damages, and
           demands of every kind — known or unknown, suspected or unsuspected, disclosed or
           undisclosed — arising out of or in any way related to such disputes or use of the dapp.
           All content you access through the dapp is at your own risk. You’re solely responsible for
@@ -375,20 +375,20 @@ const TermsAndConditions = () => (
           us.
         </p>
         <p>
-          b4H Sites and dapp may contain links to other websites (for instance, project pages, user
+          Give4Forest Sites and dapp may contain links to other websites (for instance, project pages, user
           profiles, and comments may link to other sites.) When you access third-party websites, you
           do so at your own risk. We don’t control or endorse those sites.
         </p>
         <p>
-          b4H may partner with other companies for payment processing. When you support or create a
+          Give4Forest may partner with other companies for payment processing. When you support or create a
           project, you’re also agreeing to the payment processor’s terms of service.
         </p>
         <h1>8. Your Intellectual Property</h1>
         <p>
-          We don’t own the stuff you post on b4H dapp. But when you post it, you’re giving us
+          We don’t own the stuff you post on Give4Forest dapp. But when you post it, you’re giving us
           permission to use or copy it however we need in order to run the site, or show people
           what’s happening on it (we generally just use this to promote projects and showcase our
-          community on the website). b4H doesn’t own content you submit to us (your “Content”). But
+          community on the website). Give4Forest doesn’t own content you submit to us (your “Content”). But
           we do need certain licenses from you in order for the site to perform. When you submit a
           project for review, or launch a project, you agree to these terms:
         </p>
@@ -409,16 +409,16 @@ const TermsAndConditions = () => (
             Your Content will not contain third-party copyrighted material, or material that is
             subject to other third-party proprietary rights, unless you have permission from the
             rightful owner of the material, or you are otherwise legally entitled to post the
-            material (and to grant b4H all the license rights outlined here).
+            material (and to grant Give4Forest all the license rights outlined here).
           </li>
           <li>
             Any royalties or licensing on your Content are your responsibility. You will pay all
             royalties and other amounts owed to any person or entity based on your Content, or on
-            b4H’s hosting of that Content.
+            Give4Forest’s hosting of that Content.
           </li>
           <li>
             You promise that if we use your Content, we’re not violating anyone’s rights or
-            copyrights. If b4H or its users exploit or make use of your submission in the ways
+            copyrights. If Give4Forest or its users exploit or make use of your submission in the ways
             contemplated in this agreement, you promise that this will not infringe or violate the
             rights of any third party, including (without limitation) any privacy rights, publicity
             rights, copyrights, contract rights, or any other intellectual property or proprietary
@@ -430,25 +430,25 @@ const TermsAndConditions = () => (
             person from whom that content originated.
           </li>
           <li>
-            We’re not responsible for mistakes in your content. b4H will not be liable for any
+            We’re not responsible for mistakes in your content. Give4Forest will not be liable for any
             errors or omissions in any content.
           </li>
         </ul>
-        <h1>9. b4H’s Intellectual Property</h1>
+        <h1>9. Give4Forest’s Intellectual Property</h1>
         <p>
           The content on the dapp is not protected. You do have the right to use it for certain
           personal purposes, but you can’t use it for anything commercial without getting permission
           first.
         </p>
         <p>
-          b4H’s Site and Dapp are open source. However, you agree to respect the work and legal
+          Give4Forest’s Site and Dapp are open source. However, you agree to respect the work and legal
           notices, information, and restrictions contained in any content accessed through the Site.
           You also agree not to change, translate, or otherwise create derivative works of the Site
           or Dapp, unless you were given consent.
         </p>
         <p>
-          b4H grants you access to reproduce content from the Site/Dapp for personal use only. This
-          access covers both b4H’s own protected content and user-generated content on the Site
+          Give4Forest grants you access to reproduce content from the Site/Dapp for personal use only. This
+          access covers both Give4Forest’s own protected content and user-generated content on the Site
           (this license is worldwide, non-exclusive, non-sublicensable, and non-transferable). If
           you want to use, reproduce, modify, distribute, or store any of this content for a
           commercial purpose, you need prior written permission from the relevant copyright holder.
@@ -475,7 +475,7 @@ const TermsAndConditions = () => (
           All provisions of this agreement survive termination of an account, including our rights
           regarding any content you’ve already submitted to the Site/Dapp. (For instance, if you’ve
           launched a project, deleting your account will not automatically remove the project from
-          the Site.) You can contact us at <a href="mailto:support@b4h.world">support@b4h.world</a>{' '}
+          the Site.) You can contact us at <a href="mailto:give4forest@acdi.org.ar">give4forest@acdi.org.ar</a>{' '}
           for additional information or to request project page deletion (this is not available in
           all circumstances).
         </p>
@@ -486,7 +486,7 @@ const TermsAndConditions = () => (
           protect the health and integrity of our system. We don’t take these powers lightly, and we
           only use them when we absolutely have to.
         </p>
-        <p>b4H reserves these rights:</p>
+        <p>Give4Forest reserves these rights:</p>
         <ul>
           <li>
             We can make changes to the Dapp Site and functionalities without notice or liability.
@@ -495,7 +495,7 @@ const TermsAndConditions = () => (
             We have the right to decide who’s eligible to use the Dapp. We can cancel accounts or
             decline to offer access. (Especially if you’re abusing them.) We can change our
             eligibility criteria at any time. If these things are prohibited by law where you live,
-            then we revoke your right to use the b4H dapp in that jurisdiction.
+            then we revoke your right to use the Give4Forest dapp in that jurisdiction.
           </li>
           <li>
             We have the right to reject, cancel, interrupt, remove, or suspend any project at any
@@ -503,7 +503,7 @@ const TermsAndConditions = () => (
           </li>
         </ul>
         <strong>
-          b4H is not liable for any damages as a result of any of these actions, and it is our
+          Give4Forest is not liable for any damages as a result of any of these actions, and it is our
           policy not to comment on the reasons for any such action.
         </strong>
         <h1>13. Warranty Disclaimer</h1>
@@ -518,18 +518,18 @@ const TermsAndConditions = () => (
         </p>
         <p>Here is the version with the legal jargon: </p>
         <p>
-          b4H SPECIFICALLY DISCLAIMS ANY AND ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY,
+          Give4Forest SPECIFICALLY DISCLAIMS ANY AND ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY,
           NON-INFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE, AND ANY WARRANTIES IMPLIED BY ANY
           COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE. NO ADVICE OR INFORMATION
           (ORAL OR WRITTEN) OBTAINED BY YOU FROM KICKSTARTER SHALL CREATE ANY WARRANTY.
         </p>
         <h1>14. Indemnification</h1>
-        <p>If you do something on b4H that winds up getting us sued, you have to help defend us.</p>
+        <p>If you do something on Give4Forest that winds up getting us sued, you have to help defend us.</p>
         <p>
           If you do something that gets us sued, or break any of the promises you make in this
           agreement, you agree to defend, indemnify, and hold us harmless from all liabilities,
           claims, and expenses (including reasonable attorneys’ fees and other legal costs) that
-          arise from or relate to your use or misuse of b4H Site and Dapp. We reserve the right to
+          arise from or relate to your use or misuse of Give4Forest Site and Dapp. We reserve the right to
           assume the exclusive defense and control of any matter otherwise subject to this
           indemnification clause, in which case you agree that you’ll cooperate and help us in
           asserting any defenses.
@@ -537,13 +537,13 @@ const TermsAndConditions = () => (
         <h1>15. Limitation of Liability</h1>
         <p>If something bad happens as a result of your using the Site/Dapp, we’re not liable.</p>
         <p>
-          To the fullest extent permitted by law, in no event will b4H, its directors, employees,
+          To the fullest extent permitted by law, in no event will Give4Forest, its directors, employees,
           partners, suppliers, contributors, mentors, advisors or content providers be liable for
           any indirect, incidental, punitive, consequential, special, or exemplary damages of any
           kind, including but not limited to damages (i) resulting from your access to, use of, or
           inability to access or use the dapp; (ii) for any lost profits, data loss, or cost of
           procurement or substitute goods or services; or (iii) for any conduct of content of any
-          third party on the Site. In no event shall b4H’s liability for direct damages be in excess
+          third party on the Site. In no event shall Give4Forest’s liability for direct damages be in excess
           of (in the aggregate) one hundred EURO (EUR100.00).
         </p>
         <h1>16. Dispute Resolution and Governing Law</h1>
@@ -552,14 +552,14 @@ const TermsAndConditions = () => (
           Gibraltar law.
         </p>
         <p>
-          We at b4H encourage you to contact us if you’re having an issue, before resorting to the
+          We at Give4Forest encourage you to contact us if you’re having an issue, before resorting to the
           courts. In the unfortunate situation where legal action does arise, these Terms (and all
           other rules, policies, or guidelines incorporated by reference) will be governed by and
           construed in accordance with the laws of Gibraltar, without giving effect to any
           principles of conflicts of law, and without application of the Uniform Computer
           Information Transaction Act or the United Nations Convention of Controls for International
-          Sale of Goods. You agree that b4H and its dapp are deemed a passive website that does not
-          give rise to jurisdiction over b4H or its parents, subsidiaries, affiliates, assigns,
+          Sale of Goods. You agree that Give4Forest and its dapp are deemed a passive website that does not
+          give rise to jurisdiction over Give4Forest or its parents, subsidiaries, affiliates, assigns,
           employees, agents, directors, officers, or stakeholders, either specific or general, in
           any jurisdiction other than Gibraltar. You agree that any action at law or in equity
           arising out of or relating to these Terms, or your use or non-use of dapp, shall be filed
@@ -576,18 +576,18 @@ const TermsAndConditions = () => (
         </p>
         <p>
           These Terms and the other material referenced in them are the entire agreement between you
-          and b4H with respect to the Dapp. They supersede all other communications and proposals
-          (whether oral, written, or electronic) between you and b4H with respect to the Dapp and
+          and Give4Forest with respect to the Dapp. They supersede all other communications and proposals
+          (whether oral, written, or electronic) between you and Give4Forest with respect to the Dapp and
           govern our future relationship. If any provision of these Terms is found to be invalid
           under the law, that provision will be limited or eliminated to the minimum extent
           necessary so that the Terms otherwise will remain in full force and effect and
-          enforceable. The failure of either you or b4H to exercise any right provided for in these
+          enforceable. The failure of either you or Give4Forest to exercise any right provided for in these
           Terms in any way won’t be deemed a waiver of any other rights.
         </p>
         <p>
           These Terms are personal to you. You can’t assign them, transfer them, or sublicense them
-          unless you get b4H’s prior written consent. b4H has the right to assign, transfer, or
-          delegate any of its rights and obligations under these Terms without your consent. b4H
+          unless you get Give4Forest’s prior written consent. Give4Forest has the right to assign, transfer, or
+          delegate any of its rights and obligations under these Terms without your consent. Give4Forest
           will provide you notice via email, written notice, or by conspicuously posting the notice
           on our Dapp.
         </p>
