@@ -1,5 +1,5 @@
 
-name: Build and deploy dapp - staging
+name: Build and deploy dapp - testing
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: '10.23.0'
       - run: npm install
-      - run: npm run build:staging
+      - run: npm run build:testing
       - name: generate version file
         run: echo $(date +"%Y-%m-%dT%H:%M:%S%z") - ${{ github.sha }} > build/version.html
       - name: rsync deployments
