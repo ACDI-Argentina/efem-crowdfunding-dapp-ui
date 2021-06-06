@@ -10,6 +10,32 @@ import web3Manager from "./Web3Manager";
 import networkManager from "./NetworkManager";
 import accountManager from "./AccountManager";
 
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from "@walletconnect/web3-provider";
+
+//TODO: determinar cuales es el mejor lugar para posicionar esto, creo que web3manager
+const providerOptions = {
+  // read more about providers setup in https://github.com/web3Modal/web3modal/
+  walletconnect: {
+    package: WalletConnectProvider, // setup wallet connect for mobile wallet support
+    options: {
+    rpc: {
+        30: 'https://public-node.rsk.co',
+        31: 'https://public-node.testnet.rsk.co',
+        33: config.network.nodeUrl,
+      },
+    },
+  },
+};
+
+
+
+const web3Modal = new Web3Modal({
+  providerOptions: providerOptions
+});
+
+
+
 export const Web3AppContext = React.createContext({
   contract: {},
   account: {},
@@ -149,6 +175,7 @@ class Web3App extends React.Component {
     });
   }
 
+  //Deprecar Ahora usamos wallet connect
   loginAccount = async (providerName) => {
     console.log(`Conectar usuario con ${providerName}`);
     if (providerName === "WalletConnect") {
@@ -413,10 +440,25 @@ class Web3App extends React.Component {
   };
 
 
-  openProviderSelectionModal = () => {
-    const modals = { ...this.state.modals };
-    modals.data.providerSelectionModalIsOpen = true;
-    this.setState({ modals });
+
+  openProviderSelectionModal = async () => {
+    const provider = await web3Modal.connect();
+    if(provider instanceof WalletConnectProvider){
+      web3Manager.setWalletConnectProvider(provider);
+    } else{
+      this.openConnectionPendingModal();
+      await web3Manager.connectWeb3ByWalletBrowser(); //que hace acá?
+      this.closeConnectionPendingModal();
+    }
+    const [account] = await provider.request({ method: "eth_accounts" });
+    //Usar el AccountManager
+    accountManager.loadAccount(account)
+    
+    //get and set address
+
+
+
+    
   }
   closeProviderSelectionModal = () => {
     const modals = { ...this.state.modals };

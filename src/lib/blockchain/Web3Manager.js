@@ -111,11 +111,6 @@ class Web3Manager {
    */
   connectWeb3ByWalletConnect = async () => {
 
-    let web3;
-    let walletBrowserRequired = false;
-    let walletNetworkId = undefined;
-    let walletNetworkIsCorrect = false;
-
     const provider = new WalletConnectProvider({
       rpc: {
         30: "https://public-node.rsk.co",
@@ -127,7 +122,16 @@ class Web3Manager {
     // Enable session (triggers QR Code modal)
     await provider.enable();
 
-    web3 = new Web3(provider);
+    return await this.setWalletConnectProvider(provider)
+  }
+
+
+  setWalletConnectProvider = async (provider) => {
+    const walletBrowserRequired = false;
+    let walletNetworkId;
+    let walletNetworkIsCorrect = false;
+
+    const web3 = new Web3(provider);
 
     walletNetworkId = await web3.eth.net.getId();
     web3.providerName = "WalletConnect";

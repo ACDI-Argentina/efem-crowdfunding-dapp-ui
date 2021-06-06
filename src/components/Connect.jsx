@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
 import AccountDetailsModal from 'components/Dialogs/AccountDetailsModal';
-import ProviderSelectionModal from './Dialogs/ProviderSelectionModal';
+
 import { withTranslation } from 'react-i18next';
+
 
 const Wrapper = styled.div``;
 
@@ -91,13 +92,14 @@ const Connect = (props) => {
         <img src="/img/walletconnect-logo.svg" style={{ width: '30px' }} />
       </WalletIndicator>
     );
-  } else  if(web3.providerName === "WalletBrowser"){
-    walletIndicator = (
-      <WalletIndicator>
+  } else if(web3.providerName === "WalletBrowser"){
+    walletIndicator = null;
+      /*
+      Temporalmente sacamos este indicador porque puede dar lugar a confusiones si usamos nifty o otra wallet browser
+       <WalletIndicator>
         <img src="/img/metamask-logo.svg" style={{ width: '25px' }} />
-      </WalletIndicator>
-    );
-
+      </WalletIndicator> 
+      */
   }
 
   return (
@@ -121,12 +123,6 @@ const Connect = (props) => {
           <ConnectButton onClick={() => openProviderSelectionModal()}>{t('connectWallet')}</ConnectButton>
         )}
       </Wrapper>
-      <ProviderSelectionModal
-        onSelect={ providerName => {
-          loginAccount(providerName);
-          closeProviderSelectionModal();
-        }}
-      ></ProviderSelectionModal>
 
       <AccountDetailsModal
         address={addr}
