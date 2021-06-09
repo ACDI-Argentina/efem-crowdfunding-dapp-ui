@@ -73,16 +73,7 @@ class Donate extends Component {
     if(currentUser.address){
       this.open();
     } else {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
-      setTimeout(() => {
-        modals.methods.openProviderSelectionModal();
-      },400)
-      
-      //TODO: Listen for changes on currentUserAddress to open modal
+      modals.methods.openProviderSelectionModal();
     }
     
   };
