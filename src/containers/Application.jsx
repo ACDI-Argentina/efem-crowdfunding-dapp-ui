@@ -14,7 +14,7 @@ import Sweetalert from 'sweetalert';
 
 import GA from 'lib/GoogleAnalytics';
 
-import { history } from '../lib/helpers';
+import { ScrollToTop, history } from '../lib/helpers';
 
 import config from '../configuration';
 
@@ -133,6 +133,7 @@ class Application extends Component {
                             {!web3Loading && (
                               <ConversionRateProvider fiatWhitelist={fiatWhitelist}>
                                 <Router history={history}>
+                                 <ScrollToTop />
                                   <div>
                                     {GA.init() && <GA.RouteTracker />}
 

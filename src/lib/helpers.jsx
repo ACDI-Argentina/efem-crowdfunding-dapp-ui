@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import 'whatwg-fetch';
 import { createBrowserHistory } from 'history';
 import moment from 'moment';
@@ -79,6 +81,19 @@ export const getReadableStatus = status => {
 };
 
 export const history = createBrowserHistory();
+
+
+export function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+
 
 // Get start of the day in UTC for a given date or start of current day in UTC
 export const getStartOfDayUTC = date => moment.utc(date || moment()).startOf('day');
