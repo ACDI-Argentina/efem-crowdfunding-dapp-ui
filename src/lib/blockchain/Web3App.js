@@ -440,26 +440,28 @@ class Web3App extends React.Component {
   };
 
 
-
   openProviderSelectionModal = async () => {
+   try {
     const provider = await web3Modal.connect();
     if(provider instanceof WalletConnectProvider){
       web3Manager.setWalletConnectProvider(provider);
     } else{
       this.openConnectionPendingModal();
-      await web3Manager.connectWeb3ByWalletBrowser(); //que hace acá?
+      await web3Manager.connectWeb3ByWalletBrowser(); 
       this.closeConnectionPendingModal();
     }
-    const [account] = await provider.request({ method: "eth_accounts" });
-    //Usar el AccountManager
-    accountManager.loadAccount(account)
+    const [account] = await provider.request({ method: 'eth_accounts' });
     
-    //get and set address
+    accountManager.loadAccount(account);
 
-
-
-    
+  } catch (err) {
+    console.log(err);
   }
+};
+
+
+
+
   closeProviderSelectionModal = () => {
     const modals = { ...this.state.modals };
     modals.data.providerSelectionModalIsOpen = false;

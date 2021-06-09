@@ -67,11 +67,21 @@ class Donate extends Component {
   }
 
   handleClickOpen() {
-    const {currentUser} = this.props;
+    const { currentUser } = this.props;
+    const { modals } = this.context;
+
     if(currentUser.address){
       this.open();
     } else {
-      this.context.openProviderSelectionModal();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+      setTimeout(() => {
+        modals.methods.openProviderSelectionModal();
+      },400)
+      
       //TODO: Listen for changes on currentUserAddress to open modal
     }
     
