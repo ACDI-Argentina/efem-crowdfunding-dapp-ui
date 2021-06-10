@@ -440,7 +440,7 @@ class Web3App extends React.Component {
   };
 
 
-  openProviderSelectionModal = async () => {
+  openProviderSelectionModal = async (cb) => {
    try {
     const provider = await web3Modal.connect();
     if(provider instanceof WalletConnectProvider){
@@ -452,7 +452,14 @@ class Web3App extends React.Component {
     }
     const [account] = await provider.request({ method: 'eth_accounts' });
     
-    accountManager.loadAccount(account);
+    accountManager.loadAccount(account); //this is sync??
+
+    //quien se encarga de cargar el balance?
+
+    if(typeof cb === "function"){//TODO: move a utils isFunction(object)
+      cb();
+    }
+
 
   } catch (err) {
     console.log(err);

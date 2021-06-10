@@ -73,7 +73,7 @@ class Donate extends Component {
     if(currentUser.address){
       this.open();
     } else {
-      modals.methods.openProviderSelectionModal();
+      modals.methods.openProviderSelectionModal(this.open); 
     }
     
   };
