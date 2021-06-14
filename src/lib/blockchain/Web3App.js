@@ -10,31 +10,7 @@ import web3Manager from "./Web3Manager";
 import networkManager from "./NetworkManager";
 import accountManager from "./AccountManager";
 
-import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
-
-//TODO: determinar cuales es el mejor lugar para posicionar esto, creo que web3manager
-const providerOptions = {
-  // read more about providers setup in https://github.com/web3Modal/web3modal/
-  walletconnect: {
-    package: WalletConnectProvider, // setup wallet connect for mobile wallet support
-    options: {
-    rpc: {
-        30: 'https://public-node.rsk.co',
-        31: 'https://public-node.testnet.rsk.co',
-        33: config.network.nodeUrl,
-      },
-    },
-  },
-};
-
-
-
-const web3Modal = new Web3Modal({
-  providerOptions: providerOptions
-});
-
-
 
 export const Web3AppContext = React.createContext({
   contract: {},
@@ -175,7 +151,7 @@ class Web3App extends React.Component {
     });
   }
 
-  //Deprecar Ahora usamos wallet connect
+  //A este método lo llama solamente en UserRejectedConnectionModal
   loginAccount = async (providerName) => {
     console.log(`Conectar usuario con ${providerName}`);
     if (providerName === "WalletConnect") {
@@ -442,7 +418,8 @@ class Web3App extends React.Component {
 
   openProviderSelectionModal = async (cb) => {
    try {
-    const provider = await web3Modal.connect();
+     const provider = await web3Manager.connect();
+
     if(provider instanceof WalletConnectProvider){
       web3Manager.setWalletConnectProvider(provider);
     } else{
@@ -452,9 +429,7 @@ class Web3App extends React.Component {
     }
     const [account] = await provider.request({ method: 'eth_accounts' });
     
-    accountManager.loadAccount(account); //this is sync??
-
-    //quien se encarga de cargar el balance?
+    await accountManager.loadAccount(account);
 
     if(typeof cb === "function"){//TODO: move a utils isFunction(object)
       cb();

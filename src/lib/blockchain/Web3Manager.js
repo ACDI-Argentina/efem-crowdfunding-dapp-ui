@@ -1,10 +1,32 @@
 import Web3 from 'web3';
 import Web3HttpProvider from 'web3-providers-http';
+import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { BehaviorSubject } from 'rxjs'
 import config from '../../configuration';
 import ipfsService from '../../ipfs/IpfsService';
 import Wallet from 'models/Wallet';
+
+//TODO: determinar cuales es el mejor lugar para posicionar esto, creo que web3manager
+const providerOptions = {
+  // read more about providers setup in https://github.com/web3Modal/web3modal/
+  walletconnect: {
+    package: WalletConnectProvider, // setup wallet connect for mobile wallet support
+    options: {
+    rpc: {
+        30: 'https://public-node.rsk.co',
+        31: 'https://public-node.testnet.rsk.co',
+        33: config.network.nodeUrl,
+      },
+    },
+  },
+};
+
+const web3Modal = new Web3Modal({
+  providerOptions: providerOptions
+});
+
+
 
 /**
  * Manager encargado de manejar el objeto Web3.
@@ -160,6 +182,11 @@ class Web3Manager {
     this.web3Subject.next(web3);
     console.log('[Setup Web3] Web3.', web3);
     return web3;
+  }
+
+
+  connect(){
+    return web3Modal.connect();
   }
 
   /**
