@@ -415,21 +415,17 @@ class Web3App extends React.Component {
     this.setState({ modals, callback: callback });
   };
 
-
+ //TODO: Renombrar, esto hace mas que abrir un modal, en caso
+ //de que se seleccione un priovider lo va a inicialziar
   openProviderSelectionModal = async (cb) => {
    try {
-     const provider = await web3Manager.connect();
+     const before = this.openConnectionPendingModal;
+     const after = this.closeConnectionPendingModal;
 
-    if(provider instanceof WalletConnectProvider){
-      web3Manager.setWalletConnectProvider(provider);
-    } else{
-      this.openConnectionPendingModal();
-      await web3Manager.connectWeb3ByWalletBrowser(); 
-      this.closeConnectionPendingModal();
-    }
-    const [account] = await provider.request({ method: 'eth_accounts' });
-    
-    await accountManager.loadAccount(account);
+     const web3 = await web3Manager.connect(before, after);
+     
+     //TODO: Comprobar si estoy en la red correcta
+     console.log(web3)   
 
     if(typeof cb === "function"){//TODO: move a utils isFunction(object)
       cb();
