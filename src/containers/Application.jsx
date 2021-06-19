@@ -114,7 +114,8 @@ class Application extends Component {
           <Web3App.Consumer>
             {({
               network,
-              walletBrowserRequired
+              walletBrowserRequired,
+              lastNotificationTs
             }) => (
 
               <React.Fragment>
@@ -160,6 +161,7 @@ class Application extends Component {
                                       requiredNetwork={config.network.requiredId}
                                       isCorrectNetwork={network.isCorrect}
                                       walletBrowserRequired={walletBrowserRequired}
+                                      lastNotificationTs={lastNotificationTs}
                                     />
                                   </div>
                                 </Router>

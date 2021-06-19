@@ -1,4 +1,4 @@
-import React, { useContext, Component } from 'react';
+import React, { useContext, Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import NetworkUtils from './NetworkUtils';
 import { Image, MetaMaskButton } from 'rimble-ui';
@@ -14,53 +14,71 @@ import styles from "assets/jss/material-kit-react/components/web3BannerStyle.js"
 import networkManager from './NetworkManager';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 
+import Bounce from 'components/Animated/Bounce';
+
 const WrongNetwork = ({
   currentNetwork,
   requiredNetwork,
   onWrongNetworkMessage,
+  lastNotificationTs
 }) => {
   const { t } = useTranslation();
   const requiredNetworkName = networkManager.getNetworkNameById(requiredNetwork);
   const currentNetworkName = networkManager.getNetworkNameById(currentNetwork);
   const { web3 } = useContext(Web3AppContext);
+
+  const [bouncing,setBouncing] = useState(false);
+
+  useEffect(() => {
+    setBouncing(true);
+    const timeoutId = setTimeout(()=> setBouncing(false),500);
+    return () => {clearTimeout(timeoutId)}
+  },[lastNotificationTs])
+  
+
+
+
   return (
     <div>
       {onWrongNetworkMessage === null ? (
         // Show default banner
-        <Box
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center">
-          <Box>
-            <Image
-              src={require("assets/img/icons/warning-icon.png")}
-              aria-label="Warning"
-              size="24px"
-            />
+        <Bounce bouncing={bouncing}>
+          <Box
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center">
+            <Box>
+              <Image
+                src={require("assets/img/icons/warning-icon.png")}
+                aria-label="Warning"
+                size="24px"
+              />
+            </Box>
+            <Box my={1}>
+              <Image
+                src={web3.wallet.logoUrl}
+                aria-label="MetaMask extension icon"
+                size="40px"
+              />
+            </Box>
+            <Box>
+              <Typography variant="subtitle1"
+                style={{ textDecoration: "underline" }}>
+                {t('web3WrongNetworkTitle', {
+                  requiredNetwork: requiredNetworkName
+                })}
+              </Typography>
+              <Typography variant="caption">
+                {t('web3WrongNetworkDescription', {
+                  requiredNetwork: requiredNetworkName,
+                  currentNetwork: currentNetworkName,
+                  walletName: web3.wallet.name
+                })}
+              </Typography>
+            </Box>
           </Box>
-          <Box my={1}>
-            <Image
-              src={web3.wallet.logoUrl}
-              aria-label="MetaMask extension icon"
-              size="40px"
-            />
-          </Box>
-          <Box>
-            <Typography variant="subtitle1"
-              style={{textDecoration: "underline"}}>
-              {t('web3WrongNetworkTitle', {
-                requiredNetwork: requiredNetworkName
-              })}
-            </Typography>
-            <Typography variant="caption">
-              {t('web3WrongNetworkDescription', {
-                requiredNetwork: requiredNetworkName,
-                currentNetwork: currentNetworkName,
-                walletName: web3.wallet.name
-              })}
-            </Typography>
-          </Box>
-        </Box>) : (
+        </Bounce>
+        ) : (
           // Show custom banner
           onWrongNetworkMessage
         )}
@@ -274,7 +292,11 @@ class Web3Banner extends Component {
     const { currentNetwork,
       requiredNetwork,
       walletBrowserRequired,
-      transactionFirstPending, classes } = this.props;
+      transactionFirstPending, 
+      classes,
+      lastNotificationTs
+      
+     } = this.props;
     const {
       notWeb3CapableBrowserMessage,
       noNetworkAvailableMessage,
@@ -323,6 +345,7 @@ class Web3Banner extends Component {
                   currentNetwork={currentNetwork}
                   requiredNetwork={requiredNetwork}
                   onWrongNetworkMessage={onWrongNetworkMessage}
+                  lastNotificationTs={lastNotificationTs}
                 />
               ) : null}
 

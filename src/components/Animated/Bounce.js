@@ -8,7 +8,7 @@ const bounce = keyframes`
 
 const Bounce = styled.div`
   ${props => props.bouncing && css`
-      animation: ${bounce} 1s linear infinite;
+      animation: ${bounce} .5s linear infinite;
   `}
 `
 

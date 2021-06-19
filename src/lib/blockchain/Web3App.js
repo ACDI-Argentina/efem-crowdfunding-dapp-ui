@@ -24,6 +24,7 @@ export const Web3AppContext = React.createContext({
   accountValidated: {},
   accountValidationPending: {},
   explorer: config.network.explorer,
+  lastNotificationTs: undefined,
   modals: {
     data: {
       noWeb3BrowserModalIsOpen: {},
@@ -56,7 +57,8 @@ export const Web3AppContext = React.createContext({
       closeLowFundsModal: () => { },
       openLowFundsModal: () => { },
       openProviderSelectionModal: () => { },
-      closeProviderSelectionModal: () => { }
+      closeProviderSelectionModal: () => { },
+      bounceNotification: () => { },
     }
   }
 });
@@ -122,6 +124,7 @@ class Web3App extends React.Component {
           checkBalance: this.checkBalance,
           openProviderSelectionModal: this.openProviderSelectionModal,
           closeProviderSelectionModal: this.closeProviderSelectionModal,
+          bounceNotification: this.bounceNotification,
         }
       }
     };
@@ -431,7 +434,10 @@ class Web3App extends React.Component {
   }
 };
 
-
+//Re render en el child, usando un ts
+  bounceNotification = () => {
+    this.setState({ lastNotificationTs: Date.now() });
+  }
 
 
   closeProviderSelectionModal = () => {
@@ -543,7 +549,7 @@ class Web3App extends React.Component {
 
 
   componentWillUnmount() {
-    if (this.web3Provider === "WalletConnect") {
+    if (this.web3Provider === "WalletConnect") { //TODO: Mover esta logica a web3Manager
       this.web3ProviderRef && this.web3ProviderRef.current.disconnect();
     }
   }

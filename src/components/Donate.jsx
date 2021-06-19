@@ -68,12 +68,18 @@ class Donate extends Component {
 
   handleClickOpen() {
     const { currentUser } = this.props;
-    const { modals } = this.context;
+    const { network, modals } = this.context;
 
-    if(currentUser.address){
+    const isConnectedUser = currentUser.address;
+    const isCorrectNetwork = network.isCorrect;
+
+    
+    if(isConnectedUser && isCorrectNetwork){ 
       this.open();
+    } else if(!isCorrectNetwork){ 
+      modals.methods.bounceNotification();
     } else {
-      modals.methods.openProviderSelectionModal(this.open); 
+      modals.methods.openProviderSelectionModal(this.open);
     }
     
   };
@@ -183,7 +189,6 @@ class Donate extends Component {
     return (
       <div>
         {enabled && (
-          <OnlyCorrectNetwork>
             <Button
               variant="contained"
               color="primary"
@@ -193,7 +198,6 @@ class Donate extends Component {
             >
               {t('donate')}
             </Button>
-          </OnlyCorrectNetwork>
         )}
         <Dialog fullWidth={true}
           maxWidth="md"
