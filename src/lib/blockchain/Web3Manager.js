@@ -194,13 +194,16 @@ class Web3Manager {
     if(provider instanceof WalletConnectProvider){
       web3 = this.setWalletConnectProvider(provider);
     } else{
-      before(); //this.openConnectionPendingModal(); ejexutar solo si es una funcion
+      before(); // ejecutar solo si es una funcion
       web3 = await this.connectWeb3ByWalletBrowser(); 
-      after(); //this.closeConnectionPendingModal();
+      after(); //
     }
-   
-    return web3;
 
+    if(web3.providerName === "Http"){
+      web3.isFallbackProvider = true;
+    }
+  
+    return web3;
   }
 
   /**

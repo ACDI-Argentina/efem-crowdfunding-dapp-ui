@@ -10,7 +10,6 @@ import web3Manager from "./Web3Manager";
 import networkManager from "./NetworkManager";
 import accountManager from "./AccountManager";
 
-import WalletConnectProvider from "@walletconnect/web3-provider";
 
 export const Web3AppContext = React.createContext({
   contract: {},
@@ -423,15 +422,10 @@ class Web3App extends React.Component {
      const after = this.closeConnectionPendingModal;
 
      const web3 = await web3Manager.connect(before, after);
-     
-     //TODO: Comprobar si estoy en la red correcta
-     console.log(web3)   
 
-    if(typeof cb === "function"){//TODO: move a utils isFunction(object)
-      cb();
+      if (typeof cb === "function") {//TODO: move a utils isFunction(object)
+        !web3.isFallbackProvider && cb();
     }
-
-
   } catch (err) {
     console.log(err);
   }
