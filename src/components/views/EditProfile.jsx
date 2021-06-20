@@ -35,7 +35,15 @@ class EditProfile extends Component {
   }
 
   componentDidMount() {
-    const { authenticateIfPossible } = this.context.modals.methods;
+    //Por que pega un did mount ac'a???????
+    const {currentUser} = this.props;
+    const { authenticateIfPossible, openProviderSelectionModal } = this.context.modals.methods;
+    if(!currentUser || !currentUser.address){
+      //Mostrarle algun modal en el que le indiquemos que para poder registrarse tiene que conectar la cuenta
+      //Before continue, please connect your walllet
+      openProviderSelectionModal();
+    }
+    console.log(`EditProfile did mount`,this.props.currentUser)
     authenticateIfPossible(this.props.currentUser)
       .then(() => this.setState({ isLoading: false }))
       .catch(err => {
@@ -111,9 +119,7 @@ class EditProfile extends Component {
                           <Link to="/privacypolicy">Privacy Policy</Link>.
                         </div>
 
-                      <ProfileForm
-                        user={currentUser}
-                      ></ProfileForm>
+                      <ProfileForm user={currentUser}></ProfileForm>
                       </div>
                     )}
 

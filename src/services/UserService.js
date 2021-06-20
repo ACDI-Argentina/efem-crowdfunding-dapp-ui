@@ -120,6 +120,7 @@ class UserService {
    * @param afterSave   Callback to be triggered after the user is saved in feathers
    */
   save(user) {
+    console.log("[User service] saving .... ",user)
     return new Observable(async subscriber => {
       
       try {

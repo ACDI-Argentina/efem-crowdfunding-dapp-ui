@@ -45,7 +45,15 @@ export const currentUserSlice = createSlice({
       return state;
     },
     registerCurrentUser: (state, action) => {
+      console.log("REGISTERING USER");
+      console.log('intiial state;',state)
+      const user = action.payload;
       action.payload.status = User.REGISTERING;
+
+      if(!user.address){
+        return state; //No hagas ningun cambio
+      }
+
       return action.payload.toStore();
     },
     clearCurrentUser: (state, action) => {

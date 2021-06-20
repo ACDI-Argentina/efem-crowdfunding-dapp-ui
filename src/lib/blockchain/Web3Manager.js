@@ -195,7 +195,7 @@ class Web3Manager {
       web3 = this.setWalletConnectProvider(provider);
     } else{
       before(); // ejecutar solo si es una funcion
-      web3 = await this.connectWeb3ByWalletBrowser(); 
+      web3 = await this.connectWeb3ByWalletBrowser(provider); 
       after(); //
     }
 
