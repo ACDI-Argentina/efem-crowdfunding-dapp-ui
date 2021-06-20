@@ -124,6 +124,10 @@
     "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario. Esta información será visible públicamente y se enviará por correo electrónico al revisor.",
     "milestoneCompleteMessagePlaceholder": "Describe lo que has hecho",
     "milestoneCompleteMessageMinLength": "Se agradece mucho si escribe algo significativo",
+
+    "milestoneCancel": "Cancelar",
+    "milestoneCancelTitle": "Cancelar hito",
+
     "milestoneApprove": "Aprobar",
     "milestoneApproveTitle": "Aprobar hito",
     "milestoneApproveDescription": "Explique por qué aprueba la finalización de este hito. ¡Se agradecen los cumplidos! Esta información será visible públicamente y se enviará por correo electrónico al propietario del hito.",

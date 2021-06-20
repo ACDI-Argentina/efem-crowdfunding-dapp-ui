@@ -164,6 +164,10 @@ class Activity extends Model {
   static get ACTION_REJECT() {
     return 'Reject';
   }
+
+  static get ACTION_CANCEL() {
+    return 'Cancel';
+  }
 }
 
 export default Activity;

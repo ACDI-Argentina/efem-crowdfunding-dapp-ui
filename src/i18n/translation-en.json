@@ -124,6 +124,13 @@
     "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary. This information will be publicly visible and emailed to the reviewer.",
     "milestoneCompleteMessagePlaceholder": "Describe what you've done",
     "milestoneCompleteMessageMinLength": "It is really appreciated if you write something meaningful",
+
+    "milestoneCancel": "Cancel",
+    "milestoneCancelTitle": "Milestone cancel",
+    "milestoneCancelDescription": "Explain why you cancelled this milestone. This information will be publicly visible and emailed to the milestone owner.",
+    "milestoneCancelMessagePlaceholder": "Explain why you cancelled this milestone",
+    "milestoneCancelMessageMinLength": "It is really appreciated if you write something meaningful",
+
     "milestoneApprove": "Approve",
     "milestoneApproveTitle": "Milestone approve",
     "milestoneApproveDescription": "Explain why you approve the completion of this milestone. Compliments are appreciated! This information will be publicly visible and emailed to the milestone owner.",
