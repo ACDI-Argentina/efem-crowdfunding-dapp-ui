@@ -53,13 +53,19 @@ class Footer extends Component {
             </h6>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/acdi.png")} alt={t('acdi')} className={classes.logo} />
+            <a href="https://www.acdi.org.ar" target="_blank">
+              <img src={require("assets/img/logos/acdi.png")} alt={t('acdi')} className={classes.logo} />
+            </a>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/rsk.svg")} alt={t('rsk')} className={classes.logo} />
+            <a href="https://www.rsk.co/" target="_blank">
+              <img src={require("assets/img/logos/rsk.svg")} alt={t('rsk')} className={classes.logo} />
+            </a>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/iovlabs.jpg")} alt={t('iovlabs')} className={classes.logo} />
+            <a href="https://www.iovlabs.org/" target="_blank">
+              <img src={require("assets/img/logos/iovlabs.jpg")} alt={t('iovlabs')} className={classes.logo} />
+            </a>
           </Grid>
         </Grid>
         <br/>

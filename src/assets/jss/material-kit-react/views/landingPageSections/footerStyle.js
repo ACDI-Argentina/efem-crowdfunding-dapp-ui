@@ -14,7 +14,7 @@ const footerStyle = {
     padding: "1em 1em 1em 0em",
     width: "100%",
     textAlign: "left",
-    maxWidth: "170px"
+    maxWidth: "300px"
   },
   rightSection: {
     borderLeft: "2px solid #999",

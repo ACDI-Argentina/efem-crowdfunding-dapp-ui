@@ -58,7 +58,7 @@ const profilePageStyle = {
     textAlign: "center"
   },
   dappLogo: {
-    maxHeight: "2.5em"
+    maxHeight: "4em"
   }
 };
 
