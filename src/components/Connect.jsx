@@ -6,6 +6,7 @@ import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
 import AccountDetailsModal from 'components/Dialogs/AccountDetailsModal';
 import ProviderSelectionModal from './Dialogs/ProviderSelectionModal';
+import { withTranslation } from 'react-i18next';
 
 const Wrapper = styled.div``;
 
@@ -64,10 +65,11 @@ const ConnectButton = styled.button`
   } 
 `;
 
-const Connect = ({}) => {
+const Connect = (props) => {
   const [showAccountDetailsModal, setShowAccountDetailsModal] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
+  const {t} = props;
   const {
     loginAccount,
     network,
@@ -116,7 +118,7 @@ const Connect = ({}) => {
           </AddressWrapper>
         )}
         {!currentUser.address && (
-          <ConnectButton onClick={() => openProviderSelectionModal()}>Connect</ConnectButton>
+          <ConnectButton onClick={() => openProviderSelectionModal()}>{t('connectWallet')}</ConnectButton>
         )}
       </Wrapper>
       <ProviderSelectionModal
@@ -137,4 +139,4 @@ const Connect = ({}) => {
   );
 };
 
-export default Connect;
+export default withTranslation()(Connect);

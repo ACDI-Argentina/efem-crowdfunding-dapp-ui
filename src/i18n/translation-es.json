@@ -3,6 +3,8 @@
 
     "landingPageTitle": "Crypto-fondos que nos conectan con el planeta",
 
+    "connectWallet": "Conectar billetera",
+
     "landingPagesSubtitle1": "Movilizamos donaciones en criptomonedas ",
     "landingPagesSubtitle2": "para promover el desarrollo de comunidades",
     "landingPagesSubtitle3": " que habitan y cuidan los bosques. ",
@@ -20,15 +22,15 @@
     "platformFeaturesTitle8": "evolución",
     "platformFeaturesTitle9": " humana",
 
-    "platformFeaturesDescription1": "Una cadena de bloques por sí sola no cambiará el mundo. ",
-    "platformFeaturesDescription2": "La verdadera revolución será posible ",
-    "platformFeaturesDescription3": "cuando usemos las nuevas tecnologías ",
-    "platformFeaturesDescription4": "para conectarnos íntimamente con el planeta. ",
+    "platformFeaturesDescription1": "Give4Forest activa innovaciones tecnológicas en las comunidades que viven en los bosques. Con mejores tecnologías ",
+    "platformFeaturesDescription2": "ellas podrán cuidar mejor a los bosques ",
+    "platformFeaturesDescription3": "y ",
+    "platformFeaturesDescription4": "los bosques seguirán cuidando de todos nosotros. ",
 
     "colaboration": "Colaboración",
     "colaborationDescription1": "Unimos fuerzas en una red ",
     "colaborationDescription2": "descentralizada",
-    "colaborationDescription3": " para la construcción del bien común y colectivo.",
+    "colaborationDescription3": " para la construcción y cuidado de los bienes comunes.",
 
     "connection": "Conexión",
     "connectionDescription1": "Conectamos ",
