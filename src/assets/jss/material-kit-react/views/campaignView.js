@@ -7,7 +7,14 @@ const landingPageStyle = {
   container: {
     zIndex: "12",
     color: "#212529",
-    ...container
+    ...container,
+
+  },
+  campaignDescriptionContainer: {
+    "& img": {
+      maxWidth: "100%",
+      height: "auto"
+    }
   },
   headerContainer: {
     margin: "0 30px",

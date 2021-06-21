@@ -147,7 +147,7 @@ class ViewCampaign extends Component {
           <span>
             <img src={campaign.imageCidUrl} style={{width: '100%', height: 'auto'}} alt="Campaign image" />
             <DateTimeViewer value={campaign.createdAt} style={{textAlign: 'right', marginBottom: '1em' }}/>
-            {ReactHtmlParser(campaign.description)}
+            <div className={classes.campaignDescriptionContainer}>{ReactHtmlParser(campaign.description)}</div>
             {campaign.beneficiaries && (
               <p>
                   {t('campaignBeneficiariesLabel')}: {campaign.beneficiaries}
