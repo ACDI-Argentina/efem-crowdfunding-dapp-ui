@@ -9,31 +9,16 @@ import LoaderButton from './LoaderButton';
 import GridItem from './Grid/GridItem';
 import { User } from 'models';
 
+//TODO: diferenciar actualizacion de creacion
 const ProfileForm = ({
-  user /*STORED USER!  creo que es una instancia de User model*/,
+  user,
   showSubmit = true,
   showCompact = false,
   requireFullProfile = false,
   onFinishEdition,
 }) => {
-  const [localUser, setLocalUser] = useState(user); //Guardamos una instancia de user??
 
-  //WE NEED HERE A LOCAL STATE FOR THIS FORM!
-  useEffect(() => {
-    console.log('[Profile Form] Component did mount', user);
-
-    //Aca podemos conocer si el usuario esta autenticado
-  }, []);
-
-  useEffect(() => {
-    console.log('[Profile Form] Component did update', user);
-  }, [user]);
-
-  //quiz'as tengamos que diferenciar, actualizacion de creacion
-
-  //Ni hace falta que actualicemos aca/ Creo que con hacerlo al moemnto del submit estamos
-  //console.log('Render profile form, user prop:', user, localUser);
-
+  const [localUser, setLocalUser] = useState(user); 
   const [canSubmit, setCanSubmit] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isPristine, setIsPristine] = useState(true);
@@ -64,12 +49,12 @@ const ProfileForm = ({
   if (requireFullProfile) {
     requiredFields['email'] = true;
     requiredFields['url'] = true;
-    requiredFields['avatar'] = !user.avatar; //requerido solo para nuevos usuarios
+    requiredFields['avatar'] = !user.avatar;
   }
 
   const mapInputs = (inputs) => {
     return {
-      address: localUser.address, //Quizas necesitemos hacer un spread de localUser
+      address: localUser.address, //TODO: Quizas necesitemos hacer un spread de localUser
       name: inputs.name,
       email: inputs.email,
       url: inputs.url,
@@ -77,12 +62,11 @@ const ProfileForm = ({
     };
   };
 
-  const onSubmit = (model) => {
+  const onSubmit = async (model) => {
     setIsSaving(true);
     const userInstance = new User(model);
-    if (!userInstance.address) {
-      console.log('Mostrar de alguna forma que primero se tiene que conectar y autenticar');
-      setIsSaving(false);
+    if (!userInstance.address){
+      setIsSaving(false); //TODO: Agregar algun mensaje de error indicando que no esta autenticado
     } else {
       dispatch(registerCurrentUser(userInstance));
     }
