@@ -278,9 +278,14 @@ class Web3Banner extends Component {
     this.setState({ browserIsWeb3Capable });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.currentNetwork && this.props.requiredNetwork) {
     
+    }
+
+    if(this.props.lastNotificationTs !== prevProps.lastNotificationTs){
+      this.toogleShowNotificationIcon(false);
+
     }
   }
 
