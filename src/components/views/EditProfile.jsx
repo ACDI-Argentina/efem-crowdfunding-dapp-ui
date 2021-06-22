@@ -34,16 +34,47 @@ class EditProfile extends Component {
     };
   }
 
-  componentDidMount() {
-    //Por que pega un did mount ac'a???????
-    const {currentUser} = this.props;
-    const { authenticateIfPossible, openProviderSelectionModal } = this.context.modals.methods;
-    if(!currentUser || !currentUser.address){
-      //Mostrarle algun modal en el que le indiquemos que para poder registrarse tiene que conectar la cuenta
-      //Before continue, please connect your walllet
-      openProviderSelectionModal();
+  async requestConnection(){
+    //TODO: Add translations
+    const labels = {
+      title: "Conectar",
+      text: "Antes de continuar, necesitamos que conectes tu wallet y verifiques tu cuenta",
+      cancel:"Quizás en otro momento",
+      ok: "De acuerdo, conectar",
     }
-    console.log(`EditProfile did mount`,this.props.currentUser)
+
+    const confirm = await React.swal({
+      icon: 'info',
+      title: labels.title,
+      text: labels.text,
+      
+      buttons: [labels.cancel,labels.ok],
+      closeOnClickOutside: false,
+    });
+
+    return confirm;
+
+  }
+
+  async componentDidMount() {
+    const { history, currentUser } = this.props;    
+    const { authenticateIfPossible, openProviderSelectionModal } = this.context.modals.methods;
+
+
+    const goHome = () => history.push('/');
+
+    if(!currentUser || !currentUser.address){
+      const confirmation = await this.requestConnection();
+      if(confirmation){
+        const connected = await openProviderSelectionModal();
+        if(!connected){
+          goHome();  
+        }
+      } else {
+        goHome();
+      }
+    }
+    
     authenticateIfPossible(this.props.currentUser)
       .then(() => this.setState({ isLoading: false }))
       .catch(err => {
@@ -119,7 +150,7 @@ class EditProfile extends Component {
                           <Link to="/privacypolicy">Privacy Policy</Link>.
                         </div>
 
-                      <ProfileForm user={currentUser}></ProfileForm>
+                      <ProfileForm user={currentUser}/>
                       </div>
                     )}
 
