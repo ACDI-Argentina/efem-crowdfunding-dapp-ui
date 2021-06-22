@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import Web3HttpProvider from 'web3-providers-http';
-import Web3Modal from 'web3modal';
+import Web3Modal, { getProviderInfo } from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { BehaviorSubject } from 'rxjs'
 import config from '../../configuration';
@@ -72,25 +72,21 @@ class Web3Manager {
   /**
    * Conecta Web3 a partir la Wallet del Browser si es posible.
    */
-  async connectWeb3ByWalletBrowser() {
+  async connectWeb3ByWalletBrowser(provider) {
 
-    let web3;
+    let web3 = new Web3(provider);
     let walletBrowserRequired = true;
     let walletNetworkId = undefined;
     let walletNetworkIsCorrect = false;
 
-    if (window.ethereum) {
+    if (provider) {
       walletBrowserRequired = false;
       try {
-        // Request account access if needed
-        // https://eips.ethereum.org/EIPS/eip-1102
-        // https://eips.ethereum.org/EIPS/eip-1193
-        const accounts = await window.ethereum.send('eth_requestAccounts');
+        const accounts = await web3.eth.getAccounts();
         console.log('[Setup Web3] Browser Wallet accounts.', accounts);
-        if (accounts.result && accounts.result.length > 0) {
-          web3 = new Web3(window.ethereum);
+        if (accounts.length > 0) {
           walletNetworkId = await web3.eth.net.getId();
-          web3.providerName = "WalletBrowser";
+          web3.providerName = "WalletBrowser"; //type
           web3.networkId = walletNetworkId;
           walletNetworkIsCorrect = walletNetworkId === config.network.requiredId;
         } else {
@@ -111,13 +107,13 @@ class Web3Manager {
       console.log('[Setup Web3] Conectado por Wallet Browser.');
     }
 
-    // Propiedades propias de una wallet.
-    // Obtener el nombre y logo de la wallet en runtime o por la wallet seleccionada.
+    const providerInfo = getProviderInfo(provider);
     web3.wallet = new Wallet({
-      name: "MetaMask", 
-      logoUrl: ipfsService.resolveUrl('/ipfs/QmPXPzGjVAh6UJUh3MRTKTeXY4dhjZoLVCD225fLJiLeop'),
+      name: providerInfo.name, 
+      logoUrl: providerInfo.logo,
       networkId: walletNetworkId
     });
+          
     web3.walletBrowserRequired = walletBrowserRequired;
 
     this.web3Subject.next(web3);
@@ -171,7 +167,7 @@ class Web3Manager {
       web3 = this.setWalletConnectProvider(provider);
     } else{
       before(); // ejecutar solo si es una funcion
-      web3 = await this.setWeb3ByWalletBrowser(provider); 
+      web3 = await this.connectWeb3ByWalletBrowser(provider); 
       after(); //
     }
 
