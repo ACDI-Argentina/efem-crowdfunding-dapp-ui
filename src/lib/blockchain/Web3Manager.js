@@ -125,30 +125,6 @@ class Web3Manager {
     return web3;
   }
 
-  /**
-   * DEPRECADO - Solamente lo usa web3App(loginAccount) -
-   * Del manejo de wallet connect se encarga web3modal 
-   * Conecta Web3 con Wallet Connect.
-   * 
-   * https://walletconnect.org
-   * 
-   */
-  connectWeb3ByWalletConnect = async () => {
-
-    const provider = new WalletConnectProvider({
-      rpc: {
-        30: "https://public-node.rsk.co",
-        31: "https://public-node.testnet.rsk.co",
-        33: config.network.nodeUrl
-      }
-    });
-
-    // Enable session (triggers QR Code modal)
-    await provider.enable();
-    return await this.setWalletConnectProvider(provider)
-  }
-
-
   setWalletConnectProvider = async (provider) => {
     const walletBrowserRequired = false;
     let walletNetworkId;
@@ -195,7 +171,7 @@ class Web3Manager {
       web3 = this.setWalletConnectProvider(provider);
     } else{
       before(); // ejecutar solo si es una funcion
-      web3 = await this.connectWeb3ByWalletBrowser(provider); 
+      web3 = await this.setWeb3ByWalletBrowser(provider); 
       after(); //
     }
 
