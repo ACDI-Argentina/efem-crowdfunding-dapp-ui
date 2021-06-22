@@ -75,10 +75,7 @@ const Connect = (props) => {
     loginAccount,
     network,
     web3,
-    modals
   } = useContext(Web3AppContext);
-  const openProviderSelectionModal = modals.methods.openProviderSelectionModal;
-  const closeProviderSelectionModal = modals.methods.closeProviderSelectionModal;
 
   const isCorrectNetwork = network?.isCorrect || false;
   const success = isCorrectNetwork;
@@ -120,7 +117,7 @@ const Connect = (props) => {
           </AddressWrapper>
         )}
         {!currentUser.address && (
-          <ConnectButton onClick={() => openProviderSelectionModal()}>{t('connectWallet')}</ConnectButton>
+          <ConnectButton onClick={() => loginAccount()}>{t('connectWallet')}</ConnectButton>
         )}
       </Wrapper>
 

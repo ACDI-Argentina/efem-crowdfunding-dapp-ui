@@ -58,7 +58,8 @@ class EditProfile extends Component {
 
   async componentDidMount() {
     const { history, currentUser } = this.props;    
-    const { authenticateIfPossible, openProviderSelectionModal } = this.context.modals.methods;
+    const { loginAccount } = this.context;
+    const { authenticateIfPossible } = this.context.modals.methods;
 
 
     const goHome = () => history.push('/');
@@ -66,7 +67,7 @@ class EditProfile extends Component {
     if(!currentUser || !currentUser.address){
       const confirmation = await this.requestConnection();
       if(confirmation){
-        const connected = await openProviderSelectionModal();
+        const connected = await loginAccount();
         if(!connected){
           goHome();  
         }

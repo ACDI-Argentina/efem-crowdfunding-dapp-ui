@@ -38,7 +38,6 @@ export const Web3AppContext = React.createContext({
       wrongNetworkModalIsOpen: {},
       transactionConnectionModalIsOpen: {},
       lowFundsModalIsOpen: {},
-      providerSelectionModalIsOpen: {},
     },
     methods: {
       openNoWeb3BrowserModal: () => { },
@@ -56,8 +55,6 @@ export const Web3AppContext = React.createContext({
       closeTransactionConnectionModal: () => { },
       closeLowFundsModal: () => { },
       openLowFundsModal: () => { },
-      openProviderSelectionModal: () => { },
-      closeProviderSelectionModal: () => { },
       bounceNotification: () => { },
     }
   }
@@ -97,7 +94,6 @@ class Web3App extends React.Component {
           wrongNetworkModalIsOpen: null,
           transactionConnectionModalIsOpen: null,
           lowFundsModalIsOpen: null,
-          providerSelectionModalIsOpen: false,
         },
         methods: {
           openNoWeb3BrowserModal: this.openNoWeb3BrowserModal,
@@ -122,8 +118,6 @@ class Web3App extends React.Component {
           authenticateIfPossible: this.authenticateIfPossible,
           checkProfile: this.checkProfile,
           checkBalance: this.checkBalance,
-          openProviderSelectionModal: this.openProviderSelectionModal,
-          closeProviderSelectionModal: this.closeProviderSelectionModal,
           bounceNotification: this.bounceNotification,
         }
       }
@@ -153,17 +147,21 @@ class Web3App extends React.Component {
     });
   }
 
-  //A este método lo llama solamente en UserRejectedConnectionModal
-  loginAccount = async (providerName) => {
-    console.log(`Conectar usuario con ${providerName}`);
-    if (providerName === "WalletConnect") {
-      web3Manager.connectWeb3ByWalletConnect();
-    } else if (providerName === "WalletBrowser") {
-      this.openConnectionPendingModal();
-      await web3Manager.connectWeb3ByWalletBrowser();
-      this.closeConnectionPendingModal();
+
+  loginAccount = async () => {
+    try {
+      const before = this.openConnectionPendingModal;
+      const after = this.closeConnectionPendingModal;
+
+      const web3 = await web3Manager.connect(before, after);
+      return !web3.isFallbackProvider;
+      
+    } catch (err) {
+      console.log(err);
+      return false;
     }
-  }
+  };
+
 
   logoutAccount = async () => {
     await web3Manager.disconnect();
@@ -417,35 +415,9 @@ class Web3App extends React.Component {
     this.setState({ modals, callback: callback });
   };
 
- //TODO: Renombrar, esto hace mas que abrir un modal, en caso
- //de que se seleccione un priovider lo va a inicialziar
-  openProviderSelectionModal = async (cb) => {
-   try {
-     const before = this.openConnectionPendingModal;
-     const after = this.closeConnectionPendingModal;
-
-     const web3 = await web3Manager.connect(before, after);
-
-      if (typeof cb === "function") {//TODO: move a utils isFunction(object)
-        !web3.isFallbackProvider && cb();
-    }
-    return !web3.isFallbackProvider;
-  } catch (err) {
-    console.log(err);
-    return false;
-  }
-};
-
-//Re render en el child, usando un ts
+  //Re render en el child, usando un ts
   bounceNotification = () => {
     this.setState({ lastNotificationTs: Date.now() });
-  }
-
-
-  closeProviderSelectionModal = () => {
-    const modals = { ...this.state.modals };
-    modals.data.providerSelectionModalIsOpen = false;
-    this.setState({ modals });
   }
 
   authenticateIfPossible = async (currentUser) => {

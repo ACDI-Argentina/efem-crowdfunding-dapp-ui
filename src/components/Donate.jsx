@@ -66,9 +66,9 @@ class Donate extends Component {
     this.close = this.close.bind(this);
   }
 
-  handleClickOpen() {
+  async handleClickOpen() {
     const { currentUser } = this.props;
-    const { network, modals } = this.context;
+    const { network, modals,loginAccount } = this.context;
 
     const isConnectedUser = currentUser.address;
     const isCorrectNetwork = network.isCorrect;
@@ -79,7 +79,10 @@ class Donate extends Component {
     } else if(!isCorrectNetwork){ 
       modals.methods.bounceNotification();
     } else {
-      modals.methods.openProviderSelectionModal(this.open);
+      const connected = await loginAccount();
+      if(connected){
+        this.open();
+      }
     }
     
   };
