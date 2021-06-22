@@ -5,7 +5,7 @@ import ModalCard from './ModalCard';
 class UserRejectedConnectionModal extends React.Component {
   sendMessageAgain = event => {
     this.props.closeModal();
-    this.props.loginAccount("MetaMask");
+    this.props.loginAccount();
   };
 
   renderContent = () => {
