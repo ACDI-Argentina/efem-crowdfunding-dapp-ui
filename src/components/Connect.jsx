@@ -83,20 +83,12 @@ const Connect = (props) => {
 
   let walletIndicator = null;
 
-  if(web3.providerName === "WalletConnect"){
+  if(web3.wallet && web3.wallet.logoUrl){
     walletIndicator = (
       <WalletIndicator>
-        <img src="/img/walletconnect-logo.svg" style={{ width: '30px' }} />
+        <img src={web3.wallet.logoUrl} style={{ width: '25px' }} />
       </WalletIndicator>
     );
-  } else if(web3.providerName === "WalletBrowser"){
-    walletIndicator = null;
-      /*
-      Temporalmente sacamos este indicador porque puede dar lugar a confusiones si usamos nifty o otra wallet browser
-       <WalletIndicator>
-        <img src="/img/metamask-logo.svg" style={{ width: '25px' }} />
-      </WalletIndicator> 
-      */
   }
 
   return (
