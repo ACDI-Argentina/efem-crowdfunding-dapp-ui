@@ -429,8 +429,10 @@ class Web3App extends React.Component {
       if (typeof cb === "function") {//TODO: move a utils isFunction(object)
         !web3.isFallbackProvider && cb();
     }
+    return !web3.isFallbackProvider;
   } catch (err) {
     console.log(err);
+    return false;
   }
 };
 
