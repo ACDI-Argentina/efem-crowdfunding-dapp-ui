@@ -13,17 +13,13 @@ import { withTranslation } from 'react-i18next';
  */
 class FormsyImageUploader extends Component {
   
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      image: undefined,
+      image:  this.props.previewImage || this.props.avatar,
     };
     this.cropImage = this.cropImage.bind(this);
     this.loadAndPreviewImage = this.loadAndPreviewImage.bind(this);
-  }
-
-  componentWillMount() {
-    this.setState({ image: this.props.previewImage || this.props.avatar });
   }
 
   componentDidUpdate(prevProps) {

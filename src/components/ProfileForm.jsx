@@ -9,7 +9,7 @@ import LoaderButton from './LoaderButton';
 import GridItem from './Grid/GridItem';
 import { User } from 'models';
 
-//TODO: diferenciar actualizacion de creacion
+
 const ProfileForm = ({
   user,
   showSubmit = true,
@@ -22,7 +22,7 @@ const ProfileForm = ({
   const [canSubmit, setCanSubmit] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isPristine, setIsPristine] = useState(true);
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(user.avatar);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const ProfileForm = ({
 
   const mapInputs = (inputs) => {
     return {
-      address: localUser.address, //TODO: Quizas necesitemos hacer un spread de localUser
+      address: localUser.address,
       name: inputs.name,
       email: inputs.email,
       url: inputs.url,
@@ -81,8 +81,6 @@ const ProfileForm = ({
       onChange={(currentValues, isChanged) => setIsPristine(!isChanged)}
       layout="vertical"
     >
-      <Box style={{ marginLeft: -15, marginRight: -15 }}>User address: {localUser.address}</Box>
-
       <Box style={{ marginLeft: -15, marginRight: -15 }}>
         <Grid container direction="row">
           <GridItem xs={12} sm={12} md={columnWidth}>
