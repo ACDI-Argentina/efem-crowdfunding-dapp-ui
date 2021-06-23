@@ -68,10 +68,10 @@ class EditProfile extends Component {
       if(confirmation){
         const connected = await loginAccount();
         if(!connected){
-          goHome();  
+          return goHome();
         }
       } else {
-        goHome();
+        return goHome();
       }
     }
     
