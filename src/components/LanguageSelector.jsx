@@ -2,58 +2,87 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import config from '../configuration';
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Button from "components/CustomButtons/Button.js";
-import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
+import styled from 'styled-components';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Button from 'components/CustomButtons/Button.js';
+import styles from 'assets/jss/material-kit-react/components/headerLinksStyle.js';
 import { withStyles } from '@material-ui/core/styles';
 import Flag from 'react-flagkit';
+
+const ActiveIndicator = styled.div`
+  border: 1px solid steelblue;
+  height: 2px;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
+const FlagContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 2px;
+`;
 
 /**
  * Selecciona de idioma de la aplicación.
  */
 class LanguageSelector extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: config.language.default,
+    };
+    this.changeValue = this.changeValue.bind(this);
+    this.setLanguage = this.setLanguage.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: config.language.default
-        };
-        this.changeValue = this.changeValue.bind(this);
-        this.setLanguage = this.setLanguage.bind(this);
-    }
+  componentDidMount() {
+    const { i18n } = this.props;
+    this.setState({ value: i18n.language });
+  }
 
-    changeValue(newVal) {
-        let value = newVal;
-        this.setState({value});
-        this.setLanguage(value);
-    }
+  changeValue(newVal) {
+    let value = newVal;
+    this.setState({ value });
+    this.setLanguage(value);
+  }
 
-    /**
-     * Cambia el lenguaje de la aplicación a través del API de react-i18next.
-     * 
-     */
-    setLanguage(language) {
-        const { i18n } = this.props;
-        i18n.changeLanguage(language);
-    }
+  /**
+   * Cambia el lenguaje de la aplicación a través del API de react-i18next.
+   *
+   */
+  setLanguage(language) {
+    const { i18n } = this.props;
+    i18n.changeLanguage(language);
+  }
 
-    render() {
+  render() {
+    const { classes } = this.props;
+    const currentValue = this.state.value;
 
-        const { classes } = this.props;
+    const options = config.language.options.map((language) => (
+      <ListItem key={language.key} className={classes.listItem}>
+        <Button
+          color={'primary'}
+          title={language.name}
+          justIcon
+          link
+          className={classes.margin5}
+          onClick={() => this.changeValue(language.key)}
+        >
+          <FlagContainer>
+            <Flag country={language.flag} value={language.key} />
+            {currentValue === language.key && <ActiveIndicator />}
+          </FlagContainer>
+        </Button>
+      </ListItem>
+    ));
 
-        const options = config.language.options.map(language => (
-            <ListItem key={language.key} className={classes.listItem}>
-                <Button title={language.name} justIcon link className={classes.margin5}>
-                    <Flag country={language.flag} value={language.key} onClick={() => this.changeValue(language.key)} />
-                </Button>
-            </ListItem>
-        ));
-        return (
-            <List className={classes.list}>
-                {options}
-            </List>
-        );
-    }
+    
+    return <List className={classes.list}>{options}</List>;
+  }
 }
 export default withTranslation()(withStyles(styles)(LanguageSelector));
