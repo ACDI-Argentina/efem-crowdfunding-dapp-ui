@@ -21,14 +21,11 @@ class LanguageSelector extends Component {
         };
         this.changeValue = this.changeValue.bind(this);
         this.setLanguage = this.setLanguage.bind(this);
-        this.setLanguage(config.language.default);
     }
 
     changeValue(newVal) {
         let value = newVal;
-        this.setState({
-            value: value
-        });
+        this.setState({value});
         this.setLanguage(value);
     }
 
