@@ -34,13 +34,13 @@ class EditProfile extends Component {
     };
   }
 
-  async requestConnection(){
-    //TODO: Add translations
+  async requestConnection(translate){ 
+    
     const labels = {
-      title: "Conectar",
-      text: "Antes de continuar, necesitamos que conectes tu wallet y verifiques tu cuenta",
-      cancel:"Quizás en otro momento",
-      ok: "De acuerdo, conectar",
+      title: translate("requestConnectionTitle"),
+      text: translate("requestConnectionText"),
+      cancel: translate("requestConnectionCancel"),
+      ok: translate("requestConnectionOk"),
     }
 
     const confirm = await React.swal({
@@ -57,15 +57,14 @@ class EditProfile extends Component {
   }
 
   async componentDidMount() {
-    const { history, currentUser } = this.props;    
+    const { history, currentUser, t: translate } = this.props;
     const { loginAccount } = this.context;
     const { authenticateIfPossible } = this.context.modals.methods;
-
 
     const goHome = () => history.push('/');
 
     if(!currentUser || !currentUser.address){
-      const confirmation = await this.requestConnection();
+      const confirmation = await this.requestConnection(translate);
       if(confirmation){
         const connected = await loginAccount();
         if(!connected){

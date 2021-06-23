@@ -327,6 +327,12 @@
     "transactionConfirmedTitleMilestoneWithdraw": "Se han retirado los fondos del hito '{{milestoneTitle}}'",
     "transactionConfirmedDescriptionMilestoneWithdraw": "¡Felicidades! Los fondos del hito se han retirado al destinatario.",
     "transactionFailuredTitleMilestoneWithdraw": "Los fondos del hito '{{milestoneTitle}}' no se retiraron",
-    "transactionFailuredDescriptionMilestoneWithdraw": "Ocurrió una falla retirando fondos del hito."
+    "transactionFailuredDescriptionMilestoneWithdraw": "Ocurrió una falla retirando fondos del hito.",
+
+
+    "requestConnectionTitle": "Conectar",
+    "requestConnectionText": "Antes de continuar, necesitamos que conectes tu wallet y verifiques tu cuenta",
+    "requestConnectionCancel":"Quizás en otro momento",
+    "requestConnectionOk": "De acuerdo, conectar"
 
 }
