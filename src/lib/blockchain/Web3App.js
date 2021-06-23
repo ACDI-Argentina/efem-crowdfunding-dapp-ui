@@ -81,6 +81,7 @@ class Web3App extends React.Component {
       logoutAccount: this.logoutAccount,
       accountValidated: null,
       accountValidationPending: null,
+      explorer: config.network.explorer,
       modals: {
         data: {
           noWeb3BrowserModalIsOpen: this.noWeb3BrowserModalIsOpen,
