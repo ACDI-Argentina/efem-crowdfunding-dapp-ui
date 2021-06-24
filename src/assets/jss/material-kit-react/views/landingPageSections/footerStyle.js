@@ -16,9 +16,20 @@ const footerStyle = {
     textAlign: "left",
     maxWidth: "300px"
   },
+  leftSection: {
+    textAlign: "right",
+    "@media (max-width: 600px)": {
+      textAlign: "left"
+    }
+  },
   rightSection: {
     borderLeft: "2px solid #999",
-    padding: "1em"
+    alignSelf: "center",
+    padding: "1em",
+    "@media (max-width: 600px)": {
+      borderLeft: "0px",
+      paddingLeft: "0em"
+    }
   },
   title: {
     color: "#10B363",
@@ -41,9 +52,11 @@ const footerStyle = {
     width: "75%",
     textAlign: "center",
     maxWidth: "100px"
+  },
+  smallLogo: {
+    maxWidth: "30px",
+    marginRight: "10px"
   }
-
-
 };
 
 export default footerStyle;
