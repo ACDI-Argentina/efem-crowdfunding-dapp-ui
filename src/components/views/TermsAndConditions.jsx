@@ -419,7 +419,8 @@ const TermsAndConditions = () => (
           first.
         </p>
         <p>
-          Give4Forest’s Site and Dapp are open source. However, you agree to respect the work and legal
+          <u><a target="_blank" href="https://github.com/ACDI-Argentina/efem-crowdfunding-dapp">
+          Give4Forest’s Site and Dapp are open source</a></u>. However, you agree to respect the work and legal
           notices, information, and restrictions contained in any content accessed through the Site.
           You also agree not to change, translate, or otherwise create derivative works of the Site
           or Dapp, unless you were given consent.
