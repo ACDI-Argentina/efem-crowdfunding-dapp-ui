@@ -325,6 +325,9 @@
     "requestConnectionTitle": "Connect",
     "requestConnectionText": "Before continuing, we need you to connect your wallet and verify your account",
     "requestConnectionCancel":"Maybe later",
-    "requestConnectionOk": "Ok, connect"
-    
+    "requestConnectionOk": "Ok, connect",
+
+     "menuWelcome":"Welcome!",
+     "menuProfile":"Profile", 
+     "menuSignup":"Sign up"     
 }

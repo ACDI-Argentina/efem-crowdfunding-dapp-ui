@@ -333,6 +333,11 @@
     "requestConnectionTitle": "Conectar",
     "requestConnectionText": "Antes de continuar, necesitamos que conectes tu wallet y verifiques tu cuenta",
     "requestConnectionCancel":"Quizás en otro momento",
-    "requestConnectionOk": "De acuerdo, conectar"
+    "requestConnectionOk": "De acuerdo, conectar",  
+
+    
+     "menuWelcome":"¡Hola!",
+     "menuProfile":"Perfil",
+     "menuSignup":"Regístrate" 
 
 }
