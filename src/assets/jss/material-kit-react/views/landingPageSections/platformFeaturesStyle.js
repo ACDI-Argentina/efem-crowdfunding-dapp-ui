@@ -25,16 +25,24 @@ const platformFeaturesStyle = {
   },
   image: {
     width: "50%",
-    maxWidth: "120px"
+    maxWidth: "120px",
   },
   sectionTitle: {
     color: primaryColor,
     fontWeight: "bold",
-    marginBottom: "1em"
+    marginBottom: "1em",
+    "@media (max-width: 600px)": {
+      maxWidth: "60%",
+      marginLeft: "20%"
+    }
   },
   sectionDescription: {
     color: "#000",
-    fontWeight: "normal"
+    fontWeight: "normal",
+    "@media (max-width: 600px)": {
+      maxWidth: "60%",
+      marginLeft: "20%"
+    }
   },
   underlineHighlight: {
     textDecoration: "underline",
