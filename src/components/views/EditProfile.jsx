@@ -100,7 +100,7 @@ class EditProfile extends Component {
 
 
     return (
-      <div>
+      <div className={classes.profilePage}>
         <Header
           color="white"
           brand={<img src={require("assets/img/logos/give4forest.png")}
