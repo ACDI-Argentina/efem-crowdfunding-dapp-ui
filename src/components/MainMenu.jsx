@@ -11,6 +11,7 @@ import styles from 'assets/jss/material-kit-react/components/headerLinksStyle.js
 import { withStyles } from '@material-ui/core/styles';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
+import AboutUs from './Dialogs/AboutUs';
 
 // Broken rule that can not find the correct id tag
 /* eslint jsx-a11y/aria-proptypes: 0 */
@@ -18,6 +19,12 @@ import { withTranslation } from 'react-i18next';
  * The main top menu
  */
 class MainMenu extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      showAboutUs: false,
+    }
+  }
   componentDidMount() {
     // when route changes, close the menu
     history.listen(() => this.setState({ showMobileMenu: false }));
@@ -36,6 +43,7 @@ class MainMenu extends Component {
       welcome: t('menuWelcome'),
       profile: t('menuProfile'),
       signup: t('menuSignup'),
+      aboutUs: t('aboutUs')
     }
 
     let buttonText;
@@ -52,7 +60,19 @@ class MainMenu extends Component {
       </NavLink>
     );
 
+    
+    const aboutUs = (
+      <div
+        className={classes.dropdownLink}
+        onClick={() => {
+          this.setState({showAboutUs: true})
+        }}>
+        {labels.aboutUs}
+      </div>
+    );
+
     return (
+      <>
       <List className={classes.list}>
         <ListItem className={classes.listItem}>
           <LanguageSelector></LanguageSelector>
@@ -67,11 +87,26 @@ class MainMenu extends Component {
                 className: classes.navLink,
                 color: 'transparent',
               }}
-              dropdownList={[profileLink]}
+              dropdownList={[
+                profileLink,
+                aboutUs,
+                ]}
             />
           </ListItem>
         )}
       </List>
+      <AboutUs
+        fullWidth={true}
+        maxWidth="sm"
+        open={this.state.showAboutUs}
+        onClose={() => {
+            console.log('close modal')
+            this.setState({showAboutUs:false})
+        }}
+        
+        >
+      </AboutUs>
+      </>
     );
   }
 }

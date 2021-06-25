@@ -329,5 +329,7 @@
 
      "menuWelcome":"Welcome!",
      "menuProfile":"Profile", 
-     "menuSignup":"Sign up"     
+     "menuSignup":"Sign up" ,
+
+     "aboutUs":"About us"
 }
