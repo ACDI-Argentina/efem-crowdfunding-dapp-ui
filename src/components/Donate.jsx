@@ -30,7 +30,7 @@ import ProfilePopup from './ProfilePopup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
@@ -66,14 +66,23 @@ class Donate extends Component {
     this.close = this.close.bind(this);
   }
 
-  handleClickOpen() {
-    const {currentUser} = this.props;
-    if(currentUser.address){
+  async handleClickOpen() {
+    const { currentUser } = this.props;
+    const { network, modals,loginAccount } = this.context;
+
+    const isConnectedUser = currentUser.address;
+    const isCorrectNetwork = network.isCorrect;
+
+    
+    if(isConnectedUser && isCorrectNetwork){ 
       this.open();
+    } else if(!isCorrectNetwork){ 
+      modals.methods.bounceNotification();
     } else {
-      this.context.initAccount()
-          .then(() =>this.open())
-          .catch(err => console.log(err));
+      const connected = await loginAccount();
+      if(connected){
+        this.open();
+      }
     }
     
   };
@@ -183,7 +192,6 @@ class Donate extends Component {
     return (
       <div>
         {enabled && (
-          <OnlyCorrectNetwork>
             <Button
               variant="contained"
               color="primary"
@@ -193,7 +201,6 @@ class Donate extends Component {
             >
               {t('donate')}
             </Button>
-          </OnlyCorrectNetwork>
         )}
         <Dialog fullWidth={true}
           maxWidth="md"
@@ -329,7 +336,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { addDonation }
 
-Donate.contextType = AppTransactionContext;
+Donate.contextType = Web3AppContext;
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(

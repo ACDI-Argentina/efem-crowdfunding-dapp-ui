@@ -12,13 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Badge from "components/Badge/Badge.js";
 import CustomTabs from 'components/CustomTabs/CustomTabs';
-
-const categories = [
-  {id: 1, description: 'Ambiente'},
-  {id: 2, description: 'Crecimiento personal'},
-  {id: 3, description: 'Educación'},
-  {id: 4, description: 'Trabajo'}
-];
+import { ALL_CATEGORIES } from 'constants/Categories';
 
 /**
  * The Campaigns view mapped to /campaigns
@@ -65,13 +59,13 @@ class Campaigns extends Component {
                       ))}
                     </div>
                   )
-                }].concat(categories.map(cat => (
+                }].concat(ALL_CATEGORIES.map(cat => (
                   {
-                  tabName: cat.description,
+                  tabName: t('campaignCategories' + cat + 'Label'),
                   tabContent: (
                     <div className="cards-grid-container">
                       {campaigns
-                        .filter(campaign => campaign.categories.indexOf(cat.id) !== -1)
+                        .filter(campaign => campaign.categories.indexOf(cat) !== -1)
                         .map(campaign => (<CampaignCard key={campaign.clientId} campaign={campaign} />
                       ))}
                     </div>

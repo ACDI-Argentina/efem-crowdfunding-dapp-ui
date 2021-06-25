@@ -13,7 +13,7 @@ const landingPageStyle = {
     ...container
   },
   dappLogo: {
-    maxHeight: "2.5em"
+    maxHeight: "4em"
   },
   titleContainer: {
     backgroundImage: "url(" + bkgImg + ")",

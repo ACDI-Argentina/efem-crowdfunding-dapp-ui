@@ -3,9 +3,7 @@ import Campaign from '../../models/Campaign';
 import Milestone from '../../models/Milestone';
 import Activity from '../../models/Activity';
 import Donation from '../../models/Donation';
-import getNetwork from './getNetwork';
 import { Observable } from 'rxjs'
-import web3 from 'web3';
 import BigNumber from 'bignumber.js';
 import transactionUtils from '../../redux/utils/transactionUtils'
 import entityUtils from '../../redux/utils/entityUtils'
@@ -14,10 +12,12 @@ import campaignIpfsConnector from '../../ipfs/CampaignIpfsConnector'
 import milestoneIpfsConnector from '../../ipfs/MilestoneIpfsConnector'
 import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
-import getWeb3 from './getWeb3';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
 import Web3Utils from './Web3Utils';
+import web3Manager from './Web3Manager';
+import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
+
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -27,17 +27,19 @@ class CrowdfundingContractApi {
     constructor() {
         this.crowdfunding = undefined;
         this.networkPromise = undefined;
+        web3Manager.getWeb3().subscribe(web3 => {
+            this.web3 = web3;
+            this.updateContracts();
+        });
     }
 
     async canPerformRole(address, role) {
         try {
-            const crowdfunding = await this.getCrowdfunding();
-            const hashedRole = web3.utils.keccak256(role);
-            const response = await crowdfunding.methods.canPerform(address, hashedRole, []).call();
-            //console.log('Can perform role', address, role, response);
+            const hashedRole = Web3Utils.toKeccak256(role);
+            const response = await this.crowdfunding.methods.canPerform(address, hashedRole, []).call();
             return response;
         } catch (err) {
-            console.log("Fail to invoke canPerform on smart contract:", err);
+            console.log("Fail to invoke canPerform on smart contract.", err);
             return false;
         }
     }
@@ -51,8 +53,6 @@ class CrowdfundingContractApi {
         return new Observable(async subscriber => {
             let thisApi = this;
 
-            const crowdfunding = await this.getCrowdfunding();
-
             const dacId = dac.id || 0; //zero is for new dacs;
             const isNew = dacId === 0;
 
@@ -61,7 +61,7 @@ class CrowdfundingContractApi {
 
             const clientId = dac.clientId;
 
-            const method = crowdfunding.methods.saveDac(infoCid, dacId);
+            const method = this.crowdfunding.methods.saveDac(infoCid, dacId);
 
             const gasEstimated = await method.estimateGas({
                 from: dac.delegateAddress
@@ -152,8 +152,13 @@ class CrowdfundingContractApi {
      * @returns Dac cuyo Id coincide con el especificado.
      */
     async getDacById(dacId) {
-        const crowdfunding = await this.getCrowdfunding();
-        const { id, infoCid, donationIds, campaignIds, budgetDonationIds, users, status } = await crowdfunding.methods.getDac(dacId).call();
+        const { id, 
+            infoCid, 
+            donationIds, 
+            campaignIds, 
+            budgetDonationIds, 
+            users, 
+            status } = await this.crowdfunding.methods.getDac(dacId).call();
         // Se obtiene la información de la Dac desde IPFS.
         const dacOnIpfs = await dacIpfsConnector.download(infoCid);
         const { title, description, imageCid, url } = dacOnIpfs;
@@ -178,8 +183,7 @@ class CrowdfundingContractApi {
     getDacs() {
         return new Observable(async subscriber => {
             try {
-                const crowdfunding = await this.getCrowdfunding();
-                const ids = await crowdfunding.methods.getDacIds().call();
+                const ids = await this.crowdfunding.methods.getDacIds().call();
                 const dacs = [];
                 if (ids.length > 0) {
                     for (let i = 0; i < ids.length; i++) {
@@ -216,8 +220,7 @@ class CrowdfundingContractApi {
     getCampaigns() {
         return new Observable(async subscriber => {
             try {
-                let crowdfunding = await this.getCrowdfunding();
-                let ids = await crowdfunding.methods.getCampaignIds().call();
+                let ids = await this.crowdfunding.methods.getCampaignIds().call();
                 let campaigns = [];
                 for (let i = 0; i < ids.length; i++) {
                     let campaign = await this.getCampaignById(ids[i]);
@@ -252,8 +255,7 @@ class CrowdfundingContractApi {
      * @returns Campaign cuyo Id coincide con el especificado.
      */
     async getCampaignById(campaignId) {
-        const crowdfunding = await this.getCrowdfunding();
-        const campaingOnChain = await crowdfunding.methods.getCampaign(campaignId).call();
+        const campaingOnChain = await this.crowdfunding.methods.getCampaign(campaignId).call();
         // Se obtiene la información de la Campaign desde IPFS.
         const { id, infoCid, dacIds, milestoneIds, donationIds, budgetDonationIds, users, status } = campaingOnChain;
         // Se obtiene la información de la Campaign desde IPFS.
@@ -290,7 +292,6 @@ class CrowdfundingContractApi {
             let thisApi = this;
 
             const dacId = 1; //preguntar a Mauri que vamos a hacer con esto, esto existe?
-            const crowdfunding = await this.getCrowdfunding();
             const campaignId = campaign.id || 0; //zero is for new campaigns;
             const isNew = campaignId === 0;
 
@@ -300,7 +301,7 @@ class CrowdfundingContractApi {
 
             const clientId = campaign.clientId;
 
-            const method = crowdfunding.methods.saveCampaign(
+            const method = this.crowdfunding.methods.saveCampaign(
                 campaign.infoCid,
                 dacId,
                 campaign.reviewerAddress,
@@ -394,8 +395,7 @@ class CrowdfundingContractApi {
     getMilestones() {
         return new Observable(async subscriber => {
             try {
-                let crowdfunding = await this.getCrowdfunding();
-                let ids = await crowdfunding.methods.getMilestoneIds().call();
+                let ids = await this.crowdfunding.methods.getMilestoneIds().call();
                 let milestones = [];
                 for (let i = 0; i < ids.length; i++) {
                     let milestone = await this.getMilestoneById(ids[i]);
@@ -429,8 +429,7 @@ class CrowdfundingContractApi {
      * @returns Milestone cuyo Id coincide con el especificado.
      */
     async getMilestoneById(milestoneId) {
-        const crowdfunding = await this.getCrowdfunding();
-        const milestoneOnChain = await crowdfunding.methods.getMilestone(milestoneId).call();
+        const milestoneOnChain = await this.crowdfunding.methods.getMilestone(milestoneId).call();
         const { id, campaignId, infoCid, fiatAmountTarget, users, activityIds, donationIds, budgetDonationIds, status } = milestoneOnChain;
         // Se obtiene la información del Milestone desde IPFS.
         const milestoneOnIpfs = await milestoneIpfsConnector.download(infoCid);
@@ -466,8 +465,6 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const crowdfunding = await this.getCrowdfunding();
-
             const milestoneId = milestone.id || 0; //zero is for new milestone;
             const isNew = milestoneId === 0;
 
@@ -476,7 +473,7 @@ class CrowdfundingContractApi {
 
             let clientId = milestone.clientId;
 
-            const method = crowdfunding.methods.saveMilestone(
+            const method = this.crowdfunding.methods.saveMilestone(
                 infoCid,
                 milestone.campaignId,
                 milestone.fiatAmountTarget,
@@ -575,8 +572,7 @@ class CrowdfundingContractApi {
     getDonations() {
         return new Observable(async subscriber => {
             try {
-                let crowdfunding = await this.getCrowdfunding();
-                let ids = await crowdfunding.methods.getDonationIds().call();
+                let ids = await this.crowdfunding.methods.getDonationIds().call();
                 let donations = [];
                 for (let i = 0; i < ids.length; i++) {
                     let donation = await this.getDonationById(ids[i]);
@@ -617,8 +613,7 @@ class CrowdfundingContractApi {
      * @returns Donación cuyo Id coincide con el especificado.
      */
     async getDonationById(donationId) {
-        const crowdfunding = await this.getCrowdfunding();
-        const donationOnChain = await crowdfunding.methods.getDonation(donationId).call();
+        const donationOnChain = await this.crowdfunding.methods.getDonation(donationId).call();
         // Se obtiene la información de la Donación desde IPFS.
         const { id,
             giver,
@@ -666,14 +661,12 @@ class CrowdfundingContractApi {
     saveDonationNative(donation) {
 
         return new Observable(async subscriber => {
-
+            console.log("save donation - observable");
             let thisApi = this;
-
-            const crowdfunding = await this.getCrowdfunding();
 
             let clientId = donation.clientId;
 
-            const method = crowdfunding.methods.donate(
+            const method = this.crowdfunding.methods.donate(
                 donation.entityId,
                 donation.tokenAddress,
                 donation.amount);
@@ -775,11 +768,9 @@ class CrowdfundingContractApi {
 
                         // Se aprobó la transferencia de fondos desde el token.
 
-                        const crowdfunding = await this.getCrowdfunding();
-
                         let clientId = donation.clientId;
 
-                        const method = crowdfunding.methods.donate(
+                        const method = this.crowdfunding.methods.donate(
                             donation.entityId,
                             donation.tokenAddress,
                             donation.amount);
@@ -872,9 +863,7 @@ class CrowdfundingContractApi {
 
         return new Observable(async subscriber => {
 
-            const crowdfunding = await this.getCrowdfunding();
-
-            const method = crowdfunding.methods.transfer(
+            const method = this.crowdfunding.methods.transfer(
                 entityIdFrom,
                 entityIdTo,
                 donationIds);
@@ -952,14 +941,12 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const crowdfunding = await this.getCrowdfunding();
-
             // Se almacena en IPFS toda la información del Activity.
             let activityInfoCid = await activityIpfsConnector.upload(activity);
 
             let clientId = milestone.clientId;
 
-            const method = crowdfunding.methods.milestoneComplete(
+            const method = this.crowdfunding.methods.milestoneComplete(
                 milestone.id,
                 activityInfoCid);
 
@@ -1054,14 +1041,12 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const crowdfunding = await this.getCrowdfunding();
-
             // Se almacena en IPFS toda la información del Activity.
             let activityInfoCid = await activityIpfsConnector.upload(activity);
 
             let clientId = milestone.clientId;
 
-            const method = crowdfunding.methods.milestoneReview(
+            const method = this.crowdfunding.methods.milestoneReview(
                 milestone.id,
                 activity.isApprove,
                 activityInfoCid);
@@ -1163,12 +1148,9 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const crowdfunding = await this.getCrowdfunding();
-
             let clientId = milestone.clientId;
 
-            const method = crowdfunding.methods.milestoneWithdraw(
-                milestone.id);
+            const method = this.crowdfunding.methods.milestoneWithdraw(milestone.id);
 
             const gasEstimated = await method.estimateGas({
                 from: milestone.recipientAddress
@@ -1279,8 +1261,7 @@ class CrowdfundingContractApi {
      * @returns Activity cuyo Id coincide con el especificado.
      */
     async getActivityById(activityId) {
-        const crowdfunding = await this.getCrowdfunding();
-        const activityOnChain = await crowdfunding.methods.getActivity(activityId).call();
+        const activityOnChain = await this.crowdfunding.methods.getActivity(activityId).call();
         console.log('activityOnChain', activityOnChain);
         const { id, infoCid, user, createdAt, milestoneId } = activityOnChain;
         // Se obtiene la información del Activity desde IPFS.
@@ -1303,8 +1284,7 @@ class CrowdfundingContractApi {
     getExchangeRates() {
         return new Observable(async subscriber => {
             try {
-                const exchangeRateProvider = await this.getExchangeRateProvider();
-                const rate = await exchangeRateProvider.methods.getExchangeRate(config.nativeToken.address).call();
+                const rate = await this.exchangeRateProvider.methods.getExchangeRate(config.nativeToken.address).call();
                 console.log('RBTC/USD rate', config.nativeToken.address, rate);
                 // TODO Obtener otros Exchage Rates desde el smart contract.
                 let exchangeRates = [];
@@ -1324,6 +1304,10 @@ class CrowdfundingContractApi {
                 subscriber.error(error);
             }
         });
+    }
+
+    async getExchangeRateByToken(tokenAddress) {
+        return await this.exchangeRateProvider.methods.getExchangeRate(tokenAddress).call();
     }
 
     /**
@@ -1388,31 +1372,15 @@ class CrowdfundingContractApi {
     }
 
     async getGasPrice() {
-        console.log("CrowdfundingContractApi (getGasPrice)");
-        const web3 = await getWeb3();
-        const gasPrice = await web3.eth.getGasPrice();
+        const gasPrice = await this.web3.eth.getGasPrice();
         return new BigNumber(gasPrice);
     }
 
-    async getCrowdfunding() {
-        if (this.crowdfunding) {
-            return this.crowdfunding;
-        } else if(this.networkPromise){
-            const { crowdfunding } = await this.networkPromise;
-            this.crowdfunding = crowdfunding;
-        } else if(!this.networkPromise){
-            console.log(`%c [${new Date().toISOString()}]GET CROWDFUNDING`, "color:violet");
-            this.networkPromise = getNetwork();
-            const { crowdfunding } = await this.networkPromise;
-            this.crowdfunding = crowdfunding;
-        }
-        return this.crowdfunding;
-    }
-
-    async getExchangeRateProvider() {
-        const network = await getNetwork();
-        const { exchangeRateProvider } = network;
-        return exchangeRateProvider;
+    updateContracts() {
+        console.log('[Crowdfunding Contract API] Se actualizan contratos.');
+        const { crowdfundingAddress, exchangeRateProviderAddress } = config;
+        this.crowdfunding = new this.web3.eth.Contract(CrowdfundingAbi, crowdfundingAddress);
+        this.exchangeRateProvider = new this.web3.eth.Contract(ExchangeRateProviderAbi, exchangeRateProviderAddress);
     }
 }
 

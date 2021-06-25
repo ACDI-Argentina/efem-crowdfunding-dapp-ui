@@ -35,29 +35,28 @@ class ConnectionModalUtil extends React.Component {
           closeModal={this.props.modals.methods.closeWrongNetworkModal}
           isOpen={this.props.modals.data.wrongNetworkModalIsOpen}
           network={this.props.network}
+          networkRequired={this.props.networkRequired}
         />
 
         <ConnectionModal
           closeModal={this.props.modals.methods.closeConnectionModal}
-          validateAccount={this.props.validateAccount}
           isOpen={
             this.props.modals.data.connectionModalIsOpen &&
             !this.props.accountValidated
           }
-          currentNetwork={this.props.network.current}
+          currentNetwork={this.props.network}
         />
 
         <TransactionConnectionModal
           closeModal={this.props.modals.methods.closeTransactionConnectionModal}
-          validateAccount={this.props.validateAccount}
           isOpen={this.props.modals.data.transactionConnectionModalIsOpen}
-          currentNetwork={this.props.network.current}
+          currentNetwork={this.props.network}
         />
 
         <ConnectionPendingModal
           closeModal={this.props.modals.methods.closeConnectionPendingModal}
           isOpen={this.props.modals.data.accountConnectionPending}
-          currentNetwork={this.props.network.current}
+          currentNetwork={this.props.network}
         />
 
         <SignatureRequestModal 
@@ -70,13 +69,13 @@ class ConnectionModalUtil extends React.Component {
             this.props.modals.methods.closeUserRejectedConnectionModal
           }
           isOpen={this.props.modals.data.userRejectedConnect}
-          initAccount={this.props.initAccount}
+          loginAccount={this.props.loginAccount}
         />
 
         <ValidationPendingModal
           closeModal={this.props.modals.methods.closeValidationPendingModal}
           isOpen={this.props.modals.data.accountValidationPending}
-          currentNetwork={this.props.network.current}
+          currentNetwork={this.props.network}
           account={this.props.account}
         />
         <UserRejectedValidationModal
@@ -84,13 +83,12 @@ class ConnectionModalUtil extends React.Component {
             this.props.modals.methods.closeUserRejectedValidationModal
           }
           isOpen={this.props.modals.data.userRejectedValidation}
-          validateAccount={this.props.validateAccount}
         />
 
         <LowFundsModal
           closeModal={this.props.modals.methods.closeLowFundsModal}
           isOpen={this.props.modals.data.lowFundsModalIsOpen}
-          currentNetwork={this.props.network.current}
+          currentNetwork={this.props.network}
           account={this.props.account}
         />
       </div>

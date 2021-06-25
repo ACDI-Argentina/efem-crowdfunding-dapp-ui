@@ -1,8 +1,8 @@
-import getNetwork from './getNetwork'
-import getWeb3 from './getWeb3'
 import BigNumber from 'bignumber.js'
 import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
+import web3Manager from './Web3Manager';
+import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
 
 /**
  * API encargada de la interacción con ERC20 Smart Contracts.
@@ -11,7 +11,11 @@ import transactionUtils from '../../redux/utils/transactionUtils'
  */
 class ERC20ContractApi {
 
-    constructor() { }
+    constructor() {
+        web3Manager.getWeb3().subscribe(web3 => {
+            this.web3 = web3;
+        });
+    }
 
     async getBalance(contractAddress, ownerAddress) {
         try {
@@ -87,14 +91,11 @@ class ERC20ContractApi {
     }
 
     async getERC20Contract(address) {
-        const web3 = await getWeb3();
-        const network = await getNetwork();
-        return new web3.eth.Contract(network.ERC20Abi, address);
+        return new this.web3.eth.Contract(ERC20Abi, address);
     }
 
     async getGasPrice() {
-        const web3 = await getWeb3();
-        const gasPrice = await web3.eth.getGasPrice();
+        const gasPrice = await this.web3.eth.getGasPrice();
         return new BigNumber(gasPrice);
     }
 }

@@ -13,7 +13,7 @@ class OnlyCorrectNetwork extends Component {
                     ({
                         network
                     }) =>
-                        network.isCorrectNetwork && (this.props.children)
+                        network.isCorrect && (this.props.children)
                 }
             </Web3App.Consumer>
         )

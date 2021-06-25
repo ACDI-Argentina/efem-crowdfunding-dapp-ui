@@ -3,6 +3,8 @@
 
     "landingPageTitle": "Crypto-fondos que nos conectan con el planeta",
 
+    "connectWallet": "Conectar billetera",
+
     "landingPagesSubtitle1": "Movilizamos donaciones en criptomonedas ",
     "landingPagesSubtitle2": "para promover el desarrollo de comunidades",
     "landingPagesSubtitle3": " que habitan y cuidan los bosques. ",
@@ -20,15 +22,15 @@
     "platformFeaturesTitle8": "evolución",
     "platformFeaturesTitle9": " humana",
 
-    "platformFeaturesDescription1": "Una cadena de bloques por sí sola no cambiará el mundo. ",
-    "platformFeaturesDescription2": "La verdadera revolución será posible ",
-    "platformFeaturesDescription3": "cuando usemos las nuevas tecnologías ",
-    "platformFeaturesDescription4": "para conectarnos íntimamente con el planeta. ",
+    "platformFeaturesDescription1": "Give4Forest activa innovaciones tecnológicas en las comunidades que viven en los bosques. Con mejores tecnologías ",
+    "platformFeaturesDescription2": "ellas podrán cuidar mejor a los bosques ",
+    "platformFeaturesDescription3": "y ",
+    "platformFeaturesDescription4": "los bosques seguirán cuidando de todos nosotros. ",
 
     "colaboration": "Colaboración",
     "colaborationDescription1": "Unimos fuerzas en una red ",
     "colaborationDescription2": "descentralizada",
-    "colaborationDescription3": " para la construcción del bien común y colectivo.",
+    "colaborationDescription3": " para la construcción y cuidado de los bienes comunes.",
 
     "connection": "Conexión",
     "connectionDescription1": "Conectamos ",
@@ -60,7 +62,7 @@
     "avalDAO": "AvalDAO",
     "decentralizedInvestments": "Inversiones descentralizadas",
     
-    "contactUs": "Contáctanos",
+    "contactUs": "Únete a nuestra comunidad de Telegram",
     
     "iniciativeOf": "Con la colaboración de: ",
     "argentina": "ARGENTINA ",
@@ -89,9 +91,20 @@
     "campaignDescriptionHelp": "Hágalo tan extenso como sea necesario. Su objetivo es generar confianza para que la gente done a su campaña.",
     "campaignDescriptionPlaceholder": "Describe cómo vas a ejecutar tu campaña con éxito...",
     "campaignDescriptionError": "Proporciona al menos 10 caracteres.",
+
     "campaignCategoriesLabel": "Categorías",
     "campaignCategoriesHelp": "¿Cuáles de estas categorías describen mejor tu campaña?",
     "campaignCategoriesAllLabel": "Todas",
+    "campaignCategories1Label": "Ambiente",
+    "campaignCategories2Label": "Desarrollo personal",
+    "campaignCategories3Label": "Educación",
+    "campaignCategories4Label": "Trabajo",
+    "campaignCategories5Label": "Inclusión financiera",
+    "campaignCategories6Label": "Agricultura sostenible",
+    "campaignCategories7Label": "Acceso a mercados",
+    "campaignCategories8Label": "Adaptación climática",
+    "campaignCategories9Label": "Sostenimiento de Give4Forest",
+
     "campaignBeneficiariesLabel": "Beneficiarios",
     "campaignBeneficiariesPlaceholder": "Ej. 30 familias de la región",
     "campaignBeneficiariesHelp": "Cuéntanos en pocas palabras quiénes o cuántos serán los beneficiarios de esta campaña.",
@@ -124,6 +137,13 @@
     "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario. Esta información será visible públicamente y se enviará por correo electrónico al revisor.",
     "milestoneCompleteMessagePlaceholder": "Describe lo que has hecho",
     "milestoneCompleteMessageMinLength": "Se agradece mucho si escribe algo significativo",
+
+    "milestoneCancel": "Cancelar",
+    "milestoneCancelTitle": "Cancelar hito",
+    "milestoneCancelDescription": "Explique por qué canceló este hito. Esta información será visible públicamente y se enviará por correo electrónico al propietario del hito.",
+    "milestoneCancelMessagePlaceholder": "Explique por qué canceló este hito",
+    "milestoneCancelMessageMinLength": "Se agradece mucho si escribe algo significativo",
+
     "milestoneApprove": "Aprobar",
     "milestoneApproveTitle": "Aprobar hito",
     "milestoneApproveDescription": "Explique por qué aprueba la finalización de este hito. ¡Se agradecen los cumplidos! Esta información será visible públicamente y se enviará por correo electrónico al propietario del hito.",
@@ -181,7 +201,7 @@
     "web3NotWeb3BrowserDescription": "Cambie a:",
     "web3NotWeb3BrowserDescriptionMobile": "Intente con un wallet browser:",
     "web3WrongNetworkTitle": "Cambie a la red {{requiredNetwork}}",
-    "web3WrongNetworkDescription": "Para usar nuestras funcionalidades blockchain, debes cambiar a la red {{requiredNetwork}} en Metamask.",
+    "web3WrongNetworkDescription": "Para usar nuestras funcionalidades blockchain, debes cambiar a la red {{requiredNetwork}} en {{walletName}} y reconectarse.",
     "web3NoNetwork": "Instale la extensión del explorador MetaMask para usar nuestras funcionalidades blockchain",
 
     "web3ConnectionPendingTitle": "Conecte una cuenta RSK",
@@ -307,6 +327,19 @@
     "transactionConfirmedTitleMilestoneWithdraw": "Se han retirado los fondos del hito '{{milestoneTitle}}'",
     "transactionConfirmedDescriptionMilestoneWithdraw": "¡Felicidades! Los fondos del hito se han retirado al destinatario.",
     "transactionFailuredTitleMilestoneWithdraw": "Los fondos del hito '{{milestoneTitle}}' no se retiraron",
-    "transactionFailuredDescriptionMilestoneWithdraw": "Ocurrió una falla retirando fondos del hito."
+    "transactionFailuredDescriptionMilestoneWithdraw": "Ocurrió una falla retirando fondos del hito.",
+
+
+    "requestConnectionTitle": "Conectar",
+    "requestConnectionText": "Antes de continuar, necesitamos que conectes tu wallet y verifiques tu cuenta",
+    "requestConnectionCancel":"Quizás en otro momento",
+    "requestConnectionOk": "De acuerdo, conectar",  
+
+    
+     "menuWelcome":"¡Hola!",
+     "menuProfile":"Perfil",
+     "menuSignup":"Regístrate",
+
+     "aboutUs":"Acerca de"
 
 }

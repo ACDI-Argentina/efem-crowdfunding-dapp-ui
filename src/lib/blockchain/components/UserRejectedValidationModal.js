@@ -5,7 +5,6 @@ import ModalCard from './ModalCard';
 class UserRejectedValidationModal extends React.Component {
   sendMessageAgain = event => {
     this.props.closeModal();
-    this.props.validateAccount();
   };
 
   renderContent = () => {

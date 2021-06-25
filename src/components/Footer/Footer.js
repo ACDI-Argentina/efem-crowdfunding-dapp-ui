@@ -25,16 +25,13 @@ class Footer extends Component {
           alignItems="stretch"
           spacing={0}
         >
-          <Grid item xs={8} sm={3}>
+          <Grid item xs={8} sm={6} className={classes.leftSection}>
             <img src={require("assets/img/logos/give4forest.png")} alt={t('give4forest')} className={classes.dappLogo} />
           </Grid>
-          <Grid item xs={8} sm={3} className={classes.rightSection}>
-            <h6 className={classes.title}>
-              {t('contactUs')}
-            </h6>
+          <Grid item xs={8} sm={6} className={classes.rightSection}>
             <h6 className={classes.description}>
-              <a href="mailto:give4forest@acdi.org.ar">
-                give4forest@acdi.org.ar
+              <a href="https://t.me/joinchat/et-GV-UFNsdjNzEx" target="_blank">
+                <img src={require("assets/img/logos/telegram.svg")} alt={t('telegram')} className={classes.smallLogo} />{t('contactUs')}
               </a>
             </h6>
           </Grid>
@@ -53,13 +50,19 @@ class Footer extends Component {
             </h6>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/acdi.png")} alt={t('acdi')} className={classes.logo} />
+            <a href="https://www.acdi.org.ar" target="_blank">
+              <img src={require("assets/img/logos/acdi.png")} alt={t('acdi')} className={classes.logo} />
+            </a>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/rsk.svg")} alt={t('rsk')} className={classes.logo} />
+            <a href="https://www.rsk.co/" target="_blank">
+              <img src={require("assets/img/logos/rsk.svg")} alt={t('rsk')} className={classes.logo} />
+            </a>
           </Grid>
           <Grid item xs={8} sm={2}>
-            <img src={require("assets/img/logos/iovlabs.jpg")} alt={t('iovlabs')} className={classes.logo} />
+            <a href="https://www.iovlabs.org/" target="_blank">
+              <img src={require("assets/img/logos/iovlabs.jpg")} alt={t('iovlabs')} className={classes.logo} />
+            </a>
           </Grid>
         </Grid>
         <br/>

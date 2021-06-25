@@ -66,6 +66,21 @@ class TransactionCreatedModal extends React.Component {
     }
   }
 
+  getWalletImage = wallet => {
+    if (wallet.logoUrl) {
+      return (
+        <Image
+          src={wallet.logoUrl}
+          aria-label={wallet.name}
+          title={wallet.name}
+          size="30px"
+        />
+      )
+    } else {
+      return null;
+    }
+  }
+
   closeModal = e => {
     if (typeof e !== "undefined") {
       e.preventDefault();
@@ -78,13 +93,14 @@ class TransactionCreatedModal extends React.Component {
   render() {
     const { currentUser, transaction, t } = this.props;
     const { isOpen } = this.state;
-    if(!transaction) {
+    if (!transaction) {
       return null;
     }
     return (
       <Web3App.Consumer>
         {
           ({
+            web3,
             network
           }) =>
             <Modal isOpen={isOpen}>
@@ -98,11 +114,8 @@ class TransactionCreatedModal extends React.Component {
                       borderColor="near-white"
                       pb={3}
                     >
-                      <Image
-                        src={require("assets/img/MetaMaskIcon.svg")}
-                        aria-label="MetaMask extension icon"
-                        size="24px"
-                      />
+                      {this.getWalletImage(web3.wallet)}
+
                       <Heading textAlign="center" as="h1" fontSize={[2, 3]} px={[3, 0]}>
                         {t(transaction.createdTitle.key, transaction.createdTitle.args)}
                       </Heading>
@@ -184,7 +197,7 @@ class TransactionCreatedModal extends React.Component {
                               fontWeight="bold"
                               lineHeight={"1em"}
                             >
-                              {network.current.name}
+                              {network.name}
                             </Text>
                           </Flex>
                         </Flex>
@@ -233,7 +246,7 @@ class TransactionCreatedModal extends React.Component {
                             </Tooltip>
                           </Link>
                         </Flex>
-                        
+
                         <Flex
                           justifyContent={"space-between"}
                           bg="light-gray"
@@ -274,7 +287,7 @@ class TransactionCreatedModal extends React.Component {
                               fontWeight="bold"
                               lineHeight={"1em"}
                             >
-                              {<FiatAmountByToken amount={transaction.feeEstimated}/>}
+                              {<FiatAmountByToken amount={transaction.feeEstimated} />}
                             </Text>
                             <Text color="mid-gray" fontSize={1}>
                               <CryptoAmount amount={transaction.feeEstimated} />
@@ -316,8 +329,8 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = { }
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-    withTranslation()(TransactionCreatedModal)
+  withTranslation()(TransactionCreatedModal)
 );

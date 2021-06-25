@@ -6,8 +6,6 @@ import {
   Modal,
   Flex,
   Box,
-  Button,
-  MetaMaskButton,
   Link
 } from "rimble-ui";
 import ModalCard from './ModalCard';
@@ -104,24 +102,9 @@ class ConnectionModal extends React.Component {
 
   renderConnectButton = () => {
     if (GeneralUtil.hasMetaMask()) {
-      return (
-        <MetaMaskButton
-          onClick={this.props.validateAccount}
-          width={[1, 1/2]}
-          mb={[5, 0]}
-        >
-          Connect with MetaMask
-        </MetaMaskButton>
-      )
+      return null;
     } else {
-      return (
-        <Button
-          onClick={this.props.validateAccount}
-          width={[1, 'auto']}
-        >
-          Connect
-        </Button>
-      )
+      return null;
     }
   }
 

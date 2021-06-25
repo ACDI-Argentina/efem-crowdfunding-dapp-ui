@@ -36,7 +36,7 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/views/milestonePage.js";
 import { withTranslation } from 'react-i18next';
 import { Box } from '@material-ui/core';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 BigNumber.config({ DECIMAL_PLACES: 18 });
 
@@ -485,7 +485,7 @@ class EditMilestone extends Component {
   }
 }
 
-EditMilestone.contextType = AppTransactionContext;
+EditMilestone.contextType = Web3AppContext;
 
 EditMilestone.propTypes = {
   currentUser: PropTypes.instanceOf(User),

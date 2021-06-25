@@ -8,7 +8,7 @@ import User from 'models/User';
 import ErrorPopup from 'components/ErrorPopup';
 import ConversationModal from 'components/ConversationModal';
 import GA from 'lib/GoogleAnalytics';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 class AcceptRejectProposedMilestoneButtons extends Component {
   constructor() {
@@ -145,6 +145,6 @@ AcceptRejectProposedMilestoneButtons.propTypes = {
   milestone: PropTypes.instanceOf(Milestone).isRequired,
 };
 
-AcceptRejectProposedMilestoneButtons.contextType = AppTransactionContext;
+AcceptRejectProposedMilestoneButtons.contextType = Web3AppContext;
 
 export default AcceptRejectProposedMilestoneButtons;

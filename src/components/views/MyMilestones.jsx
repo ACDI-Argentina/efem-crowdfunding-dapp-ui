@@ -11,7 +11,7 @@ import { getTruncatedText, getReadableStatus } from '../../lib/helpers';
 import MilestoneService from '../../services/MilestoneService';
 import Milestone from '../../models/Milestone';
 import DateViewer from '../DateViewer';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 const reviewDue = updatedAt =>
   moment()
@@ -279,7 +279,7 @@ class MyMilestones extends Component {
   }
 }
 
-MyMilestones.contextType = AppTransactionContext;
+MyMilestones.contextType = Web3AppContext;
 
 MyMilestones.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,

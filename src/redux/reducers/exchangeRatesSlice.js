@@ -25,6 +25,9 @@ export const exchangeRatesSlice = createSlice({
         state.push(exchangeRateStore);
       }
     },
+    handleError: (state, action) => {
+      //TODO: ADD LOGIC FOR HANDLE ERROR
+    },
   },
 });
 

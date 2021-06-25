@@ -4,13 +4,7 @@ import { withTranslation } from 'react-i18next';
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
 import { withStyles } from '@material-ui/core/styles';
 import { Box, Checkbox, FormControlLabel} from '@material-ui/core';
-
-const categories = [
-    {id: 1, description: 'Ambiente'},
-    {id: 2, description: 'Crecimiento personal'},
-    {id: 3, description: 'Educación'},
-    {id: 4, description: 'Trabajo'}
-];
+import { ALL_CATEGORIES } from '../constants/Categories';
 
 /**
  * Selecciona de idioma de la aplicación.
@@ -41,26 +35,29 @@ class CategorySelector extends Component {
     }
 
     render() {
-        const options = categories.map(cat => (
+        const {t} = this.props;
+
+        const options = ALL_CATEGORIES.map(cat => (
             <Box>
                 <FormControlLabel
                     control={
-                        <Checkbox checked={(this.state.value.indexOf(cat.id) !== -1)}
-                        onChange={(event) => this.handleChange(event, cat.id)} name={cat.id} />
+                        <Checkbox checked={(this.state.value.indexOf(cat) !== -1)}
+                        onChange={(event) => this.handleChange(event, cat)} key={cat} />
                         }
-                    label={cat.description}
+                    label={t('campaignCategories' + cat + 'Label')}
                 />
             </Box>
         ));
         return (
             <div>
-                <label class="control-label">{this.props.label}</label>
+                <label className="control-label">{this.props.label}</label>
                 <Box m={0} display="flex" justifyContent="space-evenly">
                     {options}
                 </Box>
-                <span class="help-block">{this.props.helpText}</span>
+                <span className="help-block">{this.props.helpText}</span>
             </div>
         );
     }
 }
-export default withTranslation()(withStyles(styles)(CategorySelector));
+
+export default (withStyles(styles)(withTranslation()(CategorySelector)))

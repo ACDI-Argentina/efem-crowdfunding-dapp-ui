@@ -56,7 +56,7 @@ const rootEpic = combineEpics(
 
 const epicMiddleware = createEpicMiddleware();
 
-const middlewares = [loggerMiddleware, epicMiddleware]
+const middlewares = [/*loggerMiddleware,*/ epicMiddleware]
 const middlewareEnhancer = applyMiddleware(...middlewares)
 
 const enhancers = [middlewareEnhancer]

@@ -3,6 +3,9 @@ import { container, title } from "assets/jss/material-kit-react.js";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
 
 const profilePageStyle = {
+  profilePage: {
+    overflowX: "hidden",
+  },
   container,
   profile: {
     textAlign: "center",
@@ -58,7 +61,7 @@ const profilePageStyle = {
     textAlign: "center"
   },
   dappLogo: {
-    maxHeight: "2.5em"
+    maxHeight: "4em"
   }
 };
 

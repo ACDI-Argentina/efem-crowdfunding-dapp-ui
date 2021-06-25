@@ -2,12 +2,23 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { toChecksumAddress } from 'lib/blockchain/Web3Utils';
-import AccountDialog from 'components/Dialogs/AccountDialog' 
+import AccountDetailsModal from 'components/Dialogs/AccountDetailsModal';
+
+import { withTranslation } from 'react-i18next';
 
 
 const Wrapper = styled.div``;
+
+const AddressWrapper = styled.div`
+  display: flex;
+  align-items:center;
+`;
+
+const WalletIndicator = styled.div`
+  padding: 0px 5px;
+`;
 
 const AddressLabel = styled.div`
   font-weight: bold;
@@ -16,19 +27,21 @@ const AddressLabel = styled.div`
   padding: 3px 20px;
   border-radius: 24px;
 
-  ${props => props.success && `
+  ${(props) =>
+    props.success &&
+    `
     color: #53a653;
     border: 1px solid #53a653;
     background-color: #48d24838;
   `}
 
-  ${props => props.warning && `
+  ${(props) =>
+    props.warning &&
+    `
     color: #ffc107;
     border: 1px solid #ffc107;
     background-color: #ffc10738;
   `}
-
-
 `;
 const ConnectButton = styled.button`
   font-size: 16px;
@@ -41,44 +54,74 @@ const ConnectButton = styled.button`
   color: white;
   text-transform: capitalize;
   font-weight: bold;
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+  transition: 0.3s;
+
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+              0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+  :hover{
+    box-shadow: 0 4px 2px 0 rgba(0,0,0,0.2);
+  } 
 `;
 
-const Connect = ({}) => {
-  const [showModal, setShowModal] = useState(false);
+const Connect = (props) => {
+  const [showAccountDetailsModal, setShowAccountDetailsModal] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
   const addr = toChecksumAddress(currentUser?.address);
-  const { initAccount, network } = useContext(AppTransactionContext);
-  const isCorrectNetwork = network?.isCorrectNetwork || false;
+  const {t} = props;
+  const {
+    loginAccount,
+    network,
+    web3,
+  } = useContext(Web3AppContext);
+
+  const isCorrectNetwork = network?.isCorrect || false;
   const success = isCorrectNetwork;
   const warning = !isCorrectNetwork;
 
+  let walletIndicator = null;
+
+  if(web3.wallet && web3.wallet.logoUrl){
+    walletIndicator = (
+      <WalletIndicator>
+        <img src={web3.wallet.logoUrl} style={{ width: '25px' }} />
+      </WalletIndicator>
+    );
+  }
 
   return (
     <>
-    <Wrapper>
-      {currentUser?.address && (
-        <AddressLabel 
-          success={success}
-          warning={warning}
-          onClick={() => setShowModal(true)}
-          title={isCorrectNetwork?`${addr}`:`INCORRECT NETWORK - ${addr}`}>
-          {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
-        </AddressLabel>
-      )}
-      {!currentUser.address && <ConnectButton onClick={() => initAccount()}>Connect</ConnectButton>}
-    </Wrapper>
-    <AccountDialog
-      address={addr}
-      fullWidth={true}
-      maxWidth="md"
-      open={showModal}
-      onClose={() => setShowModal(false)}>
-    </AccountDialog>
+      <Wrapper>
+        {currentUser?.address && (
+          <AddressWrapper>
+            {walletIndicator}
 
+            <AddressLabel
+              success={success}
+              warning={warning}
+              onClick={() => setShowAccountDetailsModal(true)}
+              title={isCorrectNetwork ? `${addr}` : `INCORRECT NETWORK - ${addr}`}
+            >
+              {`${addr.slice(0, 6)}...${addr.slice(-4)}`}
+            </AddressLabel>
+          </AddressWrapper>
+        )}
+        {!currentUser.address && (
+          <ConnectButton onClick={() => loginAccount()}>{t('connectWallet')}</ConnectButton>
+        )}
+      </Wrapper>
+
+      <AccountDetailsModal
+        address={addr}
+        fullWidth={true}
+        maxWidth="md"
+        open={showAccountDetailsModal}
+        onClose={() => setShowAccountDetailsModal(false)}
+      ></AccountDetailsModal>
     </>
   );
 };
 
-export default Connect;
+export default withTranslation()(Connect);

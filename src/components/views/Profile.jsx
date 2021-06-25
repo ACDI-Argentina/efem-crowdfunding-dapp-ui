@@ -10,7 +10,6 @@ import { paramsForServer } from 'feathers-hooks-common';
 import { utils } from 'web3';
 
 import { feathersClient } from '../../lib/feathersClient';
-import getNetwork from '../../lib/blockchain/getNetwork';
 import GoBackButton from '../GoBackButton';
 import Loader from '../Loader';
 import { getUserName, getUserAvatar, getTruncatedText, getReadableStatus } from '../../lib/helpers';
@@ -41,7 +40,7 @@ class Profile extends Component {
     this.state = {
       isLoading: true,
       hasError: false,
-      etherScanUrl: '',
+      etherScanUrl: config.network.explorer,
       userAddress: '',
       isLoadingDacs: true,
       dacs: null,
@@ -58,12 +57,6 @@ class Profile extends Component {
       isLoadingDonations: true,
       donations: null,
     };
-
-    getNetwork().then(network => {
-      this.setState({
-        etherScanUrl: network.etherscan,
-      });
-    });
 
     this.loadUserMilestones = this.loadUserMilestones.bind(this);
     this.loadUserCampaigns = this.loadUserCampaigns.bind(this);

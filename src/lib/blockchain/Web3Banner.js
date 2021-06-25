@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext, Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import NetworkUtils from './NetworkUtils';
 import { Image, MetaMaskButton } from 'rimble-ui';
@@ -11,53 +11,74 @@ import TransactionProgressBanner from './components/TransactionProgressBanner';
 import { Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/components/web3BannerStyle.js";
+import networkManager from './NetworkManager';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
+import Bounce from 'components/Animated/Bounce';
 
 const WrongNetwork = ({
   currentNetwork,
   requiredNetwork,
   onWrongNetworkMessage,
+  lastNotificationTs
 }) => {
   const { t } = useTranslation();
-  const requiredNetworkName = NetworkUtils.getEthNetworkNameById(requiredNetwork);
-  const currentNetworkName = NetworkUtils.getEthNetworkNameById(currentNetwork);
+  const requiredNetworkName = networkManager.getNetworkNameById(requiredNetwork);
+  const currentNetworkName = networkManager.getNetworkNameById(currentNetwork);
+  const { web3 } = useContext(Web3AppContext);
+
+  const [bouncing,setBouncing] = useState(false);
+
+  useEffect(() => {
+    setBouncing(true);
+    const timeoutId = setTimeout(()=> setBouncing(false),500);
+    return () => {clearTimeout(timeoutId)}
+  },[lastNotificationTs])
+  
+
+
+
   return (
     <div>
       {onWrongNetworkMessage === null ? (
         // Show default banner
-        <Box
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center">
-          <Box>
-            <Image
-              src={require("assets/img/icons/warning-icon.png")}
-              aria-label="Warning"
-              size="24px"
-            />
+        <Bounce bouncing={bouncing}>
+          <Box
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center">
+            <Box>
+              <Image
+                src={require("assets/img/icons/warning-icon.png")}
+                aria-label="Warning"
+                size="24px"
+              />
+            </Box>
+            <Box my={1}>
+              <Image
+                src={web3.wallet.logoUrl}
+                aria-label="MetaMask extension icon"
+                size="40px"
+              />
+            </Box>
+            <Box>
+              <Typography variant="subtitle1"
+                style={{ textDecoration: "underline" }}>
+                {t('web3WrongNetworkTitle', {
+                  requiredNetwork: requiredNetworkName
+                })}
+              </Typography>
+              <Typography variant="caption">
+                {t('web3WrongNetworkDescription', {
+                  requiredNetwork: requiredNetworkName,
+                  currentNetwork: currentNetworkName,
+                  walletName: web3.wallet.name
+                })}
+              </Typography>
+            </Box>
           </Box>
-          <Box my={1}>
-            <Image
-              src={require("assets/img/MetaMaskIcon.svg")}
-              aria-label="MetaMask extension icon"
-              size="40px"
-            />
-          </Box>
-          <Box>
-            <Typography variant="subtitle1"
-              style={{textDecoration: "underline"}}>
-              {t('web3WrongNetworkTitle', {
-                requiredNetwork: requiredNetworkName
-              })}
-            </Typography>
-            <Typography variant="caption">
-              {t('web3WrongNetworkDescription', {
-                requiredNetwork: requiredNetworkName,
-                currentNetwork: currentNetworkName
-              })}
-            </Typography>
-          </Box>
-        </Box>) : (
+        </Bounce>
+        ) : (
           // Show custom banner
           onWrongNetworkMessage
         )}
@@ -229,7 +250,7 @@ class Web3Banner extends Component {
     currentNetwork: PropTypes.number,
     requiredNetwork: PropTypes.number,
     isCorrectNetwork: PropTypes.bool,
-    onWeb3Fallback: PropTypes.bool,
+    walletBrowserRequired: PropTypes.bool,
     children: PropTypes.shape({
       notWeb3CapableBrowserMessage: PropTypes.node,
       noNetworkAvailableMessage: PropTypes.node,
@@ -240,7 +261,7 @@ class Web3Banner extends Component {
     currentNetwork: null,
     requiredNetwork: null,
     isCorrectNetwork: true,
-    onWeb3Fallback: false,
+    walletBrowserRequired: false,
     children: {
       notWeb3CapableBrowserMessage: null,
       noNetworkAvailableMessage: null,
@@ -257,9 +278,14 @@ class Web3Banner extends Component {
     this.setState({ browserIsWeb3Capable });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.currentNetwork && this.props.requiredNetwork) {
     
+    }
+
+    if(this.props.lastNotificationTs !== prevProps.lastNotificationTs){
+      this.toogleShowNotificationIcon(false);
+
     }
   }
 
@@ -270,8 +296,12 @@ class Web3Banner extends Component {
   render() {
     const { currentNetwork,
       requiredNetwork,
-      onWeb3Fallback,
-      transactionFirstPending, classes } = this.props;
+      walletBrowserRequired,
+      transactionFirstPending, 
+      classes,
+      lastNotificationTs
+      
+     } = this.props;
     const {
       notWeb3CapableBrowserMessage,
       noNetworkAvailableMessage,
@@ -279,7 +309,7 @@ class Web3Banner extends Component {
     } = this.props.children;
 
     const show = this.state.browserIsWeb3Capable === false ||
-        (onWeb3Fallback === true || currentNetwork === null) ||
+        (walletBrowserRequired === true) ||
         this.props.isCorrectNetwork === false ||
         transactionFirstPending !== undefined;
     const boxDisplay = show ? 'flex' : 'none';
@@ -313,13 +343,14 @@ class Web3Banner extends Component {
                 <NotWeb3Browser
                   notWeb3CapableBrowserMessage={notWeb3CapableBrowserMessage}
                 />
-              ) : onWeb3Fallback === true || currentNetwork === null ? (
+              ) : walletBrowserRequired === true ? (
                 <NoNetwork noNetworkAvailableMessage={noNetworkAvailableMessage} />
               ) : this.props.isCorrectNetwork === false ? (
                 <WrongNetwork
                   currentNetwork={currentNetwork}
                   requiredNetwork={requiredNetwork}
                   onWrongNetworkMessage={onWrongNetworkMessage}
+                  lastNotificationTs={lastNotificationTs}
                 />
               ) : null}
 

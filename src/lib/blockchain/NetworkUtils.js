@@ -22,49 +22,6 @@ const funcs = {
     return web3Capable;
   },
 
-  // Returns a network name based on a network ID
-  getEthNetworkNameById: networkId => {
-    let networkName = '';
-
-    if (typeof networkId === 'undefined') {
-      networkId = '';
-    }
-
-    switch (networkId) {
-      case 1:
-        networkName = 'Main';
-        break;
-      case 3:
-        networkName = 'Ropsten';
-        break;
-      case 4:
-        networkName = 'Rinkeby';
-        break;
-      case 5:
-        networkName = 'Goerli';
-        break;
-      case 30:
-        networkName = 'RSK Mainnet';
-        break;
-      case 31:
-        networkName = 'RSK Testnet';
-        break;
-      case 33:
-        networkName = 'RSK Regtest';
-        break;
-      case 42:
-        networkName = 'Kovan';
-        break;
-      case '':
-        networkName = 'None';
-        break;
-      default:
-        networkName = 'Custom';
-        break;
-    }
-    return networkName;
-  },
-
   // Current browser is detected as mobile
   isMobileDevice: () => {
     const mobilePlatform = /Mobi|Android/i.test(navigator.userAgent)

@@ -23,7 +23,7 @@ class FiatTargetProgress extends Component {
     // Cálculo del porcentaje de avance.
     if (!fiatBalance.isZero()) {
       if (!fiatTarget.isZero() && fiatBalance.lt(fiatTarget)) {
-        progress = fiatBalance.div(fiatTarget).multipliedBy(100).toFixed(2);
+        progress = parseFloat(fiatBalance.div(fiatTarget).multipliedBy(100).toFixed(2));
       } else {
         // El objetivo fue alcanzado.
         progress = 100.00;

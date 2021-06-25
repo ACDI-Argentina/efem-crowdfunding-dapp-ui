@@ -42,7 +42,7 @@ const TermsAndConditions = () => (
           account and all the activity on it.
         </p>
         <p>
-          You can browse b4 without registering for an account. But to use some of Give4Forest’s functions,
+          You can browse Give4Forest without registering for an account. But to use some of Give4Forest’s functions,
           you’ll need to register either using external web3 wallet provider or the embedded Portis
           wallet (please see their Terms of Service and Privacy Policy). Only then you are able to
           fill in your profile and when you do that, the information you give us has to be accurate
@@ -335,28 +335,6 @@ const TermsAndConditions = () => (
             it.
           </li>
         </ul>
-        <h3>How do we sustain our dapp operational cost</h3>
-        <p>
-          Give4Forest Fees are only charged on successfully funded projects (network transaction fees are
-          not included). After the official release of our production Give4Forest Dapp, we may charge 3%, in
-          addition to any fees from our partners. This fee helps fund maintenance, technical support
-          and fees related to on-chain transactions.
-        </p>
-        <p>
-          Creating an account on Give4Forest is free (but excludes network transaction fee). If you create a
-          project that is successfully funded, we (and payment partners) may collect success fees.
-          Partners’ fees may vary slightly based on your location.
-        </p>
-        <p>
-          We will not collect any fees without giving you a chance to review and accept them. If our
-          fees ever change, we’ll announce that on our Site. Some funds pledged by backers are
-          collected by payment providers. Each payment provider is its own company, and Give4Forest isn’t
-          responsible for its performance.
-        </p>
-        <p>
-          You’re responsible for paying any additional fees or taxes associated with your use of the
-          Give4Forest Dapp.
-        </p>
         <h1>6. Stuff We Don’t Do and Are Not Responsible For</h1>
         <p>
           Give4Forest isn’t liable for any damages or losses related to your use of the dapp. We don’t
@@ -441,7 +419,8 @@ const TermsAndConditions = () => (
           first.
         </p>
         <p>
-          Give4Forest’s Site and Dapp are open source. However, you agree to respect the work and legal
+          <u><a target="_blank" href="https://github.com/ACDI-Argentina/efem-crowdfunding-dapp">
+          Give4Forest’s Site and Dapp are open source</a></u>. However, you agree to respect the work and legal
           notices, information, and restrictions contained in any content accessed through the Site.
           You also agree not to change, translate, or otherwise create derivative works of the Site
           or Dapp, unless you were given consent.
@@ -521,7 +500,7 @@ const TermsAndConditions = () => (
           Give4Forest SPECIFICALLY DISCLAIMS ANY AND ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY,
           NON-INFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE, AND ANY WARRANTIES IMPLIED BY ANY
           COURSE OF DEALING, COURSE OF PERFORMANCE, OR USAGE OF TRADE. NO ADVICE OR INFORMATION
-          (ORAL OR WRITTEN) OBTAINED BY YOU FROM KICKSTARTER SHALL CREATE ANY WARRANTY.
+          (ORAL OR WRITTEN) OBTAINED BY YOU FROM GIVE4FOREST SHALL CREATE ANY WARRANTY.
         </p>
         <h1>14. Indemnification</h1>
         <p>If you do something on Give4Forest that winds up getting us sued, you have to help defend us.</p>
@@ -546,29 +525,7 @@ const TermsAndConditions = () => (
           third party on the Site. In no event shall Give4Forest’s liability for direct damages be in excess
           of (in the aggregate) one hundred EURO (EUR100.00).
         </p>
-        <h1>16. Dispute Resolution and Governing Law</h1>
-        <p>
-          We’re located in Gibraltar, and any disputes with us have to be handled in Gibraltar under
-          Gibraltar law.
-        </p>
-        <p>
-          We at Give4Forest encourage you to contact us if you’re having an issue, before resorting to the
-          courts. In the unfortunate situation where legal action does arise, these Terms (and all
-          other rules, policies, or guidelines incorporated by reference) will be governed by and
-          construed in accordance with the laws of Gibraltar, without giving effect to any
-          principles of conflicts of law, and without application of the Uniform Computer
-          Information Transaction Act or the United Nations Convention of Controls for International
-          Sale of Goods. You agree that Give4Forest and its dapp are deemed a passive website that does not
-          give rise to jurisdiction over Give4Forest or its parents, subsidiaries, affiliates, assigns,
-          employees, agents, directors, officers, or stakeholders, either specific or general, in
-          any jurisdiction other than Gibraltar. You agree that any action at law or in equity
-          arising out of or relating to these Terms, or your use or non-use of dapp, shall be filed
-          only in a court located in Gibraltar, and you hereby consent and submit to the personal
-          jurisdiction of these courts for the purposes of litigating any such action. You hereby
-          irrevocably waive any right you may have to trial by jury in any dispute, action, or
-          proceeding.
-        </p>
-        <h1>17. The Rest</h1>
+        <h1>16. The Rest</h1>
         <p>
           These are our official terms and our rules for how things work. (So if you ever see
           confusing or conflicting information about any of this stuff, just check these terms —

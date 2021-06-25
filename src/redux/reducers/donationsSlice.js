@@ -43,6 +43,7 @@ export const donationsSlice = createSlice({
       }
     },
     addDonation: (state, action) => {
+      console.log("Add donation");
       let donationStore = action.payload.toStore();
       state.push(donationStore);
     },

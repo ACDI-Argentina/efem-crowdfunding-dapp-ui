@@ -7,7 +7,7 @@ import User from 'models/User';
 import ErrorPopup from 'components/ErrorPopup';
 import ConversationModal from 'components/ConversationModal';
 import GA from 'lib/GoogleAnalytics';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 class CancelMilestoneButton extends Component {
   constructor() {
@@ -114,6 +114,6 @@ CancelMilestoneButton.propTypes = {
   milestone: PropTypes.instanceOf(Milestone).isRequired,
 };
 
-CancelMilestoneButton.contextType = AppTransactionContext;
+CancelMilestoneButton.contextType = Web3AppContext;
 
 export default CancelMilestoneButton;

@@ -17,7 +17,7 @@ import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import ProfileForm from 'components/ProfileForm';
 import Loader from '../Loader';
 import { connect } from 'react-redux';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
 
 /**
@@ -34,8 +34,47 @@ class EditProfile extends Component {
     };
   }
 
-  componentDidMount() {
+  async requestConnection(translate){ 
+    
+    const labels = {
+      title: translate("requestConnectionTitle"),
+      text: translate("requestConnectionText"),
+      cancel: translate("requestConnectionCancel"),
+      ok: translate("requestConnectionOk"),
+    }
+
+    const confirm = await React.swal({
+      icon: 'info',
+      title: labels.title,
+      text: labels.text,
+      
+      buttons: [labels.cancel,labels.ok],
+      closeOnClickOutside: false,
+    });
+
+    return confirm;
+
+  }
+
+  async componentDidMount() {
+    const { history, currentUser, t: translate } = this.props;
+    const { loginAccount } = this.context;
     const { authenticateIfPossible } = this.context.modals.methods;
+
+    const goHome = () => history.push('/');
+
+    if(!currentUser || !currentUser.address){
+      const confirmation = await this.requestConnection(translate);
+      if(confirmation){
+        const connected = await loginAccount();
+        if(!connected){
+          return goHome();
+        }
+      } else {
+        return goHome();
+      }
+    }
+    
     authenticateIfPossible(this.props.currentUser)
       .then(() => this.setState({ isLoading: false }))
       .catch(err => {
@@ -61,7 +100,7 @@ class EditProfile extends Component {
 
 
     return (
-      <div>
+      <div className={classes.profilePage}>
         <Header
           color="white"
           brand={<img src={require("assets/img/logos/give4forest.png")}
@@ -111,9 +150,7 @@ class EditProfile extends Component {
                           <Link to="/privacypolicy">Privacy Policy</Link>.
                         </div>
 
-                      <ProfileForm
-                        user={currentUser}
-                      ></ProfileForm>
+                      <ProfileForm user={currentUser}/>
                       </div>
                     )}
 
@@ -129,7 +166,7 @@ class EditProfile extends Component {
   }
 }
 
-EditProfile.contextType = AppTransactionContext;
+EditProfile.contextType = Web3AppContext;
 
 const mapStateToProps = (state, ownProps) => {
   return {

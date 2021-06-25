@@ -28,7 +28,7 @@ export const currentUserSlice = createSlice({
       return state;
     },
     setCurrentUser: (state, action) => {
-      if(state.address != action.payload.address){
+      if (state.address != action.payload.address) {
         console.log("User has been updated in the meanwhile");
         return;
       }
@@ -45,11 +45,20 @@ export const currentUserSlice = createSlice({
       return state;
     },
     registerCurrentUser: (state, action) => {
+      console.log("REGISTERING USER");
+      console.log('intiial state;',state)
+      const user = action.payload;
       action.payload.status = User.REGISTERING;
+
+      if(!user.address){
+        return state; //No hagas ningun cambio
+      }
+
       return action.payload.toStore();
     },
     clearCurrentUser: (state, action) => {
-      const initial = User.UNREGISTERED.toStore();
+      const initial = {};
+      initial.status = User.UNREGISTERED.toStore();
       initial.authenticated = false;
       initial.roles = [];
       return initial;
@@ -57,7 +66,7 @@ export const currentUserSlice = createSlice({
   },
 });
 
-export const { registerCurrentUser, initCurrentUser, updateCurrentUserBalance, setCurrentUser,clearCurrentUser } = currentUserSlice.actions;
+export const { registerCurrentUser, initCurrentUser, updateCurrentUserBalance, setCurrentUser, clearCurrentUser } = currentUserSlice.actions;
 
 export const selectCurrentUser = state => new User(state.currentUser);
 export const selectRoles = state => state.currentUser.roles;

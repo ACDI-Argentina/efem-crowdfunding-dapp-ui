@@ -1,8 +1,8 @@
-import getNetwork from '../getNetwork';
 import exchangeRateUtils from "../../../redux/utils/exchangeRateUtils";
 import ExchangeRate from 'models/ExchangeRate';
 import BigNumber from 'bignumber.js';
 import config from 'configuration';
+import crowdfundingContractApi from '../CrowdfundingContractApi';
 
 window.ExchangeRate = ExchangeRate;
 window.BigNumber = BigNumber;
@@ -19,16 +19,14 @@ async function initExchangeRateListener() {
 
     console.log("Listener sobre actualizaciones de Exchange Rate.");
 
-    const { exchangeRateProvider } = await getNetwork();
-
     async function fetchExchangeRate() {
 
         let tokenKeys = Object.keys(config.tokens);
         for (let i = 0; i < tokenKeys.length; i++) {
             let tokenKey = tokenKeys[i];
             try {
-                const tokenAddress = config.tokens[tokenKey].address
-                const rate = await exchangeRateProvider.methods.getExchangeRate(tokenAddress).call();
+                const tokenAddress = config.tokens[tokenKey].address;
+                const rate = await crowdfundingContractApi.getExchangeRateByToken(tokenAddress);
                 const exchangeRate = new ExchangeRate({
                     tokenAddress: tokenAddress,
                     rate: new BigNumber(rate),
@@ -37,7 +35,7 @@ async function initExchangeRateListener() {
                 console.log('Actualización de Exchange Rate.', exchangeRate);
                 exchangeRateUtils.updateExchangeRate(exchangeRate);
             } catch (e) {
-                console.error('Error actualizando exchange rate.', tokenKey);
+                console.error(`Error actualizando exchange rate de token ${tokenKey}.`, e);
             }
         }
     }

@@ -25,7 +25,7 @@ import GridItem from "components/Grid/GridItem.js";
 import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/views/dacPage.js";
 import { Box } from '@material-ui/core';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
 
 /**
@@ -308,7 +308,7 @@ class EditDAC extends Component {
   }
 }
 
-EditDAC.contextType = AppTransactionContext;
+EditDAC.contextType = Web3AppContext;
 
 EditDAC.propTypes = {
   user: PropTypes.instanceOf(User),

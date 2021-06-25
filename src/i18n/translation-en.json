@@ -3,6 +3,8 @@
 
     "landingPageTitle": "Crypto-funds that connect us with the planet",
 
+    "connectWallet": "Connect wallet",
+
     "landingPagesSubtitle1": "We mobilize cryptocurrency donations ",
     "landingPagesSubtitle2": "to promote the development of communities",
     "landingPagesSubtitle3": " that inhabit and care for forests.",
@@ -13,22 +15,22 @@
     "platformFeaturesTitle1": "",
     "platformFeaturesTitle2": "Sustainable development",
     "platformFeaturesTitle3": " needs an ",
-    "platformFeaturesTitle4": "holistic ",
+    "platformFeaturesTitle4": "technological ",
     "platformFeaturesTitle5": "revolution",
     "platformFeaturesTitle6": " and a ",
     "platformFeaturesTitle7": "human",
     "platformFeaturesTitle8": " evolution",
     "platformFeaturesTitle9": "",
     
-    "platformFeaturesDescription1": "Blockchain by itself won't change the world. ",
-    "platformFeaturesDescription2": "The true holistic revolution will be ",
-    "platformFeaturesDescription3": " when recognizing who we are  ",
-    "platformFeaturesDescription4": "and our connection with the planet. ",
+    "platformFeaturesDescription1": "Give4Forest activates technological innovations in the communities that live in the forests. With better technologies, ",
+    "platformFeaturesDescription2": "they will be able to take better care of the forests ",
+    "platformFeaturesDescription3": "and ",
+    "platformFeaturesDescription4": "the forests will continue taking care of us all. ",
 
     "colaboration": "Collaboration",
     "colaborationDescription1": "We join forces in a ",
     "colaborationDescription2": "decentralized",
-    "colaborationDescription3": " network for the construction of the common and collective good.",
+    "colaborationDescription3": " network for the construction and care of common goods.",
 
     "connection": "Connection",
     "connectionDescription1": "We connect ",
@@ -60,7 +62,7 @@
     "avalDAO": "AvalDAO",
     "decentralizedInvestments": "Decentralized investments",
     
-    "contactUs": "Contact us",
+    "contactUs": "Join our Telegram community",
 
     "iniciativeOf": "A collaboration of: ",
     "argentina": "ARGENTINA ",
@@ -89,9 +91,20 @@
     "campaignDescriptionHelp": "Make it as extensive as necessary. Your goal is to build trust, so that people donate to your campaign.",
     "campaignDescriptionPlaceholder": "Describe how you're going to execute your campaign successfully...",
     "campaignDescriptionError": "Please provide at least 10 characters.",
+
     "campaignCategoriesLabel": "Categories",
     "campaignCategoriesHelp": "Which of these categories best describes your campaign?",
     "campaignCategoriesAllLabel": "All",
+    "campaignCategories1Label": "Environment",
+    "campaignCategories2Label": "Personal development",
+    "campaignCategories3Label": "Education",
+    "campaignCategories4Label": "Work",
+    "campaignCategories5Label": "Financial inclusion",
+    "campaignCategories6Label": "Sustainable agriculture",
+    "campaignCategories7Label": "Markets access",
+    "campaignCategories8Label": "Climate adaptation",
+    "campaignCategories9Label": "Give4Forest sustainability",
+
     "campaignBeneficiariesLabel": "Beneficiaries",
     "campaignBeneficiariesPlaceholder": "E.g. 30 families in the area",
     "campaignBeneficiariesHelp": "Tell us in a few words who or how many will be the beneficiaries of this campaign.",
@@ -181,7 +194,7 @@
     "web3NotWeb3BrowserDescription": "Switch to:",
     "web3NotWeb3BrowserDescriptionMobile": "Try a mobile wallet browser:",
     "web3WrongNetworkTitle": "Switch to {{requiredNetwork}} network",
-    "web3WrongNetworkDescription": "To use our blockchain features, you need to switch to the {{requiredNetwork}} network in Metamask.",
+    "web3WrongNetworkDescription": "To use our blockchain features, you need to switch to the {{requiredNetwork}} network in {{walletName}} and reconnect.",
     "web3NoNetwork": "Install the MetaMask browser extension to use our blockchain features",
 
     "web3ConnectionPendingTitle": "Connect RSK account",
@@ -307,6 +320,16 @@
     "transactionConfirmedTitleMilestoneWithdraw": "Milestone '{{milestoneTitle}}' funds has been withdrawn",
     "transactionConfirmedDescriptionMilestoneWithdraw": "Congratulations! The funds of milestone have been withdrawn to the recipient.",
     "transactionFailuredTitleMilestoneWithdraw": "Milestone '{{milestoneTitle}}' funds was not withdrawn",
-    "transactionFailuredDescriptionMilestoneWithdraw": "A failure occurred withdrawing funds from milestone."
-    
+    "transactionFailuredDescriptionMilestoneWithdraw": "A failure occurred withdrawing funds from milestone.",
+
+    "requestConnectionTitle": "Connect",
+    "requestConnectionText": "Before continuing, we need you to connect your wallet and verify your account",
+    "requestConnectionCancel":"Maybe later",
+    "requestConnectionOk": "Ok, connect",
+
+     "menuWelcome":"Welcome!",
+     "menuProfile":"Profile", 
+     "menuSignup":"Sign up" ,
+
+     "aboutUs":"About us"
 }

@@ -14,7 +14,7 @@ import Sweetalert from 'sweetalert';
 
 import GA from 'lib/GoogleAnalytics';
 
-import { history } from '../lib/helpers';
+import { ScrollToTop, history } from '../lib/helpers';
 
 import config from '../configuration';
 
@@ -41,7 +41,7 @@ import initExchangeRateListener from "../lib/blockchain/listeners/exchangeRateLi
 import TransactionViewer from 'components/TransactionViewer';
 import Web3Banner from 'lib/blockchain/Web3Banner';
 import Web3App from 'lib/blockchain/Web3App';
-import { AppTransactionContext } from 'lib/blockchain/Web3App';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 /* global document */
 /**
@@ -107,40 +107,22 @@ class Application extends Component {
     const { web3Loading, whiteListLoading } = this.state;
     const { currentUser } = this.props;
     const userLoading = false; //TODO: pass to a currentUserSlice
-    const { network, web3Fallback } = this.context;/*useContext(AppTransactionContext);*/
 
     return (
       <ErrorBoundary>
         <Web3App>
           <Web3App.Consumer>
             {({
-              needsPreflight,
-              validBrowser,
-              userAgent,
-              web3,
-              account,
-              accountBalance,
-              accountBalanceLow,
-              initAccount,
-              rejectAccountConnect,
-              userRejectedConnect,
-              accountValidated,
-              accountValidationPending,
-              rejectValidation,
-              userRejectedValidation,
-              validateAccount,
-              connectAndValidateAccount,
-              modals,
               network,
-              transaction,
-              web3Fallback
+              walletBrowserRequired,
+              lastNotificationTs
             }) => (
-              
+
               <React.Fragment>
-                
+
                 <TransactionViewer></TransactionViewer>
                 <MessageViewer></MessageViewer>
-    
+
                 <WhiteListProvider onLoaded={this.whiteListLoaded}>
                   <WhiteListConsumer>
                     {({ state: { fiatWhitelist } }) => (
@@ -152,6 +134,7 @@ class Application extends Component {
                             {!web3Loading && (
                               <ConversionRateProvider fiatWhitelist={fiatWhitelist}>
                                 <Router history={history}>
+                                 <ScrollToTop />
                                   <div>
                                     {GA.init() && <GA.RouteTracker />}
 
@@ -174,10 +157,11 @@ class Application extends Component {
                                       pauseOnHover
                                     />
                                     <Web3Banner
-                                      currentNetwork={network.current.id}
+                                      currentNetwork={network.id}
                                       requiredNetwork={config.network.requiredId}
-                                      isCorrectNetwork={network.isCorrectNetwork}
-                                      onWeb3Fallback={web3Fallback}
+                                      isCorrectNetwork={network.isCorrect}
+                                      walletBrowserRequired={walletBrowserRequired}
+                                      lastNotificationTs={lastNotificationTs}
                                     />
                                   </div>
                                 </Router>
@@ -212,6 +196,6 @@ const mapDispatchToProps = {
   fetchExchangeRates
 }
 
-Application.contextType = AppTransactionContext;
+Application.contextType = Web3AppContext;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Application)
