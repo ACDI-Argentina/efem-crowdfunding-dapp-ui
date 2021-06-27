@@ -77,7 +77,10 @@ const landingPageStyle = {
   },
   bottomSeparator: {
     width: "100vw",
-    marginLeft: "calc((100% - 100vw)/2)"
+    marginLeft: "calc((100% - 100vw)/2)",
+    "@media (max-width: 600px)": {
+      paddingTop: "4em"
+    },
   }
 };
 

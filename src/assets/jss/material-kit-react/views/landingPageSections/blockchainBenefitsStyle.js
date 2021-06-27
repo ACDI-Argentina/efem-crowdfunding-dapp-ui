@@ -55,6 +55,11 @@ const blockchainBenefitsStyle = {
   },
   italicText: {
     fontStyle: "italic"
+  },
+  benefitSection: {
+    "@media (max-width: 600px)": {
+      paddingBottom: "0px !important"
+    },
   }
 };
 

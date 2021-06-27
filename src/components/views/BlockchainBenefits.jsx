@@ -26,21 +26,21 @@ class BlockchainBenefits extends Component {
             alignItems="flex-start"
             spacing={10}
           >
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
               <div>
                 <img src={require("assets/img/icons/sinFronteras.png")} alt={t('blockchainHelpBenefitTitle')} className={classes.image} />
               </div>
               <div className={classes.sectionTitle}>{t('blockchainHelpBenefitTitle')}</div>
               <h6 className={classes.sectionDescription}>{t('blockchainHelpBenefitDescription')}</h6>
             </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
               <div>
                 <img src={require("assets/img/icons/confianza.png")} alt={t('blockchainTrustBenefitTitle')} className={classes.image} />
               </div>
               <div className={classes.sectionTitle}>{t('blockchainTrustBenefitTitle')}</div>
               <h6 className={classes.sectionDescription}>{t('blockchainTrustBenefitDescription')}</h6>
             </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
               <div>
                 <img src={require("assets/img/icons/seguridad.png")} alt={t('blockchainSecurityBenefitTitle')} className={classes.image} />
               </div>

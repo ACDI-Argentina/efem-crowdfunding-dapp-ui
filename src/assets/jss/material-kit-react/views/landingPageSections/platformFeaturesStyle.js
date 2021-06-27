@@ -56,6 +56,11 @@ const platformFeaturesStyle = {
   },
   italicText: {
     fontStyle: "italic"
+  },
+  featureSection: {
+    "@media (max-width: 600px)": {
+      paddingBottom: "0px !important"
+    },
   }
 };
 

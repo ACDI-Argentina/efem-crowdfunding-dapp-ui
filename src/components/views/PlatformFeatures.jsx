@@ -43,7 +43,7 @@ class PlatformFeatures extends Component {
             alignItems="flex-start"
             spacing={10}
           >
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.featureSection}>
               <div>
                 <img src={require("assets/img/icons/colaboracion.png")} alt={t('colaboration')} className={classes.image} />
               </div>
@@ -54,7 +54,7 @@ class PlatformFeatures extends Component {
                 {t('colaborationDescription3')}
               </h6>
             </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.featureSection}>
               <div>
                 <img src={require("assets/img/icons/conexion.png")} alt={t('connection')} className={classes.image} />
               </div>
@@ -67,7 +67,7 @@ class PlatformFeatures extends Component {
                 {t('connectionDescription5')}
               </h6>
             </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3}>
+            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.featureSection}>
               <div>
                 <img src={require("assets/img/icons/intimidad.png")} alt={t('intimacy')} className={classes.image} />
               </div>
