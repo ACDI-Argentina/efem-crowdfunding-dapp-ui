@@ -131,114 +131,6 @@ const NoNetwork = ({ noNetworkAvailableMessage }) => {
     </div>
   );
 };
-
-const NotWeb3Browser = ({ notWeb3CapableBrowserMessage }) => {
-  const { t } = useTranslation();
-  return (
-    <div>
-      {notWeb3CapableBrowserMessage === null ? (
-        <Box
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center">
-          <Box my={2}>
-            <Image
-              src={require("assets/img/icons/warning-icon.png")}
-              aria-label="Warning"
-              size="24px"
-            />
-          </Box>
-          <Box my={2}>
-            <Typography variant="subtitle1">
-              {t('web3NotWeb3BrowserTitle')}
-            </Typography>
-            {NetworkUtils.isMobileDevice() ? (
-              <Typography variant="caption">
-                {t('web3NotWeb3BrowserDescriptionMobile')}
-              </Typography>
-            ) : (
-              <Typography variant="caption">
-                {t('web3NotWeb3BrowserDescription')}
-              </Typography>
-            )}
-          </Box>
-          {NetworkUtils.isMobileDevice() ? (
-            <Box
-              flexDirection="row"
-              justifyContent="center"
-              alignItems="center">
-                <a href="https://status.im/" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/status.svg")}
-                    aria-label="Status"
-                    size="28px"
-                  />
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=org.toshi&hl=es_AR&gl=US" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/coinbase.png")}
-                    aria-label="Coinbase"
-                    size="28px"
-                  />
-                </a>
-                <a href="https://www.crunchbase.com/organization/cipher-browser" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/cipher.jpg")}
-                    aria-label="Cipher"
-                    size="28px"
-                  />
-                </a>
-            </Box>
-          ) : (
-            <Box
-              flexDirection="row"
-              justifyContent="center"
-              alignItems="center">
-                <a href="https://www.opera.com/" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/opera.svg")}
-                    aria-label="Opera"
-                    size="28px"
-                  />
-                </a>
-                <a href="https://www.brave.com/" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/brave.svg")}
-                    aria-label="Brave"
-                    size="28px"
-                  />
-                </a>
-                <a href="https://www.mozilla.org/" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/firefox.svg")}
-                    aria-label="Firefox"
-                    size="28px"
-                  />
-                </a>
-                <a href="https://www.google.com/" target="_blank"
-                  style={{margin: "1em"}}>
-                  <Image
-                    src={require("assets/img/logos/chrome.svg")}
-                    aria-label="Chrome"
-                    size="28px"
-                  />
-                </a>
-            </Box>
-          )}
-
-        </Box>) : (
-          notWeb3CapableBrowserMessage
-        )}
-    </div>
-  );
-};
-
 class Web3Banner extends Component {
 
   constructor(props) {
@@ -252,7 +144,6 @@ class Web3Banner extends Component {
     isCorrectNetwork: PropTypes.bool,
     walletBrowserRequired: PropTypes.bool,
     children: PropTypes.shape({
-      notWeb3CapableBrowserMessage: PropTypes.node,
       noNetworkAvailableMessage: PropTypes.node,
       onWrongNetworkMessage: PropTypes.node,
     }),
@@ -263,7 +154,6 @@ class Web3Banner extends Component {
     isCorrectNetwork: true,
     walletBrowserRequired: false,
     children: {
-      notWeb3CapableBrowserMessage: null,
       noNetworkAvailableMessage: null,
       onWrongNetworkMessage: null,
     },
@@ -274,8 +164,6 @@ class Web3Banner extends Component {
   };
 
   componentDidMount() {
-    const browserIsWeb3Capable = NetworkUtils.browserIsWeb3Capable();
-    this.setState({ browserIsWeb3Capable });
   }
 
   componentDidUpdate(prevProps) {
@@ -303,13 +191,11 @@ class Web3Banner extends Component {
       
      } = this.props;
     const {
-      notWeb3CapableBrowserMessage,
       noNetworkAvailableMessage,
       onWrongNetworkMessage,
     } = this.props.children;
 
-    const show = this.state.browserIsWeb3Capable === false ||
-        (walletBrowserRequired === true) ||
+    const show = (walletBrowserRequired === true) ||
         this.props.isCorrectNetwork === false ||
         transactionFirstPending !== undefined;
     const boxDisplay = show ? 'flex' : 'none';
@@ -339,11 +225,7 @@ class Web3Banner extends Component {
               onClick={() => this.toogleShowNotificationIcon(true)}
             />
             <Box className={classes.notificationBox}>
-              {this.state.browserIsWeb3Capable === false ? (
-                <NotWeb3Browser
-                  notWeb3CapableBrowserMessage={notWeb3CapableBrowserMessage}
-                />
-              ) : walletBrowserRequired === true ? (
+              {walletBrowserRequired === true ? (
                 <NoNetwork noNetworkAvailableMessage={noNetworkAvailableMessage} />
               ) : this.props.isCorrectNetwork === false ? (
                 <WrongNetwork

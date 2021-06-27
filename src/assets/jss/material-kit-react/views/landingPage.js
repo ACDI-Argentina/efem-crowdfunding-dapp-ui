@@ -13,14 +13,26 @@ const landingPageStyle = {
     ...container
   },
   dappLogo: {
-    maxHeight: "4em"
+    maxHeight: "4em",
+    "@media (max-width: 800px)": {
+      maxHeight: "3em"
+    },
+    "@media (max-width: 600px)": {
+      maxHeight: "2em"
+    }
   },
   titleContainer: {
     backgroundImage: "url(" + bkgImg + ")",
     padding: "1em 2em 3em",
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    "@media (max-width: 600px)": {
+      background: "none",
+      backgroundColor: "rgba(0,0,0,0.3)",
+      borderRadius: "50px",
+      padding: "1em"
+    }
   },
   title: {
     ...title,
