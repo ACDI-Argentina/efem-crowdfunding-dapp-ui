@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import CommitIcon from 'assets/img/icons/git-commit.svg';
 import CloseIcon from '@material-ui/icons/Close';
 
 export const Content = styled.div`

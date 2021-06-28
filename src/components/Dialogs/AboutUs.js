@@ -4,6 +4,7 @@ import Logo from 'assets/img/logos/give4forest.png';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import packageJson from '../../../package.json';
+import CommitIcon from 'assets/img/icons/git-commit.svg';
 
 import {
   Content,
@@ -16,14 +17,20 @@ import {
   CloseContainer,
 } from './aboutUs/styled';
 
+
+const {
+  REACT_APP_BUILD_TS,
+  REACT_APP_BUILD_COMMIT,
+} = process.env;
+
 const AboutUs = ({ onClose, ...props }) => {
   const { version } = packageJson;
   const repoUrl = 'https://github.com/ACDI-Argentina/efem-crowdfunding-dapp';
 
   // A esto vamos a tenerlo que leerlo desde version.html o algun otro archivo que genermos por aca, o bien que sea version.txt
 
-  /* const commitHash = "2bcd4c6ec9ad88af953209b663dca59651d857d1";
-  const commitUrl = `https://github.com/ACDI-Argentina/efem-crowdfunding-dapp/commit/${commitHash}`; */
+  const commitHash = REACT_APP_BUILD_COMMIT;
+  const commitUrl = REACT_APP_BUILD_COMMIT ? `https://github.com/ACDI-Argentina/efem-crowdfunding-dapp/commit/${commitHash}` : null;
 
   return (
     <Dialog onClose={onClose} {...props}>
@@ -44,15 +51,18 @@ const AboutUs = ({ onClose, ...props }) => {
               View on github
             </a>
           </Div>
-          {/* <Div>
-            <a
-              href={commitUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <SCommitIcon src={CommitIcon} /> {'Commit'}
-            </a>
-          </Div> */}
+          {commitUrl && (
+            <Div>
+              <a
+                href={commitUrl}
+                target="_blank"
+                rel="noreferrer"
+                title={`Build date: ${REACT_APP_BUILD_TS}`}
+              >
+                <SCommitIcon src={CommitIcon} /> {'Commit'}
+              </a>
+            </Div>
+          )}
         </Row>
       </Content>
     </Dialog>
