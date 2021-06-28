@@ -59,7 +59,7 @@ const AboutUs = ({ onClose, ...props }) => {
                 rel="noreferrer"
                 title={`Build date: ${REACT_APP_BUILD_TS}`}
               >
-                <SCommitIcon src={CommitIcon} /> {'Commit'}
+                <SCommitIcon src={CommitIcon} /> {commitHash.substring(0,7)}
               </a>
             </Div>
           )}
