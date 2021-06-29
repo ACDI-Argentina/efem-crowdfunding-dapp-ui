@@ -23,7 +23,7 @@ class ERC20ContractApi {
             const balance = await erc20Contract.methods.balanceOf(ownerAddress).call();
             return new BigNumber(balance);
         } catch (err) {
-            console.error("Error obteniendo balance de ERC20 Token.", err);
+            console.error("Error obteniendo balance de ERC20 Token.",contractAddress, err);
             return new BigNumber(0);
         }
     }
