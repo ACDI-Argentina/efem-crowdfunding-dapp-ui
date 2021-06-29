@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 function CircularProgressWithLabel(props) {
   return (
     <Box position="relative" display="inline-flex">
-      <CircularProgress variant="static" {...props} size={45} />
+      <CircularProgress variant="determinate" {...props} size={45} />
       <Box
         top={0}
         left={0}
@@ -21,7 +21,7 @@ function CircularProgressWithLabel(props) {
         <Typography variant="caption"
           component="div"
           color="textSecondary">
-            {`${Math.round(props.value,)}%`}
+            {`${Math.round(props.value)}%`}
         </Typography>
       </Box>
     </Box>

@@ -43,9 +43,7 @@ class TransactionProgressBanner extends React.Component {
       } else {
         progress = 100;
       }
-      this.setState({
-        progress: progress.toFixed()
-      });
+      this.setState({progress});
     }
   }
 
