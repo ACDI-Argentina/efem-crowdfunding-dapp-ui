@@ -3,6 +3,7 @@ import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
 import web3Manager from './Web3Manager';
 import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
+import { listen } from './transactionStatusChecker';
 
 /**
  * API encargada de la interacción con ERC20 Smart Contracts.
@@ -73,9 +74,24 @@ class ERC20ContractApi {
             });
 
             method.send({from: senderAddress})
-                .once('transactionHash', (hash) => { // La transacción ha sido creada.
+                .once('transactionHash', async (hash) => { // La transacción ha sido creada.
+                    
                     transaction.submit(hash);
                     transactionUtils.updateTransaction(transaction);
+
+                    try {
+                        const receipt = await listen(hash);
+                        //Only for wallet connect!
+                        if (receipt) {
+                            transaction.confirme();
+                            transactionUtils.updateTransaction(transaction);
+                            subscriber.next(true);
+                        }
+                    }  catch(err){
+                        console.log(err);
+                        //Call error handlng
+                    }
+
                 })
                 .once('confirmation', (confNumber, receipt) => {
                     transaction.confirme();

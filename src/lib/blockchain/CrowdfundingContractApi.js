@@ -17,7 +17,7 @@ import erc20ContractApi from './ERC20ContractApi';
 import Web3Utils from './Web3Utils';
 import web3Manager from './Web3Manager';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
-
+import { listen } from './transactionStatusChecker';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -709,13 +709,28 @@ class CrowdfundingContractApi {
             });
 
             promiEvent
-                .once('transactionHash', (hash) => { // La transacción ha sido creada.
-
+                .once('transactionHash',async (hash) => { // La transacción ha sido creada.
+                    //Check provider
+                    window.txHash = hash;
                     transaction.submit(hash);
                     transactionUtils.updateTransaction(transaction);
-
+                    
                     donation.txHash = hash;
                     subscriber.next(donation);
+
+                    try {
+                        const receipt = await listen(hash);
+                        //Only for wallet connect!
+                        if (receipt) {
+                            transaction.confirme();
+                            transactionUtils.updateTransaction(transaction);
+                        }
+                    }  catch(err){
+                        console.log(err);
+                        //Call error handlng
+                    }
+
+
                 })
                 .once('confirmation', (confNumber, receipt) => {
 
@@ -811,13 +826,27 @@ class CrowdfundingContractApi {
                         });
 
                         promiEvent
-                            .once('transactionHash', (hash) => { // La transacción ha sido creada.
+                            .once('transactionHash', async (hash) => { // La transacción ha sido creada.
 
                                 transaction.submit(hash);
                                 transactionUtils.updateTransaction(transaction);
 
                                 donation.txHash = hash;
                                 subscriber.next(donation);
+
+                                try {
+                                    const receipt = await listen(hash);
+                                    //Only for wallet connect!
+                                    if (receipt) {
+                                        transaction.confirme();
+                                        transactionUtils.updateTransaction(transaction);
+                                        subscriber.next(true);
+                                    }
+                                }  catch(err){
+                                    console.log(err);
+                                    //Call error handlng
+                                }
+            
                             })
                             .once('confirmation', (confNumber, receipt) => {
 
