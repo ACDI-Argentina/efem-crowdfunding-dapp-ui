@@ -17,7 +17,7 @@ import erc20ContractApi from './ERC20ContractApi';
 import Web3Utils from './Web3Utils';
 import web3Manager from './Web3Manager';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
-import { listen } from './transactionStatusChecker';
+import CrowdfundingUtils from './CrowdfundingUtils';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -30,6 +30,7 @@ class CrowdfundingContractApi {
         web3Manager.getWeb3().subscribe(web3 => {
             this.web3 = web3;
             this.updateContracts();
+            this.crowdfundingUtils = new CrowdfundingUtils(web3,config.crowdfundingAddress);
         });
     }
 
@@ -708,53 +709,66 @@ class CrowdfundingContractApi {
                 value: donation.amount
             });
 
-            promiEvent
-                .once('transactionHash',async (hash) => { // La transacción ha sido creada.
-                    //Check provider
-                    window.txHash = hash;
-                    transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
-                    
-                    donation.txHash = hash;
-                    subscriber.next(donation);
 
+            const onTransactionHash = async (hash) => { // La transacción ha sido creada.
+                transaction.submit(hash);
+                transactionUtils.updateTransaction(transaction);
+                
+                donation.txHash = hash;
+                subscriber.next(donation);
+
+                if(this.web3.providerName == "WalletConnect"){
                     try {
-                        const receipt = await listen(hash);
-                        //Only for wallet connect!
-                        if (receipt) {
-                            transaction.confirme();
-                            transactionUtils.updateTransaction(transaction);
+                        const receipt = await this.crowdfundingUtils.listenTransactionReceipt(hash);
+                        if (receipt.status) { //Transaction was confirmed
+                            onConfirmation(undefined,receipt);
+                        } else {//Transaction was reverted
+                            onError(new Error(`Transacation reverted`));
                         }
+
                     }  catch(err){
                         console.log(err);
                         //Call error handlng
                     }
+                }
+            }
 
+            const onConfirmation = async (confNumber, receipt) => {
+                transaction.confirme();
+                transactionUtils.updateTransaction(transaction);
 
-                })
-                .once('confirmation', (confNumber, receipt) => {
+                let idFromEvent;
 
-                    transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
-
+                if(this.web3?.providerName == "WalletConnect"){
+                    const { donationId } = this.crowdfundingUtils.getEventData(receipt,`NewDonation`);
+                    idFromEvent = donationId;
+                } else {
                     // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                     // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
-                    const idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
-                    thisApi.getDonationById(idFromEvent).then(donation => {
-                        donation.clientId = clientId;
-                        subscriber.next(donation);
-                    });
-                    entityUtils.refreshEntity(donation.entityId);
-                })
-                .on('error', function (error) {
+                    idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
+                }
+                
+                const donation = await thisApi.getDonationById(idFromEvent);
+                donation.clientId = clientId;
+                subscriber.next(donation);
+                
+                entityUtils.refreshEntity(donation.entityId);
+            };
 
-                    transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+            const onError = function (error) {
 
-                    error.donation = donation;
-                    console.error(`Error procesando transacción de almacenamiento de donación.`, error);
-                    subscriber.error(error);
-                });
+                transaction.fail();
+                transactionUtils.updateTransaction(transaction);
+
+                error.donation = donation;
+                console.error(`Error procesando transacción de almacenamiento de donación.`, error);
+                subscriber.error(error);
+            };
+
+            promiEvent
+                .once('transactionHash', onTransactionHash)
+                .once('confirmation', onConfirmation)
+                .on('error',onError);
         });
     }
 
@@ -825,52 +839,69 @@ class CrowdfundingContractApi {
                             from: donation.giverAddress
                         });
 
-                        promiEvent
-                            .once('transactionHash', async (hash) => { // La transacción ha sido creada.
 
-                                transaction.submit(hash);
-                                transactionUtils.updateTransaction(transaction);
 
-                                donation.txHash = hash;
-                                subscriber.next(donation);
 
+                        const onTransactionHash = async (hash) => { // La transacción ha sido creada.
+                            transaction.submit(hash);
+                            transactionUtils.updateTransaction(transaction);
+
+                            donation.txHash = hash;
+                            subscriber.next(donation);
+
+                            if (this.web3.providerName == "WalletConnect") {
                                 try {
-                                    const receipt = await listen(hash);
-                                    //Only for wallet connect!
-                                    if (receipt) {
-                                        transaction.confirme();
-                                        transactionUtils.updateTransaction(transaction);
-                                        subscriber.next(true);
+                                    const receipt = await this.crowdfundingUtils.listenTransactionReceipt(hash);
+                                
+                                    if (receipt.status) { //Transaction was confirmed
+                                        onConfirmation(undefined,receipt);
+                                    } else {//Transaction was reverted
+                                        onError(new Error(`Transacation reverted`));
                                     }
-                                }  catch(err){
+                                } catch (err) {
                                     console.log(err);
                                     //Call error handlng
                                 }
-            
-                            })
-                            .once('confirmation', (confNumber, receipt) => {
+                            }
+                        };
 
-                                transaction.confirme();
-                                transactionUtils.updateTransaction(transaction);
+                        const onConfirmation = (confNumber, receipt) => {
 
+                            transaction.confirme();
+                            transactionUtils.updateTransaction(transaction);
+
+                            let idFromEvent;
+
+                            if(this.web3?.providerName == "WalletConnect"){
+                                const { donationId } = this.crowdfundingUtils.getEventData(receipt,`NewDonation`);
+                                idFromEvent = donationId;
+                            } else {
                                 // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                                 // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
-                                const idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
-                                thisApi.getDonationById(idFromEvent).then(donation => {
-                                    donation.clientId = clientId;
-                                    subscriber.next(donation);
-                                });
-                                entityUtils.refreshEntity(donation.entityId);
-                            })
-                            .on('error', function (error) {
-
-                                transaction.fail();
-                                transactionUtils.updateTransaction(transaction);
-
-                                error.donation = donation;
-                                console.error(`Error procesando transacción de almacenamiento de donación.`, error);
-                                subscriber.error(error);
+                                idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
+                            }
+                            
+                            thisApi.getDonationById(idFromEvent).then(donation => {
+                                donation.clientId = clientId;
+                                subscriber.next(donation);
                             });
+                            entityUtils.refreshEntity(donation.entityId);
+                        }
+
+                        const onError =  function (error) {
+
+                            transaction.fail();
+                            transactionUtils.updateTransaction(transaction);
+
+                            error.donation = donation;
+                            console.error(`Error procesando transacción de almacenamiento de donación.`, error);
+                            subscriber.error(error);
+                        }
+
+                        promiEvent
+                            .once('transactionHash',onTransactionHash)
+                            .once('confirmation',onConfirmation)
+                            .on('error',onError);
 
                     } else {
                         // No se aprobó la transferencia de fondos desde el token.

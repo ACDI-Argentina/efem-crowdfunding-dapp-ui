@@ -1,3 +1,7 @@
+//TODO: La funcion exportada en este archivo es la misma que en crowdfundingUtils
+//Se movio ahi pensando que era una buena idea, pero es una funcion que puede
+//usarse sobre cualquier smart contract, asi que lo ideal seria llevarla a una clase
+
 import Web3 from 'web3';
 import Web3HttpProvider from 'web3-providers-http';
 import config from '../../configuration';
@@ -11,7 +15,7 @@ const web3 = new Web3(provider);
 
 const transactionTimeout = 300000; //5 min
 
-export const listen = async (txHash) => {
+export const listenTransactionReceipt = async (txHash) => {
   console.log(`Listen for ${txHash}`);
   return new Promise((resolve,reject) => {
     const intervalId = setInterval(async () => { 
@@ -27,7 +31,7 @@ export const listen = async (txHash) => {
         } else {
           clearInterval(intervalId);
           clearTimeout(timeoutId);
-          reject(`Transaction failed`); //why???
+          reject(`Transaction failed`); //TODO: send cause
         }
       }
     },1000)
