@@ -69,7 +69,7 @@ class TransactionConfirmedModal extends React.Component {
     if (!transaction) {
       return null;
     }
-    const preventDefault = (event) => event.preventDefault();
+    
     return (
       <Web3App.Consumer>
         {
@@ -106,7 +106,10 @@ class TransactionConfirmedModal extends React.Component {
                     flexDirection={["column", "row"]}
                     alignItems="center"
                   >
-                    <Link href={config.network.explorer + 'tx/' + transaction.hash} onClick={preventDefault}>
+                    <Link 
+                      href={config.network.explorer + 'tx/' + transaction.hash} 
+                      target='_blank'
+                    >
                       {t('transactionExplore')}
                     </Link>
                   </Flex>

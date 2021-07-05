@@ -3,6 +3,7 @@ import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
 import web3Manager from './Web3Manager';
 import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
+import { listenTransactionReceipt } from './transactionStatusChecker';
 
 /**
  * API encargada de la interacción con ERC20 Smart Contracts.
@@ -72,21 +73,44 @@ class ERC20ContractApi {
                 }
             });
 
+            const onTransactionHash =  async (hash) => { // La transacción ha sido creada.
+                    
+                transaction.submit(hash);
+                transactionUtils.updateTransaction(transaction);
+
+
+                if(this.web3.providerName == "WalletConnect"){
+                    try {
+                        const receipt = await listenTransactionReceipt(hash);
+                        
+                        if (receipt) {
+                            onConfirmation(undefined, receipt)
+                        } else {
+                            onError(new Error(`Transaction reverted`))
+                        }
+                    }  catch(err){
+                        console.log(err);
+                        onError(new Error(`Transaction reverted`))
+                    }
+                }
+
+            };
+
+            const onConfirmation = (confNumber, receipt) => {
+                transaction.confirme();
+                transactionUtils.updateTransaction(transaction);
+                subscriber.next(true);
+            }
+            const onError = function (error) {
+                transaction.fail();
+                transactionUtils.updateTransaction(transaction);
+                subscriber.next(false);
+            }
+
             method.send({from: senderAddress})
-                .once('transactionHash', (hash) => { // La transacción ha sido creada.
-                    transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
-                })
-                .once('confirmation', (confNumber, receipt) => {
-                    transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
-                    subscriber.next(true);
-                })
-                .on('error', function (error) {
-                    transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
-                    subscriber.next(false);
-                });
+                .once('transactionHash',onTransactionHash)
+                .once('confirmation', onConfirmation)
+                .on('error', onError);
         });
     }
 

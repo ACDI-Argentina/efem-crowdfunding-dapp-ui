@@ -61,8 +61,14 @@ const profilePageStyle = {
     textAlign: "center"
   },
   dappLogo: {
-    maxHeight: "4em"
-  }
+    maxHeight: "4em",
+    "@media (max-width: 800px)": {
+      maxHeight: "3em"
+    },
+    "@media (max-width: 600px)": {
+      maxHeight: "2em"
+    }
+  },
 };
 
 export default profilePageStyle;
