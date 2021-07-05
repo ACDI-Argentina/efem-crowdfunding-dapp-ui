@@ -723,12 +723,12 @@ class CrowdfundingContractApi {
                         if (receipt.status) { //Transaction was confirmed
                             onConfirmation(undefined,receipt);
                         } else {//Transaction was reverted
-                            onError(new Error(`Transacation reverted`));
+                            onError(new Error(`Transaction reverted`));
                         }
 
                     }  catch(err){
                         console.log(err);
-                        //Call error handlng
+                        onError(new Error(`Transaction reverted`));
                     }
                 }
             }
@@ -856,11 +856,10 @@ class CrowdfundingContractApi {
                                     if (receipt.status) { //Transaction was confirmed
                                         onConfirmation(undefined,receipt);
                                     } else {//Transaction was reverted
-                                        onError(new Error(`Transacation reverted`));
+                                        onError(new Error(`Transaction reverted`));
                                     }
                                 } catch (err) {
-                                    console.log(err);
-                                    //Call error handlng
+                                    onError(new Error(`Transaction reverted`));
                                 }
                             }
                         };

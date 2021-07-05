@@ -90,7 +90,7 @@ class ERC20ContractApi {
                         }
                     }  catch(err){
                         console.log(err);
-                        //Call error handlng
+                        onError(new Error(`Transaction reverted`))
                     }
                 }
 
