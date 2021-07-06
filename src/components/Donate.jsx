@@ -66,6 +66,32 @@ class Donate extends Component {
     this.close = this.close.bind(this);
   }
 
+
+  componentDidUpdate(prevProps, prevState){
+    const tokenAddress = this.state.tokenAddress;
+    const balance = this.props.currentUser?.tokenBalances[tokenAddress];
+
+    if(this.props.currentUser != prevProps.currentUser){
+      balance && this.updateMax();
+    }
+    if(tokenAddress!= prevState.tokenAddress) {
+      balance && this.updateMax();
+    }
+  }
+
+  updateMax(){
+    const { tokenAddress } = this.state;
+    const balance = this.props.currentUser.tokenBalances[tokenAddress];
+    const max = Web3Utils.weiToEther(balance);
+          
+    this.setState(prev => ({
+        donateInputProps: {
+          ...prev.donateInputProps,
+          max: max.toString()
+        }
+      }));
+  }
+
   async handleClickOpen() {
     const { currentUser } = this.props;
     const { network, modals,loginAccount } = this.context;
@@ -96,9 +122,7 @@ class Donate extends Component {
     let tokenAddress = event.target.value;
     let donateInputProps = this.state.donateInputProps;
     let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
-    let balance = this.props.currentUser.tokenBalances[tokenAddress];
     donateInputProps.step = tokenConfig.donateStep;
-    donateInputProps.max = balance;
 
     this.setState({
       tokenAddress: tokenAddress,
@@ -108,9 +132,30 @@ class Donate extends Component {
   };
 
   handleAmountChange(event) {
-    this.setState({
-      amount: event.target.value === '' ? '' : Number(event.target.value)
-    });
+    const value = event.target.value
+    console.log(`New value:`,value) 
+
+    try{
+      const parsed = Number(value.trim());
+      if(!isNaN(parsed)){
+        if(value.includes('.') && value.split('.').length === 2){
+          //Check number of decimal places
+          const decimalPlaces = value.split('.')[1].length;
+          if(decimalPlaces > 18){ //Cae por fuera de lo que podamos manejar con wei
+            return;
+          }
+
+
+        }
+
+       return this.setState({amount:value});
+      }
+  
+    } catch(err){
+      console.log(err);
+    }
+    this.setState({amount:''});
+    
   };
 
   handleAmountBlur() {
@@ -167,7 +212,16 @@ class Donate extends Component {
     if (amount > 0) {
       donationIsValid = true;
     }
-    let amountWei = Web3Utils.etherToWei(amount || 0);
+
+
+    let amountWei;
+    try{
+      amountWei = Web3Utils.etherToWei(amount || 0);
+    } catch(err){
+      console.log(err);
+      amountWei = 0;
+    }
+     
 
     let tokenOptions = Object.keys(config.tokens).map(tokenKey => 
       <MenuItem key={config.tokens[tokenKey].address}
