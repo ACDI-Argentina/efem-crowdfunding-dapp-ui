@@ -11,8 +11,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Flag from 'react-flagkit';
 
 const ActiveIndicator = styled.div`
-  border: 1px solid steelblue;
-  height: 2px;
+  border: 1px solid #53a653;
+  backGround-color: #53a653;
   box-sizing: border-box;
   position: absolute;
   bottom: 0;
@@ -64,7 +64,6 @@ class LanguageSelector extends Component {
     const currentValue = this.state.value;
 
     const options = config.language.options.map((language) => (
-      <ListItem key={language.key} className={classes.listItem}>
         <Button
           color={'primary'}
           title={language.name}
@@ -78,11 +77,10 @@ class LanguageSelector extends Component {
             {currentValue === language.key && <ActiveIndicator />}
           </FlagContainer>
         </Button>
-      </ListItem>
     ));
 
     
-    return <List className={classes.list}>{options}</List>;
+    return <div className={classes.flagsListContainer}>{options}</div>;
   }
 }
 export default withTranslation()(withStyles(styles)(LanguageSelector));

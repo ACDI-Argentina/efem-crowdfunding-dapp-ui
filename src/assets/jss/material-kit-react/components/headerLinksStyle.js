@@ -110,7 +110,12 @@ const headerLinksStyle = theme => ({
   },
   ...tooltip,
   marginRight5: {
-    marginRight: "5px"
+    marginRight: "5px",
+    float: "left"
+  },
+  flagsListContainer: {
+    minWidth: "86px",
+    marginRight: "10px"
   }
 });
 

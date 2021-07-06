@@ -3,7 +3,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { history } from '../lib/helpers';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
-import LanguageSelector from '../components/LanguageSelector';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import CustomDropdown from './CustomDropdown/CustomDropdown';
@@ -60,7 +59,6 @@ class MainMenu extends Component {
       </NavLink>
     );
 
-    
     const aboutUs = (
       <div
         className={classes.dropdownLink}
@@ -74,9 +72,6 @@ class MainMenu extends Component {
     return (
       <>
       <List className={classes.list}>
-        <ListItem className={classes.listItem}>
-          <LanguageSelector></LanguageSelector>
-        </ListItem>
 
         {currentUser && (
           <ListItem className={classes.listItem}>
@@ -89,7 +84,7 @@ class MainMenu extends Component {
               }}
               dropdownList={[
                 profileLink,
-                aboutUs,
+                aboutUs
                 ]}
             />
           </ListItem>
