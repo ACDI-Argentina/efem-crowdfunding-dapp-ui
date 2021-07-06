@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
 import web3Manager from './Web3Manager';
 import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
-import { listenTransactionReceipt } from './transactionStatusChecker';
+import TransactionTracker from './TransactionTracker';
 
 /**
  * API encargada de la interacción con ERC20 Smart Contracts.
@@ -16,6 +16,7 @@ class ERC20ContractApi {
         web3Manager.getWeb3().subscribe(web3 => {
             this.web3 = web3;
         });
+        this.transactionTracker = new TransactionTracker();
     }
 
     async getBalance(contractAddress, ownerAddress) {
@@ -81,7 +82,7 @@ class ERC20ContractApi {
 
                 if(this.web3.providerName == "WalletConnect"){
                     try {
-                        const receipt = await listenTransactionReceipt(hash);
+                        const receipt = await this.transactionTracker.listenTransactionReceipt(hash);
                         
                         if (receipt) {
                             onConfirmation(undefined, receipt)

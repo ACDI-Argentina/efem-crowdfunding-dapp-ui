@@ -1,26 +1,9 @@
-
-import Web3 from 'web3';
-import Web3HttpProvider from 'web3-providers-http';
-import config from '../../configuration';
-
-const TRANSACTION_CHECK_INTERVAL_MS = 1000;
-const TRANSACTION_TIMEOUT_MS = 300000; //5 min
-
-//Usamos este provider, ya que al utilizar el de wallet connect no obtenermos resultados consistentes
-const httpWeb3 = new Web3(new Web3HttpProvider(
-  config.network.nodeUrl, {
-  keepAlive: true,
-  timeout: config.network.timeout,
-}));
-
 const params = {
   "NewDonation" : ['uint256', 'uint256', 'address', 'uint256'],
 };
 const signatures = {
   "NewDonation": "NewDonation(uint256,uint256,address,uint256)",
 }
-
-//
 
 class CrowdfundingUtils {
   constructor(web3,crowdfundingAddress) {
@@ -45,42 +28,6 @@ class CrowdfundingUtils {
       }
     }
   }
-
-
-  //TODO: Este metodo es general a cualquier transaccion, no solo las relacionadas
-  //con el smart contract de crowdfuding moverlo a una clase dedicada
-  async listenTransactionReceipt(txHash){
-    console.log(`Listen for ${txHash}`);
-    return new Promise((resolve,reject) => {
-      const intervalId = setInterval(async () => { 
-        //Check status of transaction
-        const receipt = await httpWeb3.eth.getTransactionReceipt(txHash);
-        if(receipt){ 
-          const success = receipt.status;
-          if(success){
-            clearInterval(intervalId);
-            clearTimeout(timeoutId);
-            resolve(receipt);
-          } else {
-            clearInterval(intervalId);
-            clearTimeout(timeoutId);
-            reject(`Transaction failed`); //TODO: send cause
-          }
-        }
-      },TRANSACTION_CHECK_INTERVAL_MS)
-    
-      const timeoutId = setTimeout(() => {
-        clearInterval(intervalId);
-        reject(`Timeout`); //indicate that timeout has been reached
-      },TRANSACTION_TIMEOUT_MS);
-  
-  
-    });
-  }
-
-
-  
-
 
 }
 

@@ -18,6 +18,7 @@ import Web3Utils from './Web3Utils';
 import web3Manager from './Web3Manager';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
+import TransactionTracker from './TransactionTracker';
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -32,6 +33,7 @@ class CrowdfundingContractApi {
             this.updateContracts();
             this.crowdfundingUtils = new CrowdfundingUtils(web3,config.crowdfundingAddress);
         });
+        this.transactionTracker = new TransactionTracker();
     }
 
     async canPerformRole(address, role) {
@@ -719,7 +721,7 @@ class CrowdfundingContractApi {
 
                 if(this.web3.providerName == "WalletConnect"){
                     try {
-                        const receipt = await this.crowdfundingUtils.listenTransactionReceipt(hash);
+                        const receipt = await this.transactionTracker.listenTransactionReceipt(hash);
                         if (receipt.status) { //Transaction was confirmed
                             onConfirmation(undefined,receipt);
                         } else {//Transaction was reverted
@@ -851,7 +853,7 @@ class CrowdfundingContractApi {
 
                             if (this.web3.providerName == "WalletConnect") {
                                 try {
-                                    const receipt = await this.crowdfundingUtils.listenTransactionReceipt(hash);
+                                    const receipt = await this.transactionTracker.listenTransactionReceipt(hash);
                                 
                                     if (receipt.status) { //Transaction was confirmed
                                         onConfirmation(undefined,receipt);
