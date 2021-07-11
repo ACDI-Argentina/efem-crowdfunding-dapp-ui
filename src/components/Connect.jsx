@@ -61,9 +61,17 @@ const ConnectButton = styled.button`
               0px 2px 2px 0px rgba(0, 0, 0, 0.14),
               0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 
+  @media (max-width: 500px) {
+    font-size: 12px;
+    margin: 0px;
+    padding: 3px 10px;
+    margin: 5px;
+    border-radius: 14px;
+  }
+
   :hover{
     box-shadow: 0 4px 2px 0 rgba(0,0,0,0.2);
-  } 
+  }
 `;
 
 const Connect = (props) => {

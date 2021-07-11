@@ -317,7 +317,11 @@ const buttonStyle = {
         width: "17px",
         height: "17px"
       }
+    },
+    "@media (max-width: 500px)": {
+      height: "20px",
     }
+
   }
 };
 
