@@ -91,10 +91,10 @@ const Connect = (props) => {
 
   let walletIndicator = null;
 
-  if(web3.wallet && web3.wallet.logoUrl){
+  if(web3.wallet && web3.wallet.logo){
     walletIndicator = (
       <WalletIndicator>
-        <img src={web3.wallet.logoUrl} style={{ width: '25px' }} />
+        <img src={web3.wallet.logo} style={{ width: '25px' }} />
       </WalletIndicator>
     );
   }

@@ -56,8 +56,8 @@ const WrongNetwork = ({
             </Box>
             <Box my={1}>
               <Image
-                src={web3.wallet.logoUrl}
-                aria-label="MetaMask extension icon"
+                src={web3.wallet.logo}
+                aria-label="Wallet icon"
                 size="40px"
               />
             </Box>

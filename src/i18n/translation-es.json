@@ -196,10 +196,7 @@
 
     "status": "Estado",
 
-    "web3InstallMetaMask": "Instale MetaMask",
-    "web3NotWeb3BrowserTitle": "Su navegador no soporta nuestras características blockchain.",
-    "web3NotWeb3BrowserDescription": "Cambie a:",
-    "web3NotWeb3BrowserDescriptionMobile": "Intente con un wallet browser:",
+    "web3InstallMetaMask": "Instale MetaMask",    
     "web3WrongNetworkTitle": "Cambie a la red {{requiredNetwork}}",
     "web3WrongNetworkDescription": "Para usar nuestras funcionalidades blockchain, debes cambiar a la red {{requiredNetwork}} en {{walletName}} y reconectarse.",
     "web3NoNetwork": "Instale la extensión del explorador MetaMask para usar nuestras funcionalidades blockchain",
@@ -217,7 +214,7 @@
 
     "transactionExplore": "Ver en Etherscan",
     "transactionWaitConfirmationTitle": "Esperando confirmación...",
-    "transactionWaitConfirmationDescription": "¿No ve la ventana de MetaMask?",
+    "transactionWaitConfirmationDescription": "¿No ve la ventana de {{walletName}}?",
     "transactionNetwork": "Red",
     "transactionAccount": "Tu dirección",
     "transactionEstimatedFee": "Costo de transacción estimado",

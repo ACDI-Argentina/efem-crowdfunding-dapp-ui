@@ -5,7 +5,7 @@ import { Map } from "immutable";
  * Modelo de Wallet.
  *
  * @attribute name          Nombre de la wallet.
- * @attribute logoUrl       URL con la imagen del logo de la wallet.
+ * @attribute logo       URL con la imagen del logo de la wallet.
  * @attribute networkId     Identificador de la red de la wallet.
  */
 class Wallet {
@@ -13,13 +13,13 @@ class Wallet {
   constructor(data = {}) {
     const {
       name = null,
-      logoUrl = null,
+      logo = null,
       networkId = null
     } = data;
 
     if (data) {
       this._name = name;
-      this._logoUrl = logoUrl;
+      this._logo = logo;
       this._networkId = networkId;
     }
   }
@@ -32,12 +32,12 @@ class Wallet {
     this._name = value;
   }
 
-  get logoUrl() {
+  get logo() {
     return this._logoUrl;
   }
 
-  set logoUrl(value) {
-    this._logoUrl = value;
+  set logo(value) {
+    this._logo = value;
   }
 
   get networkId() {

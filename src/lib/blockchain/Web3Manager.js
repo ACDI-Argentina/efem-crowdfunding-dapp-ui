@@ -110,7 +110,7 @@ class Web3Manager {
     const providerInfo = getProviderInfo(provider);
     web3.wallet = new Wallet({
       name: providerInfo.name, 
-      logoUrl: providerInfo.logo,
+      logo: providerInfo.logo,
       networkId: walletNetworkId
     });
           

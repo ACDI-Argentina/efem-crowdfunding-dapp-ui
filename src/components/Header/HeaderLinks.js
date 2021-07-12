@@ -35,7 +35,7 @@ export default function HeaderLinks(props) {
           <List className={classes.list}>
 
             {validProvider && !failedToLoad && isEnabled && !currentUser && (
-              <small className="text-muted">Please unlock MetaMask</small>
+              <small className="text-muted">Please unlock your wallet</small>
             )}
             {!validProvider && (
               <ListItem className={classes.listItem}>
