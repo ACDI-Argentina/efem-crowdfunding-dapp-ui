@@ -188,6 +188,9 @@ class Web3Manager {
     } else if (web3.providerName === "WalletBrowser") {
       // No se encontró forma de desconectar una wallet browser.
     }
+
+    
+
     console.log('[Setup Web3] Desconectado.');
     this.connectWeb3ByHttp();
   }

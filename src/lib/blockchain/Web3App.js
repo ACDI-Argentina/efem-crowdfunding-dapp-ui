@@ -166,6 +166,7 @@ class Web3App extends React.Component {
 
   logoutAccount = async () => {
     await web3Manager.disconnect();
+    await accountManager.logout();
   }
 
   // CONNECTION MODAL METHODS
