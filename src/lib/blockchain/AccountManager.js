@@ -43,7 +43,6 @@ class AccountManager {
 
   pollBalance(accountAddress){
     clearInterval(this.intervalId);
-    console.log(`pollBalance accountAddress`)
     this.intervalId = setInterval(() => this.updateAccountBalances(accountAddress),POLLING_BALANCE_MS)
   }
 
@@ -53,8 +52,7 @@ class AccountManager {
    * @param accountAddress address de la cuenta sobre la que se actualizan los balances.
    */
   updateAccountBalances = async (accountAddress) => {
-    console.log(`update account balance`);
-
+    
     let account = this.accountSubject.getValue();
     let changed = false;
 
