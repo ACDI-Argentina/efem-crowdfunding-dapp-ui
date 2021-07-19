@@ -10,12 +10,11 @@ import { Grid } from '@material-ui/core';
 import TokenUserBalance from 'components/TokenUserBalance';
 
 const BalanceWrapper = styled.div`
-  boder:2px solid tomato;
   min-height:235px;
 
   @media (min-width: 860px) {
     flex-direction:row;
-    min-height:95px;
+    min-height:134px;
   }
 `
 
@@ -37,7 +36,7 @@ const BalanceContainer = styled.div`
 const BalanceTitle = styled.div`
   font-size: 1.25rem;
   line-height: 1.3rem;
-  margin-top: 25px;
+  margin-top: 15px;
   font-weight: 400;
 `
 
@@ -52,12 +51,12 @@ const STokenBalance = styled.div`
 
 const BalancesInfo = ({ }) => {
   const currentUser = useSelector(selectCurrentUser);
-  const { web3, explorer } = useContext(Web3AppContext);
-  const sanitizedExplorer = explorer?.endsWith('/') ? explorer?.slice(0, -1) : explorer;
+  //const { web3, explorer } = useContext(Web3AppContext);
+  //const sanitizedExplorer = explorer?.endsWith('/') ? explorer?.slice(0, -1) : explorer;
 
   const balances = Object.keys(config.tokens).map((tokenKey) => {
     const token = config.tokens[tokenKey];
-    const balance = currentUser.tokenBalances[token.address]; //what if there is no balance?
+    const balance = currentUser.tokenBalances[token.address];
     return { balance, token };
   }).filter(entry => entry.balance);
 
@@ -65,7 +64,7 @@ const BalancesInfo = ({ }) => {
   return (
     <Grid container item direction="column" justify="center" xs={12}>
       <BalanceWrapper>
-        {balances?.length && (
+        {balances?.length > 0 && (
           <>
             <BalanceTitle>Balance info</BalanceTitle>
             <BalanceContainer>
