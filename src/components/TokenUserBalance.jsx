@@ -24,7 +24,7 @@ class TokenUserBalance extends Component {
 
     let balance = currentUser.balance;
     if(!tokenConfig.isNative) {
-      balance = currentUser.tokenBalances[tokenAddress];
+      balance = currentUser.tokenBalances[tokenAddress] || 0;
     }
 
     return (
