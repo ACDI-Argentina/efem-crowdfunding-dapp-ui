@@ -19,6 +19,7 @@ import {
   fetchMilestoneEpic,
   saveMilestoneEpic,
   milestoneCompleteEpic,
+  milestoneCancelEpic,
   milestoneReviewEpic,
   milestoneWithdrawEpic
 } from './epics/milestonesEpics'
@@ -42,6 +43,7 @@ const rootEpic = combineEpics(
   fetchMilestoneEpic,
   saveMilestoneEpic,
   milestoneCompleteEpic,
+  milestoneCancelEpic,
   milestoneReviewEpic,
   milestoneWithdrawEpic,
   fetchActivitiesByIdsEpic,

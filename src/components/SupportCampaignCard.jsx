@@ -55,7 +55,7 @@ class SupportCampaignCard extends Component {
             <Grid item xs={12} className={classes.actions}>
               <Box display="flex" flexGrow={1} alignItems="center" justifyContent="flex-end">
                 <Box>
-                  <div style={{textAlign: 'center'}}>
+                  <div style={{textAlign: 'right'}}>
                     <Donate
                       entityId={campaign.id}
                       entityCard={<CampaignCardMini campaign={campaign} />}

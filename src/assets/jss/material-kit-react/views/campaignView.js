@@ -30,7 +30,6 @@ const landingPageStyle = {
   },
   parallax: {
     backgroundPositionY: '100%',
-    zIndex: "-1"
   },
   entityType: {
     color: "#555",

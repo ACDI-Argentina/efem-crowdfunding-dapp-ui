@@ -1092,6 +1092,106 @@ class CrowdfundingContractApi {
     }
 
     /**
+     * Marca como completado un Milestone en el Smart Contarct.
+     * 
+     * @param milestone a marcar como completado.
+     */
+     milestoneCancel(milestone, activity) {
+
+        return new Observable(async subscriber => {
+
+            let thisApi = this;
+
+            // Se almacena en IPFS toda la información del Activity.
+            let activityInfoCid = await activityIpfsConnector.upload(activity);
+
+            let clientId = milestone.clientId;
+
+            const method = this.crowdfunding.methods.milestoneCancel(
+                milestone.id,
+                activityInfoCid);
+
+            const gasEstimated = await method.estimateGas({
+                from: activity.userAddress
+            });
+            const gasPrice = await this.getGasPrice();
+
+            let transaction = transactionUtils.addTransaction({
+                gasEstimated: new BigNumber(gasEstimated),
+                gasPrice: gasPrice,
+                createdTitle: {
+                    key: 'transactionCreatedTitleMilestoneCancel',
+                    args: {
+                        milestoneTitle: milestone.title
+                    }
+                },
+                createdSubtitle: {
+                    key: 'transactionCreatedSubtitleMilestoneCancel'
+                },
+                pendingTitle: {
+                    key: 'transactionPendingTitleMilestoneCancel',
+                    args: {
+                        milestoneTitle: milestone.title
+                    }
+                },
+                confirmedTitle: {
+                    key: 'transactionConfirmedTitleMilestoneCancel',
+                    args: {
+                        milestoneTitle: milestone.title
+                    }
+                },
+                confirmedDescription: {
+                    key: 'transactionConfirmedDescriptionMilestoneCancel'
+                },
+                failuredTitle: {
+                    key: 'transactionFailuredTitleMilestoneCancel',
+                    args: {
+                        milestoneTitle: milestone.title
+                    }
+                },
+                failuredDescription: {
+                    key: 'transactionFailuredDescriptionMilestoneCancel'
+                }
+            });
+
+            const promiEvent = method.send({
+                from: activity.userAddress
+            });
+
+            promiEvent
+                .once('transactionHash', (hash) => { // La transacción ha sido creada.
+
+                    transaction.submit(hash);
+                    transactionUtils.updateTransaction(transaction);
+
+                    // La transacción ha sido creada.
+                    milestone.txHash = hash;
+                    subscriber.next(milestone);
+                })
+                .once('confirmation', (confNumber, receipt) => {
+
+                    transaction.confirme();
+                    transactionUtils.updateTransaction(transaction);
+
+                    let milestoneId = parseInt(receipt.events['MilestoneCancel'].returnValues.milestoneId);
+                    thisApi.getMilestoneById(milestoneId).then(milestone => {
+                        milestone.clientId = clientId;
+                        subscriber.next(milestone);
+                    });
+                })
+                .on('error', function (error) {
+
+                    transaction.fail();
+                    transactionUtils.updateTransaction(transaction);
+
+                    error.milestone = milestone;
+                    console.error(`Error procesando transacción para cancelar el milestone.`, error);
+                    subscriber.error(error);
+                });
+        });
+    }
+
+    /**
      * Revisa el milestone para marcarlo como aprobado o no en el Smart Contarct.
      * 
      * @param milestone a revisar.

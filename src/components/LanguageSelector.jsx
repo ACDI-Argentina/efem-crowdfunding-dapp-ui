@@ -65,6 +65,7 @@ class LanguageSelector extends Component {
 
     const options = config.language.options.map((language) => (
         <Button
+          key={language.key}
           color={'primary'}
           title={language.name}
           justIcon

@@ -235,7 +235,7 @@ class ViewCampaign extends Component {
 
                     <Box display="flex" justifyContent="flex-end">
                       <Box m={1}>
-                        <Typography variant="h7">
+                        <Typography variant="h6">
                           {t('campaignShare')}
                         </Typography>
                       </Box>
@@ -303,15 +303,16 @@ class ViewCampaign extends Component {
                       }}
                     >
                       <Masonry gutter="10px">
-                        {milestones.map(m => (
-                          <MilestoneCard
+                        {milestones.map(m =>
+                          (m.isCancelled && (
+                            <MilestoneCard
                             milestone={m}
                             currentUser={currentUser}
                             key={m.clientId}
                             history={history}
                             removeMilestone={() => this.removeMilestone(m.clientId)}
-                          />
-                        ))}
+                          />))
+                        )}
                       </Masonry>
                     </ResponsiveMasonry>
 

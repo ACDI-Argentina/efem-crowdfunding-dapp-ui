@@ -95,6 +95,9 @@ export default class Milestone extends Entity {
     return this.isActive || this.isRejected;
   }
 
+  canCancel() {
+    return this.isActive;
+  }
 
   /*TODO: CRITICAL: revisar funciones del milestoneManager, probablemente se pueda agregar una funcion isCampaignManager de ser necesario 
      en el modelo del milestone*/
@@ -112,6 +115,10 @@ export default class Milestone extends Entity {
 
   static get ACTIVE() {
     return StatusUtils.build('Active');
+  }
+
+  static get CANCELLING() {
+    return StatusUtils.build('Cancelling', true);
   }
 
   static get CANCELLED() {
@@ -168,6 +175,10 @@ export default class Milestone extends Entity {
 
   get isRejected() {
     return this.status.name === Milestone.REJECTED.name;
+  }
+
+  get isCancelled() {
+    return this.status.name === Milestone.CANCELLED.name;
   }
 
   static get type() {
