@@ -17,7 +17,6 @@ import CampaignCardMini from './CampaignCardMini'
 import Grid from '@material-ui/core/Grid'
 
 import { Box } from '@material-ui/core'
-import CommunityButton from './CommunityButton'
 import EditCampaignButton from './EditCampaignButton'
 import TransferCampaign from './TransferCampaign'
 

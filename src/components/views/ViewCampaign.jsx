@@ -33,12 +33,14 @@ import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork'
 import Grid from '@material-ui/core/Grid';
 import CustomTabs from 'components/CustomTabs/CustomTabs';
 import SupportCampaignCard from 'components/SupportCampaignCard';
+import Button from '@material-ui/core/Button';
 
 import TelegramIcon from '@material-ui/icons/Telegram';
 import RedditIcon from '@material-ui/icons/Reddit';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import DateTimeViewer from 'components/DateTimeViewer';
+import { PlaylistAdd } from '@material-ui/icons';
 
 
 /**
@@ -104,6 +106,8 @@ class ViewCampaign extends Component {
     const { isLoading, isLoadingMilestones, milestonesLoaded, milestonesTotal } = this.state;
     const { classes, campaign, milestones, cascadeDonationIds, cascadeFiatAmountTarget, history, currentUser, t } = this.props;
     const { ...rest } = this.props;
+
+    const milestonesVisible = milestones.filter(m => !m.isCancelled).length;
 
     if (!isLoading && !campaign) return <p>Unable to find a campaign</p>;
 
@@ -235,9 +239,9 @@ class ViewCampaign extends Component {
 
                     <Box display="flex" justifyContent="flex-end">
                       <Box m={1}>
-                        <Typography variant="h6">
+                        <span>
                           {t('campaignShare')}
-                        </Typography>
+                        </span>
                       </Box>
                       <Box m={1}>
                         <TelegramIcon
@@ -279,13 +283,17 @@ class ViewCampaign extends Component {
                       <Box my={1}>
                         {isOwner(campaign.managerAddress, currentUser) && (
                           <OnlyCorrectNetwork>
-                            <div>
-                              <Link
-                                className="btn btn-success btn-sm pull-right"
-                                to={`/campaigns/${campaign.id}/milestones/new`}>
+                            <Link to={`/campaigns/${campaign.id}/milestones/new`}>
+                              <Button
+                                size="small"
+                                variant="contained"
+                                color="primary"
+                                startIcon={<PlaylistAdd />}
+                                className={classes.button}
+                                >
                                 {t('milestoneAdd')}
-                              </Link>
-                            </div>
+                              </Button>
+                            </Link>
                           </OnlyCorrectNetwork>                                
                         )}
                       </Box>
@@ -304,7 +312,7 @@ class ViewCampaign extends Component {
                     >
                       <Masonry gutter="10px">
                         {milestones.map(m =>
-                          (m.isCancelled && (
+                          (!m.isCancelled && (
                             <MilestoneCard
                             milestone={m}
                             currentUser={currentUser}
@@ -332,6 +340,21 @@ class ViewCampaign extends Component {
                           {!isLoadingMilestones && <span>Load More</span>}
                         </button>
                       </center>
+                    )}
+
+                    {milestonesVisible === 0 && (
+                      <div>
+                        <center>
+                          <p className={classes.description}>{t('noMilestonesYet')}</p>
+                          <img
+                            className="empty-state-img"
+                            src={`${process.env.PUBLIC_URL}/img/milestone.svg`}
+                            width="200px"
+                            height="200px"
+                            alt="no-milestones-icon"
+                          />
+                        </center>
+                      </div>
                     )}
                   </Grid>
                 </Grid>
