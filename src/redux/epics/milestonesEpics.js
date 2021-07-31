@@ -77,6 +77,27 @@ export const milestoneCompleteEpic = action$ => action$.pipe(
 )
 
 /**
+ * Marcado del Milestone como cancelado
+ * 
+ * @param action$ de Redux.
+ */
+ export const milestoneCancelEpic = action$ => action$.pipe(
+  ofType('milestones/cancel'),
+  mergeMap(action => crowdfundingContractApi.milestoneCancel(
+    action.payload.milestone,
+    action.payload.activity
+  )),
+  map(milestone => ({
+    type: 'milestones/updateMilestoneByClientId',
+    payload: milestone
+  })),
+  catchError(error => of({
+    type: 'milestones/fetchMilestone',
+    payload: error.milestone.id
+  }))
+)
+
+/**
  * Revisión del Milestone para aprobarlo o rechazarlo.
  * 
  * @param action$ de Redux.

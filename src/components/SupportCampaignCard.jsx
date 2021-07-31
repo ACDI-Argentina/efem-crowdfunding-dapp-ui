@@ -17,7 +17,6 @@ import CampaignCardMini from './CampaignCardMini'
 import Grid from '@material-ui/core/Grid'
 
 import { Box } from '@material-ui/core'
-import CommunityButton from './CommunityButton'
 import EditCampaignButton from './EditCampaignButton'
 import TransferCampaign from './TransferCampaign'
 
@@ -55,7 +54,7 @@ class SupportCampaignCard extends Component {
             <Grid item xs={12} className={classes.actions}>
               <Box display="flex" flexGrow={1} alignItems="center" justifyContent="flex-end">
                 <Box>
-                  <div style={{textAlign: 'center'}}>
+                  <div style={{textAlign: 'right'}}>
                     <Donate
                       entityId={campaign.id}
                       entityCard={<CampaignCardMini campaign={campaign} />}

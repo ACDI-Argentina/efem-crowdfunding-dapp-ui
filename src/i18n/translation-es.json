@@ -129,6 +129,7 @@
     "campaignShareTitle": "Apoya esta campaña en Give4Forest",
 
     "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro que deseas salir de esta página?",
+    "noMilestonesYet": "¡Aún no hay hitos!",
     "milestones": "Hitos",
     "milestone": "Hito",
     "milestoneAdd": "Agregar hito",
@@ -143,6 +144,7 @@
     "milestoneCancelDescription": "Explique por qué canceló este hito. Esta información será visible públicamente y se enviará por correo electrónico al propietario del hito.",
     "milestoneCancelMessagePlaceholder": "Explique por qué canceló este hito",
     "milestoneCancelMessageMinLength": "Se agradece mucho si escribe algo significativo",
+    "milestoneCancelButtonLabel": "Confirmar cancelación",
 
     "milestoneApprove": "Aprobar",
     "milestoneApproveTitle": "Aprobar hito",
@@ -301,6 +303,14 @@
     "transactionConfirmedDescriptionMilestoneComplete": "Felicitaciones! El hito ha sido completado y ahora puede ser revisado.",
     "transactionFailuredTitleMilestoneComplete": "No se completó el hito '{{milestoneTitle}}'",
     "transactionFailuredDescriptionMilestoneComplete": "Ocurrió una falla completando el hito.",
+
+    "transactionCreatedTitleMilestoneCancel": "Confirme el hito '{{milestoneTitle}}' como cancelado en la billetera",
+    "transactionCreatedSubtitleMilestoneCancel": "Verifique los detalles aquí - la cancelación de un hito no puede revertirse.",
+    "transactionPendingTitleMilestoneCancel": "Cancelando hito '{{milestoneTitle}}'...",
+    "transactionConfirmedTitleMilestoneCancel": "El hito '{{milestoneTitle}}' ha sido cancelado",
+    "transactionConfirmedDescriptionMilestoneCancel": "Felicitaciones! El hito ha sido cancelado exitósamente.",
+    "transactionFailuredTitleMilestoneCancel": "No se canceló el hito '{{milestoneTitle}}'",
+    "transactionFailuredDescriptionMilestoneCancel": "Ocurrió una falla cancelando el hito.",
 
     "transactionCreatedTitleMilestoneApprove": "Confirmar el hito '{{milestoneTitle}}' como aprobado en la billetera",
     "transactionCreatedSubtitleMilestoneApprove": "Verifique los detalles aquí - el hito aprobado no se puede reembolsar.",

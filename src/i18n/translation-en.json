@@ -129,6 +129,7 @@
     "campaignShareTitle": "Support this campaign on Give4Forest",
 
     "unsavedChanges": "You have unsaved changes. Are you sure you want to navigate from this page?",
+    "noMilestonesYet": "There are no milestones yet!",
     "milestones": "Milestones",
     "milestone": "Milestone",
     "milestoneAdd": "Add milestone",
@@ -137,6 +138,14 @@
     "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary. This information will be publicly visible and emailed to the reviewer.",
     "milestoneCompleteMessagePlaceholder": "Describe what you've done",
     "milestoneCompleteMessageMinLength": "It is really appreciated if you write something meaningful",
+
+    "milestoneCancel": "Cancel",
+    "milestoneCancelTitle": "Milestone cancel",
+    "milestoneCancelDescription": "Explain why you cancelled this milestone. This information will be publicly visible and emailed to the milestone owner.",
+    "milestoneCancelMessagePlaceholder": "Explain why you cancelled this milestone",
+    "milestoneCancelMessageMinLength": "It is really appreciated if you write something meaningful",
+    "milestoneCancelButtonLabel": "Confirm cancellation",
+
     "milestoneApprove": "Approve",
     "milestoneApproveTitle": "Milestone approve",
     "milestoneApproveDescription": "Explain why you approve the completion of this milestone. Compliments are appreciated! This information will be publicly visible and emailed to the milestone owner.",
@@ -294,6 +303,14 @@
     "transactionConfirmedDescriptionMilestoneComplete": "Congratulations! The milestone has been completed and can be reviewed.",
     "transactionFailuredTitleMilestoneComplete": "Milestone '{{milestoneTitle}}' was not completed",
     "transactionFailuredDescriptionMilestoneComplete": "A failure occurred completing milestone.",
+
+    "transactionCreatedTitleMilestoneCancel": "Confirm milestone '{{milestoneTitle}}' as cancelled in wallet",
+    "transactionCreatedSubtitleMilestoneCancel": "Double check the details here - Cancelling the milestone cannot be reverted.",
+    "transactionPendingTitleMilestoneCancel": "Cancelling milestone '{{milestoneTitle}}'...",
+    "transactionConfirmedTitleMilestoneCancel": "Milestone '{{milestoneTitle}}' has been cancelled",
+    "transactionConfirmedDescriptionMilestoneCancel": "Congratulations! The milestone has been successfully cancelled.",
+    "transactionFailuredTitleMilestoneCancel": "Milestone '{{milestoneTitle}}' was not cancelled",
+    "transactionFailuredDescriptionMilestoneCancel": "A failure occurred cancelling milestone.",
 
     "transactionCreatedTitleMilestoneApprove": "Confirm milestone '{{milestoneTitle}}' as approved in wallet",
     "transactionCreatedSubtitleMilestoneApprove": "Double check the details here - the approved milestone cannot be refunded.",

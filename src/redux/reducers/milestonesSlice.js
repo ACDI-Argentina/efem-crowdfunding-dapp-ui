@@ -61,6 +61,13 @@ export const milestonesSlice = createSlice({
         state[index] = milestoneStore;
       }
     },
+    cancel: (state, action) => {
+      let milestoneStore = action.payload.milestone.toStore();
+      let index = state.findIndex(m => m.clientId === milestoneStore.clientId);
+      if (index != -1) {
+        state[index] = milestoneStore;
+      }
+    },
     review: (state, action) => {
       let milestoneStore = action.payload.milestone.toStore();
       let index = state.findIndex(m => m.clientId === milestoneStore.clientId);
@@ -85,6 +92,7 @@ export const {
   saveMilestone,
   updateMilestoneByClientId,
   complete,
+  cancel,
   review,
   withdraw } = milestonesSlice.actions;
 

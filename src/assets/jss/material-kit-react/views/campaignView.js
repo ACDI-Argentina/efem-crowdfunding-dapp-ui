@@ -30,7 +30,6 @@ const landingPageStyle = {
   },
   parallax: {
     backgroundPositionY: '100%',
-    zIndex: "-1"
   },
   entityType: {
     color: "#555",
@@ -102,6 +101,11 @@ const landingPageStyle = {
       flexWrap: "space-around"
     }
   },
+  description: {
+    color: "#000",
+    margin: "0 auto 1em auto",
+    fontWeight: "normal"
+  }
 };
 
 export default landingPageStyle;
