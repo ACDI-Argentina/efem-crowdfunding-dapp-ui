@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 import { withTranslation } from 'react-i18next'
 import config from '../configuration'
@@ -13,6 +12,7 @@ import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import { connect } from 'react-redux'
 import TokenAvatar from './TokenAvatar'
 import TokenUtils from 'utils/TokenUtils'
+import BigNumber from 'bignumber.js';
 
 class TokenUserBalance extends Component {
 
@@ -24,7 +24,7 @@ class TokenUserBalance extends Component {
 
     let balance = currentUser.balance;
     if(!tokenConfig.isNative) {
-      balance = currentUser.tokenBalances[tokenAddress] || 0;
+      balance = currentUser.tokenBalances[tokenAddress] || new BigNumber(0);
     }
 
     return (

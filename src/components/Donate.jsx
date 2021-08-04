@@ -133,8 +133,7 @@ class Donate extends Component {
 
   handleAmountChange(event) {
     const value = event.target.value
-    console.log(`New value:`,value) 
-
+    
     try{
       const parsed = Number(value.trim());
       if(!isNaN(parsed)){

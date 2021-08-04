@@ -58,7 +58,7 @@ const BalancesInfo = ({ }) => {
     const token = config.tokens[tokenKey];
     const balance = currentUser.tokenBalances[token.address];
     return { balance, token };
-  }).filter(entry => entry.balance !== undefined); 
+  })
 
 
   return (

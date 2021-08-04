@@ -7,7 +7,7 @@ import Application from './containers/Application';
 import './styles/application.css';
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@material-ui/core";
 import './i18n/i18n';
 
 import "assets/scss/material-kit-react.scss?v=1.9.0";
@@ -25,7 +25,7 @@ try {
   // console.log(e);
 }
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: '#FF5D49'
