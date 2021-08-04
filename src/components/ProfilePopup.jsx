@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,10 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import User from 'models/User';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
-import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import ProfileForm from './ProfileForm';
 
-import { Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 
