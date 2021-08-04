@@ -24,7 +24,6 @@ import TokenAvatar from './TokenAvatar';
 import Web3Utils from '../lib/blockchain/Web3Utils';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
-import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import ProfileCard from './ProfileCard';
 import ProfilePopup from './ProfilePopup';
 import MenuItem from '@material-ui/core/MenuItem';
