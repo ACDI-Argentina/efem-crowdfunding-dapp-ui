@@ -1,10 +1,10 @@
 {
   "name": "@acdi/give4forests-dapp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@acdi/give4forests-crowdfunding-contract": "1.2.0-beta.1",
+    "@acdi/give4forests-crowdfunding-contract": "1.2.0",
     "@feathersjs/authentication-client": "^1.0.11",
     "@feathersjs/client": "^3.7.8",
     "@feathersjs/commons": "^4.0.0",
