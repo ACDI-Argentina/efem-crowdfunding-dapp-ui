@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerCurrentUser } from '../redux/reducers/currentUserSlice';
 
@@ -18,6 +18,7 @@ const ProfileForm = ({
   onFinishEdition,
 }) => {
 
+  const avatarRef = useRef();
   const [localUser, setLocalUser] = useState(user); 
   const [canSubmit, setCanSubmit] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -26,7 +27,7 @@ const ProfileForm = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    user.newAvatar = image;
+    avatarRef.current = image;
   }, [image]);
 
   useEffect(() => {
@@ -68,6 +69,9 @@ const ProfileForm = ({
     if (!userInstance.address){
       setIsSaving(false); //TODO: Agregar algun mensaje de error indicando que no esta autenticado
     } else {
+      if(avatarRef.current){
+        userInstance.newAvatar = avatarRef.current;
+      } 
       dispatch(registerCurrentUser(userInstance));
     }
   };
