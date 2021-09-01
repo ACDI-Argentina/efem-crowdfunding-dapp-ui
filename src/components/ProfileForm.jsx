@@ -23,7 +23,7 @@ const ProfileForm = ({
   const [canSubmit, setCanSubmit] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isPristine, setIsPristine] = useState(true);
-  const [image, setImage] = useState(user.avatar);
+  const [image, setImage] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const ProfileForm = ({
       name: inputs.name,
       email: inputs.email,
       url: inputs.url,
-      avatar: image,
+      avatar: user.avatar
     };
   };
 
@@ -67,7 +67,7 @@ const ProfileForm = ({
     setIsSaving(true);
     const userInstance = new User(model);
     if (!userInstance.address){
-      setIsSaving(false); //TODO: Agregar algun mensaje de error indicando que no esta autenticado
+      setIsSaving(false); //TODO: Agregar algun mensaje de error indicando que no tiene la wallet conectada
     } else {
       if(avatarRef.current){
         userInstance.newAvatar = avatarRef.current;
