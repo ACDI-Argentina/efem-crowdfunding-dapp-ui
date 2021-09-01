@@ -45,8 +45,6 @@ export const currentUserSlice = createSlice({
       return state;
     },
     registerCurrentUser: (state, action) => {
-      console.log("REGISTERING USER");
-      console.log('intiial state;',state)
       const user = action.payload;
       action.payload.status = User.REGISTERING;
 
