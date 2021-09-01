@@ -426,8 +426,10 @@ class Web3App extends React.Component {
     if (currentUser && currentUser.address && currentUser.authenticated) {
       return true;
     }
-    currentUser.authenticated = await this.authenticate(currentUser.address);
-    return currentUser.authenticated;
+    if(currentUser?.address){
+      currentUser.authenticated = await this.authenticate(currentUser.address);
+      return currentUser.authenticated; 
+    }
   };
 
   authenticate = async (address, redirectOnFail = true) => {
@@ -441,9 +443,11 @@ class Web3App extends React.Component {
       const payload = await feathersClient.passport.verifyJWT(accessToken);
       if (Web3Utils.addressEquals(address, payload.userId)) {
         await feathersClient.authenticate(); // authenticate the socket connection
+        console.log(`[Web3App] ${address} authenticated using existing token`); 
         return true;
+      } else {
+        await feathersClient.logout(); 
       }
-      await feathersClient.logout();
     }
 
     try {
