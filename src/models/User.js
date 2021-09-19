@@ -11,6 +11,7 @@ import {
 } from '../constants/Role';
 import StatusUtils from '../utils/StatusUtils';
 import Status from './Status';
+import ipfsService from '../ipfs/IpfsService';
 
 /**
  * Modelo de User en Dapp.
@@ -33,8 +34,10 @@ class User extends Model {
 
     const {
       address = null,
-      name = '',
+      infoCid = '',
+      avatarCid = '/ipfs/QmWCaq985NJjPnXhyDPQ4FPob8XNybncQqkQUZatySkY7E',
       avatar = '',
+      name = '',
       email = '',
       giverId,
       url = '',
@@ -48,6 +51,8 @@ class User extends Model {
 
     if (data) {
       this._address = address;
+      this._infoCid = infoCid;
+      this._avatarCid = avatarCid;
       this._name = name;
       this._avatar = avatar;
       this._email = email;
@@ -93,6 +98,9 @@ class User extends Model {
   toStore() {
     return {
       address: this._address,
+      infoCid: this._infoCid,
+      avatarCid: this._avatarCid,
+      avatar: this._avatar,
       name: this._name,
       email: this._email,
       url: this._url,
@@ -143,9 +151,35 @@ class User extends Model {
     this._address = value;
   }
 
+  get infoCid() {
+    return this._infoCid;
+  }
+
+  set infoCid(value) {
+    this._infoCid = value;
+  }
+
+  get avatarCid() {
+    return this._avatarCid;
+  }
+
+  set avatarCid(value) {
+    this._avatarCid = value;
+  }
+
+
   get avatar() {
     return this._avatar;
   }
+
+  /**
+    * Obtiene la URL completa del avatar.
+    */
+  get avatarCidUrl() {
+    return ipfsService.resolveUrl(this._avatarCid)
+  }
+
+  
 
   set avatar(value) {
     this.checkType(value, ['undefined', 'string'], 'avatar');

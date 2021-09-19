@@ -27,6 +27,19 @@ const ProfileForm = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(localUser.name !== user.name ){
+      setLocalUser(prev => ({...prev, name: user.name}));
+    }
+    if(localUser.email !== user.email ){
+      setLocalUser(prev => ({...prev, email: user.email}));
+    }
+    if(localUser.url !== user.url ){
+      setLocalUser(prev => ({...prev, url: user.url}));
+    }
+  }, [user]);
+
+
+  useEffect(() => {
     avatarRef.current = image;
   }, [image]);
 
@@ -126,7 +139,7 @@ const ProfileForm = ({
       <FormsyImageUploader
         name="avatar"
         setImage={setImage}
-        avatar={image || localUser.avatar}
+        avatar={image || localUser.avatar || user.avatarCidUrl}
         aspectRatio={1}
         isRequired={requiredFields['avatar']}
       />
