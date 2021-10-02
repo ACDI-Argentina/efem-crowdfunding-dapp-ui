@@ -12,6 +12,9 @@
     "@feathersjs/rest-client": "^1.4.7",
     "@feathersjs/socketio": "^3.2.9",
     "@feathersjs/socketio-client": "^1.2.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -23,6 +26,7 @@
     "bowser": "^2.11.0",
     "feathers-hooks-common": "^4.20.2",
     "feathers-reactive": "^0.7.2",
+    "formik": "^2.2.9",
     "formsy-react": "^2.2.5",
     "formsy-react-components": "^2.0.0-beta.5",
     "history": "4.10.1",
@@ -42,6 +46,7 @@
     "react-datepicker": "1.8.0",
     "react-datetime": "2.16.3",
     "react-dom": "^16.13.1",
+    "react-easy-crop": "^3.5.3",
     "react-flagkit": "^2.0.3",
     "react-ga": "^2.5.3",
     "react-helmet": "^5.2.0",
@@ -72,7 +77,8 @@
     "sweetalert": "^2.1.2",
     "web3": "^1.5.0",
     "web3modal": "^1.9.4",
-    "whatwg-fetch": "3.4.0"
+    "whatwg-fetch": "3.4.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/cli": "7.10.1",

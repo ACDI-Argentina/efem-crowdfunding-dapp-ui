@@ -1,172 +1,181 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerCurrentUser } from '../redux/reducers/currentUserSlice';
 
 import { Box, Grid } from '@material-ui/core';
 import { Form, Input } from 'formsy-react-components';
-import FormsyImageUploader from './FormsyImageUploader';
+
 import LoaderButton from './LoaderButton';
 import GridItem from './Grid/GridItem';
 import { User } from 'models';
+import Avatar from './Avatar/Avatar';
 
+import { TextField } from '@material-ui/core';
+
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { Web3AppContext } from 'lib/blockchain/Web3App';
+import { useTranslation } from 'react-i18next';
+
+
+const sleep = ms => new Promise((resolve, reject) => setTimeout(() => resolve(ms), ms))
 
 const ProfileForm = ({
-  user,
-  showSubmit = true,
-  showCompact = false,
-  requireFullProfile = false,
+  user, //Leerlo del ctx
   onFinishEdition,
 }) => {
-
   const avatarRef = useRef();
-  const [localUser, setLocalUser] = useState(user); 
-  const [canSubmit, setCanSubmit] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isPristine, setIsPristine] = useState(true);
-  const [image, setImage] = useState();
+  const [avatar, setAvatar] = useState();
+  const [avatarEditing, setAvatarEditing] = useState(false);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    avatarRef.current = image;
-  }, [image]);
+  const { modals } = useContext(Web3AppContext);
+  const authenticateIfPossible = modals.methods.authenticateIfPossible;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
-    if (isSaving && user.isRegistered) {
-      setIsSaving(false);
+    avatarRef.current = avatar;
+  }, [avatar]);
 
+  useEffect(() => {
+    if (user.isRegistered) {
       if (onFinishEdition && typeof onFinishEdition === 'function') {
         onFinishEdition();
       }
     }
-  }, [isSaving, user]);
+  }, [user]);
 
-  const saveDisabled = isSaving || isPristine || !canSubmit || (user && user.giverId === 0);
 
-  const columnWidth = showCompact ? 6 : 12;
+  const formik = useFormik({
+    initialValues: {
+      name: user.name,
+      email: user.email,
+      url: user.url,
+      avatar: avatar
+    },
+    enableReinitialize: true,
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(1, 'Please enter your name')
+        .max(42, 'Must be 42 characters or less')
+        .required('Required'),
+      email: Yup.string().email('Invalid email address').required('Required'),
+      url: Yup.string().url().required('Required'),
+    }),
+    onSubmit: async values => {
+      //Clonar el user que nos venga x prop
 
-  const requiredFields = {};
-  requiredFields['name'] = true;
+      for(const [key,value] of Object.entries(values)){
+        console.log(`${key} ${value}`);
+        user[key] = value; //Esto es lo que se hace el nombre cuando se esta editando
+      }
+        
+      if (!user.address) {//TODO: Agregar algun mensaje de error indicando que no tiene la wallet conectada
+        
+      } else {
+        if (avatarRef.current) {
+          user.avatar = avatarRef.current;
+        }
+        
+        if(!user.authenticated){
+          await authenticateIfPossible(user);
+        }
+        dispatch(registerCurrentUser(user));
+      }
+    },
+  });
 
-  if (requireFullProfile) {
-    requiredFields['email'] = true;
-    requiredFields['url'] = true;
-    requiredFields['avatar'] = !user.avatar;
-  }
-
-  const mapInputs = (inputs) => {
-    return {
-      address: localUser.address,
-      name: inputs.name,
-      email: inputs.email,
-      url: inputs.url,
-      avatar: user.avatar
-    };
-  };
-
-  const onSubmit = async (model) => {
-    setIsSaving(true);
-    const userInstance = new User(model);
-    if (!userInstance.address){
-      setIsSaving(false); //TODO: Agregar algun mensaje de error indicando que no tiene la wallet conectada
-    } else {
-      if(avatarRef.current){
-        userInstance.newAvatar = avatarRef.current;
-      } 
-      dispatch(registerCurrentUser(userInstance));
-    }
-  };
+  const dirty = formik.dirty || avatar; //que pasa cuando esto cambie
 
   return (
-    <Form
-      onSubmit={onSubmit}
-      onValid={() => setCanSubmit(true)}
-      onInvalid={() => setCanSubmit(false)}
-      mapping={(inputs) => mapInputs(inputs)}
-      onChange={(currentValues, isChanged) => setIsPristine(!isChanged)}
-      layout="vertical"
-    >
-      <Box style={{ marginLeft: -15, marginRight: -15 }}>
-        <Grid container direction="row">
-          <GridItem xs={12} sm={12} md={columnWidth}>
-            <div className="form-group">
-              <Input
-                name="name"
-                autoComplete="name"
-                id="name-input"
-                label="Your name"
-                type="text"
-                value={localUser.name}
-                placeholder="John Doe."
-                validations="minLength:3"
-                validationErrors={{ minLength: 'Please enter your name' }}
-                required={requiredFields['name']}
-                autoFocus
-              />
-            </div>
-          </GridItem>
+    <form onSubmit={formik.handleSubmit}>
+      <Grid container direction="row">
+        <GridItem xs={12} md={5}>
+          <div style={{ display:"flex", justifyContent:"center", marginTop: "32px"}}>
+            <Avatar
+              imageSrc={user.avatarCidUrl}
+              onCropped={(cropped) => {
+                setAvatar(cropped);
+              }}
+              onEditingChange={editing => setAvatarEditing(editing)}
+            />
 
-          <GridItem xs={12} sm={12} md={columnWidth}>
-            <div className="form-group">
-              <Input
-                name="email"
-                autoComplete="email"
-                label="Email"
-                value={localUser.email}
-                placeholder="email@example.com"
-                validations="isEmail"
-                help="Please enter your email address."
-                required={requiredFields['email']}
-                validationErrors={{ isEmail: "Oops, that's not a valid email address." }}
-              />
-            </div>
-          </GridItem>
-        </Grid>
-      </Box>
+          </div>
+        </GridItem>
 
-      <FormsyImageUploader
-        name="avatar"
-        setImage={setImage}
-        avatar={image || localUser.avatar}
-        aspectRatio={1}
-        isRequired={requiredFields['avatar']}
-      />
+        <GridItem xs={12} md={7}>
+          <div className="form-group">
+            <TextField
+              name={"name"}
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              label={t('userName')}
+              helperText={formik.errors.name}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{ shrink: true }}
+              error={formik.errors.name?.length > 0}
+              required
+              inputProps={{ maxLength: 42 }}
+            />
+          </div>
+          <div className="form-group">
+            <TextField
+              name={"email"}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              label={t('userEmail')}
+              helperText={formik.errors.email}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{ shrink: true }}
+              error={formik.errors.email?.length > 0}
+              required
+              inputProps={{ maxLength: 42 }}
+            />
+          </div>
+
+          <div className="form-group">
+            <TextField
+              name={"url"}
+              value={formik.values.url}
+              onChange={formik.handleChange}
+              label={t('userUrl')}
+              helperText={formik.errors.url}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              error={formik.errors.url?.length > 0}
+              required
+              inputProps={{ maxLength: 42 }}
+            />
+          </div>
+        </GridItem>
+      </Grid>
+
 
       <div className="form-group">
-        <Input
-          name="url"
-          label="Your Profile"
-          type="text"
-          value={localUser.url}
-          placeholder="Your profile url"
-          help="Provide a link to some more info about you, this will help to build trust. You could add your linkedin profile, Twitter account or a relevant website."
-          required={requiredFields['url']}
-          validations="isUrl"
-          validationErrors={{
-            isUrl: 'Please enter a valid url',
-          }}
-        />
+        <Box my={2} display="flex" justifyContent="flex-end">
+          <Box>
+            <LoaderButton
+              color="primary"
+              className="btn btn-info"
+              formNoValidate
+              type="submit"
+              disabled={!formik.isValid || !dirty || avatarEditing}
+              isLoading={formik.isSubmitting}
+              loadingText={t('saving')}>
+              {t('save')}
+            </LoaderButton>
+          </Box>
+        </Box>
       </div>
 
-      {showSubmit && (
-        <div className="form-group">
-          <Box my={2} display="flex" justifyContent="flex-end">
-            <Box>
-              <LoaderButton
-                color="primary"
-                className="btn btn-info"
-                formNoValidate
-                type="submit"
-                disabled={saveDisabled}
-                isLoading={isSaving}
-                loadingText="Saving..."
-              >
-                Save profile
-              </LoaderButton>
-            </Box>
-          </Box>
-        </div>
-      )}
-    </Form>
+    </form>
   );
 };
 

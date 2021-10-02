@@ -11,6 +11,7 @@ import {
 } from '../constants/Role';
 import StatusUtils from '../utils/StatusUtils';
 import Status from './Status';
+import ipfsService from '../ipfs/IpfsService';
 
 /**
  * Modelo de User en Dapp.
@@ -19,9 +20,7 @@ import Status from './Status';
  * @attribute balance       Balance de la cuenta del usuario medida en Wei.
  * @attribute tokenBalances Balances de los diferentes tokens de la cuenta del usuario medida en Wei.
  * @attribute avatar        URL to user avatar
- * @attribute commitTime
  * @attribute email         Email address of the user
- * @attribute giverId       Giver ID used for querying donations
  * @attribute name          Name of the user
  * @attribute url           Url attached to LiquidPledging admin
  * @attribute authenticated If the user is authenticated w/ feathers
@@ -33,25 +32,27 @@ class User extends Model {
 
     const {
       address = null,
-      name = '',
+      infoCid = '',
+      avatarCid = '/ipfs/QmWCaq985NJjPnXhyDPQ4FPob8XNybncQqkQUZatySkY7E',
       avatar = '',
+      name = '',
       email = '',
-      giverId,
       url = '',
       roles = [],
       balance = new BigNumber(0),
       tokenBalances = new Map(),
       authenticated = false,
-      registered = false, //exists on mongodb?
+      registered = false,
       status = User.UNREGISTERED.toStore()
     } = data;
 
     if (data) {
       this._address = address;
+      this._infoCid = infoCid;
+      this._avatarCid = avatarCid;
       this._name = name;
       this._avatar = avatar;
       this._email = email;
-      this._giverId = giverId;
       this._url = url;
       this._roles = roles;
       this._balance = balance;
@@ -64,27 +65,18 @@ class User extends Model {
 
   toIpfs() {
     return {
-      name: this._name,
-      email: this._email,
-      url: this._url,
-      avatar: cleanIpfsPath(this._avatar),
-      version: 1,
+      avatarCid: cleanIpfsPath(this._avatarCid)
     };
   }
 
-  toFeathers(txHash) {
-    const user = {
+  toFeathers() {
+    return {
+      address: this._address,
       name: this._name,
       email: this._email,
       url: this._url,
-      avatar: cleanIpfsPath(this._avatar),
-    };
-    if (this._giverId === undefined && txHash) {
-      // set to 0 so we don't attempt to create multiple givers in lp for the same user
-      user._giverId = 0;
-      user._txHash = txHash;
-    }
-    return user;
+      infoCid: this._infoCid
+    };  
   }
 
   /**
@@ -93,6 +85,8 @@ class User extends Model {
   toStore() {
     return {
       address: this._address,
+      infoCid: this._infoCid,
+      avatarCid: this._avatarCid,
       name: this._name,
       email: this._email,
       url: this._url,
@@ -130,10 +124,6 @@ class User extends Model {
     return 'giver';
   }
 
-  get id() {
-    return this._address;
-  }
-
   get address() {
     return this._address;
   }
@@ -143,9 +133,35 @@ class User extends Model {
     this._address = value;
   }
 
+  get infoCid() {
+    return this._infoCid;
+  }
+
+  set infoCid(value) {
+    this._infoCid = value;
+  }
+
+  get avatarCid() {
+    return this._avatarCid;
+  }
+
+  set avatarCid(value) {
+    this._avatarCid = value;
+  }
+
+
   get avatar() {
     return this._avatar;
   }
+
+  /**
+    * Obtiene la URL completa del avatar.
+    */
+  get avatarCidUrl() {
+    return ipfsService.resolveUrl(this._avatarCid)
+  }
+
+  
 
   set avatar(value) {
     this.checkType(value, ['undefined', 'string'], 'avatar');
@@ -164,15 +180,6 @@ class User extends Model {
   set email(value) {
     this.checkType(value, ['undefined', 'string'], 'email');
     this._email = value;
-  }
-
-  get giverId() {
-    return this._giverId;
-  }
-
-  set giverId(value) {
-    this.checkType(value, ['undefined', 'number'], 'giverId');
-    this._giverId = value;
   }
 
   get name() {

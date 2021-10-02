@@ -72,6 +72,16 @@
 
     "userAnonymous": "Anonymous user",
     
+    "userProfileTitle": "User profile",
+    "userName": "Fullname",
+    "userEmail": "E-Mail",
+    "userUrl": "URL",
+    "userAvatar": "Profile photo",
+    "userAvatarChoose": "Choose a profile photo",
+    "save": "Save",
+    "saving": "Saving ...",
+
+
     "dacs": "Decentralized Funds",
     "dac": "Decentralized Fund",
     "dacsSectionDescription":"These Funds are solving causes. Help them realise their goals by giving Bitcoin or tokens!",

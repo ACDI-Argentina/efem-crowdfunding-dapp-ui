@@ -78,9 +78,7 @@ class FormsyImageUploader extends Component {
                 guides={false}
                 aspectRatio={this.props.aspectRatio}
                 src={this.state.image}
-                ref={cropper => {
-                  this.cropper = cropper;
-                }}
+                ref={cropper => {this.cropper = cropper;}}
                 cropend={this.cropImage}
                 modal={false}
                 highlight={false}
@@ -147,7 +145,7 @@ FormsyImageUploader.defaultProps = {
   isRequired: false,
   avatar: undefined,
   previewImage: undefined,
-  aspectRatio: 16 / 9,
+  aspectRatio: 1,
   resize: true,
 };
 

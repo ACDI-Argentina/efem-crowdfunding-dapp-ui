@@ -7,6 +7,7 @@ import BigNumber from 'bignumber.js';
 import User from '../models/User';
 import { ALL_ROLES } from '../constants/Role';
 import messageUtils from '../redux/utils/messageUtils'
+import userIpfsConnector from '../ipfs/UserIpfsConnector'
 
 class UserService {
 
@@ -29,15 +30,33 @@ class UserService {
 
         if (address) {
 
-          feathersClient.service('/users').get(address).then(data => {
-            const { name, email, avatar, url } = data;
-            currentUser.registered = true;
+          try {
+            const userData = await feathersClient.service('users').get(address);
+            let registered = true;
+            const { name, email, url, infoCid } = userData;
+            
+            let avatarCid;
+            let avatar;
+
+            if (infoCid) {
+              // Se obtiene la información del usuario desde IPFS.
+              const userIpfs = await userIpfsConnector.download(infoCid);
+              avatarCid = userIpfs.avatarCid;
+              avatar = userIpfs.avatar;
+            }
+
+            currentUser.registered = registered;
             currentUser.name = name;
             currentUser.email = email;
-            currentUser.avatar = avatar;
             currentUser.url = url;
+            currentUser.infoCid = infoCid;
+            currentUser.avatarCid = avatarCid;
+            currentUser.avatar = avatar;
+
+            console.log(`Loaded current user:`, currentUser) //? undefined?
             subscriber.next(currentUser);
-          }).catch(err => {
+
+          } catch (err) {
             console.log('Error obteniendo datos del usuario desde Feathers:', err.message);
             if (err.code === 404) {
               currentUser.registered = false;
@@ -48,7 +67,10 @@ class UserService {
               subscriber.next(currentUser);
               return;
             }
-          });
+          }
+
+
+
 
           // Se cargan los roles del usuario desde el smart constract
           getRoles(address).then(roles => {
@@ -81,7 +103,7 @@ class UserService {
         userdata.registered = true;
         subscriber.next(new User({ ...userdata }));
       } catch (e) {
-        
+
         if (e.name === 'NotFound') {
           // El usuario no está registrado.
           subscriber.next(new User({ address: address }));
@@ -120,30 +142,40 @@ class UserService {
    * @param afterSave   Callback to be triggered after the user is saved in feathers
    */
   save(user) {
-    console.log("[User service] saving .... ",user)
+
     return new Observable(async subscriber => {
-      
+
       try {
+        // Se almacena en IPFS toda la información del Usuario.
+        let infoCid = await userIpfsConnector.upload(user);
+        user.infoCid = infoCid;
 
-        await this._updateAvatar(user);
+        if (user.registered === false) {
+          console.log(`create new user`)
+          // Nuevo usuario
+          await feathersClient.service('users').update(user.address, user.toFeathers());
+          user.registered = true;
+          messageUtils.addMessageSuccess({
+            title: 'Bienvenido!',
+            text: `Su perfil ha sido registrado`
+          });
+        } else {
+          console.log(`update user`)
+          // Actualización de usuario
+          await feathersClient.service('users').update(user.address, user.toFeathers());
+          messageUtils.addMessageSuccess({
+            text: `Su perfil ha sido actualizado`
+          });
+        }
 
-        await _uploadUserToIPFS(user);
-
-        await feathersClient.service('/users').patch(user.address, user.toFeathers());
-        //user.isRegistered = true;
-        user.registered = true;
-        
         subscriber.next(user);
-        messageUtils.addMessageSuccess({
-          title: 'Felicitaciones!',
-          text: `Su perfil ha sido registrado`
-        });
 
-      } catch (err) {
-        subscriber.error(err);
+      } catch (error) {
+        console.error('[User Service] Error almacenando usuario.', error);
+        subscriber.error(error);
         messageUtils.addMessageError({
-          text: `Se produjo un error registrando su perfil. Por favor, refresque la página e inténtelo nuevamente.`,
-          error: err
+          text: `Se produjo un error registrando su perfil.`,
+          error: error
         });
       }
     });

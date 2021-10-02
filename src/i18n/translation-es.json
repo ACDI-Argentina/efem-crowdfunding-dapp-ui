@@ -72,6 +72,17 @@
 
     "userAnonymous": "Usuario anónimo",
     
+    "userProfileTitle": "Perfil de usuario",
+    "userName": "Nombre",
+    "userEmail": "E-Mail",
+    "userUrl": "URL",
+    "userAvatar": "Foto de perfil",
+    "userAvatarChoose": "Elige una foto de perfil",
+    "userUnknown": "Usuario desconocido",
+    "save": "Guardar",
+    "saving": "Guardando ...",
+
+
     "dacs": "Comunidades Altruistas Descentralizadas",
     "dac": "Comunidad Altruista Descentralizada",
     "dacsSectionDescription":"Estas Comunidades están llevando proyectos a cabo. ¡Ayúdelas a alcanzar sus objetivos dándoles Bitcoins o tokens!",
