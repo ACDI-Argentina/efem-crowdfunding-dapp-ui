@@ -125,7 +125,7 @@ class Application extends Component {
 
                 <WhiteListProvider onLoaded={this.whiteListLoaded}>
                   <WhiteListConsumer>
-                    {({ state: { fiatWhitelist } }) => (
+                    {({ fiatWhitelist }) => (
                       <div>
                         {whiteListLoading && <Loader className="fixed" />}
                         {!whiteListLoading && (
@@ -134,7 +134,7 @@ class Application extends Component {
                             {!web3Loading && (
                               <ConversionRateProvider fiatWhitelist={fiatWhitelist}>
                                 <Router history={history}>
-                                 <ScrollToTop />
+                                  <ScrollToTop />
                                   <div>
                                     {GA.init() && <GA.RouteTracker />}
 

@@ -67,32 +67,17 @@ class WhiteListProvider extends Component {
     super();
 
     this.state = {
-      delegates: [],
-      campaignManagers: [],
-      reviewers: [],
-      reviewerWhitelist: [],
-      delegateWhitelist: [],
-      projectOwnerWhitelist: [],
       tokenWhitelist: [],
       fiatWhitelist: [],
       hasError: false,
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
-      const whitelist = await feathersClient.service('/whitelist').find();
+      const whitelist = await feathersClient.service('whitelist').find();
 
-      const delegates = await getUsers(whitelist.delegateWhitelist);
-      const campaignManagers = await getUsers(whitelist.projectOwnerWhitelist);
-      const reviewers = await getUsers(whitelist.reviewerWhitelist);
-
-      this.setState({
-          ...whitelist,
-          delegates,
-          campaignManagers,
-          reviewers,
-        },
+      this.setState({ ...whitelist },
         () => this.props.onLoaded(),
       );
     } catch (err) {
@@ -103,12 +88,6 @@ class WhiteListProvider extends Component {
 
   render() {
     const {
-      delegates,
-      campaignManagers,
-      reviewers,
-      reviewerWhitelist,
-      delegateWhitelist,
-      projectOwnerWhitelist,
       tokenWhitelist,
       fiatWhitelist,
       hasError,
@@ -117,19 +96,9 @@ class WhiteListProvider extends Component {
     return (
       <Provider
         value={{
-          state: {
-            delegates,
-            campaignManagers,
-            reviewers,
-            tokenWhitelist,
-            fiatWhitelist,
-            hasError,
-          },
-          actions: {
-            isDelegate: user => isInWhitelist(user, delegateWhitelist),
-            isCampaignManager: user => isInWhitelist(user, projectOwnerWhitelist),
-            isReviewer: user => isInWhitelist(user, reviewerWhitelist),
-          },
+          tokenWhitelist,
+          fiatWhitelist,
+          hasError,
         }}
       >
         {this.props.children}

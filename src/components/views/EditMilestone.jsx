@@ -74,40 +74,40 @@ class EditMilestone extends Component {
   componentDidMount() {
     console.log("[Edit milestone] component did mount!")
     this.checkUser().then(() => {
-        if (!this.props.isNew) {
-          console.log("editing milestone!")
-          try {
-            const campaign = this.props.campaign;
-            const milestone = this.props.milestone;
+      if (!this.props.isNew) {
+        console.log("editing milestone!")
+        try {
+          const campaign = this.props.campaign;
+          const milestone = this.props.milestone;
 
-            if(!milestone.canUserEdit(this.props.currentUser)){
-              this.props.history.goBack();
-            }
-            
-            this.setState({ isLoading: false, milestone, campaign });
-          } catch (err) {
-            ErrorPopup(
-              'Sadly we were unable to load the requested milestone details. Please try again.',
-              err,
-            );
+          if (!milestone.canUserEdit(this.props.currentUser)) {
+            this.props.history.goBack();
           }
-        } else {
-          try {
-            const milestone = new Milestone();
 
-            this.setState({
-              isLoading: false,             
-              milestone,
-              campaign: this.props.campaign
-            });
-          } catch (e) {
-            ErrorPopup(
-              'Sadly we were unable to load the campaign in which this milestone was created. Please try again.',
-              e,
-            );
-          }
+          this.setState({ isLoading: false, milestone, campaign });
+        } catch (err) {
+          ErrorPopup(
+            'Sadly we were unable to load the requested milestone details. Please try again.',
+            err,
+          );
         }
-      })
+      } else {
+        try {
+          const milestone = new Milestone();
+
+          this.setState({
+            isLoading: false,
+            milestone,
+            campaign: this.props.campaign
+          });
+        } catch (e) {
+          ErrorPopup(
+            'Sadly we were unable to load the campaign in which this milestone was created. Please try again.',
+            e,
+          );
+        }
+      }
+    })
       .catch(err => {
         // TODO: This is not super user friendly, fix it
         if (err === 'noBalance') this.props.history.goBack();
@@ -160,7 +160,7 @@ class EditMilestone extends Component {
       return Promise.reject("Not allowed. No user logged in");
     }
 
-    if(!this.props.isCampaignManager){
+    if (!this.props.isCampaignManager) {
       this.props.history.push('/');
       return Promise.reject("Not allowed. User is not able to create milestones");
     }
@@ -202,21 +202,21 @@ class EditMilestone extends Component {
         : milestone.status; // make sure not to change status!*/
     milestone.status = Milestone.PENDING;
 
-    this.setState({isSaving: true,isBlocking: false,},() => {
+    this.setState({ isSaving: true, isBlocking: false, }, () => {
 
-        // Save the milestone
-        this.props.saveMilestone(milestone);
-        GA.trackEvent({
-          category: 'Milestone',
-          action: 'updated',
-          label: this.state.id,
-        });
-        this.setState({
-          isSaving: false,
-          isBlocking: false,
-        });
-        this.props.history.goBack();
-      },
+      // Save the milestone
+      this.props.saveMilestone(milestone);
+      GA.trackEvent({
+        category: 'Milestone',
+        action: 'updated',
+        label: this.state.id,
+      });
+      this.setState({
+        isSaving: false,
+        isBlocking: false,
+      });
+      this.props.history.goBack();
+    },
     );
   }
 
@@ -270,8 +270,8 @@ class EditMilestone extends Component {
         <Header
           color="white"
           brand={<img src={require("assets/img/logos/give4forest.png")}
-          alt={t('give4forest')}
-          className={classes.dappLogo}/>}
+            alt={t('give4forest')}
+            className={classes.dappLogo} />}
           rightLinks={<MainMenu />}
           fixed
           changeColorOnScroll={{
@@ -281,8 +281,8 @@ class EditMilestone extends Component {
           {...rest}
         />
 
-        {isNew && <Parallax small image={require("assets/img/milestone-default-bg.jpg")}/>}
-        {!isNew && <Parallax small image={milestone.imageCidUrl}/>}
+        {isNew && <Parallax small image={require("assets/img/milestone-default-bg.jpg")} />}
+        {!isNew && <Parallax small image={milestone.imageCidUrl} />}
 
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
@@ -397,7 +397,7 @@ class EditMilestone extends Component {
                             disabled={!isNew && !isProposed}
                           />
                         </div>
-                        
+
                         <div className="form-group">
                           <SelectFormsy
                             name="recipientAddress"
@@ -515,7 +515,7 @@ EditMilestone.defaultProps = {
 
 const EdtMilestone = props => (
   <WhiteListConsumer>
-    {({ state: { tokenWhitelist, fiatWhitelist } }) => (
+    {({ tokenWhitelist, fiatWhitelist }) => (
       <EditMilestone
         {...props}
         tokenWhitelist={tokenWhitelist}
@@ -533,7 +533,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: selectCurrentUser(state),
     campaign: selectCampaign(state, campaignId),
-    milestone: selectMilestone(state,milestoneId),
+    milestone: selectMilestone(state, milestoneId),
     isCampaignManager: selectCurrentUser(state).isCampaignManager(),
     reviewers: milestoneReviewers(state),
     recipients: recipients(state)
@@ -542,4 +542,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { saveMilestone }
 
-export default connect(mapStateToProps,mapDispatchToProps)((withStyles(styles)(withTranslation()(EdtMilestone))));
+export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(withTranslation()(EdtMilestone))));
