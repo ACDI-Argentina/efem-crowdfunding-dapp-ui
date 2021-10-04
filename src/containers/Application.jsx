@@ -18,14 +18,7 @@ import { ScrollToTop, history } from '../lib/helpers';
 
 import config from '../configuration';
 
-// components
-//import MainMenu from '../components/MainMenu';
-import Loader from '../components/Loader';
 import ErrorBoundary from '../components/ErrorBoundary';
-
-// context providers
-import ConversionRateProvider from '../contextProviders/ConversionRateProvider';
-import WhiteListProvider, { Consumer as WhiteListConsumer } from '../contextProviders/WhiteListProvider';
 
 import '../lib/validators';
 import { connect } from 'react-redux'
@@ -65,7 +58,6 @@ React.toast = toast;
  * It is also responsible for loading application persistent data.
  * As long as this component is mounted, the data will be persistent,
  * if passed as props to children.
- * -> moved to data to UserProvider
  */
 class Application extends Component {
   constructor(props) {
@@ -75,13 +67,7 @@ class Application extends Component {
       name: 'dapp',
     });
 
-    this.state = {
-      web3Loading: false,
-      whiteListLoading: true,
-    };
-
-    this.web3Loaded = this.web3Loaded.bind(this);
-    this.whiteListLoaded = this.whiteListLoaded.bind(this);
+    this.state = {};
   }
 
   componentDidMount() {
@@ -93,20 +79,9 @@ class Application extends Component {
     initExchangeRateListener();
   }
 
-  web3Loaded() {
-    this.setState({ web3Loading: false });
-  }
-
-  whiteListLoaded() {
-    this.setState({ whiteListLoading: false });
-  }
-
-
 
   render() {
-    const { web3Loading, whiteListLoading } = this.state;
     const { currentUser } = this.props;
-    const userLoading = false; //TODO: pass to a currentUserSlice
 
     return (
       <ErrorBoundary>
@@ -117,63 +92,31 @@ class Application extends Component {
               walletBrowserRequired,
               lastNotificationTs
             }) => (
-
-              <React.Fragment>
-
+              <>
                 <TransactionViewer></TransactionViewer>
                 <MessageViewer></MessageViewer>
-
-                <WhiteListProvider onLoaded={this.whiteListLoaded}>
-                  <WhiteListConsumer>
-                    {({ fiatWhitelist }) => (
-                      <div>
-                        {whiteListLoading && <Loader className="fixed" />}
-                        {!whiteListLoading && (
-                          <div>
-                            {web3Loading && <Loader className="fixed" />}
-                            {!web3Loading && (
-                              <ConversionRateProvider fiatWhitelist={fiatWhitelist}>
-                                <Router history={history}>
-                                  <ScrollToTop />
-                                  <div>
-                                    {GA.init() && <GA.RouteTracker />}
-
-                                    {userLoading && <Loader className="fixed" />}
-
-                                    {!userLoading && (
-                                      <div>
-                                        <SwitchRoutes
-                                          currentUser={currentUser}
-                                        />
-                                      </div>
-                                    )}
-                                    <ToastContainer
-                                      position="top-right"
-                                      type="default"
-                                      autoClose={5000}
-                                      hideProgressBar
-                                      newestOnTop={false}
-                                      closeOnClick
-                                      pauseOnHover
-                                    />
-                                    <Web3Banner
-                                      currentNetwork={network.id}
-                                      requiredNetwork={config.network.requiredId}
-                                      isCorrectNetwork={network.isCorrect}
-                                      walletBrowserRequired={walletBrowserRequired}
-                                      lastNotificationTs={lastNotificationTs}
-                                    />
-                                  </div>
-                                </Router>
-                              </ConversionRateProvider>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </WhiteListConsumer>
-                </WhiteListProvider>
-              </React.Fragment>
+                <Router history={history}>
+                  <ScrollToTop />
+                  {GA.init() && <GA.RouteTracker />}
+                  <SwitchRoutes currentUser={currentUser} />
+                  <ToastContainer
+                    position="top-right"
+                    type="default"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    pauseOnHover
+                  />
+                  <Web3Banner
+                    currentNetwork={network.id}
+                    requiredNetwork={config.network.requiredId}
+                    isCorrectNetwork={network.isCorrect}
+                    walletBrowserRequired={walletBrowserRequired}
+                    lastNotificationTs={lastNotificationTs}
+                  />
+                </Router>
+              </>
             )}
           </Web3App.Consumer>
         </Web3App>
