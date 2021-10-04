@@ -66,24 +66,18 @@ class WhiteListProvider extends Component {
   constructor() {
     super();
 
+    //Original values from feathers. TODO: read from config
     this.state = {
-      tokenWhitelist: [],
-      fiatWhitelist: [],
+      tokenWhitelist: [
+        {
+          name: "RBTC",
+          symbol: "RBTC",
+          decimals: 18
+        }
+      ],
+      fiatWhitelist: ["USD"],
       hasError: false,
     };
-  }
-
-  async componentDidMount() {
-    try {
-      const whitelist = await feathersClient.service('whitelist').find();
-
-      this.setState({ ...whitelist },
-        () => this.props.onLoaded(),
-      );
-    } catch (err) {
-      console.error(err);
-      this.setState({ hasError: true }, () => this.props.onLoaded());
-    }
   }
 
   render() {

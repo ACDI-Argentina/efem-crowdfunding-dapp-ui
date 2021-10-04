@@ -37,6 +37,7 @@ import styles from "assets/jss/material-kit-react/views/milestonePage.js";
 import { withTranslation } from 'react-i18next';
 import { Box } from '@material-ui/core';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
+import WhiteListProvider from 'contextProviders/WhiteListProvider';
 
 BigNumber.config({ DECIMAL_PLACES: 18 });
 
@@ -514,16 +515,18 @@ EditMilestone.defaultProps = {
 };
 
 const EdtMilestone = props => (
-  <WhiteListConsumer>
-    {({ tokenWhitelist, fiatWhitelist }) => (
-      <EditMilestone
-        {...props}
-        tokenWhitelist={tokenWhitelist}
-        fiatTypes={fiatWhitelist.map(f => ({ value: f, title: f }))}
-        isCampaignManager={props.isCampaignManager}
-      />
-    )}
-  </WhiteListConsumer>
+  <WhiteListProvider>
+    <WhiteListConsumer>
+      {({ tokenWhitelist, fiatWhitelist }) => (
+        <EditMilestone
+          {...props}
+          tokenWhitelist={tokenWhitelist}
+          fiatTypes={fiatWhitelist.map(f => ({ value: f, title: f }))}
+          isCampaignManager={props.isCampaignManager}
+        />
+      )}
+    </WhiteListConsumer>
+  </WhiteListProvider>
 );
 
 
