@@ -110,10 +110,10 @@ class EditProfile extends Component {
           <div className={classes.container}>
             {isLoading && <Loader className="fixed" />}
             {!isLoading && (
-              <div>
-                {currentUser.email && <h3>{t("userProfileTitle")}</h3>}
+              <>
+                <h3>{t("userProfileTitle")}</h3>
                 <ProfileForm user={currentUser} />
-              </div>
+              </>
             )}
           </div>
         </div>
