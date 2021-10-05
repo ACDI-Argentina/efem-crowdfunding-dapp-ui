@@ -53,7 +53,6 @@ const ProfileForm = ({
       name: user.name,
       email: user.email,
       url: user.url,
-      avatar: avatar
     },
     enableReinitialize: true,
     validationSchema: Yup.object({
@@ -87,7 +86,7 @@ const ProfileForm = ({
     },
   });
 
-  const dirty = formik.dirty || avatar; //que pasa cuando esto cambie
+  const dirty = formik.dirty || avatar; 
 
   return (
     <form onSubmit={formik.handleSubmit}>
