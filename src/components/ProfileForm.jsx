@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux';
 import { registerCurrentUser } from '../redux/reducers/currentUserSlice';
 
 import { Box, Grid } from '@material-ui/core';
-import { Form, Input } from 'formsy-react-components';
 
 import LoaderButton from './LoaderButton';
 import GridItem from './Grid/GridItem';
-import { User } from 'models';
 import Avatar from './Avatar/Avatar';
 
 import { TextField } from '@material-ui/core';
@@ -21,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 const sleep = ms => new Promise((resolve, reject) => setTimeout(() => resolve(ms), ms))
 
 const ProfileForm = ({
-  user, //Leerlo del ctx
+  user, 
   onFinishEdition,
 }) => {
   const avatarRef = useRef();
@@ -90,9 +88,9 @@ const ProfileForm = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid container direction="row">
+      <Grid container direction="row" style={{ marginTop:"20px"}}>
         <GridItem xs={12} md={5}>
-          <div style={{ display:"flex", justifyContent:"center", marginTop: "32px"}}>
+          <div style={{ display:"flex", justifyContent:"center"}}>
             <Avatar
               imageSrc={user.avatarCidUrl}
               onCropped={(cropped) => {
@@ -104,7 +102,7 @@ const ProfileForm = ({
           </div>
         </GridItem>
 
-        <GridItem xs={12} md={7}>
+        <GridItem xs={12} md={7} container direction="column" justify="center">
           <div className="form-group">
             <TextField
               name={"name"}
