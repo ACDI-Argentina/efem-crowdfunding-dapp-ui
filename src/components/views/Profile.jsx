@@ -111,30 +111,7 @@ class Profile extends Component {
   }
 
   loadUserMilestones() {
-    this.milestonesObserver = feathersClient
-      .service('milestones')
-      .watch({ listStrategy: 'always' })
-      .find({
-        query: {
-          $sort: {
-            createdAt: -1,
-          },
-          $limit: this.state.itemsPerPage,
-          $skip: this.state.skipMilestonePages * this.state.itemsPerPage,
-          $or: [
-            { ownerAddress: this.state.userAddress },
-            { reviewerAddress: this.state.userAddress },
-            { recipientAddress: this.state.userAddress },
-          ],
-        },
-      })
-      .subscribe(resp =>
-        this.setState(prevState => ({
-          userAddress: prevState.userAddress,
-          milestones: resp,
-          isLoadingMilestones: false,
-        })),
-      );
+    console.warn("Usage of deprecated feathers service milestones")
   }
 
   loadUserCampaigns() {

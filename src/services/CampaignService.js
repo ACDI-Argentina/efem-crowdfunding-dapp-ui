@@ -8,6 +8,7 @@ import Donation from '../models/Donation';
 class CampaignService {
 
   /**
+   * @deprecated
    * Get a Campaign defined by ID
    *
    * @param id   ID of the Campaign to be retrieved
@@ -17,6 +18,7 @@ class CampaignService {
   }
 
   /**
+   * @deprecated
    * Get Campaign milestones listener
    *
    * @param id        ID of the Campaign which donations should be retrieved
@@ -30,6 +32,7 @@ class CampaignService {
   }
 
   /**
+   * @deprecated
    * Get Campaign donations
    *
    * @param id        ID of the Campaign which donations should be retrieved
@@ -43,6 +46,7 @@ class CampaignService {
   }
 
   /**
+   * @deprecated
    * Subscribe to count of new donations. Initial resp will always be 0. Any new donations
    * that come in while subscribed, the onSuccess will be called with the # of newDonations
    * since initial subscribe
@@ -56,6 +60,7 @@ class CampaignService {
   }
 
   /**
+   * @deprecated
    * Get the user's Campaigns
    *
    * @param userAddress Address of the user whose Campaign list should be retrieved
