@@ -20,21 +20,14 @@ const MainMenuDropdown = ({ currentUser, showMobileMenu }) => {
                 className={`dropdown-menu ${showMobileMenu ? 'show' : ''} `}
                 aria-labelledby="navbarDropdownDashboard"
             >
-                <NavLink className="dropdown-item" to="/my-milestones">
-                    Hitos
-              </NavLink>
+           
                 <NavLink className="dropdown-item" to="/donations">
                     Donaciones
               </NavLink>
                 <NavLink className="dropdown-item" to="/delegations">
                     Delegaciones
               </NavLink>
-                <NavLink className="dropdown-item" to="/my-dacs">
-                    DACs
-              </NavLink>
-                <NavLink className="dropdown-item" to="/my-campaigns">
-                    Campa&ntilde;as
-              </NavLink>
+     
             </div>
         </li>
 

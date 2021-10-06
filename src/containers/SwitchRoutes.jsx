@@ -2,14 +2,12 @@ import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import LandingPage from 'views/LandingPage/LandingPage.js';
 import Loader from '../components/Loader';
+
 const Profile = React.lazy(() => import('../components/views/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 const ViewMilestone = React.lazy(() => import('../components/views/ViewMilestone'));
 const EditDAC = React.lazy(() => import('../components/views/EditDAC'));
 const ViewDAC = React.lazy(() => import('../components/views/ViewDAC'));
-const MyDACs = React.lazy(() => import('../components/views/MyDACs'));
-const MyCampaigns = React.lazy(() => import('../components/views/MyCampaigns'));
-const MyMilestones = React.lazy(() => import('../components/views/MyMilestones'));
 const NotFound = React.lazy(() => import('../components/views/NotFound'));
 const Campaigns = React.lazy(() => import('../components/views/Campaigns'));
 const DACs = React.lazy(() => import('../components/views/DACs'));
@@ -151,35 +149,7 @@ const SwitchRoutes = ({ currentUser }) => (
                 />
             )}
         />*/}
-      <Route
-        exact
-        path="/my-dacs"
-        render={(props) => (
-          <MyDACs key={currentUser ? currentUser.id : 0} currentUser={currentUser} {...props} />
-        )}
-      />
-      <Route
-        exact
-        path="/my-campaigns"
-        render={(props) => (
-          <MyCampaigns
-            key={currentUser ? currentUser.id : 0}
-            currentUser={currentUser}
-            {...props}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/my-milestones"
-        render={(props) => (
-          <MyMilestones
-            key={currentUser ? currentUser.id : 0}
-            currentUser={currentUser}
-            {...props}
-          />
-        )}
-      />
+     
       <Route
         exact
         path="/profile"
