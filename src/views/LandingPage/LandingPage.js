@@ -47,7 +47,7 @@ export default withTranslation()(function LandingPage(props) {
       />
       <Parallax image={require("assets/img/landing-bg.jpg")}>
       <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer justifyContent="center">
             <GridItem xs={12} sm={12} md={8}>
               <div className={classes.titleContainer}>
                 <h2 className={classes.title}>{t('landingPageTitle')}</h2>
