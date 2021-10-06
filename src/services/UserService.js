@@ -65,12 +65,9 @@ class UserService {
               currentUser.avatar = undefined;
               currentUser.url = undefined;
               subscriber.next(currentUser);
-              return;
+              //return; //Esto impide que cargue los roles
             }
           }
-
-
-
 
           // Se cargan los roles del usuario desde el smart constract
           getRoles(address).then(roles => {
