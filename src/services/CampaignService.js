@@ -1,11 +1,10 @@
-import { paramsForServer } from 'feathers-hooks-common';
+/* import { paramsForServer } from 'feathers-hooks-common';
 import Milestone from 'models/Milestone';
 import { feathersClient } from '../lib/feathersClient';
 import Campaign from '../models/Campaign';
 import Donation from '../models/Donation';
 
-const campaigns = feathersClient.service('campaigns');
-
+ */
 class CampaignService {
 
   /**
@@ -14,14 +13,7 @@ class CampaignService {
    * @param id   ID of the Campaign to be retrieved
    */
   static get(id) {
-    return new Promise((resolve, reject) => {
-      campaigns
-        .find({ query: { _id: id } })
-        .then(resp => {
-          resolve(new Campaign(resp.data[0]));
-        })
-        .catch(reject);
-    });
+    return new Promise((resolve, reject) => reject("Feathers service campaigns deprecated"))
   }
 
   /**
@@ -34,21 +26,7 @@ class CampaignService {
    * @param onError   Callback function if error is encountered
    */
   static getMilestones(id, $limit = 100, $skip = 0, onSuccess = () => {}, onError = () => {}) {
-    return feathersClient
-      .service('milestones')
-      .find({
-        query: {
-          campaignId: id,
-          status: {
-            $nin: [Milestone.CANCELED, Milestone.PROPOSED, Milestone.REJECTED, Milestone.PENDING],
-          },
-          $sort: { createdAt: 1 },
-          $limit,
-          $skip,
-        },
-      })
-      .then(resp => onSuccess(resp.data.map(m => new Milestone(m)), resp.total))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
@@ -61,24 +39,7 @@ class CampaignService {
    * @param onError   Callback function if error is encountered
    */
   static getDonations(id, $limit = 100, $skip = 0, onSuccess = () => {}, onError = () => {}) {
-    return feathersClient
-      .service('donations')
-      .find(
-        paramsForServer({
-          query: {
-            status: { $ne: Donation.FAILED },
-            $or: [{ intendedProjectTypeId: id }, { ownerTypeId: id }],
-            ownerTypeId: id,
-            isReturn: false,
-            $sort: { createdAt: -1 },
-            $limit,
-            $skip,
-          },
-          schema: 'includeTypeAndGiverDetails',
-        }),
-      )
-      .then(resp => onSuccess(resp.data.map(d => new Donation(d)), resp.total))
-      .catch(onError);
+    return onError(new Error("Feathers service donations deprecated"));
   }
 
   /**
@@ -91,31 +52,7 @@ class CampaignService {
    * @param onError   Callback function if error is encountered
    */
   static subscribeNewDonations(id, onSuccess, onError) {
-    let initalTotal;
-    return feathersClient
-      .service('donations')
-      .watch()
-      .find(
-        paramsForServer({
-          query: {
-            status: { $ne: Donation.FAILED },
-            $or: [{ intendedProjectTypeId: id }, { ownerTypeId: id }],
-            ownerTypeId: id,
-            isReturn: false,
-            $sort: { createdAt: -1 },
-            $limit: 0,
-          },
-          schema: 'includeTypeAndGiverDetails',
-        }),
-      )
-      .subscribe(resp => {
-        if (initalTotal === undefined) {
-          initalTotal = resp.total;
-          onSuccess(0);
-        } else {
-          onSuccess(resp.total - initalTotal);
-        }
-      }, onError);
+    return onError(new Error("Feathers service donations deprecated"));
   }
 
   /**
@@ -128,24 +65,7 @@ class CampaignService {
    * @param onError     Callback function if error is encountered
    */
   static getUserCampaigns(userAddress, skipPages, itemsPerPage, onSuccess, onError) {
-    return campaigns
-      .watch({ listStrategy: 'always' })
-      .find({
-        query: {
-          $or: [{ ownerAddress: userAddress }, { reviewerAddress: userAddress }],
-          $sort: {
-            createdAt: -1,
-          },
-          $limit: itemsPerPage,
-          $skip: skipPages * itemsPerPage,
-        },
-      })
-      .subscribe(resp => {
-        const newResp = Object.assign({}, resp, {
-          data: resp.data.map(c => new Campaign(c)),
-        });
-        onSuccess(newResp);
-      }, onError);
+    return onError(new Error("Feathers service campaigns deprecated"));
   }
 }
 

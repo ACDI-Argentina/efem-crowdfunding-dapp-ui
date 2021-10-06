@@ -106,29 +106,7 @@ class MilestoneService {
         { status: Milestone.REJECTED },
       ];
     } else {
-      const resp = await feathersClient.service('campaigns').find({
-        query: {
-          ownerAddress,
-          $select: ['_id'],
-        },
-      });
-
-      query.$and = [
-        {
-          $or: [
-            { ownerAddress },
-            { reviewerAddress: ownerAddress },
-            { recipientAddress: ownerAddress },
-            {
-              $and: [
-                { campaignId: { $in: resp.data.map(c => c._id) } },
-                { status: Milestone.PROPOSED },
-              ],
-            },
-          ],
-        },
-        { status: { $nin: [Milestone.PAID, Milestone.CANCELED, Milestone.REJECTED] } },
-      ];
+      throw new Error("Feathers service campaings deprecated")
     }
 
     this.subscribe(query, onResult, onError);
@@ -188,7 +166,7 @@ class MilestoneService {
    * @param onSuccess Callback function once response is obtained successfully
    * @param onError   Callback function if error is encountered
    */
-  static getActiveMilestones($limit = 100, $skip = 0, onSuccess = () => {}, onError = () => {}) {
+  static getActiveMilestones($limit = 100, $skip = 0, onSuccess = () => { }, onError = () => { }) {
     return feathersClient
       .service('milestones')
       .find({
@@ -212,7 +190,7 @@ class MilestoneService {
    * @param onSuccess Callback function once response is obtained successfully
    * @param onError   Callback function if error is encountered
    */
-  static getDonations(id, $limit = 100, $skip = 0, onSuccess = () => {}, onError = () => {}) {
+  static getDonations(id, $limit = 100, $skip = 0, onSuccess = () => { }, onError = () => { }) {
     return feathersClient
       .service('donations')
       .find(
