@@ -38,7 +38,7 @@ class CategorySelector extends Component {
         const {t} = this.props;
 
         const options = ALL_CATEGORIES.map(cat => (
-            <Box>
+            <Box key={cat}>
                 <FormControlLabel
                     control={
                         <Checkbox checked={(this.state.value.indexOf(cat) !== -1)}
