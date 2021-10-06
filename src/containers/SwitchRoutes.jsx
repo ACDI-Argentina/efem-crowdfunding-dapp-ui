@@ -3,7 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import LandingPage from 'views/LandingPage/LandingPage.js';
 import Loader from '../components/Loader';
 
-const Profile = React.lazy(() => import('../components/views/Profile'));
+const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 const ViewMilestone = React.lazy(() => import('../components/views/ViewMilestone'));
 const EditDAC = React.lazy(() => import('../components/views/EditDAC'));
