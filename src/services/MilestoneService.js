@@ -1,12 +1,12 @@
 import BigNumber from 'bignumber.js';
-import { utils } from 'web3';
-import { paramsForServer } from 'feathers-hooks-common';
 import Milestone from 'models/Milestone';
+/* import { utils } from 'web3';
+import { paramsForServer } from 'feathers-hooks-common';
 import { feathersClient } from 'lib/feathersClient';
 import extraGas from 'lib/blockchain/extraGas';
 import Donation from '../models/Donation';
+ */
 
-const milestones = feathersClient.service('milestones');
 
 BigNumber.config({ DECIMAL_PLACES: 18 });
 
@@ -16,37 +16,27 @@ class MilestoneService {
   }
 
   /**
+   * @deprecated
    * Get a Milestone defined by ID
    *
    * @param id   ID of the Milestone to be retrieved
    */
   static get(id) {
-    return new Promise((resolve, reject) => {
-      milestones
-        .find({ query: { _id: id } })
-        .then(resp => {
-          resolve(new Milestone(resp.data[0]));
-        })
-        .catch(reject);
-    });
+    return new Promise((resolve, reject) => reject("Feathers service milestones deprecated"))
   }
 
   /**
+   * @deprecated
    * Subscribe to a Milestone defined by ID
    *
    * @param id   ID of the Milestone to be retrieved
    */
   static subscribeOne(id, onResult, onError) {
-    this.milestoneSubscription = milestones
-      .watch({ listStrategy: 'always' })
-      .find({ query: { _id: id } })
-      .subscribe(resp => {
-        onResult(new Milestone(resp.data[0]));
-      }, onError);
-    return this.milestoneSubscription;
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Lazy-load Milestones by subscribing to Milestone listener
    *
    * @param milestoneStatus   any of the Milestone model statuses
@@ -113,6 +103,7 @@ class MilestoneService {
   }
 
   /**
+   * @deprecated
    * Lazy-load Milestones by subscribing to Milestone listener
    *
    * @param query     A feathers query
@@ -130,24 +121,7 @@ class MilestoneService {
    */
 
   static subscribe(query, onResult, onError) {
-    this.milestoneSubscription = milestones
-      .watch({ listStrategy: 'always' })
-      .find({ query })
-      .subscribe(
-        resp => {
-          try {
-            onResult(
-              Object.assign({}, resp, {
-                data: resp.data.map(m => new Milestone(m)),
-              }),
-            );
-          } catch (e) {
-            onError(e);
-          }
-        },
-
-        onError,
-      );
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
@@ -159,6 +133,7 @@ class MilestoneService {
   }
 
   /**
+   * @deprecated
    * Get Active Milestones sorted by created date
    *
    * @param $limit    Amount of records to be loaded
@@ -167,21 +142,11 @@ class MilestoneService {
    * @param onError   Callback function if error is encountered
    */
   static getActiveMilestones($limit = 100, $skip = 0, onSuccess = () => { }, onError = () => { }) {
-    return feathersClient
-      .service('milestones')
-      .find({
-        query: {
-          status: Milestone.IN_PROGRESS,
-          $sort: { createdAt: -1 },
-          $limit,
-          $skip,
-        },
-      })
-      .then(resp => onSuccess(resp.data.map(m => new Milestone(m)), resp.total))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Get Milestone donations
    *
    * @param id        ID of the Milestone which donations should be retrieved
@@ -191,26 +156,11 @@ class MilestoneService {
    * @param onError   Callback function if error is encountered
    */
   static getDonations(id, $limit = 100, $skip = 0, onSuccess = () => { }, onError = () => { }) {
-    return feathersClient
-      .service('donations')
-      .find(
-        paramsForServer({
-          query: {
-            amountRemaining: { $ne: 0 },
-            status: { $ne: Donation.FAILED },
-            $or: [{ intendedProjectTypeId: id }, { ownerTypeId: id }],
-            $sort: { usdValue: -1, createdAt: -1 },
-            $limit,
-            $skip,
-          },
-          schema: 'includeTypeAndGiverDetails',
-        }),
-      )
-      .then(resp => onSuccess(resp.data.map(d => new Donation(d)), resp.total))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Subscribe to count of new donations. Initial resp will always be 0. Any new donations
    * that come in while subscribed, the onSuccess will be called with the # of newDonations
    * since initial subscribe
@@ -220,33 +170,11 @@ class MilestoneService {
    * @param onError   Callback function if error is encountered
    */
   static subscribeNewDonations(id, onSuccess, onError) {
-    let initalTotal;
-    return feathersClient
-      .service('donations')
-      .watch()
-      .find(
-        paramsForServer({
-          query: {
-            amountRemaining: { $ne: 0 },
-            status: { $ne: Donation.FAILED },
-            $or: [{ intendedProjectTypeId: id }, { ownerTypeId: id }],
-            $sort: { createdAt: -1 },
-            $limit: 0,
-          },
-          schema: 'includeTypeAndGiverDetails',
-        }),
-      )
-      .subscribe(resp => {
-        if (initalTotal === undefined) {
-          initalTotal = resp.total;
-          onSuccess(0);
-        } else {
-          onSuccess(resp.total - initalTotal);
-        }
-      }, onError);
+    return onError(new Error("Feathers service donations deprecated"));
   }
 
   /**
+   * @deprecated
    * Delete a proposed milestone
    *
    * @param milestone   a Milestone model
@@ -254,13 +182,11 @@ class MilestoneService {
    * @param onError     Callback function if error is encountered
    */
   static deleteProposedMilestone({ milestone, onSuccess, onError }) {
-    milestones
-      .remove(milestone._id)
-      .then(() => onSuccess())
-      .catch(e => onError(e));
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Reject a proposed milestone
    *
    * @param milestone       a Milestone model
@@ -269,15 +195,11 @@ class MilestoneService {
    * @param onError         Callback function if error is encountered
    */
   static rejectProposedMilestone({ milestone, rejectReason, onSuccess, onError }) {
-    const reject = { status: 'Rejected' };
-    if (rejectReason) reject.message = rejectReason;
-    milestones
-      .patch(milestone._id, reject)
-      .then(() => onSuccess())
-      .catch(e => onError(e));
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Repropose a proposed milestone that has been rejected
    *
    * @param milestone       a Milestone model
@@ -286,16 +208,11 @@ class MilestoneService {
    * @param onError         Callback function if error is encountered
    */
   static reproposeRejectedMilestone({ milestone, message, onSuccess, onError }) {
-    milestones
-      .patch(milestone._id, {
-        status: Milestone.PROPOSED,
-        message,
-      })
-      .then(() => onSuccess())
-      .catch(e => onError(e));
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Request a milestone to be marked as complete
    *
    * @param milestone       a Milestone model
@@ -307,19 +224,11 @@ class MilestoneService {
    * @param onError         Callback function if error is encountered
    */
   static async requestMarkComplete({ milestone, proof, onConfirmation, onError }) {
-    try {
-      await milestones.patch(milestone._id, {
-        status: Milestone.NEEDS_REVIEW,
-        message: proof.message,
-        mined: false,
-      });
-      onConfirmation(milestone);
-    } catch (err) {
-      onError(err);
-    }
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Approve the completion of a milestone (after the milestone has been requested as complete)
    *
    * @param milestone       a Milestone model
@@ -331,19 +240,11 @@ class MilestoneService {
    */
 
   static approveMilestoneCompletion({ milestone, proof, onConfirmation, onError }) {
-    milestone.status = Milestone.COMPLETED;
-    return milestones
-      .patch(milestone._id, {
-        status: Milestone.COMPLETED,
-        mined: false,
-        message: proof.message,
-        proofItems: proof.items,
-      })
-      .then(() => onConfirmation(milestone))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
+   * @deprecated
    * Reject the completion of a milestone (after the milestone has been requested as complete)
    *
    * @param milestone       a Milestone model
@@ -357,16 +258,7 @@ class MilestoneService {
    */
 
   static rejectMilestoneCompletion({ milestone, proof, onConfirmation, onError }) {
-    milestone.status = Milestone.IN_PROGRESS;
-    return milestones
-      .patch(milestone._id, {
-        status: Milestone.IN_PROGRESS,
-        mined: false,
-        message: proof.message,
-        proofItems: proof.items,
-      })
-      .then(() => onConfirmation(milestone))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 
   /**
@@ -381,13 +273,7 @@ class MilestoneService {
    */
 
   static withdraw({ milestone, onConfirmation, onError }) {
-    milestone.status = Milestone.PAID;
-    return milestones
-      .patch(milestone._id, {
-        status: Milestone.PAID,
-      })
-      .then(() => onConfirmation(milestone))
-      .catch(onError);
+    return onError(new Error("Feathers service milestones deprecated"));
   }
 }
 
