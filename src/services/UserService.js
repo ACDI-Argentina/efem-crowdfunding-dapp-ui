@@ -218,6 +218,7 @@ async function getRoles(address) {
   const userRoles = [];
   try {
     for (const rol of ALL_ROLES) {
+      console.log(`${address} - check rol ${rol} `);
       const canPerform = await crowdfundingContractApi.canPerformRole(address, rol);
       if (canPerform) userRoles.push(rol);
     }
