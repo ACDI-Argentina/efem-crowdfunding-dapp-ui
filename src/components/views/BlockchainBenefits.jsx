@@ -22,7 +22,7 @@ class BlockchainBenefits extends Component {
           <Grid
             container
             direction="row"
-            justify="center"
+            justifyContent="center"
             alignItems="flex-start"
             spacing={10}
           >

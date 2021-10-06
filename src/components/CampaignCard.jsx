@@ -68,7 +68,7 @@ class CampaignCard extends Component {
           <Grid
             container
             direction="row"
-            justify="flex-end"
+            justifyContent="flex-end"
           >
             <Grid item xs={6} className={classes.actions}>
               <Donate
