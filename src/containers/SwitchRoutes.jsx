@@ -21,15 +21,10 @@ const TermsAndConditions = React.lazy(() => import('../components/views/TermsAnd
 const PrivacyPolicy = React.lazy(() => import('../components/views/PrivacyPolicy'));
 
 const SwitchRoutes = ({ currentUser }) => (
-  <React.Suspense fallback={<Loader className="fixed"/>}>
+  <React.Suspense fallback={<Loader className="fixed" />}>
     <Switch>
       {/*NOTE order matters, wrong order breaks routes!*/}
-      <Route
-        exact
-        path="/termsandconditions"
-        render={(props) => <TermsAndConditions {...props} />}
-      />
-      <Route exact path="/privacypolicy" render={(props) => <PrivacyPolicy {...props} />} />
+
       <Route exact path="/dacs/new" render={(props) => <EditDAC isNew {...props} />} />
       <Route
         exact
@@ -40,9 +35,14 @@ const SwitchRoutes = ({ currentUser }) => (
         exact
         path="/dacs/:id/edit"
         render={(props) => (
-          <EditDAC key={currentUser ? currentUser.id : 0} currentUser={currentUser} {...props} />
+          <EditDAC
+            key={currentUser ? currentUser.id : 0}
+            currentUser={currentUser}
+            {...props}
+          />
         )}
       />
+
       <Route exact path="/campaigns/new" render={(props) => <EditCampaign isNew {...props} />} />
       <Route
         exact
@@ -60,6 +60,7 @@ const SwitchRoutes = ({ currentUser }) => (
           />
         )}
       />
+
       <Route
         exact
         path="/campaigns/:id/milestones/new"
@@ -152,7 +153,7 @@ const SwitchRoutes = ({ currentUser }) => (
                 />
             )}
         />*/}
-     
+
       <Route
         exact
         path="/profile"
@@ -160,15 +161,19 @@ const SwitchRoutes = ({ currentUser }) => (
       />
       <Route exact path="/profile/:userAddress" render={(props) => <Profile {...props} />} />
       <Route path="/" render={(props) => <LandingPage {...props} />} />
-      {/*<Route
-            exact
-            path="/"
-            render={props => <Explore {...props} />}
-        />*/}
+
       <Route exact path="/campaigns" render={(props) => <Campaigns {...props} />} />
       <Route exact path="/dacs" render={(props) => <DACs {...props} />} />
       {/* Other material react routes. Not used*/})
       <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
+
+      <Route
+        exact
+        path="/termsandconditions"
+        render={(props) => <TermsAndConditions {...props} />}
+      />
+      <Route exact path="/privacypolicy" render={(props) => <PrivacyPolicy {...props} />} />
+
       <Route component={NotFound} />
     </Switch>
   </React.Suspense>
