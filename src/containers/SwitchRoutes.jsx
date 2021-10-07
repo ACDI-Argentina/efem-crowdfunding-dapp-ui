@@ -5,17 +5,20 @@ import Loader from '../components/Loader';
 
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
-const ViewMilestone = React.lazy(() => import('../components/views/ViewMilestone'));
+
 const EditDAC = React.lazy(() => import('../components/views/EditDAC'));
 const ViewDAC = React.lazy(() => import('../components/views/ViewDAC'));
-const NotFound = React.lazy(() => import('../components/views/NotFound'));
-const Campaigns = React.lazy(() => import('../components/views/Campaigns'));
-const DACs = React.lazy(() => import('../components/views/DACs'));
-const TermsAndConditions = React.lazy(() => import('../components/views/TermsAndConditions'));
-const PrivacyPolicy = React.lazy(() => import('../components/views/PrivacyPolicy'));
 const EditCampaign = React.lazy(() => import('../components/views/EditCampaign'));
 const ViewCampaign = React.lazy(() => import('../components/views/ViewCampaign'));
 const EditMilestone = React.lazy(() => import('../components/views/EditMilestone'));
+const ViewMilestone = React.lazy(() => import('../components/views/ViewMilestone'));
+
+const NotFound = React.lazy(() => import('../components/views/NotFound'));
+const DACs = React.lazy(() => import('../components/views/DACs'));
+const Campaigns = React.lazy(() => import('../components/views/Campaigns'));
+
+const TermsAndConditions = React.lazy(() => import('../components/views/TermsAndConditions'));
+const PrivacyPolicy = React.lazy(() => import('../components/views/PrivacyPolicy'));
 
 const SwitchRoutes = ({ currentUser }) => (
   <React.Suspense fallback={<Loader className="fixed"/>}>
