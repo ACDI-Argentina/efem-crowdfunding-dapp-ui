@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import LandingPage from 'views/LandingPage/LandingPage.js';
 import Loader from '../components/Loader';
 
+import LandingPage from 'components/views/LandingPage.js';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
