@@ -65,8 +65,7 @@ const ProfileForm = ({
       //Clonar el user que nos venga x prop
 
       for(const [key,value] of Object.entries(values)){
-        console.log(`${key} ${value}`);
-        user[key] = value; //Esto es lo que se hace el nombre cuando se esta editando
+        user[key] = value;
       }
         
       if (!user.address) {//TODO: Agregar algun mensaje de error indicando que no tiene la wallet conectada
@@ -102,7 +101,7 @@ const ProfileForm = ({
           </div>
         </GridItem>
 
-        <GridItem xs={12} md={7} container direction="column" justify="center">
+        <GridItem xs={12} md={7} container direction="column" justifyContent="center">
           <div className="form-group">
             <TextField
               name={"name"}

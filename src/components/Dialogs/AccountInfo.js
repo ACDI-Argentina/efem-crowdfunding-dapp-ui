@@ -58,16 +58,16 @@ const AccountInfo = ({ address }) => {
 
   return (
     <>
-      <Grid container item justify="center" xs={12}>
+      <Grid container item justifyContent="center" xs={12}>
         <Address>{address}</Address>
       </Grid>
       <AccountActionsContainer>
-        <Grid container justify="center" align="center" item sm={4} xs={12}>
+        <Grid container justifyContent="center" align="center" item sm={4} xs={12}>
           <LinkButton target="_blank" href={explorerLink}>
             View on RSK explorer
           </LinkButton>
         </Grid>
-        <Grid container justify="center" align="center" item sm={4} xs={12}>
+        <Grid container justifyContent="center" align="center" item sm={4} xs={12}>
           <Tooltip open={showTooltip} title="Copied!" placement="top">
             <CopyAddress onClick={copyToClipboard}>
               Copy address <i className="far fa-copy" />

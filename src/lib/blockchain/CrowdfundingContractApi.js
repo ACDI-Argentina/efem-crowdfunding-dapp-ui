@@ -42,6 +42,9 @@ class CrowdfundingContractApi {
             const response = await this.crowdfunding.methods.canPerform(address, hashedRole, []).call();
             return response;
         } catch (err) {
+            if(!this.crowdfunding){ //TODO: Add common error handling to this class
+                console.log(`Crowdfundign smart contract is not initialized`)
+            }
             console.log("Fail to invoke canPerform on smart contract.", err);
             return false;
         }

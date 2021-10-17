@@ -17,7 +17,6 @@ import { getTruncatedText } from '../../lib/helpers';
 import LoaderButton from '../LoaderButton';
 import User from '../../models/User';
 import ErrorPopup from '../ErrorPopup';
-import { Consumer as WhiteListConsumer } from '../../contextProviders/WhiteListProvider';
 import FiatUtils from '../../utils/FiatUtils';
 import { connect } from 'react-redux'
 import { selectCampaign } from '../../redux/reducers/campaignsSlice'
@@ -37,7 +36,6 @@ import styles from "assets/jss/material-kit-react/views/milestonePage.js";
 import { withTranslation } from 'react-i18next';
 import { Box } from '@material-ui/core';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
-import WhiteListProvider from 'contextProviders/WhiteListProvider';
 
 BigNumber.config({ DECIMAL_PLACES: 18 });
 
@@ -259,8 +257,9 @@ class EditMilestone extends Component {
   }
 
   render() {
+    const fiatTypes = [{ value: "USD", title: "USD" }]; //TODO: Read from config
 
-    const { isNew, isProposed, history, fiatTypes, reviewers, recipients, t } = this.props;
+    const { isNew, isProposed, history, reviewers, recipients, t } = this.props;
     const { isLoading, isSaving, formIsValid, campaign, isBlocking, milestone } = this.state;
     const { classes } = this.props;
     const { ...rest } = this.props;
@@ -502,10 +501,8 @@ EditMilestone.propTypes = {
       milestoneId: PropTypes.string,
     }).isRequired,
   }).isRequired,
-  fiatTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
   isCampaignManager: PropTypes.bool,
   reviewers: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  tokenWhitelist: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 EditMilestone.defaultProps = {
@@ -513,21 +510,6 @@ EditMilestone.defaultProps = {
   isNew: false,
   isProposed: false,
 };
-
-const EdtMilestone = props => (
-  <WhiteListProvider>
-    <WhiteListConsumer>
-      {({ tokenWhitelist, fiatWhitelist }) => (
-        <EditMilestone
-          {...props}
-          tokenWhitelist={tokenWhitelist}
-          fiatTypes={fiatWhitelist.map(f => ({ value: f, title: f }))}
-          isCampaignManager={props.isCampaignManager}
-        />
-      )}
-    </WhiteListConsumer>
-  </WhiteListProvider>
-);
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -545,4 +527,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = { saveMilestone }
 
-export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(withTranslation()(EdtMilestone))));
+export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(withTranslation()(EditMilestone))));

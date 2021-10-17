@@ -35,7 +35,7 @@ class FiatTargetProgress extends Component {
       <Grid container
         spacing={0}
         direction="row"
-        justify="space-around"
+        justifyContent="space-around"
         alignItems="center"
         className={classes.root}>
         <Grid item xs={12}>

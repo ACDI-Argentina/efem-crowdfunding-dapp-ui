@@ -49,7 +49,7 @@ class SupportCampaignCard extends Component {
           <Grid
             container
             direction="row"
-            justify="flex-end"
+            justifyContent="flex-end"
           >
             <Grid item xs={12} className={classes.actions}>
               <Box display="flex" flexGrow={1} alignItems="center" justifyContent="flex-end">
