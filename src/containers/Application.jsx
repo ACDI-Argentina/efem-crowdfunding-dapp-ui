@@ -74,9 +74,10 @@ class Application extends Component {
     this.props.fetchDacs();
     this.props.fetchCampaigns();
     this.props.fetchMilestones();
-    this.props.fetchUsers();
     this.props.fetchExchangeRates();
     initExchangeRateListener();
+    
+    setTimeout(() => this.props.fetchUsers(), 15000)
   }
 
 
