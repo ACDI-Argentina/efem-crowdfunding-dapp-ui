@@ -226,7 +226,7 @@ class Donate extends Component {
           value={config.tokens[tokenKey].address}>
         <Grid container
             spacing={2}
-            justify="flex-start"
+            justifyContent="flex-start"
             alignItems="center"
             className={classes.selectToken}>
           <Grid item xs={5}>
@@ -288,7 +288,7 @@ class Donate extends Component {
                   <ProfileCard address={currentUser.address} />
                   <Grid container
                       spacing={2}
-                      justify="flex-start"
+                      justifyContent="flex-start"
                       alignItems="center">
                     <Grid item xs={4}>
                       <Select value={tokenAddress} onChange={this.handleTokenChange} >
