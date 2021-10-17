@@ -51,7 +51,7 @@ export const currentUserSlice = createSlice({
       action.payload.status = User.REGISTERING;
 
       if(!user.address){
-        return state; //No hagas ningun cambio
+        return state;
       }
 
       return action.payload.toStore();
