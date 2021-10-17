@@ -102,7 +102,7 @@ const ProfileForm = ({
           </div>
         </GridItem>
 
-        <GridItem xs={12} md={7} container direction="column" justify="center">
+        <GridItem xs={12} md={7} container direction="column" justifyContent="center">
           <div className="form-group">
             <TextField
               name={"name"}
