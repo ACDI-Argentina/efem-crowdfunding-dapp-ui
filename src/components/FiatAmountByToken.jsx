@@ -18,18 +18,24 @@ const FiatAmountByToken = ({
 }) => {
     const [fiatAmount, setFiatAmount] = useState();
     const [tokenAmount, setTokenAmount] = useState();
-    const { rate } = useSelector(state => selectExchangeRateByToken(state, tokenAddress));
+    const exchangeRate = useSelector(state => selectExchangeRateByToken(state, tokenAddress));
+    const rate = exchangeRate?.rate;
+    
 
     useEffect(() => {
         try {
+            if(!rate) return;
             const centsFiatAmount = tokenAmountWei.dividedBy(rate);
             setFiatAmount(centsFiatAmount.toString());
             setTokenAmount(tokenAmount);
         } catch (err) {
             console.error('Error transformando monto crypto en fiat.', err);
         }
-    })
+    }, [tokenAddress, tokenAmountWei, rate])
 
+    if(!rate){
+        return null;
+    }
     return (
         <Typography variant="body1">
             <FiatAmount amount={new BigNumber(fiatAmount)} />
