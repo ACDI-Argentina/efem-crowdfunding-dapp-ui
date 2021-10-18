@@ -51,9 +51,7 @@ const ProfileForm = ({
     }
   }, [user]);
   
-  console.log(user.status);
-
-
+  
   const formik = useFormik({
     initialValues: {
       name: user.name,
