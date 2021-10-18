@@ -24,6 +24,7 @@ const ProfileForm = ({
 }) => {
   const avatarRef = useRef();
   const [avatar, setAvatar] = useState();
+  const [loading, setLoading] = useState(false);
   const [avatarEditing, setAvatarEditing] = useState(false);
 
   const dispatch = useDispatch();
@@ -43,7 +44,14 @@ const ProfileForm = ({
         onFinishEdition();
       }
     }
+    if(user.status.name === "Registering"){
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
   }, [user]);
+  
+  console.log(user.status);
 
 
   const formik = useFormik({
@@ -163,7 +171,7 @@ const ProfileForm = ({
               formNoValidate
               type="submit"
               disabled={!formik.isValid || !dirty || avatarEditing}
-              isLoading={formik.isSubmitting}
+              isLoading={formik.isSubmitting || loading} 
               loadingText={t('saving')}>
               {t('save')}
             </LoaderButton>
