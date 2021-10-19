@@ -38,7 +38,7 @@ class ProfileCard extends Component {
         return (
             <ListItem alignItems="flex-start" className={classes.root}>
                 <ListItemAvatar>
-                    <Avatar src={user.avatar} className={classes.logo} />
+                    <Avatar src={user.avatarCidUrl} className={classes.logo} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={user.name}

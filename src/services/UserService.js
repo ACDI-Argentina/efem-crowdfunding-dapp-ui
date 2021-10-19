@@ -34,7 +34,7 @@ class UserService {
             const userData = await feathersClient.service('users').get(address);
             let registered = true;
             const { name, email, url, infoCid } = userData;
-            
+
             let avatarCid;
             let avatar;
 
@@ -95,10 +95,28 @@ class UserService {
   loadUserByAddress(address) {
     return new Observable(async subscriber => {
       try {
-        const userdata = await feathersClient.service('/users').get(address);
-        // El usuario se encuentra registrado.
-        userdata.registered = true;
-        subscriber.next(new User({ ...userdata }));
+        const userdata = await feathersClient.service('users').get(address);
+        const { infoCid } = userdata;
+
+        let avatarCid;
+        let avatar;
+        if (infoCid) {
+          // Se obtiene la información del usuario desde IPFS.
+          const userIpfs = await userIpfsConnector.download(infoCid);
+          avatarCid = userIpfs.avatarCid;
+          avatar = userIpfs.avatar;
+        }
+
+        const user = new User({
+          ...userdata,
+          avatar,
+          avatarCid,
+          registered: true
+        });
+        window.user = user;
+
+        subscriber.next(user);
+
       } catch (e) {
 
         if (e.name === 'NotFound') {
@@ -122,9 +140,21 @@ class UserService {
     return new Observable(async subscriber => {
       const usersByGroups = [];
       const { data: users } = await feathersClient.service("users").find();
-      for (const user of users) {
+      
+      const hydratedUsers = [];
+      for(const user of users) {
+        if(user.infoCid){ // Resolver ipfs
+          const userIpfs = await userIpfsConnector.download(user.infoCid);
+          user.avatarCid = userIpfs.avatarCid;
+          user.avatar = userIpfs.avatar;
+        }
+        hydratedUsers.push(user);
+      }
+
+      for (const user of hydratedUsers) {
         const roles = await getRoles(user.address);
-        usersByGroups.push(new User({ ...user, roles }));
+        const userWithRoles = new User({ ...user, roles });
+        usersByGroups.push(userWithRoles); 
       }
       subscriber.next(usersByGroups);
     })

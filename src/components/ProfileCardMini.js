@@ -37,7 +37,7 @@ class ProfileCardMini extends Component {  //va a recibir como prop un address
         return (
             <div>
                 <Link className={`profile-card ${namePosition}`} to={`/profile/${user.address}`}>
-                    <Avatar src={user.avatar} className={classes.logo} />
+                    <Avatar src={user.avatarCidUrl} className={classes.logo} /> 
                     <p className={`description ${descriptionClass}`}>{user.name}</p>
                 </Link>
             </div>
