@@ -1,13 +1,13 @@
 {
     "give4forest": "Give for forest",
 
-    "landingPageTitle": "Crypto-fondos que nos conectan con el planeta",
+    "landingPageTitle": "Crypto donaciones que nos conectan con el planeta",
 
     "connectWallet": "Conectar billetera",
 
-    "landingPagesSubtitle1": "Movilizamos donaciones en criptomonedas ",
-    "landingPagesSubtitle2": "para promover el desarrollo de comunidades",
-    "landingPagesSubtitle3": " que habitan y cuidan los bosques. ",
+    "landingPagesSubtitle1": "Conectamos la creatividad local y sus ",
+    "landingPagesSubtitle2": "soluciones digitales orientadas a la naturaleza",
+    "landingPagesSubtitle3": ", con la financiación temprana que necesitan.",
 
     "landingPageFinanceProject": "Financia tu proyecto",
     "landingPageMakeDonation": "Haz tu donación",
@@ -358,6 +358,7 @@
      "menuProfile":"Perfil",
      "menuSignup":"Regístrate",
 
-     "aboutUs":"Acerca de"
+     "aboutUs":"ACERCA DE",
+     "faqTitle": "FAQs"
 
 }

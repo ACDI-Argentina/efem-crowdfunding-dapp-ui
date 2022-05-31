@@ -26,7 +26,7 @@ class Footer extends Component {
           spacing={0}
         >
           <Grid item xs={8} sm={6} className={classes.leftSection}>
-            <img src={require("assets/img/logos/give4forest.png")} alt={t('give4forest')} className={classes.dappLogo} />
+            <img src={require("assets/img/logos/give4forest.svg")} alt={t('give4forest')} className={classes.dappLogo} />
           </Grid>
           <Grid item xs={8} sm={6} className={classes.rightSection}>
             <h6 className={classes.description}>

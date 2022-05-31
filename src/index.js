@@ -7,7 +7,8 @@ import Application from './containers/Application';
 import './styles/application.css';
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core";
+import { createTheme } from "@mui/material/styles";
 import './i18n/i18n';
 
 import "assets/scss/material-kit-react.scss?v=1.9.0";
@@ -30,7 +31,7 @@ const theme = createTheme({
     primary: {
       main: '#FF5D49'
     },
-    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif'
+    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
   }
 });
 

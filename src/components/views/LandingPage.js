@@ -31,7 +31,7 @@ export default withTranslation()(function LandingPage(props) {
     <div className={classes.landingPage}>
       <Header
         color="white"
-        brand={<img src={require("assets/img/logos/give4forest.png")}
+        brand={<img style={{minHeight: '80px'}} src={require("assets/img/logos/give4forest.svg")}
         alt={t('give4forest')}
         className={classes.dappLogo}/>}
         rightLinks={<MainMenu />}
@@ -40,11 +40,11 @@ export default withTranslation()(function LandingPage(props) {
       <Parallax image={require("assets/img/landing-bg.jpg")}>
       <div className={classes.container}>
           <GridContainer justifyContent="center">
-            <GridItem xs={12} sm={12} md={8}>
+            <GridItem xs={12} sm={12} md={12}>
               <div className={classes.titleContainer}>
                 <h2 className={classes.title}>{t('landingPageTitle')}</h2>
                 <h4 className={classes.subtitle}>
-                  {t('landingPagesSubtitle1')}<span>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
+                  {t('landingPagesSubtitle1')}<span className={classes.subtitleHighlight}>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
                 </h4>
               </div>
             </GridItem>
@@ -53,12 +53,10 @@ export default withTranslation()(function LandingPage(props) {
       </Parallax>
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
-          <img src={require("assets/img/icons/separator.png")} alt="" className={classes.topSeparator} />
           <JoinGivethCommunity history={props.history} />
           <Campaigns />
           <PlatformFeatures />
           <BlockchainBenefits />
-          <img src={require("assets/img/icons/separator.png")} alt="" className={classes.bottomSeparator} />
           <Footer />
         </div>
       </div>

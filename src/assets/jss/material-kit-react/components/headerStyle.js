@@ -52,19 +52,9 @@ const headerStyle = {
     flex: 1
   },
   title: {
-    ...defaultFont,
-    lineHeight: "30px",
-    fontSize: "18px",
-    borderRadius: "3px",
-    textTransform: "none",
-    color: "inherit",
-    padding: "0px",
-    letterSpacing: "unset",
-    /*textShadow: "1px 1px 2px rgba(0, 0, 0, 1)",*/
-    "&:hover,&:focus": {
-      color: "inherit",
-      background: "transparent"
-    }
+    minWidth: "50%",
+    textAlign: "center",
+    height: "50px",
   },
   appResponsive: {
     margin: "20px 10px"
@@ -121,10 +111,11 @@ const headerStyle = {
     border: "0",
     padding: "0.625rem 0",
     /*marginBottom: "20px",*/
-    color: "#555",
-    backgroundColor: "#fff !important",
-    boxShadow:
-      "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)"
+    color: "#fff",
+    background: "none !important",
+    position: "absolute",
+    zIndex: "1",
+    boxShadow: "none"
   },
   drawerPaper: {
     border: "none",

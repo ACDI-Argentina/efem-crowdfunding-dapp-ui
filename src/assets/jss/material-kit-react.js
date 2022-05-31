@@ -62,7 +62,7 @@ const card = {
 };
 
 const defaultFont = {
-  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
   lineHeight: "1.5em"
 };
