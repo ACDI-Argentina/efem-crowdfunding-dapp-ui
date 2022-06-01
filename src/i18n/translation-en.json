@@ -12,6 +12,13 @@
     "landingPageFinanceProject": "Finance your project",
     "landingPageMakeDonation": "Make your donation",
 
+    "landingPageConocerSoluciones": "Explore solutions",
+    "landingPageProponerSoluciones": "Propose solutions",
+
+    "knowPlatform1": "Give for Forest",
+    "knowPlatform2": " activates the digital innovations arising from the local communities themselves, through the trust of Blockchain technology. With better technologies they will be able to take better care of the forests, and the forests will continue to take care of all of us.",
+    "knowPlatformKnowMoreButton": "Learn more",
+
     "platformFeaturesTitle1": "",
     "platformFeaturesTitle2": "Sustainable development",
     "platformFeaturesTitle3": " needs a ",
@@ -85,11 +92,10 @@
     "dacs": "Decentralized Funds",
     "dac": "Decentralized Fund",
     "dacsSectionDescription":"These Funds are solving causes. Help them realise their goals by giving Bitcoin or tokens!",
-    "campaigns": "Campaigns",
+    "campaigns": "Digital solutions for development",
     "campaign": "Campaign",
     "noCampaignsYet": "There are no campaings yet!",
     "edit": "Edit",
-    "campaignsSectionDescription":"Our life endeavours",
     "newCampaignTitle": "Start a new campaign!",
     "editCampaignTitle": "Edit campaign",
     "campaignDescription": "A campaign solves a specific cause by executing a project via its Milestones. Funds raised by a campaign need to be delegated to its Milestones in order to be paid out.",

@@ -6,7 +6,8 @@ const campaignsStyle = {
 
   section: {
     padding: "0",
-    textAlign: "left"
+    textAlign: "left",
+    backgroundColor: "#FFF"
   },
   title: {
     ...title,

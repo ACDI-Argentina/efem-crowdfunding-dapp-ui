@@ -32,7 +32,7 @@ class DACs extends Component {
     return (
       <div id="campaigns-view" className="card-view">
         <div className={classes.section}>
-          <h3 className={classes.title}>{t('dacs')} {total > 0 && <Badge color="success">{total}</Badge>}</h3>
+          <h2 className={classes.title}>{t('dacs')} {total > 0 && <Badge color="success">{total}</Badge>}</h2>
           <h6 className={classes.description}>
             {t('dacsSectionDescription')}
           </h6>

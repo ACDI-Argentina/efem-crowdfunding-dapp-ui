@@ -12,6 +12,13 @@
     "landingPageFinanceProject": "Financia tu proyecto",
     "landingPageMakeDonation": "Haz tu donación",
 
+    "landingPageConocerSoluciones": "Conocer soluciones",
+    "landingPageProponerSoluciones": "Proponer soluciones",
+
+    "knowPlatform1": "Give for Forest",
+    "knowPlatform2": " activa las innovaciones digitales surgidas de las propias comunidades locales, a través de la fiabilidad de la tecnología Blockchain. Con mejores tecnologías podrán cuidar mejor a los bosques, y los bosques seguirán cuidando de todos nosotros.",
+    "knowPlatformKnowMoreButton": "Conocer más",
+
     "platformFeaturesTitle1": "El ",
     "platformFeaturesTitle2": "crecimiento sostenible",
     "platformFeaturesTitle3": " necesita una ",
@@ -86,11 +93,10 @@
     "dacs": "Comunidades Altruistas Descentralizadas",
     "dac": "Comunidad Altruista Descentralizada",
     "dacsSectionDescription":"Estas Comunidades están llevando proyectos a cabo. ¡Ayúdelas a alcanzar sus objetivos dándoles Bitcoins o tokens!",
-    "campaigns": "Campañas",
+    "campaigns": "Soluciones digitales para el desarrollo",
     "campaign": "Campaña",
     "noCampaignsYet": "¡Aún no hay campañas!",
     "edit": "Editar",
-    "campaignsSectionDescription":"Nuestros emprendimientos de vida",
     "newCampaignTitle": "Comienza una nueva campaña!",
     "editCampaignTitle": "Editar campaña",
     "campaignDescription": "Una campaña resuelve una causa específica ejecutando un proyecto a través de sus Hitos. Los fondos recaudados por una campaña deben delegarse a sus Hitos para poder ser pagados.",

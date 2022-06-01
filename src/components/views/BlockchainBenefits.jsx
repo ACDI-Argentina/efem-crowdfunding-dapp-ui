@@ -17,7 +17,7 @@ class BlockchainBenefits extends Component {
 
     return (
       <div className={classes.section}>
-        <h3 className={classes.title}>{t('blockchainBenefitsTitle')}</h3>
+        <h2 className={classes.title}>{t('blockchainBenefitsTitle')}</h2>
         {
           <Grid
             container

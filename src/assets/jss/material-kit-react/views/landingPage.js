@@ -1,5 +1,7 @@
 import { container, title } from "assets/jss/material-kit-react.js";
 
+import { dropShadowButton } from "assets/jss/material-kit-react/components/customButtonStyle.js";
+
 const landingPageStyle = {
 
   landingPage: {
@@ -21,10 +23,8 @@ const landingPageStyle = {
   },
   titleContainer: {
     padding: "3em",
-    paddingTop: "calc(130px + 3em)",
     "@media (max-width: 600px)": {
       padding: "1em",
-      paddingTop: "calc(130px + 1em)",
     }
   },
   title: {
@@ -64,6 +64,10 @@ const landingPageStyle = {
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"*/
+  },
+  dropShadowButton: {
+    ...dropShadowButton,
+    margin: ".5em",
   }
 };
 

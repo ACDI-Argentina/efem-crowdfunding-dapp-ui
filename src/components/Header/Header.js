@@ -121,7 +121,7 @@ export default function Header(props) {
         <Box sx={{ display: { md: 'flex' } }}>
           <Connect />
         </Box>
-
+        <Box sx={{ display: { md: 'flex' } }}>
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
@@ -134,6 +134,8 @@ export default function Header(props) {
             <Menu />
           </IconButton>
         </Hidden>
+        </Box>
+
 
       </Toolbar>
 

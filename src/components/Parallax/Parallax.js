@@ -50,7 +50,6 @@ export default function Parallax(props) {
       style={{
         ...style,
         backgroundImage: "url(" + image + ")",
-        transform: transform
       }}
     >
       {children}
