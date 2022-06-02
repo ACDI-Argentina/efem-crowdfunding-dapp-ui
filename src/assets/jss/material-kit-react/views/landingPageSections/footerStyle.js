@@ -1,4 +1,5 @@
-import { title, primaryColor } from "assets/jss/material-kit-react.js";
+import { fontSize } from "styled-system";
+import { primaryColor } from "assets/jss/material-kit-react.js";
 
 const footerStyle = {
 
@@ -8,19 +9,32 @@ const footerStyle = {
     color: "#000",
     padding: "0",
     textAlign: "left",
-    marginTop: "2em"
+    backgroundColor: "#004634"
   },
   dappLogo: {
-    padding: "1em 1em 1em 0em",
-    width: "100%",
-    textAlign: "left",
-    maxWidth: "300px"
+    padding: "1em 0",
+    maxHeight: "180px",
+    position: "absolute",
+    top: "-120px"
   },
   leftSection: {
-    textAlign: "right",
     "@media (max-width: 600px)": {
       textAlign: "left"
     }
+  },
+  socialMediaIcon: {
+    maxWidth: "30px",
+    maxHeight: "30px",
+    marginLeft: "20px"
+  },
+  sectionlink: {
+    color: "#FFF",
+    textTransform: "uppercase",
+    marginRight: "40px",
+    fontSize: ".8em",
+    "&:hover,&:focus": {
+      color: primaryColor
+    },
   },
   rightSection: {
     borderLeft: "2px solid #999",
@@ -43,10 +57,18 @@ const footerStyle = {
     margin: "0"
   },
   disclaimer: {
-    color: "#000",
+    color: "#FFF",
     fontWeight: "normal",
+    padding: "1em",
+    textAlign: "center",
+    fontSize: ".7em",
     margin: "0",
-    textAlign: "center"
+  },
+  link: {
+    color: "#FFF",
+    "&:hover,&:focus": {
+      color: primaryColor
+    },
   },
   logo: {
     width: "75%",

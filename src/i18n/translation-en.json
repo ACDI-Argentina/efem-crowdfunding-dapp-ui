@@ -332,10 +332,21 @@
     "requestConnectionCancel":"Maybe later",
     "requestConnectionOk": "Ok, connect",
 
-     "menuWelcome":"Welcome!",
-     "menuProfile":"Profile", 
-     "menuSignup":"Sign up" ,
+    "menuWelcome":"Welcome!",
+    "menuProfile":"Profile", 
+    "menuSignup":"Sign up" ,
 
-     "aboutUs":"ABOUT US",
-     "faqTitle": "FAQs"
+    "aboutUs":"ABOUT US",
+    "faqTitle": "FAQs",
+
+    "sponsorTap1Title": "Partners",
+    "sponsorTap2Title": "Investors",
+    "sponsorTap3Title": "Wallets",
+
+    "sponsorAcdi": "ACDI",
+    "sponsorElFuturoEstaEnElMonte": "El Futuro está en el Monte",
+    "sponsorRsk": "RSK",
+    "sponsorIovlabs": "IOVlabs",
+    "sponsorBidlab": "BID Lab",
+    "sponsorMetamask": "Metamask"
 }
