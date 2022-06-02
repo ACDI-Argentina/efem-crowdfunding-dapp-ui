@@ -28,7 +28,13 @@
     "platformFeatures3Title": "Transparency",
     "platformFeatures3Text": "We mobilize donations with traceability and incentives for all parties through technology.",
 
-    "blockchainBenefitsTitle": "Blockchain benefits in fundraising for Development",
+    "blockchainBenefitsTitle": "Blockchain for growth",
+    "blockchainBenefitsDescription": "An open and transparent financing platform, associated with decentralized certified results.",
+
+    "blockchainBenefits1Legend": "Your donation, without commissions",
+    "blockchainBenefits2Legend": "Public and real-time traceability",
+    "blockchainBenefits3Legend": "Security and anonymity",
+    "blockchainBenefits4Legend": "Disbursement of funds by certified stages",
 
     "blockchainHelpBenefitTitle": "Help without borders",
     "blockchainHelpBenefitDescription": "Make your donation from anywhere in the world, without intermediaries and with lower transaction costs.",
@@ -48,7 +54,7 @@
 
     "iniciativeOf": "A collaboration of: ",
     "argentina": "ARGENTINA ",
-    "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
+    "disclaimer": "Copyright 2022 | RSK - The future is in the forest | All rights reserved. ",
     "termsAndConditions": "Terms and conditions. ",
     "dataHandlingPolicy": "Data handling policy. ",
 

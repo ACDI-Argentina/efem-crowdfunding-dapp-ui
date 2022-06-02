@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import styles from "assets/jss/material-kit-react/views/landingPageSections/blockchainBenefitsStyle.js";
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
+import BlockchainBenefitsCard from './BlockchainBenefitsCard';
 
 /**
  * The BlockchainBenefits section
@@ -16,40 +17,41 @@ class BlockchainBenefits extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <div className={classes.section}>
-        <h2 className={classes.title}>{t('blockchainBenefitsTitle')}</h2>
-        {
-          <Grid
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="flex-start"
-            spacing={10}
-          >
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
-              <div>
-                <img src={require("assets/img/icons/sinFronteras.png")} alt={t('blockchainHelpBenefitTitle')} className={classes.image} />
-              </div>
-              <div className={classes.sectionTitle}>{t('blockchainHelpBenefitTitle')}</div>
-              <h6 className={classes.sectionDescription}>{t('blockchainHelpBenefitDescription')}</h6>
-            </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
-              <div>
-                <img src={require("assets/img/icons/confianza.png")} alt={t('blockchainTrustBenefitTitle')} className={classes.image} />
-              </div>
-              <div className={classes.sectionTitle}>{t('blockchainTrustBenefitTitle')}</div>
-              <h6 className={classes.sectionDescription}>{t('blockchainTrustBenefitDescription')}</h6>
-            </Grid>
-            <Grid item xs={12} sm={4} md={4} lg={3} xl={3} className={classes.benefitSection}>
-              <div>
-                <img src={require("assets/img/icons/seguridad.png")} alt={t('blockchainSecurityBenefitTitle')} className={classes.image} />
-              </div>
-              <div className={classes.sectionTitle}>{t('blockchainSecurityBenefitTitle')}</div>
-              <h6 className={classes.sectionDescription}>{t('blockchainSecurityBenefitDescription')}</h6>
-            </Grid>              
+      <Grid container justifyContent="center" className={classes.container}>
+        <Grid item xs={12}>
+          <h2 className={classes.title}>{t('blockchainBenefitsTitle')}</h2>
+        </Grid>
+        <Grid item xs={12}>
+          <h4 className={classes.subtitle}>{t('blockchainBenefitsDescription')}</h4>
+        </Grid>
+        <Grid item xs={12} className={classes.separator}></Grid>
+        <Grid container direction="row" justifyContent="center" alignItems="stretch" spacing={3}>
+          <Grid item alignItems="stretch" xs={3}>
+            <BlockchainBenefitsCard
+              backgroundColor="#A1B651"
+              iconSrc={require("assets/img/icons/blockchain1.svg")}
+              legend={t('blockchainBenefits1Legend')} />
           </Grid>
-        }
-      </div>
+          <Grid item alignItems="stretch" xs={3}>
+            <BlockchainBenefitsCard
+              backgroundColor="#C4CBFF"
+              iconSrc={require("assets/img/icons/blockchain2.svg")}
+              legend={t('blockchainBenefits2Legend')} />
+          </Grid>
+          <Grid item alignItems="stretch" xs={3}>
+            <BlockchainBenefitsCard
+              backgroundColor="#43E0A9"
+              iconSrc={require("assets/img/icons/blockchain3.svg")}
+              legend={t('blockchainBenefits3Legend')} />
+          </Grid>
+          <Grid item alignItems="stretch" xs={3}>
+            <BlockchainBenefitsCard
+              backgroundColor="#F8652F"
+              iconSrc={require("assets/img/icons/blockchain4.svg")}
+              legend={t('blockchainBenefits4Legend')} />
+          </Grid>
+        </Grid>
+      </Grid>
     )
   }
 }

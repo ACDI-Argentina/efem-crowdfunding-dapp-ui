@@ -13,7 +13,8 @@ const platformFeaturesStyle = {
   title: {
     ...title,
     color: "#fff",
-    paddingBottom: "1.5em"
+    paddingBottom: "1.5em",
+    marginTop: "0"
   },
 
   separator: {

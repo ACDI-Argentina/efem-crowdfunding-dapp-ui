@@ -28,7 +28,13 @@
     "platformFeatures3Title": "Transparencia",
     "platformFeatures3Text": "Movilizamos donaciones con trazabilidad e incentivos para todas las partes través de la tecnología.",
 
-    "blockchainBenefitsTitle": "Beneficios de blockchain en la recolección de fondos para el Desarrollo",
+    "blockchainBenefitsTitle": "Blockchain para el crecimiento",
+    "blockchainBenefitsDescription": "Una plataforma de financiación abierta y transparente, asociada a resultados certificados descentralizadamente.",
+
+    "blockchainBenefits1Legend": "Tu donación, sin comisiones",
+    "blockchainBenefits2Legend": "Trazabilidad pública y en tiempo real",
+    "blockchainBenefits3Legend": "Seguridad y anonimato",
+    "blockchainBenefits4Legend": "Desembolso de fondos por etapas certificadas",
 
     "blockchainHelpBenefitTitle": "Ayuda sin fonteras",
     "blockchainHelpBenefitDescription": "Haz tu donación desde cualquier lugar del mundo, sin intermediarios y con menores costos por transacción.",

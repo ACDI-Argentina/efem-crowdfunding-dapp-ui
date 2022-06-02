@@ -71,7 +71,7 @@ export default withTranslation()(function LandingPage(props) {
         <Grid item sm={1} lg={2}></Grid>
 
         <Grid item sm={1} lg={2}></Grid>
-        <Grid item sm={10} lg={8}>
+        <Grid style={{ margin: "4em 0"}} item sm={10} lg={8}>
           <Sponsors />
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
