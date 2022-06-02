@@ -4,18 +4,44 @@ const platformFeaturesStyle = {
 
   color: "#999",
 
+  container: {
+    alignItems: "center",
+    color: "#fff",
+    padding: "4em 0"
+  },
+
+  title: {
+    ...title,
+    color: "#fff",
+    paddingBottom: "1.5em"
+  },
+
+  separator: {
+    padding: "1em",
+  },
+
+  sectionTitle: {
+    fontWeight: "600",
+    fontSize: "30px",
+    marginBottom: ".5em"
+  },
+
+  sectionDescription: {
+    color: "#fff",
+    fontWeight: "normal",
+    fontSize: "25px",
+    lineHeight: "1.5em"
+  },
+
+  image: {
+    width: "60%",
+    padding: "3em 0"
+  },
+
   section: {
     padding: "0",
     textAlign: "center",
     marginTop: "3em"
-  },
-  title: {
-    ...title,
-    minHeight: "32px",
-    textDecoration: "none",
-    color: "#000",
-    width: "50%",
-    margin: "0 auto 0.5em auto"
   },
   description: {
     color: "#000",
@@ -23,45 +49,7 @@ const platformFeaturesStyle = {
     margin: "0 auto 1em auto",
     fontWeight: "normal"
   },
-  image: {
-    width: "50%",
-    maxWidth: "120px",
-  },
-  sectionTitle: {
-    color: primaryColor,
-    fontWeight: "bold",
-    marginBottom: "1em",
-    "@media (max-width: 600px)": {
-      maxWidth: "60%",
-      marginLeft: "20%"
-    }
-  },
-  sectionDescription: {
-    color: "#000",
-    fontWeight: "normal",
-    "@media (max-width: 600px)": {
-      maxWidth: "60%",
-      marginLeft: "20%"
-    }
-  },
-  underlineHighlight: {
-    textDecoration: "underline",
-    textDecorationColor: "#10B363"
-  },
-  colorHighlight: {
-    color: primaryColor
-  },
-  boldText: {
-    fontWeight: "600"
-  },
-  italicText: {
-    fontStyle: "italic"
-  },
-  featureSection: {
-    "@media (max-width: 600px)": {
-      paddingBottom: "0px !important"
-    },
-  }
+
 };
 
 export default platformFeaturesStyle;

@@ -56,11 +56,13 @@ export default withTranslation()(function LandingPage(props) {
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
 
-        <Grid item sm={1} lg={2}></Grid>
-        <Grid item sm={10} lg={8}>
-          <PlatformFeatures />
+        <Grid container xs={12} className={classes.platformFeaturesBkg}>
+          <Grid item sm={1} lg={2}></Grid>
+          <Grid item sm={10} lg={8}>
+            <PlatformFeatures />
+          </Grid>
+          <Grid item sm={1} lg={2}></Grid>
         </Grid>
-        <Grid item sm={1} lg={2}></Grid>
 
         <Grid item sm={1} lg={2}></Grid>
         <Grid item sm={10} lg={8}>
@@ -76,21 +78,5 @@ export default withTranslation()(function LandingPage(props) {
 
       </Grid>
     </Page>
-  );
-
-  return (
-    <div className={classes.landingPage}>
-      <div className={classNames(classes.main, classes.mainRaised)}>
-        <div className={classes.container}>
-          <KnowPlatform />
-          <JoinGivethCommunity history={props.history} />
-          <Campaigns />
-          <PlatformFeatures />
-          <BlockchainBenefits />
-          <Sponsors />
-          <Footer />
-        </div>
-      </div>
-    </div>
   );
 });
