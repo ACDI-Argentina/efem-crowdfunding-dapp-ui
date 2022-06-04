@@ -20,6 +20,7 @@ import Sponsors from "./Sponsors";
 import HomeParallax from "./HomeParallax";
 import Page from "components/Pages/Page";
 import Grid from '@material-ui/core/Grid'
+import SupportGive4Forest from "./SupportGive4Forest";
 
 
 const useStyles = makeStyles(styles);
@@ -52,7 +53,8 @@ export default withTranslation()(function LandingPage(props) {
 
         <Grid item sm={1} lg={2}></Grid>
         <Grid item sm={10} lg={8}>
-          <Campaigns />
+          <img width="100%" style={{ marginBottom: "4em" }} src={require("assets/img/placeHolderCampaigns.jpg")}/>
+          {/*<Campaigns />*/}
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
 
@@ -69,6 +71,10 @@ export default withTranslation()(function LandingPage(props) {
           <BlockchainBenefits />
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
+
+        <Grid item sm={12} lg={12}>
+          <SupportGive4Forest />
+        </Grid>
 
         <Grid item sm={1} lg={2}></Grid>
         <Grid style={{ margin: "4em 0"}} item sm={10} lg={8}>

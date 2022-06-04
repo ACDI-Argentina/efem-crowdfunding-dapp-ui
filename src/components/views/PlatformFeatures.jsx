@@ -22,36 +22,30 @@ class PlatformFeatures extends Component {
           <h2 className={classes.title}>{t('platformFeaturesTitle')}</h2>
         </Grid>
 
-        <Grid item xs={6}>
-            <center>
-              <img src={require("assets/img/platformFeatures1.jpg")} className={classes.image} />
-            </center>
+        <Grid item xs={5} style={{ textAlign: "left"}}>
+          <img src={require("assets/img/platformFeatures1.jpg")} className={classes.image} />
         </Grid>
-        <Grid item xs={6} style={{ paddingLeft: "1em"}}>
+        <Grid item xs={7} style={{ paddingLeft: "1em"}}>
           <h3 className={classes.sectionTitle}>{t('platformFeatures1Title')}</h3>
           <div className={classes.sectionDescription}>{t('platformFeatures1Text')}</div>
         </Grid>
 
         <Grid item xs={12} className={classes.separator}></Grid>
 
-        <Grid item xs={6} style={{ paddingRight: "1em", textAlign: "right"}}>
+        <Grid item xs={7} style={{ paddingRight: "1em", textAlign: "right"}}>
           <h3 className={classes.sectionTitle}>{t('platformFeatures2Title')}</h3>
           <div className={classes.sectionDescription}>{t('platformFeatures2Text')}</div>
         </Grid>
-        <Grid item xs={6}>
-            <center>
-              <img src={require("assets/img/platformFeatures2.jpg")} className={classes.image} />
-            </center>
+        <Grid item xs={5} style={{ textAlign: "right"}}>
+          <img src={require("assets/img/platformFeatures2.jpg")} className={classes.image} />
         </Grid>
 
         <Grid item xs={12} className={classes.separator}></Grid>
 
-        <Grid item xs={6}>
-            <center>
-              <img src={require("assets/img/platformFeatures3.jpg")} className={classes.image} />
-            </center>
+        <Grid item xs={5} style={{ textAlign: "left"}}>
+          <img src={require("assets/img/platformFeatures3.jpg")} className={classes.image} />
         </Grid>
-        <Grid item xs={6} style={{ paddingLeft: "1em"}}>
+        <Grid item xs={7} style={{ paddingLeft: "1em"}}>
           <h3 className={classes.sectionTitle}>{t('platformFeatures3Title')}</h3>
           <div className={classes.sectionDescription}>{t('platformFeatures3Text')}</div>
         </Grid>

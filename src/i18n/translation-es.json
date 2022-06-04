@@ -1,7 +1,7 @@
 {
     "give4forest": "Give for forest",
 
-    "landingPageTitle": "Crypto donaciones que nos conectan con el planeta",
+    "landingPageTitle": "Cripto donaciones que nos conectan con el planeta",
 
     "connectWallet": "Conectar billetera",
 
@@ -44,6 +44,10 @@
 
     "blockchainSecurityBenefitTitle": "Seguridad y anonimato",
     "blockchainSecurityBenefitDescription": "Nadie te pedirá más información de la que quieras dar. ",
+
+    "supportGive4ForestTitle": "¿Querés ayudarnos a crecer?",
+    "supportGive4ForestText": "Podés colaborar con nuestra misión y el crecimiento de la plataforma aportando fondos a Give for forest.",
+    "supportGive4ForestButtonLabel": "Apoyar a G4F",
 
     "relatedServices": "Servicios relacionados",
 

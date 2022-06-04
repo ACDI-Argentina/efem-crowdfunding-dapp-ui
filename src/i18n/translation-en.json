@@ -45,6 +45,10 @@
     "blockchainSecurityBenefitTitle": "Security and anonymity",
     "blockchainSecurityBenefitDescription": "No one will ask you for more information than you want to give.",
 
+    "supportGive4ForestTitle": "Do you want to help us grow?",
+    "supportGive4ForestText": "You can collaborate with our mission and the growth of the platform by contributing to Give for forest.",
+    "supportGive4ForestButtonLabel": "Support G4F",
+
     "relatedServices": "Related services",
 
     "avalDAO": "AvalDAO",
