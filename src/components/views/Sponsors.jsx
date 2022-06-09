@@ -96,7 +96,7 @@ export default function Sponsors() {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <Grid container
             spacing={0}
-            justify="center"
+            justifyContent="center"
             alignItems="center">
             <Grid item xs={12} sm={6} md={3} className={classes.sponsorGrid}>
               <Sponsor url="https://www.acdi.org.ar"
@@ -130,7 +130,7 @@ export default function Sponsors() {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Grid container
             spacing={0}
-            justify="center"
+            justifyContent="center"
             alignItems="center">
             <Grid item xs={12} sm={6} md={3} className={classes.sponsorGrid}>
               <Sponsor url="https://bidlab.org"
@@ -151,7 +151,7 @@ export default function Sponsors() {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Grid container
             spacing={0}
-            justify="center"
+            justifyContent="center"
             alignItems="center">
             <Grid item xs={12} sm={6} md={3} className={classes.sponsorGrid}>
               <Sponsor url="https://metamask.io"
