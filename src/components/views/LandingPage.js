@@ -21,6 +21,7 @@ import HomeParallax from "./HomeParallax";
 import Page from "components/Pages/Page";
 import Grid from '@material-ui/core/Grid'
 import SupportGive4Forest from "./SupportGive4Forest";
+import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress";
 
 
 const useStyles = makeStyles(styles);
@@ -33,10 +34,9 @@ export default withTranslation()(function LandingPage(props) {
     <Page>
       <Grid container
         spacing={0}
-        justifyContent="center"
         alignItems="center">
         <Grid item xs={12}>
-          <HomeParallax />
+          <HomeParallax history={props.history} />
         </Grid>
 
         <Grid item sm={1} lg={2}></Grid>
@@ -47,18 +47,11 @@ export default withTranslation()(function LandingPage(props) {
 
         <Grid item sm={1} lg={2}></Grid>
         <Grid item sm={10} lg={8}>
-          <JoinGivethCommunity history={props.history} />
+          <Campaigns />
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
 
-        <Grid item sm={1} lg={2}></Grid>
-        <Grid item sm={10} lg={8}>
-          <img width="100%" style={{ marginBottom: "4em" }} src={require("assets/img/placeHolderCampaigns.jpg")}/>
-          {/*<Campaigns />*/}
-        </Grid>
-        <Grid item sm={1} lg={2}></Grid>
-
-        <Grid container xs={12} className={classes.platformFeaturesBkg}>
+        <Grid container className={classes.platformFeaturesBkg}>
           <Grid item sm={1} lg={2}></Grid>
           <Grid item sm={10} lg={8}>
             <PlatformFeatures />

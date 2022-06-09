@@ -15,7 +15,8 @@ const footerStyle = {
     padding: "1em 0",
     maxHeight: "180px",
     position: "absolute",
-    top: "-120px"
+    top: "-120px",
+    zIndex: "10"
   },
   leftSection: {
     "@media (max-width: 600px)": {

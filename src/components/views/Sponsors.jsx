@@ -147,8 +147,7 @@ export default function Sponsors() {
               </Sponsor>
             </Grid>
           </Grid>
-        </TabPanel>
-
+        </TabPanel> 
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Grid container
             spacing={0}

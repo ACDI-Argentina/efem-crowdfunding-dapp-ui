@@ -17,7 +17,7 @@ class BlockchainBenefits extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container justifyContent="center" className={classes.container}>
+      <Grid container className={classes.container}>
         <Grid item xs={12}>
           <h2 className={classes.title}>{t('blockchainBenefitsTitle')}</h2>
         </Grid>
@@ -25,26 +25,26 @@ class BlockchainBenefits extends Component {
           <h4 className={classes.subtitle}>{t('blockchainBenefitsDescription')}</h4>
         </Grid>
         <Grid item xs={12} className={classes.separator}></Grid>
-        <Grid container direction="row" justifyContent="center" alignItems="stretch" spacing={3}>
-          <Grid item alignItems="stretch" xs={3}>
+        <Grid container direction="row" alignItems="stretch" spacing={3}>
+          <Grid item xs={3}>
             <BlockchainBenefitsCard
               backgroundColor="#A1B651"
               iconSrc={require("assets/img/icons/blockchain1.svg")}
               legend={t('blockchainBenefits1Legend')} />
           </Grid>
-          <Grid item alignItems="stretch" xs={3}>
+          <Grid item xs={3}>
             <BlockchainBenefitsCard
               backgroundColor="#C4CBFF"
               iconSrc={require("assets/img/icons/blockchain2.svg")}
               legend={t('blockchainBenefits2Legend')} />
           </Grid>
-          <Grid item alignItems="stretch" xs={3}>
+          <Grid item xs={3}>
             <BlockchainBenefitsCard
               backgroundColor="#43E0A9"
               iconSrc={require("assets/img/icons/blockchain3.svg")}
               legend={t('blockchainBenefits3Legend')} />
           </Grid>
-          <Grid item alignItems="stretch" xs={3}>
+          <Grid item xs={3}>
             <BlockchainBenefitsCard
               backgroundColor="#F8652F"
               iconSrc={require("assets/img/icons/blockchain4.svg")}

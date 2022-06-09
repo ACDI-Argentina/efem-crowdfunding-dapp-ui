@@ -28,4 +28,4 @@ class BlockchainBenefitsCard extends Component {
 
 BlockchainBenefitsCard.propTypes = {};
 
-export default withTranslation()((withStyles(styles)(BlockchainBenefitsCard)))
+export default withTranslation()(withStyles(styles)(BlockchainBenefitsCard))

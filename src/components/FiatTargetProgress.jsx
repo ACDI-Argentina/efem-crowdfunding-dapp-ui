@@ -8,6 +8,7 @@ import BigNumber from 'bignumber.js'
 import Grid from '@material-ui/core/Grid'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import FiatUtils from '../utils/FiatUtils'
+import CustomLinearProgress from './CustomLinearProgress/CustomLinearProgress';
 
 class FiatTargetProgress extends Component {
 
@@ -44,19 +45,41 @@ class FiatTargetProgress extends Component {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <LinearProgress
+          <CustomLinearProgress
+            color="primary"
             variant="determinate"
             value={progress} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid container
+            spacing={2}
+            justifyContent="flex-start"
+            alignItems="center">
+          <Grid item xs={7}>
+            <Typography variant="body2"
+              color="textSecondary"
+              component="div"
+              style={{ fontWeight: 600 }}>
+              {t('targetProgressRaised')}
+            </Typography>
+            <Typography variant="body2"
+              color="textSecondary"
+              component="div">
+              {FiatUtils.format(fiatBalance)}
+            </Typography>
+          </Grid>
+          <Grid item xs={5}>
           <Typography variant="body2"
-            color="textSecondary"
-            component="span">
-            {t('targetProgress', {
-              fiatBalance: FiatUtils.format(fiatBalance),
-              fiatTarget: FiatUtils.format(fiatTarget)
-            })}
-          </Typography>
+              color="textSecondary"
+              component="div"
+              style={{ fontWeight: 600 }}>
+              {t('targetProgressGoal')}
+            </Typography>
+            <Typography variant="body2"
+              color="textSecondary"
+              component="div">
+              {FiatUtils.format(fiatTarget)}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
     );

@@ -11,13 +11,13 @@ import styles from "assets/jss/material-kit-react/components/customLinearProgres
 const useStyles = makeStyles(styles);
 
 export default function CustomLinearProgress(props) {
-  const classes = useStyles();
-  const { color, ...rest } = props;
+  const { color, value, ...rest } = props;
+  const classes = useStyles({ value });
   return (
     <LinearProgress
       {...rest}
       classes={{
-        root: classes.root + " " + classes[color + "Background"],
+        root: classes.root,
         bar: classes.bar + " " + classes[color]
       }}
     />

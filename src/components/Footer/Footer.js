@@ -19,7 +19,6 @@ class Footer extends Component {
         <Grid
           container
           direction="row"
-          justifyContent="center"
           alignItems="center"
           spacing={0}
         >

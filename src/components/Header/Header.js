@@ -131,7 +131,6 @@ export default function Header(props) {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
           >
-            <Menu />
           </IconButton>
         </Hidden>
         </Box>
@@ -213,6 +212,6 @@ Header.propTypes = {
       "white",
       "rose",
       "dark"
-    ]).isRequired
+    ])
   })
 };

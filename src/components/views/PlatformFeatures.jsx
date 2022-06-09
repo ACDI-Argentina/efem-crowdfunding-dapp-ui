@@ -17,7 +17,7 @@ class PlatformFeatures extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container justifyContent="center" className={classes.container}>
+      <Grid container className={classes.container}>
         <Grid item xs={12}>
           <h2 className={classes.title}>{t('platformFeaturesTitle')}</h2>
         </Grid>

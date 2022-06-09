@@ -32,7 +32,10 @@ const theme = createTheme({
       main: '#FF5D49'
     },
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
-  }
+  },
+  typography: {
+    "fontFamily": '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+   }
 });
 
 ReactDOM.render(

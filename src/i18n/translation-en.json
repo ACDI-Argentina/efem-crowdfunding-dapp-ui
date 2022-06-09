@@ -158,6 +158,7 @@
     "milestoneRejectMessagePlaceholder": "Explain why you rejected the completion of this milestone",
     "milestoneRejectMessageMinLength": "It is really appreciated if you write something meaningful",
     "donate": "Donate",
+    "openDetail": "Learn more",
     "donateAmount": "Amount",
     "donateDacTitle": "Donate to DAC",
     "donateDacDescription": "You are committing your funds to the DAC. As long as the owner of the fund does not lock your money, you can get it back at any time.",
@@ -196,6 +197,8 @@
 
     "target": "Target",
     "targetProgress": "{{fiatBalance}} raised of {{fiatTarget}} goal",
+    "targetProgressRaised": "Raised",
+    "targetProgressGoal": "Goal",
 
     "status": "Status",
 

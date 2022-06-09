@@ -22,10 +22,10 @@ class KnowPlatform extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container justifyContent="center" className={classes.container}>
+      <Grid container className={classes.container}>
         <Grid item xs={10} sm={8} lg={8}>
           <div className={classes.paragraphText}><span className={classes.paragraphTextHighlight}>{t('knowPlatform1')}</span><span>{t('knowPlatform2')}</span></div>
-          <Button variant="primary" color="tertiary" size="lg" className={classes.dropShadowButton} onClick={() => this.handleClickAbout()}>
+          <Button variant="contained" color="default" size="medium" className={classes.dropShadowButton} onClick={() => this.handleClickAbout()}>
             {t('knowPlatformKnowMoreButton')}
           </Button>
         </Grid>

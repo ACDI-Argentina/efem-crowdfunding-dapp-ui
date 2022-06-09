@@ -5,7 +5,7 @@ const campaignsStyle = {
   color: "#999",
 
   section: {
-    padding: "0",
+    paddingBottom: "5em",
     textAlign: "left",
     backgroundColor: "#FFF"
   },
@@ -32,8 +32,6 @@ const campaignsStyle = {
     marginRight: "0px",
     marginBottom: "15px",
     background: "none",
-    borderTop: "1px solid black",
-    borderBottom: "1px solid black",
     borderRadius: "0",
     "flexContainer": {
       display: "flex",

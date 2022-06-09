@@ -159,6 +159,7 @@
     "milestoneRejectMessagePlaceholder": "Explique por qué rechazó la finalización de este hito",
     "milestoneRejectMessageMinLength": "Se agradece mucho si escribe algo significativo",
     "donate": "Donar",
+    "openDetail": "Conocer más",
     "donateAmount": "Monto",
     "donateDacTitle": "Donar a DAC",
     "donateDacDescription": "Usted está comprometiendo sus fondos a la DAC. Siempre que el propietario del fondo no bloquee su dinero, puede recuperarlo en cualquier momento.",
@@ -197,6 +198,8 @@
 
     "target": "Objetivo",
     "targetProgress": "{{fiatBalance}} recaudado de {{fiatTarget}} objetivo",
+    "targetProgressRaised": "Recaudado",
+    "targetProgressGoal": "Objetivo",
 
     "status": "Estado",
 

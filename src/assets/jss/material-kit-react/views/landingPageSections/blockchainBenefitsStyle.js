@@ -68,7 +68,12 @@ const blockchainBenefitsStyle = {
 
   card: {
     borderRadius: "5px",
-    height: "100%"
+    height: "100%",
+    "&:hover": {
+      borderRadius: "5px",
+      boxShadow: "8px 8px 0px 0px rgba(67,224,169,0.75)",
+      textTransform: "none",
+    }
   }
 
 };

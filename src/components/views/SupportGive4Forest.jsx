@@ -22,14 +22,14 @@ class SupportGive4Forest extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container justifyContent="center" alignItems="stretch" className={classes.container}>
+      <Grid container alignItems="stretch" className={classes.container}>
         <Grid item xs={6} sm={6} className={classes.supportBackgroundImg}>
         </Grid>
         <Grid item xs={6} sm={6}>
           <div className={classes.leftContainer}>
             <h2 className={classes.title}>{t('supportGive4ForestTitle')}</h2>
             <div className={classes.paragraphText}>{t('supportGive4ForestText')}</div>
-            <Button variant="primary" size="lg" className={classes.dropShadowButton} onClick={() => this.handleClickDonate()}>
+            <Button variant="contained" size="medium" className={classes.dropShadowButton} onClick={() => this.handleClickDonate()}>
               {t('supportGive4ForestButtonLabel')}
             </Button>
           </div>

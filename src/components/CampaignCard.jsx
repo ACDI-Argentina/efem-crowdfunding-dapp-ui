@@ -18,6 +18,8 @@ import Typography from '@material-ui/core/Typography'
 import Donate from './Donate'
 import CampaignCardMini from './CampaignCardMini'
 import Grid from '@material-ui/core/Grid'
+import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle'
+import { Button } from '@material-ui/core'
 
 class CampaignCard extends Component {
 
@@ -47,7 +49,7 @@ class CampaignCard extends Component {
             image={campaign.imageCidUrl}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography style={{ fontWeight: 600 }} gutterBottom variant="h6" component="h2">
               {getTruncatedText(campaign.title, 40)}
             </Typography>
             <Typography
@@ -66,19 +68,24 @@ class CampaignCard extends Component {
         </CardActionArea>
         <CardActions>
           <Grid
+            xs={12}
             container
             direction="row"
-            justifyContent="flex-end"
-          >
-            <Grid item xs={6} className={classes.actions}>
-              <Donate
-                entityId={campaign.id}
-                entityCard={<CampaignCardMini campaign={campaign} />}
-                title={t('donateCampaignTitle')}
-                description={t('donateCampaignDescription')}
-                enabled={campaign.canReceiveFunds}>
-              </Donate>
-            </Grid>
+            style={{ justifyContent: "center" }}>
+              <span>
+                <Donate
+                  entityId={campaign.id}
+                  entityCard={<CampaignCardMini campaign={campaign} />}
+                  title={t('donateCampaignTitle')}
+                  description={t('donateCampaignDescription')}
+                  enabled={campaign.canReceiveFunds}>
+                </Donate>
+              </span>
+              <span>
+                <Button variant="contained" color="default" size="md" className={classes.dropShadowButton} onClick={this.viewCampaign}>
+                  {t('openDetail')}
+                </Button>
+              </span>
           </Grid>
         </CardActions>
       </Card>
@@ -101,6 +108,10 @@ const styles = theme => ({
   },
   actions: {
     textAlign: 'right'
+  },
+  dropShadowButton: {
+    ...dropShadowButton,
+    margin: ".5em"
   }
 });
 

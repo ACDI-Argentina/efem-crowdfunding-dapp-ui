@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from "classnames";
 import PropTypes from 'prop-types';
 import Donation from '../models/Donation';
 import Button from '@material-ui/core/Button';
@@ -31,6 +32,7 @@ import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
+import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -247,13 +249,13 @@ class Donate extends Component {
             <Button
               variant="contained"
               color="primary"
-              className={classes.button}
-              startIcon={<FavoriteIcon />}
+              size="md"
+              className={classNames(classes.button, classes.dropShadowButton)}
               onClick={this.handleClickOpen}
             >
               {t('donate')}
             </Button>
-        )}
+            )}
         <Dialog fullWidth={true}
           maxWidth="md"
           open={open}
@@ -376,6 +378,10 @@ const styles = theme => ({
   },
   selectToken: {
     width: '8em'
+  },
+  dropShadowButton: {
+    ...dropShadowButton,
+    margin: ".5em"
   }
 });
 
