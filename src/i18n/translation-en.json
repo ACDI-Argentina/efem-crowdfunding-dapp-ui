@@ -1,52 +1,40 @@
 {
     "give4forest": "Give for forest",
 
-    "landingPageTitle": "Crypto-funds that connect us with the planet",
+    "landingPageTitle": "Crypto donations that connect us with the planet",
 
     "connectWallet": "Connect wallet",
 
-    "landingPagesSubtitle1": "We mobilize cryptocurrency donations ",
-    "landingPagesSubtitle2": "to promote the development of communities",
-    "landingPagesSubtitle3": " that inhabit and care for forests.",
+    "landingPagesSubtitle1": "We connect local creativity and their ",
+    "landingPagesSubtitle2": "nature-oriented digital solutions",
+    "landingPagesSubtitle3": " with the early funding they need.",
 
     "landingPageFinanceProject": "Finance your project",
     "landingPageMakeDonation": "Make your donation",
 
-    "platformFeaturesTitle1": "",
-    "platformFeaturesTitle2": "Sustainable development",
-    "platformFeaturesTitle3": " needs a ",
-    "platformFeaturesTitle4": "technological ",
-    "platformFeaturesTitle5": "revolution",
-    "platformFeaturesTitle6": " and a ",
-    "platformFeaturesTitle7": "human",
-    "platformFeaturesTitle8": " evolution",
-    "platformFeaturesTitle9": "",
+    "landingPageConocerSoluciones": "Explore solutions",
+    "landingPageProponerSoluciones": "Propose solutions",
+
+    "knowPlatform1": "Give for Forest",
+    "knowPlatform2": " activates the digital innovations arising from the local communities themselves, through the trust of Blockchain technology. With better technologies they will be able to take better care of the forests, and the forests will continue to take care of all of us.",
+    "knowPlatformKnowMoreButton": "Learn more",
+
+    "platformFeaturesTitle": "We generate community",
     
-    "platformFeaturesDescription1": "Give4Forest activates technological innovations in the communities that live in the forests. With better technologies, ",
-    "platformFeaturesDescription2": "they will be able to take better care of the forests ",
-    "platformFeaturesDescription3": "and ",
-    "platformFeaturesDescription4": "the forests will continue taking care of us all. ",
+    "platformFeatures1Title": "Collaboration",
+    "platformFeatures1Text": "We join forces in a decentralized network for the construction and care of common goods.",
+    "platformFeatures2Title": "Connection",
+    "platformFeatures2Text": "We connect digital assets with the sustainable development of our planet.",
+    "platformFeatures3Title": "Transparency",
+    "platformFeatures3Text": "We mobilize donations with traceability and incentives for all parties through technology.",
 
-    "colaboration": "Collaboration",
-    "colaborationDescription1": "We join forces in a ",
-    "colaborationDescription2": "decentralized",
-    "colaborationDescription3": " network for the construction and care of common goods.",
+    "blockchainBenefitsTitle": "Blockchain for growth",
+    "blockchainBenefitsDescription": "An open and transparent financing platform, associated with decentralized certified results.",
 
-    "connection": "Connection",
-    "connectionDescription1": "We connect ",
-    "connectionDescription2": "digital assets",
-    "connectionDescription3": " with the ",
-    "connectionDescription4": "sustainable development",
-    "connectionDescription5": " of our planet.",
-
-    "intimacy": "Intimacy",
-    "intimacyDescription1": "We create spaces for ",
-    "intimacyDescription2": "thinking",
-    "intimacyDescription3": " and ",
-    "intimacyDescription4": "awareness",
-    "intimacyDescription5": " that connect us with nature.",
-
-    "blockchainBenefitsTitle": "Blockchain benefits in fundraising for Development",
+    "blockchainBenefits1Legend": "Your donation, without commissions",
+    "blockchainBenefits2Legend": "Public and real-time traceability",
+    "blockchainBenefits3Legend": "Security and anonymity",
+    "blockchainBenefits4Legend": "Disbursement of funds by certified stages",
 
     "blockchainHelpBenefitTitle": "Help without borders",
     "blockchainHelpBenefitDescription": "Make your donation from anywhere in the world, without intermediaries and with lower transaction costs.",
@@ -57,6 +45,10 @@
     "blockchainSecurityBenefitTitle": "Security and anonymity",
     "blockchainSecurityBenefitDescription": "No one will ask you for more information than you want to give.",
 
+    "supportGive4ForestTitle": "Do you want to help us grow?",
+    "supportGive4ForestText": "You can collaborate with our mission and the growth of the platform by contributing to Give for forest.",
+    "supportGive4ForestButtonLabel": "Support G4F",
+
     "relatedServices": "Related services",
 
     "avalDAO": "AvalDAO",
@@ -66,7 +58,7 @@
 
     "iniciativeOf": "A collaboration of: ",
     "argentina": "ARGENTINA ",
-    "disclaimer": "Copyright 2021 | RSK - The future is in the forest | All rights reserved. ",
+    "disclaimer": "Copyright 2022 | RSK - The future is in the forest | All rights reserved. ",
     "termsAndConditions": "Terms and conditions. ",
     "dataHandlingPolicy": "Data handling policy. ",
 
@@ -85,11 +77,10 @@
     "dacs": "Decentralized Funds",
     "dac": "Decentralized Fund",
     "dacsSectionDescription":"These Funds are solving causes. Help them realise their goals by giving Bitcoin or tokens!",
-    "campaigns": "Campaigns",
+    "campaigns": "Digital solutions for development",
     "campaign": "Campaign",
     "noCampaignsYet": "There are no campaings yet!",
     "edit": "Edit",
-    "campaignsSectionDescription":"Our life endeavours",
     "newCampaignTitle": "Start a new campaign!",
     "editCampaignTitle": "Edit campaign",
     "campaignDescription": "A campaign solves a specific cause by executing a project via its Milestones. Funds raised by a campaign need to be delegated to its Milestones in order to be paid out.",
@@ -167,6 +158,7 @@
     "milestoneRejectMessagePlaceholder": "Explain why you rejected the completion of this milestone",
     "milestoneRejectMessageMinLength": "It is really appreciated if you write something meaningful",
     "donate": "Donate",
+    "openDetail": "Learn more",
     "donateAmount": "Amount",
     "donateDacTitle": "Donate to DAC",
     "donateDacDescription": "You are committing your funds to the DAC. As long as the owner of the fund does not lock your money, you can get it back at any time.",
@@ -205,6 +197,8 @@
 
     "target": "Target",
     "targetProgress": "{{fiatBalance}} raised of {{fiatTarget}} goal",
+    "targetProgressRaised": "Raised",
+    "targetProgressGoal": "Goal",
 
     "status": "Status",
 
@@ -351,9 +345,21 @@
     "requestConnectionCancel":"Maybe later",
     "requestConnectionOk": "Ok, connect",
 
-     "menuWelcome":"Welcome!",
-     "menuProfile":"Profile", 
-     "menuSignup":"Sign up" ,
+    "menuWelcome":"Welcome!",
+    "menuProfile":"Profile", 
+    "menuSignup":"Sign up" ,
 
-     "aboutUs":"About us"
+    "aboutUs":"ABOUT US",
+    "faqTitle": "FAQs",
+
+    "sponsorTap1Title": "Partners",
+    "sponsorTap2Title": "Investors",
+    "sponsorTap3Title": "Wallets",
+
+    "sponsorAcdi": "ACDI",
+    "sponsorElFuturoEstaEnElMonte": "El Futuro está en el Monte",
+    "sponsorRsk": "RSK",
+    "sponsorIovlabs": "IOVlabs",
+    "sponsorBidlab": "BID Lab",
+    "sponsorMetamask": "Metamask"
 }

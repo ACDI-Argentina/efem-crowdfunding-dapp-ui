@@ -62,7 +62,7 @@ const card = {
 };
 
 const defaultFont = {
-  fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+  fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
   fontWeight: "300",
   lineHeight: "1.5em"
 };
@@ -158,13 +158,13 @@ const title = {
   color: "#3C4858",
   margin: "1.75rem 0 0.875rem",
   textDecoration: "none",
-  fontWeight: "700",
+  fontWeight: "600",
 };
 
 const cardTitle = {
   ...title,
   color: "#999",
-  fontWeight: "700",
+  fontWeight: "600",
   marginTop: ".625rem"
 };
 

@@ -149,7 +149,7 @@ class EditDAC extends Component {
       <div id="edit-dac-view">
         <Header
           color="white"
-          brand={<img src={require("assets/img/logos/give4forest.png")}
+          brand={<img src={require("assets/img/logos/give4forest.svg")}
           alt={t('give4forest')}
           className={classes.dappLogo}/>}
           rightLinks={<MainMenu />}

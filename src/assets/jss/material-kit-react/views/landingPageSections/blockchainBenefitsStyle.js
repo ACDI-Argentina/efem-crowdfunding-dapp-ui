@@ -4,63 +4,78 @@ const blockchainBenefitsStyle = {
 
   color: "#999",
 
-  section: {
-    padding: "0",
-    textAlign: "left",
-    marginTop: "5em"
+  container: {
+    alignItems: "center",
+    color: "#fff",
+    padding: "4em 0"
   },
+
   title: {
     ...title,
-    minHeight: "32px",
-    textDecoration: "none",
+    color: primaryColor,
+    padding: "0",
+    margin: "0",
+    marginBottom: ".5em"
+  },
+
+  subtitle: {
     color: "#000",
-    width: "50%",
-    margin: "0 auto 1em auto",
-    textAlign: "center"
+    padding: "0",
+    margin: "0",
   },
-  image: {
-    width: "20%",
-    maxWidth: "80px",
-    "@media (max-width: 600px)": {
-      marginLeft: "20%"
-    }
+
+  separator: {
+    padding: "1em",
   },
+
   sectionTitle: {
-    color: "#000",
-    fontWeight: "bold",
-    marginTop: "0.5em",
-    marginBottom: "0.5em",
-    "@media (max-width: 600px)": {
-      maxWidth: "60%",
-      marginLeft: "20%"
-    }
+    fontWeight: "600",
+    fontSize: "30px",
+    marginBottom: ".5em"
   },
+
   sectionDescription: {
-    color: "#000",
+    color: "#fff",
     fontWeight: "normal",
-    "@media (max-width: 600px)": {
-      maxWidth: "60%",
-      marginLeft: "20%"
+    fontSize: "25px",
+    lineHeight: "1.5em"
+  },
+
+  image: {
+    width: "40%",
+    padding: "2em 0 1em 0"
+  },
+
+  section: {
+    padding: "0",
+    textAlign: "center",
+    marginTop: "3em"
+  },
+  description: {
+    color: "#000",
+    width: "40%",
+    margin: "0 auto 1em auto",
+    fontWeight: "normal"
+  },
+
+  legend: {
+    textAlign: "center",
+    color: "#454545",
+    padding: ".5em",
+    fontWeight: "400",
+    fontSize: ".9em"
+  },
+
+  card: {
+    borderRadius: "5px",
+    height: "100%",
+    "&:hover": {
+      borderRadius: "5px",
+      boxShadow: "8px 8px 0px 0px rgba(67,224,169,0.75)",
+      textTransform: "none",
     }
-  },
-  underlineHighlight: {
-    textDecoration: "underline",
-    textDecorationColor: "#10B363"
-  },
-  colorHighlight: {
-    color: primaryColor
-  },
-  boldText: {
-    fontWeight: "600"
-  },
-  italicText: {
-    fontStyle: "italic"
-  },
-  benefitSection: {
-    "@media (max-width: 600px)": {
-      paddingBottom: "0px !important"
-    },
   }
+
 };
 
 export default blockchainBenefitsStyle;

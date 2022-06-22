@@ -69,7 +69,7 @@ const customInputStyle = {
     height: "unset",
     "&,&::placeholder": {
       fontSize: "14px",
-      fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
       fontWeight: "400",
       lineHeight: "1.42857",
       opacity: "1"

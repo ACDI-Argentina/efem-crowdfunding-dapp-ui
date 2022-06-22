@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2019 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="200px" height="200px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 200 200"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil5 {fill:#A41517}
+    .fil3 {fill:#FFEDB1}
+    .fil4 {fill:#A41517;fill-rule:nonzero}
+    .fil1 {fill:url(#id0)}
+    .fil0 {fill:url(#id1)}
+    .fil2 {fill:url(#id2)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="136.67" y1="146.67" x2="136.67" y2="200.01">
+   <stop offset="0" style="stop-opacity:1; stop-color:#DD172C"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#C60B1F"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="136.67" y1="0.01" x2="136.67" y2="53.34">
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="136.67" y1="53.34" x2="136.67" y2="146.67">
+   <stop offset="0" style="stop-opacity:1; stop-color:#FFD133"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FFC500"/>
+  </linearGradient>
+ </defs>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="ES">
+   <path id="Rectangle-2" class="fil0" d="M11.47 53.34l176.92 0c-16.77,-31.72 -50.09,-53.33 -88.46,-53.33 -38.37,0 -71.69,21.61 -88.46,53.33z"/>
+   <path id="Rectangle-2_0" class="fil1" d="M188.39 146.67l-176.92 0c16.77,31.72 50.09,53.34 88.46,53.34 38.37,0 71.69,-21.62 88.46,-53.34z"/>
+   <path id="Rectangle-2_1" class="fil2" d="M11.47 146.67l176.92 0c7.36,-13.93 11.54,-29.81 11.54,-46.66 0,-16.86 -4.18,-32.74 -11.54,-46.67l-176.92 0c-7.36,13.93 -11.54,29.81 -11.54,46.67 0,16.85 4.18,32.73 11.54,46.66z"/>
+   <polygon id="Rectangle-139-Copy" class="fil3" points="70,93.34 83.34,93.34 83.34,100.01 70,100.01 "/>
+   <path id="Rectangle-137" class="fil4" d="M62.2 112.8c0.33,3.94 3.88,7.21 7.8,7.21 3.92,0 7.48,-3.28 7.8,-7.21l1.62 -19.46 -18.84 0 1.62 19.46zm-8.31 -19.52c-0.31,-3.65 2.52,-6.61 6.19,-6.61l19.84 0c3.73,0 6.51,2.88 6.2,6.61l-1.67 20.08c-0.62,7.35 -7.04,13.32 -14.45,13.32 -7.36,0 -13.83,-5.91 -14.44,-13.32l-1.67 -20.08z"/>
+   <polygon id="Rectangle-139" class="fil5" points="56.67,100.01 83.34,100.01 83.34,106.68 76.67,106.68 70,120.01 63.33,106.68 56.67,106.68 "/>
+   <polygon id="Rectangle-135" class="fil5" points="36.67,126.67 50,126.67 50,80.01 36.67,80.01 "/>
+   <polygon id="Rectangle-135-Copy" class="fil5" points="90,126.67 103.34,126.67 103.34,80.01 90,80.01 "/>
+   <path id="Rectangle-138" class="fil5" d="M56.67 73.34c0,-3.68 2.85,-6.67 6.73,-6.67l13.2 0c3.72,0 6.74,3.1 6.74,6.67l0 3.31c0,1.85 -1.44,3.36 -3.27,3.36l-20.13 0c-1.81,0 -3.27,-1.43 -3.27,-3.36l0 -3.31z"/>
+  </g>
+ </g>
+</svg>

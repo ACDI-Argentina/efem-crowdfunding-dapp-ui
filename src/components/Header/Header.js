@@ -10,18 +10,22 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
-// @material-ui/icons
-import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import { NavLink } from "react-router-dom";
 import Connect from "components/Connect";
 import LanguageSelector from "components/LanguageSelector";
+import { useTranslation } from 'react-i18next';
+import { Box, Button, Menu } from "@material-ui/core"
+import { styled } from "@material-ui/styles"
+import { history } from 'lib/helpers'
+
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -36,6 +40,15 @@ export default function Header(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleClickAbout = () => {
+    history.push(`/about`);
+  };
+
+  const handleClickFAQ = () => {
+    history.push(`/faq`);
+  };
+
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
     const windowsScrollTop = window.pageYOffset;
@@ -70,23 +83,46 @@ export default function Header(props) {
 
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        {leftLinks !== undefined ? brandComponent : null}
-        {<div className={classes.flex}>
-          {leftLinks !== undefined ? (
-            <Hidden smDown implementation="css">
-              {leftLinks}
-            </Hidden>
-          ) : (
-              brandComponent
-            )}
-        </div>}
-
-        <LanguageSelector></LanguageSelector>
-
-        <Connect/>
-
+        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <HeaderButton
+            variant="text"
+            size="small"
+            onClick={handleClickAbout}
+            sx={{ m: 2, color: 'white', display: 'block' }}
+          >
+            {t('aboutUs')}
+          </HeaderButton>
+          <HeaderButton
+            variant="text"
+            size="small"
+            onClick={handleClickFAQ}
+            sx={{ my: 2, color: 'white', display: 'block' }}
+          >
+            {t('faqTitle')}
+          </HeaderButton>
+        </Box>
+        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+        </Box>
+        <Box minWidth="40%" textAlign="center" sx={{ flexGrow: 1, display: { md: 'flex' } }}>
+            {leftLinks !== undefined ? brandComponent : null}
+            {<div className={classes.flex}>
+              {leftLinks !== undefined ? (
+                <Hidden smDown implementation="css">
+                  {leftLinks}
+                </Hidden>
+              ) : (
+                brandComponent
+              )}
+            </div>}
+        </Box>
+        <Box sx={{ display: { md: 'flex' } }}>
+          <LanguageSelector></LanguageSelector>
+        </Box>
+        <Box sx={{ display: { md: 'flex' } }}>
+          <Connect />
+        </Box>
+        <Box sx={{ display: { md: 'flex' } }}>
         <Hidden smDown implementation="css">
-
           {rightLinks}
         </Hidden>
         <Hidden mdUp>
@@ -95,10 +131,11 @@ export default function Header(props) {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
           >
-            <Menu />
           </IconButton>
         </Hidden>
-        
+        </Box>
+
+
       </Toolbar>
 
       <Hidden mdUp implementation="js">
@@ -124,6 +161,18 @@ export default function Header(props) {
 Header.defaultProp = {
   color: "white"
 };
+
+const HeaderButton = styled(Button)({
+  color: "#FFF",
+  textTransform: 'none',
+  fontWeight: "normal",
+  border: 'none',
+  borderRadius: '0px',
+  '&:hover': {
+    background: 'none',
+  },
+});
+
 
 Header.propTypes = {
   color: PropTypes.oneOf([
@@ -163,6 +212,6 @@ Header.propTypes = {
       "white",
       "rose",
       "dark"
-    ]).isRequired
+    ])
   })
 };

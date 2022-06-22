@@ -83,8 +83,7 @@ class MainMenu extends Component {
                 color: 'transparent',
               }}
               dropdownList={[
-                profileLink,
-                aboutUs
+                profileLink
                 ]}
             />
           </ListItem>

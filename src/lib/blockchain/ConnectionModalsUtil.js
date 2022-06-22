@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 
 import NoWeb3BrowserModal from "./components/NoWeb3BrowserModal";
 import NoWalletModal from "./components/NoWalletModal";
@@ -15,7 +15,7 @@ import UserRejectedValidationModal from "./components/UserRejectedValidationModa
 import LowFundsModal from "./components/LowFundsModal";
 import SignatureRequestModal from "./components/SignatureRequestModal";
 
-class ConnectionModalUtil extends React.Component {
+class ConnectionModalUtil extends Component {
   render() {
     return (
       <div>

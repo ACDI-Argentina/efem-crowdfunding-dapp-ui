@@ -114,12 +114,20 @@ const headerLinksStyle = theme => ({
     float: "left"
   },
   flagsListContainer: {
-    marginLeft: "10px",
     minWidth: "86px",
     textAlign: "center",
     "@media (max-width: 500px)": {
       minWidth: "43px"
     }
+  },
+  flag: {
+    width: "30px",
+    height: "30px",
+  },
+  inactiveFlag: {
+    filter: "grayscale(100%) opacity(70%)",
+  },
+  activeFlag: {
   }
 });
 

@@ -41,7 +41,7 @@ class FiatUtils {
     let fiatConfig = config.fiat;
     let amount = FiatUtils.centToDollar(centAmount).toFixed(fiatConfig.showDecimals);
     let symbol = fiatConfig.symbol;
-    return amount + ' ' + symbol;
+    return symbol + ' ' + amount;
   }
 }
 

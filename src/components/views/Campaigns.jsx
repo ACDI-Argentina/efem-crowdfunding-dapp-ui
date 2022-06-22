@@ -39,10 +39,7 @@ class Campaigns extends Component {
     return (
       <div id="campaigns-view" className="card-view">
         <div className={classes.section}>
-          <h3 className={classes.title}>{t('campaigns')} {total > 0 && <Badge color="success">{total}</Badge>}</h3>
-          <h6 className={classes.description}>
-            {t('campaignsSectionDescription')}
-          </h6>
+          <h2 className={classes.title}>{t('campaigns')} {total > 0 && <Badge color="success">{total}</Badge>}</h2>
           {// There are some Campaigns in the system, show them
           !hasError && campaigns.length > 0 && (
             <CustomTabs

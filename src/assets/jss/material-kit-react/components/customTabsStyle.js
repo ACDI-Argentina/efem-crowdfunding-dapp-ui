@@ -22,22 +22,22 @@ const customTabsStyle = {
     height: "unset !important",
     maxWidth: "unset !important",
     maxHeight: "unset !important",
-    padding: "2px 20px",
-    borderRadius: "3px",
+    padding: "10px 20px",
+    borderRadius: "25px",
     lineHeight: "24px",
-    border: "0 !important",
-    color: "#000 !important",
-    marginLeft: "4px",
+    border: "1px solid #004634",
+    color: "#004634",
+    marginRight: "5px",
     fontWeight: "500",
     fontSize: "12px",
     "&:last-child": {
-      marginLeft: "0px"
+      marginRight: "0px"
     }
   },
   tabSelected: {
     backgroundColor: "rgba(255, 255, 255, 0.2)",
-    /*transition: "0.2s background-color 0.1s",*/
-    fontWeight: "bold"
+    backgroundColor: "#39CA98",
+    border: "1px solid #39CA98"
   },
   tabWrapper: {
     display: "inline-block",

@@ -24,7 +24,7 @@ const typographyStyle = {
     width: "100%"
   },
   note: {
-    fontFamily: '"Raleway", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif',
     bottom: "10px",
     color: "#c0c1c2",
     display: "block",

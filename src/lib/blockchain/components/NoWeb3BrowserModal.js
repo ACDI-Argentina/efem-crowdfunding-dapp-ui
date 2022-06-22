@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Box, Heading, Text, Modal, Link } from "rimble-ui";
 import ModalCard from './ModalCard';
 import NetworkUtils from "../NetworkUtils";
 
-class NoWeb3BrowserModal extends React.Component {
+class NoWeb3BrowserModal extends Component {
   renderContent = () => {
     return (
       <React.Fragment>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import Logo from 'assets/img/logos/give4forest.png';
+import Logo from 'assets/img/logos/give4forest.svg';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import packageJson from '../../../package.json';

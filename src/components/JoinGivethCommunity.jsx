@@ -13,6 +13,8 @@ import { CREATE_DAC_ROLE, CREATE_CAMPAIGN_ROLE } from "../constants/Role";
 
 import Button from "components/CustomButtons/Button.js";
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
+import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
+import { withStyles } from '@material-ui/core/styles';
 
 /**
  * The join Giveth community top-bar
@@ -105,6 +107,9 @@ class JoinGivethCommunity extends Component {
   }
 
   render() {
+
+    const { classes } = this.props;
+
     return (
       <div
         id="join-giveth-community"
@@ -113,12 +118,12 @@ class JoinGivethCommunity extends Component {
           <center>
             <OnlyCorrectNetwork>
               <OnlyRole role={CREATE_DAC_ROLE}>
-                <Button color="primary" size="lg" className="btn btn-info" onClick={() => this.createDAC()}>
+                <Button variant="contained" color="primary" size="lg" className={classes.dropShadowButton} onClick={() => this.createDAC()}>
                   Crear una DAC
                 </Button>
               </OnlyRole>
               <OnlyRole role={CREATE_CAMPAIGN_ROLE}>
-                <Button color="primary" size="lg" className="btn btn-info" onClick={() => this.createCampaign()}>
+                <Button variant="contained" color="primary" size="lg" className={classes.dropShadowButton} onClick={() => this.createCampaign()}>
                   Iniciar una campa&ntilde;a
                 </Button>
               </OnlyRole>
@@ -147,4 +152,11 @@ const mapStateToProps = (state, props) => ({
 });
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(JoinGivethCommunity);
+const styles = {
+  dropShadowButton: {
+      ...dropShadowButton,
+      margin: ".5em"
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(JoinGivethCommunity));

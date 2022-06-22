@@ -44,14 +44,14 @@ const AddressLabel = styled.div`
   `}
 `;
 const ConnectButton = styled.button`
-  font-size: 16px;
+  font-size: 14px;
   margin: 10px;
-  background-color: #53a653;
+  background-color: #FFF;
   cursor: pointer;
-  padding: 3px 20px;
+  padding: 5px 20px;
   border-radius: 24px;
   border: 0px;
-  color: white;
+  color: #000;
   text-transform: capitalize;
   font-weight: bold;
 
