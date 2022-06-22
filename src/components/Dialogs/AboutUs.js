@@ -25,12 +25,12 @@ const {
 
 const AboutUs = ({ onClose, ...props }) => {
   const { version } = packageJson;
-  const repoUrl = 'https://github.com/ACDI-Argentina/efem-crowdfunding-dapp';
+  const repoUrl = 'https://github.com/ACDI-Argentina/give-4-forest';
 
   // A esto vamos a tenerlo que leerlo desde version.html o algun otro archivo que genermos por aca, o bien que sea version.txt
 
   const commitHash = REACT_APP_BUILD_COMMIT;
-  const commitUrl = REACT_APP_BUILD_COMMIT ? `https://github.com/ACDI-Argentina/efem-crowdfunding-dapp/commit/${commitHash}` : null;
+  const commitUrl = REACT_APP_BUILD_COMMIT ? `https://github.com/ACDI-Argentina/give-4-forest/commit/${commitHash}` : null;
 
   return (
     <Dialog onClose={onClose} {...props}>
