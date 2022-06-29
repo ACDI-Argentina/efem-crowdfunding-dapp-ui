@@ -1,25 +1,21 @@
 import React, { useContext } from "react";
-// nodejs library that concatenates classes
 import classNames from "classnames";
-// nodejs library to set properties for components
 import PropTypes from "prop-types";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
-// core components
 import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import { NavLink } from "react-router-dom";
-import Connect from "components/Connect";
 import LanguageSelector from "components/LanguageSelector";
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Menu } from "@material-ui/core"
 import { styled } from "@material-ui/styles"
 import { history } from 'lib/helpers'
-
+import ConnectButton from "components/ConnectButton";
+//import { Badge } from '@acdi/efem-dapp';
 
 const useStyles = makeStyles(styles);
 
@@ -68,7 +64,7 @@ export default function Header(props) {
         .classList.remove(classes[changeColorOnScroll.color]);
     }
   };
-  const { color, rightLinks, leftLinks, brand, fixed, absolute } = props;
+  const { color, leftLinks, brand, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
@@ -119,12 +115,9 @@ export default function Header(props) {
           <LanguageSelector></LanguageSelector>
         </Box>
         <Box sx={{ display: { md: 'flex' } }}>
-          <Connect />
+          <ConnectButton />
         </Box>
         <Box sx={{ display: { md: 'flex' } }}>
-        <Hidden smDown implementation="css">
-          {rightLinks}
-        </Hidden>
         <Hidden mdUp>
           <IconButton
             color="inherit"
@@ -150,7 +143,6 @@ export default function Header(props) {
         >
           <div className={classes.appResponsive}>
             {leftLinks}
-            {rightLinks}
           </div>
         </Drawer>
       </Hidden>
@@ -186,7 +178,6 @@ Header.propTypes = {
     "rose",
     "dark"
   ]),
-  rightLinks: PropTypes.node,
   leftLinks: PropTypes.node,
   brand: PropTypes.oneOfType([
     PropTypes.string,

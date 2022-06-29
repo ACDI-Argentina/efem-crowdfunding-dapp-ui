@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
-import web3Manager from './Web3Manager';
+import { web3Manager } from '../../commons';
 import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
 import TransactionTracker from './TransactionTracker';
 
@@ -52,25 +52,25 @@ class ERC20ContractApi {
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
-                    key: 'transactionCreatedTitleApproveTokenDonate'
+                    key: 'transactionCreatedTitleApproveToken'
                 },
                 createdSubtitle: {
-                    key: 'transactionCreatedSubtitleApproveTokenDonate'
+                    key: 'transactionCreatedSubtitleApproveToken'
                 },
                 pendingTitle: {
-                    key: 'transactionPendingTitleApproveTokenDonate'
+                    key: 'transactionPendingTitleApproveToken'
                 },
                 confirmedTitle: {
-                    key: 'transactionConfirmedTitleApproveTokenDonate'
+                    key: 'transactionConfirmedTitleApproveToken'
                 },
                 confirmedDescription: {
-                    key: 'transactionConfirmedDescriptionApproveTokenDonate'
+                    key: 'transactionConfirmedDescriptionApproveToken'
                 },
                 failuredTitle: {
-                    key: 'transactionFailuredTitleApproveTokenDonate'
+                    key: 'transactionFailuredTitleApproveToken'
                 },
                 failuredDescription: {
-                    key: 'transactionFailuredDescriptionApproveTokenDonate'
+                    key: 'transactionFailuredDescriptionApproveToken'
                 }
             });
 

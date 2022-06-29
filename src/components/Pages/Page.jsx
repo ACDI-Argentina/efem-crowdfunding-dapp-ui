@@ -3,7 +3,6 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import { makeStyles } from "@material-ui/core";
 import { useTranslation } from 'react-i18next';
-import MainMenu from 'components/MainMenu';
 
 const Page = ({ children, ...props }) => {
   const classes = makeStyles(styles)();
@@ -24,7 +23,6 @@ const Page = ({ children, ...props }) => {
         changeColorOnScroll={{
           height: 0
         }}
-        rightLinks={<MainMenu />}
         {...props}
       />
       <div className={classes.panel}>

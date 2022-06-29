@@ -16,6 +16,9 @@ import AboutUs from './Dialogs/AboutUs';
 /* eslint jsx-a11y/aria-proptypes: 0 */
 /**
  * The main top menu
+ * 
+ * TODO Eliminar
+ * 
  */
 class MainMenu extends Component {
   constructor(props){

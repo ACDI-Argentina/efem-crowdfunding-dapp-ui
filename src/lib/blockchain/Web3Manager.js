@@ -1,11 +1,13 @@
-import Web3 from 'web3';
-import Web3HttpProvider from 'web3-providers-http';
-import Web3Modal, { getProviderInfo } from 'web3modal';
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import Web3 from 'web3'
+import Web3HttpProvider from 'web3-providers-http'
+import Web3Modal, { getProviderInfo } from 'web3modal'
+import WalletConnectProvider from "@walletconnect/web3-provider"
 import { BehaviorSubject } from 'rxjs'
-import config from '../../configuration';
-import ipfsService from '../../ipfs/IpfsService';
-import Wallet from 'models/Wallet';
+import config from '../../configuration'
+import ipfsService from '../../ipfs/IpfsService'
+//import Wallet from 'models/Wallet'
+import { Wallet } from '@acdi/efem-dapp'
+import { history } from '../../lib/helpers'
 
 //TODO: determinar cuales es el mejor lugar para posicionar esto, creo que web3manager
 const providerOptions = {
@@ -13,7 +15,7 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // setup wallet connect for mobile wallet support
     options: {
-    rpc: {
+      rpc: {
         30: 'https://public-node.rsk.co',
         31: 'https://public-node.testnet.rsk.co',
         33: config.network.nodeUrl,
@@ -63,7 +65,7 @@ class Web3Manager {
       this.accountAddressSubject = new BehaviorSubject(null);
     } else {
       this.accountAddressSubject.next(null);
-    }    
+    }
     console.log('[Setup Web3] Conectado por HTTP Provider.', provider);
     console.log('[Setup Web3] Web3.', web3);
     return web3;
@@ -108,12 +110,14 @@ class Web3Manager {
     }
 
     const providerInfo = getProviderInfo(provider);
+
+    console.log('providerInfo', providerInfo);
     web3.wallet = new Wallet({
-      name: providerInfo.name, 
+      name: providerInfo.name,
       logo: providerInfo.logo,
       networkId: walletNetworkId
     });
-          
+
     web3.walletBrowserRequired = walletBrowserRequired;
 
     this.web3Subject.next(web3);
@@ -126,7 +130,7 @@ class Web3Manager {
     let walletNetworkId;
     let walletNetworkIsCorrect = false;
 
-    const web3 = new Web3(provider);
+    let web3 = new Web3(provider);
 
     walletNetworkId = await web3.eth.net.getId();
     web3.providerName = "WalletConnect";
@@ -147,7 +151,7 @@ class Web3Manager {
     // Propiedades propias de una wallet.
     web3.wallet = new Wallet({
       name: "WalletConnect",
-      logoUrl: ipfsService.resolveUrl('/ipfs/QmdgSn7DszmWnF7RWukPQjNYv4SN2qFwxMhrtJ8NYWqRxX'),
+      logo: ipfsService.resolveUrl('/ipfs/QmdgSn7DszmWnF7RWukPQjNYv4SN2qFwxMhrtJ8NYWqRxX'),
       networkId: walletNetworkId
     });
     web3.walletBrowserRequired = walletBrowserRequired;
@@ -158,23 +162,25 @@ class Web3Manager {
   }
 
 
-  async connect(before,after){
+  async connect(before, after) {
+
+    console.log('ync connect(before, aft');
     const provider = await web3Modal.connect();
 
     let web3;
 
-    if(provider instanceof WalletConnectProvider){
+    if (provider instanceof WalletConnectProvider) {
       web3 = this.setWalletConnectProvider(provider);
-    } else{
+    } else {
       before(); // ejecutar solo si es una funcion
-      web3 = await this.connectWeb3ByWalletBrowser(provider); 
+      web3 = await this.connectWeb3ByWalletBrowser(provider);
       after(); //
     }
 
-    if(web3.providerName === "Http"){
+    if (web3.providerName === "Http") {
       web3.isFallbackProvider = true;
     }
-  
+
     return web3;
   }
 
@@ -189,9 +195,11 @@ class Web3Manager {
       // No se encontró forma de desconectar una wallet browser.
     }
 
-    
+
 
     console.log('[Setup Web3] Desconectado.');
+    // Se redirecciona el usuario al home.
+    history.push(``);
     this.connectWeb3ByHttp();
   }
 
@@ -238,11 +246,13 @@ class Web3Manager {
       });
 
       // Event accountsChanged
-      provider.on("accountsChanged", (accounts) => {
+      provider.on("accountsChanged", async (accounts) => {
         console.log('[Web3] Provider event: accountsChanged.', accounts);
-        if (accounts.length > 0) {
+        /*if (accounts.length > 0) {
           this.accountAddressSubject.next(accounts[0]);
-        }
+        }*/
+        // Al modificarse la cuenta, se desconocta el usuario actual.
+        await this.disconnect();
       });
     }
   }
@@ -261,10 +271,9 @@ class Web3Manager {
    * 
    * @returns accountAddress 
    */
-   getAccountAddress() {
+  getAccountAddress() {
     return this.accountAddressSubject.asObservable();
   }
 }
 
 export default new Web3Manager();
-window.web3Manager = new Web3Manager();

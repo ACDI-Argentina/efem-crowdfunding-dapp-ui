@@ -284,13 +284,13 @@
     "transactionFailuredTitleDonate": "The donation was not confirmed",
     "transactionFailuredDescriptionDonate": "A failure occurred during donation.",
 
-    "transactionCreatedTitleApproveTokenDonate": "Confirm your approve to transfer your tokens as donation in the wallet",
-    "transactionCreatedSubtitleApproveTokenDonate": "Double check the details here – your approval can't be refunded.",
-    "transactionPendingTitleApproveTokenDonate": "Approving token donation...",
-    "transactionConfirmedTitleApproveTokenDonate": "The approval donation has been confirmed",
-    "transactionConfirmedDescriptionApproveTokenDonate": "Thank you very much for your approval!",
-    "transactionFailuredTitleApproveTokenDonate": "Token donation approval was not confirmed",
-    "transactionFailuredDescriptionApproveTokenDonate": "A failure occurred during approve donation.",
+    "transactionCreatedTitleApproveToken": "Confirm your approve to transfer your tokens as donation in the wallet",
+    "transactionCreatedSubtitleApproveToken": "Double check the details here – your approval can't be refunded.",
+    "transactionPendingTitleApproveToken": "Approving token donation...",
+    "transactionConfirmedTitleApproveToken": "The approval donation has been confirmed",
+    "transactionConfirmedDescriptionApproveToken": "Thank you very much for your approval!",
+    "transactionFailuredTitleApproveToken": "Token donation approval was not confirmed",
+    "transactionFailuredDescriptionApproveToken": "A failure occurred during approve donation.",
 
     "transactionCreatedTitleTransfer": "Confirm your funds transfer in the wallet",
     "transactionCreatedSubtitleTransfer": "Double check the details here – your funds transfer can't be refunded.",
@@ -345,7 +345,6 @@
     "requestConnectionCancel":"Maybe later",
     "requestConnectionOk": "Ok, connect",
 
-    "menuWelcome":"Welcome!",
     "menuProfile":"Profile", 
     "menuSignup":"Sign up" ,
 

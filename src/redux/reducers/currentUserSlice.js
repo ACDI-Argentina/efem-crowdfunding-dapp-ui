@@ -14,13 +14,17 @@ export const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState: currentUserInitialState,
   reducers: {
-    initCurrentUser: (state, action) => {
+    loadCurrentUser: (state, action) => {
       // Cuando se carga el usuario, se obtiene un
       // estado inicial para ir cargándolo desde el Epic.
-      const { account } = action.payload;
-      state.address = account;
+      state.address = action.payload;
       return state;
     },
+    setAuthenticated:(state,action) => {
+      const isAuthenticated = action.payload;
+      state.authenticated = isAuthenticated;
+    },
+ 
     updateCurrentUserBalance: (state, action) => {
       const { balance, tokenBalances } = action.payload;
       state.balance = balance;
@@ -28,16 +32,12 @@ export const currentUserSlice = createSlice({
       return state;
     },
     setCurrentUser: (state, action) => {
-      if (state.address != action.payload.address) {
-        console.log("User has been updated in the meanwhile");
-        return;
-      }
       let currentUserStore = action.payload.toStore();
       state.address = currentUserStore.address;
       state.infoCid = currentUserStore.infoCid;
-      state.avatarCid = currentUserStore.avatarCid;
       state.authenticated = currentUserStore.authenticated;
       state.avatar = currentUserStore.avatar;
+      state.avatarCid = currentUserStore.avatarCid;
       state.email = currentUserStore.email;
       state.name = currentUserStore.name;
       state.roles = currentUserStore.roles;
@@ -49,11 +49,9 @@ export const currentUserSlice = createSlice({
     registerCurrentUser: (state, action) => {
       const user = action.payload;
       action.payload.status = User.REGISTERING;
-
       if(!user.address){
         return state;
       }
-
       return action.payload.toStore();
     },
     clearCurrentUser: (state, action) => {
@@ -66,7 +64,14 @@ export const currentUserSlice = createSlice({
   },
 });
 
-export const { registerCurrentUser, initCurrentUser, updateCurrentUserBalance, setCurrentUser, clearCurrentUser } = currentUserSlice.actions;
+export const { 
+  registerCurrentUser, 
+  setAuthenticated,
+  loadCurrentUser, 
+  updateCurrentUserBalance, 
+  setCurrentUser, 
+  clearCurrentUser 
+} = currentUserSlice.actions;
 
 export const selectCurrentUser = state => new User(state.currentUser);
 export const selectRoles = state => state.currentUser.roles;

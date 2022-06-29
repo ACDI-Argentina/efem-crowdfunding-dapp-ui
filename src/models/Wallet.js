@@ -1,11 +1,8 @@
-import BigNumber from "bignumber.js";
-import { Map } from "immutable";
-
 /**
  * Modelo de Wallet.
  *
  * @attribute name          Nombre de la wallet.
- * @attribute logo       URL con la imagen del logo de la wallet.
+ * @attribute logo          URL con la imagen del logo de la wallet.
  * @attribute networkId     Identificador de la red de la wallet.
  */
 class Wallet {
@@ -33,7 +30,7 @@ class Wallet {
   }
 
   get logo() {
-    return this._logoUrl;
+    return this._logo;
   }
 
   set logo(value) {

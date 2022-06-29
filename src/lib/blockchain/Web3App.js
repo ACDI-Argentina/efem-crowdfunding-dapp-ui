@@ -6,9 +6,9 @@ import { feathersClient } from '../feathersClient';
 import Web3Utils from "./Web3Utils";
 import { history } from '../helpers';
 import { utils } from 'web3';
-import web3Manager from "./Web3Manager";
+import { web3Manager } from '../../commons';
 import networkManager from "./NetworkManager";
-import accountManager from "./AccountManager";
+import { accountManager } from "../../commons";
 
 
 export const Web3AppContext = React.createContext({
@@ -148,21 +148,17 @@ class Web3App extends React.Component {
     });
   }
 
-
   loginAccount = async () => {
     try {
       const before = this.openConnectionPendingModal;
       const after = this.closeConnectionPendingModal;
-
       const web3 = await web3Manager.connect(before, after);
       return !web3.isFallbackProvider;
-      
     } catch (err) {
       console.log(err);
       return false;
     }
   };
-
 
   logoutAccount = async () => {
     await web3Manager.disconnect();
@@ -426,9 +422,9 @@ class Web3App extends React.Component {
     if (currentUser && currentUser.address && currentUser.authenticated) {
       return true;
     }
-    if(currentUser?.address){
+    if (currentUser?.address) {
       currentUser.authenticated = await this.authenticate(currentUser.address);
-      return currentUser.authenticated; 
+      return currentUser.authenticated;
     }
   };
 
@@ -443,10 +439,10 @@ class Web3App extends React.Component {
       const payload = await feathersClient.passport.verifyJWT(accessToken);
       if (Web3Utils.addressEquals(address, payload.userId)) {
         await feathersClient.authenticate(); // authenticate the socket connection
-        console.log(`[Web3App] ${address} authenticated using existing token`); 
+        console.log(`[Web3App] ${address} authenticated using existing token`);
         return true;
       } else {
-        await feathersClient.logout(); 
+        await feathersClient.logout();
       }
     }
 
