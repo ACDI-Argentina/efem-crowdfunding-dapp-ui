@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Milestone from 'models/Milestone';
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import BigNumber from 'bignumber.js';
 import DeleteProposedMilestoneButton from 'components/DeleteProposedMilestoneButton';
 import AcceptRejectProposedMilestoneButtons from 'components/AcceptRejectProposedMilestoneButtons';

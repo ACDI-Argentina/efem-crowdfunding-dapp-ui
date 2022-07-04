@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
-import User from '../models/User';
+import { User } from '@acdi/efem-dapp';
 
 /**
  * Show a warning if the user is not authenticated

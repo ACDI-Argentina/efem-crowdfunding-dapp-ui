@@ -7,10 +7,10 @@ import localforage from 'localforage';
 import rx from 'feathers-reactive';
 import config from '../configuration';
 
-const restClient = rest(config.feathersConnection);
+const restClient = rest(config.feathersUsersConnection);
 const fetch = require('node-fetch');
 
-export const socket = io(config.feathersConnection, {
+export const socket = io(config.feathersUsersConnection, {
   transports: ['websocket'],
 });
 

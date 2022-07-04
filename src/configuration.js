@@ -1,6 +1,7 @@
 const {
   REACT_APP_ENVIRONMENT = 'localhost', // optional
   REACT_APP_DECIMALS = 8, // optional
+  REACT_APP_FEATHERJS_CONNECTION_URL,
   REACT_APP_FEATHERJS_USERS_CONNECTION_URL,
   REACT_APP_NODE_CONNECTION_URL,
   REACT_APP_CROWDFUNDING_ADDRESS,
@@ -274,7 +275,8 @@ config.tokenAddresses = REACT_APP_TOKEN_ADDRESSES
   ? JSON.parse(REACT_APP_TOKEN_ADDRESSES)
   : config.tokenAddresses;
 config.etherscan = REACT_APP_BLOCKEXPLORER || config.etherscan;
-config.feathersConnection = REACT_APP_FEATHERJS_USERS_CONNECTION_URL || config.feathersConnection;
+config.feathersConnection = REACT_APP_FEATHERJS_CONNECTION_URL || config.feathersConnection;
+config.feathersUsersConnection = REACT_APP_FEATHERJS_USERS_CONNECTION_URL || config.feathersUsersConnection;
 config.network.nodeUrl = REACT_APP_NODE_CONNECTION_URL || config.network.nodeUrl;
 config.network.requiredId = (REACT_APP_NODE_ID && Number.parseInt(REACT_APP_NODE_ID, 10)) || config.nodeId;
 config.decimals = REACT_APP_DECIMALS;

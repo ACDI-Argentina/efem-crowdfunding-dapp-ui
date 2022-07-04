@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import { history } from 'lib/helpers';
 import Campaign from '../models/Campaign';
 import Button from '@material-ui/core/Button';

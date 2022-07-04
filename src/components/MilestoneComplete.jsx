@@ -18,7 +18,7 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { complete } from '../redux/reducers/milestonesSlice';
 import MilestoneCardMini from './MilestoneCardMini';
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import TextField from '@material-ui/core/TextField';
 import DoneIcon from '@material-ui/icons/Done';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';

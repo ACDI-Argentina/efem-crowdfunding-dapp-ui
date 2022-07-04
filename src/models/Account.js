@@ -18,9 +18,12 @@ class Account {
     } = data;
 
     if (data) {
+      // Un comentario
+      // Otro comentario23
       this._address = address;
       this._balance = balance;
       this._tokenBalances = tokenBalances;
+      
     }
   }
 

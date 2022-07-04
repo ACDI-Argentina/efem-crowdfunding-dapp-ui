@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import ProfileForm from './ProfileForm';
 

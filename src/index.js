@@ -46,6 +46,8 @@ const root = createRoot(rootElement);
 
 // Se inicializan listeners entre Managers comunes y Redux.
 new AccountListener();
+
+
 new TransactionsListener();
 
 root.render(

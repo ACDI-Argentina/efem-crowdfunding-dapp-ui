@@ -11,6 +11,8 @@ export const Severity = {
   ERROR: 'Error'
 }
 
+
+
 /**
  * Representa un mensaje en la Dapp.
  */

@@ -13,7 +13,7 @@ import FormsyImageUploader from '../FormsyImageUploader';
 import GoBackButton from '../GoBackButton';
 import { isOwner, history } from '../../lib/helpers';
 import LoaderButton from '../LoaderButton';
-import User from '../../models/User';
+import { User } from '@acdi/efem-dapp';
 import Campaign from '../../models/Campaign';
 
 import { connect } from 'react-redux'

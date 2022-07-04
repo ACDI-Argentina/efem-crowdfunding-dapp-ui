@@ -12,6 +12,7 @@ class Campaign extends Entity {
   constructor(data = {}) {
     super(data);
     const {
+      
       dacIds = [],
       milestoneIds = [],
       managerAddress = '',

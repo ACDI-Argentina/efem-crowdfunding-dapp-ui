@@ -1,4 +1,4 @@
-import User from './User';
+import { User } from '@acdi/efem-dapp';
 
 // Test User model
 describe('User Model', () => {

@@ -8,6 +8,7 @@ import moment from 'moment';
  */
 class Activity extends Model {
 
+  
   constructor(data = {}) {
     super(data);
     const {

@@ -12,7 +12,7 @@ import Campaign from '../../models/Campaign'
 import CommunityButton from '../CommunityButton'
 import DonationList from '../DonationList'
 import DonationsBalance from '../DonationsBalance'
-import User from '../../models/User'
+import { User } from '@acdi/efem-dapp';
 import ErrorBoundary from '../ErrorBoundary'
 import { connect } from 'react-redux'
 import { selectCampaign,

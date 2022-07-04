@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import User from "../models/User";
 
 const { Provider, Consumer } = React.createContext();
 export { Consumer };

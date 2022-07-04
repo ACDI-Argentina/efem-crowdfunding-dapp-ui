@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from "classnames"
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser'
-import User from 'models/User'
+import { User } from '@acdi/efem-dapp';
 import MilestoneActions from '../MilestoneActions'
 import Donate from '../Donate'
 import GoBackButton from '../GoBackButton'

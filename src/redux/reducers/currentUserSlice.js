@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import User from '../../models/User';
+import { User } from '@acdi/efem-dapp';
 
 /**
  * Estado inicial del usuario.

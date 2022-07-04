@@ -4,7 +4,7 @@ import ipfsService from '../ipfs/IpfsService';
 import crowdfundingContractApi from '../lib/blockchain/CrowdfundingContractApi';
 import { Observable } from 'rxjs';
 import BigNumber from 'bignumber.js';
-import User from '../models/User';
+import { User } from '@acdi/efem-dapp';
 import { ALL_ROLES } from '../constants/Role';
 import messageUtils from '../redux/utils/messageUtils'
 import userIpfsConnector from '../ipfs/UserIpfsConnector'

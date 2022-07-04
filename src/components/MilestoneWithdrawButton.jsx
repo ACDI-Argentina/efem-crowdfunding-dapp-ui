@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Milestone from '../models/Milestone';
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import { connect } from 'react-redux'
 import { withdraw } from '../redux/reducers/milestonesSlice';
 

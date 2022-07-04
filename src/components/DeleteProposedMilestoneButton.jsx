@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MilestoneService from 'services/MilestoneService';
 import Milestone from 'models/Milestone';
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import ErrorPopup from 'components/ErrorPopup';
 import confirmationDialog from 'lib/confirmationDialog';
 

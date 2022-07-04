@@ -15,7 +15,7 @@ import { withTranslation } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { addDonation } from '../redux/reducers/donationsSlice'
-import User from 'models/User';
+import { User } from '@acdi/efem-dapp';
 import TextField from '@material-ui/core/TextField';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import InputAdornment from '@material-ui/core/InputAdornment';

@@ -15,7 +15,7 @@ import FormsyImageUploader from '../FormsyImageUploader';
 import GoBackButton from '../GoBackButton';
 import { getTruncatedText } from '../../lib/helpers';
 import LoaderButton from '../LoaderButton';
-import User from '../../models/User';
+import { User } from '@acdi/efem-dapp';
 import ErrorPopup from '../ErrorPopup';
 import FiatUtils from '../../utils/FiatUtils';
 import { connect } from 'react-redux'

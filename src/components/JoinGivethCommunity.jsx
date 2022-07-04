@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // import CommunityButton from './CommunityButton';
-import User from '../models/User';
+import { User } from '@acdi/efem-dapp';
 
 import { connect } from 'react-redux';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';

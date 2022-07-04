@@ -2,7 +2,7 @@ import { ofType } from 'redux-observable';
 import { map, mergeMap, catchError } from 'rxjs/operators'
 import UserService from '../../services/UserService';
 import { of } from 'rxjs';
-import User from '../../models/User'
+import { User } from '@acdi/efem-dapp';
 
 const userService = new UserService();
 

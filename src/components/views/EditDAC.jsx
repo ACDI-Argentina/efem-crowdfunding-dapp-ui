@@ -11,7 +11,7 @@ import GoBackButton from '../GoBackButton';
 import { isOwner, history } from '../../lib/helpers';
 import LoaderButton from '../LoaderButton';
 import DAC from '../../models/DAC';
-import User from '../../models/User';
+import { User } from '@acdi/efem-dapp';
 import ErrorPopup from '../ErrorPopup';
 import { connect } from 'react-redux'
 import { saveDac, selectDac } from '../../redux/reducers/dacsSlice';

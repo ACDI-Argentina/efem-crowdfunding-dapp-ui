@@ -1,7 +1,7 @@
 import { ofType } from 'redux-observable';
 import { map, mergeMap } from 'rxjs/operators'
-import userService from '../../commons';
-import authService from '../../commons';
+import { userService } from '../../commons';
+import { authService } from '../../commons';
 
 /**
  * Epic que reacciona a la acción de obtención del usuario actual local,

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import BigNumber from 'bignumber.js';
-import User from '../../models/User';
+import { User } from '@acdi/efem-dapp';
 import Web3Utils from '../../lib/blockchain/Web3Utils';
 
 export const usersSlice = createSlice({
