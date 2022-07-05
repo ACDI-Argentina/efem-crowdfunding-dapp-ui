@@ -65,6 +65,7 @@
     "userAnonymous": "Usuario anónimo",
     
     "userProfileTitle": "Perfil de usuario",
+    "userAddress": "Dirección",
     "userName": "Nombre",
     "userEmail": "E-Mail",
     "userUrl": "URL",
@@ -347,20 +348,25 @@
     "requestConnectionCancel":"Quizás en otro momento",
     "requestConnectionOk": "De acuerdo, conectar",  
 
-     "menuProfile":"Perfil",
-     "menuSignup":"Regístrate",
+    "menuProfile":"Perfil",
+    "menuSignup":"Regístrate",
 
-     "aboutUs":"ACERCA DE",
-     "faqTitle": "FAQs",
+    "aboutUs":"ACERCA DE",
+    "faqTitle": "FAQs",
 
-     "sponsorTap1Title": "Aliados",
-     "sponsorTap2Title": "Inversores",
-     "sponsorTap3Title": "Wallets",
+    "sponsorTap1Title": "Aliados",
+    "sponsorTap2Title": "Inversores",
+    "sponsorTap3Title": "Wallets",
  
-     "sponsorAcdi": "ACDI",
-     "sponsorElFuturoEstaEnElMonte": "El Futuro está en el Monte",
-     "sponsorRsk": "RSK",
-     "sponsorIovlabs": "IOVlabs",
-     "sponsorBidlab": "BID Lab",
-     "sponsorMetamask": "Metamask"
+    "sponsorAcdi": "ACDI",
+    "sponsorElFuturoEstaEnElMonte": "El Futuro está en el Monte",
+    "sponsorRsk": "RSK",
+    "sponsorIovlabs": "IOVlabs",
+    "sponsorBidlab": "BID Lab",
+    "sponsorMetamask": "Metamask",
+
+    "errorRequired": "Requerido",
+    "errorInvalidAddress": "Dirección inválida",
+    "errorInvalidEmail": "E-Mail inválido",
+    "errorInvalidUrl": "URL inválida"
 }

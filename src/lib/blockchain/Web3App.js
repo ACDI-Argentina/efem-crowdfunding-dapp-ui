@@ -3,7 +3,7 @@ import ConnectionModalUtil from "./ConnectionModalsUtil";
 import config from '../../configuration';
 import BigNumber from 'bignumber.js';
 import { feathersClient } from '../feathersClient';
-import Web3Utils from "./Web3Utils";
+import { web3Utils } from 'commons';
 import { history } from '../helpers';
 import { utils } from 'web3';
 import { web3Manager } from '../../commons';
@@ -437,7 +437,7 @@ class Web3App extends React.Component {
     const accessToken = await feathersClient.passport.getJWT();
     if (accessToken) {
       const payload = await feathersClient.passport.verifyJWT(accessToken);
-      if (Web3Utils.addressEquals(address, payload.userId)) {
+      if (web3Utils.addressEquals(address, payload.userId)) {
         await feathersClient.authenticate(); // authenticate the socket connection
         console.log(`[Web3App] ${address} authenticated using existing token`);
         return true;

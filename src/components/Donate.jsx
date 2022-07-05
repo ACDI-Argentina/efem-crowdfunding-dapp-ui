@@ -22,7 +22,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import config from '../configuration';
 import TokenUserBalance from './TokenUserBalance';
 import TokenAvatar from './TokenAvatar';
-import Web3Utils from '../lib/blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
 import ProfileCard from './ProfileCard';
@@ -52,7 +52,7 @@ class Donate extends Component {
       donateInputProps: {
         step: tokenConfig.donateStep,
         min: 0,
-        max: Web3Utils.weiToEther(props.currentUser.balance),
+        max: web3Utils.weiToEther(props.currentUser.balance),
         size: 31
       },
       amount: 0
@@ -83,7 +83,7 @@ class Donate extends Component {
   updateMax(){
     const { tokenAddress } = this.state;
     const balance = this.props.currentUser.tokenBalances[tokenAddress];
-    const max = Web3Utils.weiToEther(balance);
+    const max = web3Utils.weiToEther(balance);
           
     this.setState(prev => ({
         donateInputProps: {
@@ -161,7 +161,7 @@ class Donate extends Component {
   handleAmountBlur() {
     const { amount, tokenAddress } = this.state;
     const { currentUser } = this.props;
-    const max = Web3Utils.weiToEther(currentUser.tokenBalances[tokenAddress]);
+    const max = web3Utils.weiToEther(currentUser.tokenBalances[tokenAddress]);
     if (amount < 0) {
       this.setState({ amount: 0 });
     } else if (amount > max) {
@@ -173,7 +173,7 @@ class Donate extends Component {
     const { tokenAddress, amount } = this.state;
     const { entityId, currentUser, addDonation, rate } = this.props;
 
-    const amountWei = Web3Utils.etherToWei(amount);
+    const amountWei = web3Utils.etherToWei(amount);
     const centsFiatAmount = amountWei.dividedBy(rate);
     const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
 
@@ -183,7 +183,7 @@ class Donate extends Component {
       const donation = new Donation();
       donation.entityId = entityId;
       donation.tokenAddress = tokenAddress;
-      donation.amount = Web3Utils.etherToWei(amount);
+      donation.amount = web3Utils.etherToWei(amount);
       donation.giverAddress = currentUser.address;
       addDonation(donation);
       this.close();
@@ -216,7 +216,7 @@ class Donate extends Component {
 
     let amountWei;
     try{
-      amountWei = Web3Utils.etherToWei(amount || 0);
+      amountWei = web3Utils.etherToWei(amount || 0);
     } catch(err){
       console.log(err);
       amountWei = 0;

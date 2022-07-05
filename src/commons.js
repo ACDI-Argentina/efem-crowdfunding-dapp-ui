@@ -3,13 +3,16 @@ import {
     Web3Manager,
     AccountManager,
     TransactionsManager,
+    MessageManager,
     ERC20ContractApi,
     AdminContractApi,
     FeathersClient,
     FeathersUsersClient,
     UserService,
     AuthService,
-    UserIpfsConnector
+    IpfsService,
+    UserIpfsConnector,
+    ValidatorUtils
 } from '@acdi/efem-dapp';
 
 import config from 'configuration';
@@ -17,6 +20,9 @@ import config from 'configuration';
 const commonsContext = {
     config: config
 }
+
+export const validatorUtils = new ValidatorUtils();
+commonsContext.validatorUtils = validatorUtils;
 
 export const web3Utils = new Web3Utils(commonsContext);
 commonsContext.web3Utils = web3Utils;
@@ -30,6 +36,9 @@ commonsContext.feathersUsersClient = feathersUsersClient;
 export const web3Manager = new Web3Manager(commonsContext);
 commonsContext.web3Manager = web3Manager;
 
+export const messageManager = new MessageManager();
+commonsContext.messageManager = messageManager;
+
 export const transactionsManager = new TransactionsManager();
 commonsContext.transactionsManager = transactionsManager;
 
@@ -41,6 +50,9 @@ commonsContext.adminContractApi = adminContractApi;
 
 export const accountManager = new AccountManager(commonsContext);
 commonsContext.accountManager = accountManager;
+
+export const ipfsService = new IpfsService(commonsContext);
+commonsContext.ipfsService = ipfsService;
 
 export const userIpfsConnector = new UserIpfsConnector(commonsContext);
 commonsContext.userIpfsConnector = userIpfsConnector;

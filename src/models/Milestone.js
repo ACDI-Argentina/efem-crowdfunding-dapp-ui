@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { getStartOfDayUTC } from 'lib/helpers';
 import StatusUtils from '../utils/StatusUtils';
 import Status from './Status';
-import Web3Utils from 'lib/blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 
 /**
  * Modelo Milestone de Dapp.
@@ -64,7 +64,7 @@ export default class Milestone extends Entity {
    * @param user a determinar si es el manager del milestone.
    */
   isManager(user) {
-    return user && Web3Utils.addressEquals(user.address, this.managerAddress);
+    return user && web3Utils.addressEquals(user.address, this.managerAddress);
   }
 
   /**
@@ -77,8 +77,8 @@ export default class Milestone extends Entity {
   isReviewer(user) {
     
     return user && (
-      Web3Utils.addressEquals(user.address, this.reviewerAddress) || 
-      Web3Utils.addressEquals(user.address, this.campaignReviewerAddress)
+      web3Utils.addressEquals(user.address, this.reviewerAddress) || 
+      web3Utils.addressEquals(user.address, this.campaignReviewerAddress)
       );
   }
 
@@ -88,7 +88,7 @@ export default class Milestone extends Entity {
    * @param user a determinar si es el recipient del milestone.
    */
   isRecipient(user) {
-    return user && Web3Utils.addressEquals(user.address, this.recipientAddress);
+    return user && web3Utils.addressEquals(user.address, this.recipientAddress);
   }
 
   canComplete() {

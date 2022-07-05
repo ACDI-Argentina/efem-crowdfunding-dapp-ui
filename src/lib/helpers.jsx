@@ -7,10 +7,10 @@ import moment from 'moment';
 
 import DefaultAvatar from '../assets/avatar-100.svg';
 import config from '../configuration';
-import Web3Utils from './blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 
 export const isOwner = (address, user) => {
-  return address !== undefined && user !== undefined && Web3Utils.addressEquals(address, user.address);
+  return address !== undefined && user !== undefined && web3Utils.addressEquals(address, user.address);
 }
   
 

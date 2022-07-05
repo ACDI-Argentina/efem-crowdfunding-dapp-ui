@@ -14,7 +14,7 @@ import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
-import Web3Utils from './Web3Utils';
+import { web3Utils } from 'commons';
 import web3Manager from './Web3Manager';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
@@ -38,7 +38,7 @@ class CrowdfundingContractApi {
 
     async canPerformRole(address, role) {
         try {
-            const hashedRole = Web3Utils.toKeccak256(role);
+            const hashedRole = web3Utils.toKeccak256(role);
             const response = await this.crowdfunding.methods.canPerform(address, hashedRole, []).call();
             return response;
         } catch (err) {
@@ -650,7 +650,7 @@ class CrowdfundingContractApi {
      * @param donation a almacenar.
      */
     saveDonation(donation) {
-        if (Web3Utils.addressEquals(donation.tokenAddress, config.tokens.rbtc.address)) {
+        if (web3Utils.addressEquals(donation.tokenAddress, config.tokens.rbtc.address)) {
             // Donación en token nativo
             return this.saveDonationNative(donation);
         } else {

@@ -65,7 +65,8 @@
     "userAnonymous": "Anonymous user",
     
     "userProfileTitle": "User profile",
-    "userName": "Fullname",
+    "userAddress": "Address",
+    "userName": "Name",
     "userEmail": "E-Mail",
     "userUrl": "URL",
     "userAvatar": "Profile photo",
@@ -360,5 +361,10 @@
     "sponsorRsk": "RSK",
     "sponsorIovlabs": "IOVlabs",
     "sponsorBidlab": "BID Lab",
-    "sponsorMetamask": "Metamask"
+    "sponsorMetamask": "Metamask",
+
+    "errorRequired": "Required",
+    "errorInvalidAddress": "Invalid address",
+    "errorInvalidEmail": "Invalid E-Mail",
+    "errorInvalidUrl": "Invalid URL"
 }

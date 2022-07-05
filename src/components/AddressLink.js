@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Web3Utils from '../lib/blockchain/Web3Utils';
 import Link from '@material-ui/core/Link';
 import config from '../configuration'
+import { web3Utils } from 'commons';
 
 class AddressLink extends Component {
 
@@ -14,7 +14,7 @@ class AddressLink extends Component {
             <Link href={config.network.explorer + 'address/' + address}
                 onClick={this.preventDefault}
                 target={"_blank"}>
-                {Web3Utils.abbreviateAddress(address)}
+                {web3Utils.abbreviateAddress(address)}
             </Link>
         );
     }

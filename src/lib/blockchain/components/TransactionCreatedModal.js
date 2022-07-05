@@ -18,7 +18,7 @@ import config from '../../../configuration'
 import Web3App from '../Web3App'
 import { connect } from 'react-redux'
 import { selectCurrentUser } from '../../../redux/reducers/currentUserSlice'
-import Web3Utils from "../Web3Utils";
+import { web3Utils } from 'commons';
 import CryptoAmount from "components/CryptoAmount";
 import FiatAmountByToken from "components/FiatAmountByToken";
 import { selectLastCreated } from '../../../redux/reducers/transactionsSlice';
@@ -228,7 +228,7 @@ class TransactionCreatedModal extends React.Component {
                                 flexDirection="row-reverse"
                               >
                                 <Text fontWeight="bold">
-                                  {Web3Utils.abbreviateAddress(currentUser.address)}
+                                  {web3Utils.abbreviateAddress(currentUser.address)}
                                 </Text>
                                 <Flex
                                   mr={2}

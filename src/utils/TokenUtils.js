@@ -1,4 +1,4 @@
-import Web3Utils from 'lib/blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 import config from '../configuration';
 
 /**
@@ -14,7 +14,7 @@ class TokenUtils {
    */
   static format(tokenAddress, amount) {
     let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
-    let amountEther = Web3Utils.weiToEther(amount).toFixed(tokenConfig.showDecimals);
+    let amountEther = web3Utils.weiToEther(amount).toFixed(tokenConfig.showDecimals);
     let symbol = tokenConfig.symbol;
     return amountEther + ' ' + symbol;
   }
@@ -29,7 +29,7 @@ class TokenUtils {
     let tokenKeys = Object.keys(config.tokens);
     for (let i = 0; i < tokenKeys.length; i++) {
       const tokenKey = tokenKeys[i];
-      if(Web3Utils.addressEquals(config.tokens[tokenKey].address, tokenAddress)) {
+      if(web3Utils.addressEquals(config.tokens[tokenKey].address, tokenAddress)) {
         tokenConfig = config.tokens[tokenKey];
         break;
       } 

@@ -3,7 +3,7 @@ import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
-import Web3Utils from 'lib/blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
@@ -91,7 +91,7 @@ const ConnectButton = (props) => {
               <ExpandLessIcon></ExpandLessIcon> :
               <ExpandMoreIcon></ExpandMoreIcon>
           }>
-          {Web3Utils.abbreviateAddress(currentUser?.address)}
+          {web3Utils.abbreviateAddress(currentUser?.address)}
         </PrimaryButton>
       )}
 

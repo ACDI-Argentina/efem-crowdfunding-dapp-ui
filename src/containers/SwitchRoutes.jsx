@@ -3,6 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import Loader from '../components/Loader';
 
 import LandingPage from 'components/views/LandingPage.js';
+import UserProfilePage from 'components/Pages/UserProfilePage';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
@@ -153,12 +154,13 @@ const SwitchRoutes = ({ currentUser }) => (
                 />
             )}
         />*/}
-
       <Route
-        exact
-        path="/profile"
-        render={(props) => <EditProfile key={currentUser ? currentUser.id : 0} {...props} />}
-      />
+            exact
+            path="/profile"
+            render={props => (
+                <UserProfilePage />
+            )}
+        />
       <Route exact path="/profile/:userAddress" render={(props) => <Profile {...props} />} />
       <Route path="/" render={(props) => <LandingPage {...props} />} />
 

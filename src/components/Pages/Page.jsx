@@ -15,7 +15,7 @@ const Page = ({ children, ...props }) => {
 
     <div className={classes.root}>
       <Header
-        color="white"
+        
         brand={<img src={brandSource}
           alt={t('give4forest')}
           className={classes.dappLogo} />}

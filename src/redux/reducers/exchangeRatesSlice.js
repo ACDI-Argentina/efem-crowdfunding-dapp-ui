@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Web3Utils from 'lib/blockchain/Web3Utils';
+import { web3Utils } from 'commons';
 import ExchangeRate from '../../models/ExchangeRate'
 
 export const exchangeRatesSlice = createSlice({
@@ -11,7 +11,7 @@ export const exchangeRatesSlice = createSlice({
     },
     updateExchangeRate: (state, action) => {
       const exchangeRateStore = action.payload.toStore();
-      const idx = state.findIndex(exr => Web3Utils.addressEquals(exr.tokenAddress, exchangeRateStore.tokenAddress));
+      const idx = state.findIndex(exr => web3Utils.addressEquals(exr.tokenAddress, exchangeRateStore.tokenAddress));
       if(idx > -1){
         state[idx] = exchangeRateStore;
       } else {
@@ -40,7 +40,7 @@ export const selectExchangeRates = (state) => {
 };
 
 export const selectExchangeRateByToken = (state, tokenAddress) => {
-  let exchangeRate = state.exchangeRates.find(er => Web3Utils.addressEquals(er.tokenAddress, tokenAddress));
+  let exchangeRate = state.exchangeRates.find(er => web3Utils.addressEquals(er.tokenAddress, tokenAddress));
   if (exchangeRate) {
     return new ExchangeRate(exchangeRate);
   }
