@@ -71,7 +71,6 @@
     "userUrl": "URL",
     "userAvatar": "Profile photo",
     "userAvatarChoose": "Choose a profile photo",
-    "save": "Save",
     "saving": "Saving ...",
 
 
@@ -81,7 +80,6 @@
     "campaigns": "Digital solutions for development",
     "campaign": "Campaign",
     "noCampaignsYet": "There are no campaings yet!",
-    "edit": "Edit",
     "newCampaignTitle": "Start a new campaign!",
     "editCampaignTitle": "Edit campaign",
     "campaignDescription": "A campaign solves a specific cause by executing a project via its Milestones. Funds raised by a campaign need to be delegated to its Milestones in order to be paid out.",
@@ -366,5 +364,12 @@
     "errorRequired": "Required",
     "errorInvalidAddress": "Invalid address",
     "errorInvalidEmail": "Invalid E-Mail",
-    "errorInvalidUrl": "Invalid URL"
+    "errorInvalidUrl": "Invalid URL",
+
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "view": "View",
+
+    "logoutTitle": "Logout"
 }

@@ -33,7 +33,14 @@ try {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FF5D49'
+      main: '#43E0A9',
+      light: '#8efed7',
+      dark: '#004634'
+    },
+    secondary: {
+      main: '#F8652F',
+      light: '#ff9a75',
+      dark: '#C43700'
     },
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
   },

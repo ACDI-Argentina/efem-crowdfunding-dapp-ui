@@ -17,7 +17,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import InfoIcon from '@material-ui/icons/Info';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import PrimaryButton from './buttons/PrimaryButton';
+import RoundedButton from './buttons/RoundedButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
@@ -65,15 +65,15 @@ const ConnectButton = (props) => {
     <React.Fragment>
 
       {!isUserConnected && (
-        <PrimaryButton
+        <RoundedButton
           style={{ width: '15em' }}
           onClick={() => loginAccount()}>
           {t('connectWallet')}
-        </PrimaryButton>
+        </RoundedButton>
       )}
 
       {isUserConnected && (
-        <PrimaryButton
+        <RoundedButton
           color={isCorrectNetwork ? "success" : "warning"}
           style={{ width: '15em' }}
           onClick={handleOpenMenu}
@@ -92,7 +92,7 @@ const ConnectButton = (props) => {
               <ExpandMoreIcon></ExpandMoreIcon>
           }>
           {web3Utils.abbreviateAddress(currentUser?.address)}
-        </PrimaryButton>
+        </RoundedButton>
       )}
 
       <Menu

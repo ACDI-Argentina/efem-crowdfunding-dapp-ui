@@ -12,19 +12,8 @@ const Page = ({ children, ...props }) => {
   const brandSource = require("assets/img/logos/give4forest.svg");
 
   return (
-
     <div className={classes.root}>
-      <Header
-        
-        brand={<img src={brandSource}
-          alt={t('give4forest')}
-          className={classes.dappLogo} />}
-        fixed
-        changeColorOnScroll={{
-          height: 0
-        }}
-        {...props}
-      />
+      <Header fixed {...props} />
       <div className={classes.panel}>
         {children}
       </div>

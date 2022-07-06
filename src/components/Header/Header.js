@@ -1,41 +1,73 @@
-import React, { useContext } from "react";
+import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Hidden from "@material-ui/core/Hidden";
-import Drawer from "@material-ui/core/Drawer";
-import styles from "assets/jss/material-kit-react/components/headerStyle.js";
 import { NavLink } from "react-router-dom";
 import LanguageSelector from "components/LanguageSelector";
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Menu } from "@material-ui/core"
+import { Button } from "@material-ui/core"
 import { styled } from "@material-ui/styles"
 import { history } from 'lib/helpers'
 import ConnectButton from "components/ConnectButton";
-//import { Badge } from '@acdi/efem-dapp';
+import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles({
+  appBar: {
+    display: "flex",
+    border: "0",
+    borderRadius: "3px",
+    padding: "0.625rem 0",
+    color: "#FFF",
+    width: "100%",
+    height: '6em',
+    backgroundColor: "rgba(0, 43, 33, 0.8)",
+    transition: "all 150ms ease 0s",
+    alignItems: "center",
+    flexFlow: "row nowrap",
+    justifyContent: "flex-start",
+    position: "relative",
+    zIndex: "unset"
+  },
+  absolute: {
+    position: "absolute",
+    zIndex: "1100"
+  },
+  fixed: {
+    position: "fixed",
+    zIndex: "1100"
+  },
+  appBarGrid: {
+    width: '100%'
+  },
+  appBarGridLeft: {
+
+  },
+  appBarGridCenter: {
+    textAlign: 'center'
+  },
+  appBarGridRight: {
+    textAlign: 'right'
+  },
+  dappLogo: {
+    maxHeight: "4em",
+    "@media (max-width: 800px)": {
+      maxHeight: "3em"
+    },
+    "@media (max-width: 600px)": {
+      maxHeight: "2em"
+    }
+  },
+  title: {
+    minWidth: "50%",
+    textAlign: "center",
+    height: "50px",
+  }
+});
 
 export default function Header(props) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  React.useEffect(() => {
-    if (props.changeColorOnScroll) {
-      window.addEventListener("scroll", headerColorChange);
-    }
-    return function cleanup() {
-      if (props.changeColorOnScroll) {
-        window.removeEventListener("scroll", headerColorChange);
-      }
-    };
-  });
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const handleClickAbout = () => {
     history.push(`/about`);
@@ -45,41 +77,29 @@ export default function Header(props) {
     history.push(`/faq`);
   };
 
-  const headerColorChange = () => {
-    const { color, changeColorOnScroll } = props;
-    const windowsScrollTop = window.pageYOffset;
-    if (windowsScrollTop > changeColorOnScroll.height) {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[changeColorOnScroll.color]);
-    } else {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[changeColorOnScroll.color]);
-    }
-  };
-  const { color, leftLinks, brand, fixed, absolute } = props;
+  const { color, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  const brandComponent = <NavLink className={classes.title} to="/">
-    {brand}
-  </NavLink>;
+
+  const dappLogoSrc = require("assets/img/logos/give4forest.svg");
 
   return (
 
     <AppBar className={appBarClasses}>
-      <Toolbar className={classes.container}>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+
+      <Grid container
+        className={classes.appBarGrid}
+        direction="row"
+        justifyContent="center"
+        alignItems="center">
+
+        <Grid item xs={3}
+          className={classes.appBarGridLeft}>
+
           <HeaderButton
             variant="text"
             size="small"
@@ -96,56 +116,36 @@ export default function Header(props) {
           >
             {t('faqTitle')}
           </HeaderButton>
-        </Box>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-        </Box>
-        <Box minWidth="40%" textAlign="center" sx={{ flexGrow: 1, display: { md: 'flex' } }}>
-            {leftLinks !== undefined ? brandComponent : null}
-            {<div className={classes.flex}>
-              {leftLinks !== undefined ? (
-                <Hidden smDown implementation="css">
-                  {leftLinks}
-                </Hidden>
-              ) : (
-                brandComponent
-              )}
-            </div>}
-        </Box>
-        <Box sx={{ display: { md: 'flex' } }}>
-          <LanguageSelector></LanguageSelector>
-        </Box>
-        <Box sx={{ display: { md: 'flex' } }}>
-          <ConnectButton />
-        </Box>
-        <Box sx={{ display: { md: 'flex' } }}>
-        <Hidden mdUp>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-          >
-          </IconButton>
-        </Hidden>
-        </Box>
+        </Grid>
 
+        <Grid item xs={3}
+          className={classes.appBarGridCenter}>
 
-      </Toolbar>
+          <NavLink className={classes.title} to="/">
+            <img src={dappLogoSrc}
+              alt={t('give4forest')}
+              className={classes.dappLogo} />
+          </NavLink>
+        </Grid>
 
-      <Hidden mdUp implementation="js">
-        <Drawer
-          variant="temporary"
-          anchor={"right"}
-          open={mobileOpen}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          onClose={handleDrawerToggle}
-        >
-          <div className={classes.appResponsive}>
-            {leftLinks}
-          </div>
-        </Drawer>
-      </Hidden>
+        <Grid item xs={3}
+          className={classes.appBarGridRight}>
+
+          <Grid container
+
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="center">
+
+            <Grid item>
+              <LanguageSelector></LanguageSelector>
+            </Grid>
+            <Grid item>
+              <ConnectButton />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </AppBar>
   );
 }
@@ -165,7 +165,6 @@ const HeaderButton = styled(Button)({
   },
 });
 
-
 Header.propTypes = {
   color: PropTypes.oneOf([
     "primary",
@@ -178,31 +177,6 @@ Header.propTypes = {
     "rose",
     "dark"
   ]),
-  leftLinks: PropTypes.node,
-  brand: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ]),
   fixed: PropTypes.bool,
-  absolute: PropTypes.bool,
-  // this will cause the sidebar to change the color from
-  // props.color (see above) to changeColorOnScroll.color
-  // when the window.pageYOffset is heigher or equal to
-  // changeColorOnScroll.height and then when it is smaller than
-  // changeColorOnScroll.height change it back to
-  // props.color (see above)
-  changeColorOnScroll: PropTypes.shape({
-    height: PropTypes.number.isRequired,
-    color: PropTypes.oneOf([
-      "primary",
-      "info",
-      "success",
-      "warning",
-      "danger",
-      "transparent",
-      "white",
-      "rose",
-      "dark"
-    ])
-  })
+  absolute: PropTypes.bool
 };

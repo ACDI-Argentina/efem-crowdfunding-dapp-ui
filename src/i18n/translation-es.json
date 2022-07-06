@@ -72,7 +72,6 @@
     "userAvatar": "Foto de perfil",
     "userAvatarChoose": "Elige una foto de perfil",
     "userUnknown": "Usuario desconocido",
-    "save": "Guardar",
     "saving": "Guardando ...",
 
 
@@ -82,7 +81,6 @@
     "campaigns": "Soluciones digitales para el desarrollo",
     "campaign": "Campaña",
     "noCampaignsYet": "¡Aún no hay campañas!",
-    "edit": "Editar",
     "newCampaignTitle": "Comienza una nueva campaña!",
     "editCampaignTitle": "Editar campaña",
     "campaignDescription": "Una campaña resuelve una causa específica ejecutando un proyecto a través de sus Hitos. Los fondos recaudados por una campaña deben delegarse a sus Hitos para poder ser pagados.",
@@ -368,5 +366,12 @@
     "errorRequired": "Requerido",
     "errorInvalidAddress": "Dirección inválida",
     "errorInvalidEmail": "E-Mail inválido",
-    "errorInvalidUrl": "URL inválida"
+    "errorInvalidUrl": "URL inválida",
+
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "view": "Visualizar",
+
+    "logoutTitle": "Salir"
 }

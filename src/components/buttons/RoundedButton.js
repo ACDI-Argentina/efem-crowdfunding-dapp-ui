@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 import LoadingOverlay from '../Loading/LoadingOverlay';
 
-class SecondaryButton extends Component {
+class RoundedButton extends Component {
 
   constructor(props) {
     super(props);
@@ -14,9 +14,8 @@ class SecondaryButton extends Component {
     return (
       <LoadingOverlay loading={isWorking}>
         <Button {...this.props}
-          color="secondary"
           className={classes.root}
-          variant="outlined">
+          variant="contained">
           {children}
         </Button>
       </LoadingOverlay>
@@ -26,17 +25,18 @@ class SecondaryButton extends Component {
 
 const styles = theme => ({
   root: {
-    borderRadius: "5px",
-    textTransform: "none"
+    borderRadius: "1.5em",
+    textTransform: "none",
+    margin: "0.5em 0.5em 0.5em 0.5em"
   }
 });
 
-SecondaryButton.defaultProps = {
+RoundedButton.defaultProps = {
   isWorking: false
 }
 
-SecondaryButton.propTypes = {
-
+RoundedButton.propTypes = {
+  
 };
 
-export default withStyles(styles)(SecondaryButton);
+export default withStyles(styles)(RoundedButton);

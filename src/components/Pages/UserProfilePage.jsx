@@ -13,7 +13,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Page from './Page'
 import Background from 'components/views/Background'
-import InputField from 'components/InputField';
+import { InputField } from '@acdi/efem-dapp';
 import Paper from '@material-ui/core/Paper';
 import SecondaryButton from 'components/buttons/SecondaryButton';
 import PrimaryButton from 'components/buttons/PrimaryButton';
@@ -374,19 +374,25 @@ class UserProfilePage extends Component {
                       </Grid>
                     </Grid>
 
-                    <Grid container xs={12} justifyContent="flex-end">
+                    <Grid container
+                      xs={12}
+                      justifyContent="flex-end"
+                      spacing={2}>
 
-                      <SecondaryButton
-                        onClick={this.cancel}>
-                        {t("cancel")}
-                      </SecondaryButton>
-
-                      <PrimaryButton
-                        type="submit"
-                        disabled={!formValid || isSaving}
-                        isWorking={isSaving}>
-                        {t("save")}
-                      </PrimaryButton>
+                      <Grid item>
+                        <SecondaryButton
+                          onClick={this.cancel}>
+                          {t("cancel")}
+                        </SecondaryButton>
+                      </Grid>
+                      <Grid item>
+                        <PrimaryButton
+                          type="submit"
+                          disabled={!formValid || isSaving}
+                          isWorking={isSaving}>
+                          {t("save")}
+                        </PrimaryButton>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </form>
