@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import { Button } from '@material-ui/core';
 import { history } from 'lib/helpers'
 import JoinGivethCommunity from 'components/JoinGivethCommunity';
-
+import PrimaryButton from 'components/buttons/PrimaryButton';
+import SecondaryButton from 'components/buttons/SecondaryButton';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import { container } from "assets/jss/material-kit-react.js";
+import parallaxBkg from "assets/img/landing-bg.jpg";
 
 const handleClickAbout = () => {
     history.push(`/about`);
@@ -29,37 +30,83 @@ class HomeParallax extends Component {
         return (
             <div className={classes.background}>
                 <div className={classes.container}>
-                    <GridContainer>
-                        <GridItem xs={12} sm={12} md={12}>
+                    <Grid container>
+                        <Grid item xs={12} sm={12} md={12}>
                             <div className={classes.titleContainer}>
-                                <h2 className={classes.title}>{t('landingPageTitle')}</h2>
-                                <h4 className={classes.subtitle}>
-                                    {t('landingPagesSubtitle1')}<span className={classes.subtitleHighlight}>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
-                                </h4>
+                                <Typography variant="h3"
+                                    className={classes.title}>
+                                    {t('landingPageTitle')}
+                                </Typography>
+
+                                <Typography variant="subtitle1"
+                                    className={classes.subtitle}>
+                                    {t('landingPagesSubtitle1')}<span className={classes.textHighlight}>{t('landingPagesSubtitle2')}</span>{t('landingPagesSubtitle3')}
+                                </Typography>
                             </div>
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={12}>
-                            <center>
-                                <Button variant="contained" color="primary" className={classes.dropShadowButton} size="medium" onClick={() => handleClickAbout()}>
-                                    {t('landingPageConocerSoluciones')}
-                                </Button>
-                                <Button variant="contained" color="default" size="medium" className={classes.dropShadowButton} onClick={() => handleClickAbout()}>
-                                    {t('landingPageProponerSoluciones')}
-                                </Button>
-                            </center>
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={12}>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12}>
+
+                            <Grid container
+                                xs={12}
+                                justifyContent="center"
+                                spacing={2}>
+
+                                <Grid item>
+                                    <PrimaryButton onClick={() => handleClickAbout()}>
+                                        {t('landingPageConocerSoluciones')}
+                                    </PrimaryButton>
+                                </Grid>
+                                <Grid item>
+                                    <SecondaryButton onClick={() => handleClickAbout()}>
+                                        {t('landingPageProponerSoluciones')}
+                                    </SecondaryButton>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12}>
                             <JoinGivethCommunity history={history} />
-                        </GridItem>
-                    </GridContainer>
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         )
     }
 }
 
+const styles = theme => ({
+    background: {
+        backgroundImage: "url(" + parallaxBkg + ")",
+        backgroundSize: "cover",
+        height: "100vh"
+    },
+    container: {
+        zIndex: "12",
+        color: "#FFFFFF",
+        ...container
+    },
+    titleContainer: {
+        padding: "3em",
+        paddingTop: "10em",
+        "@media (max-width: 600px)": {
+            padding: "1em",
+        }
+    },
+    title: {
+        margin: "0 10%",
+        textAlign: "center",
+        fontWeight: "600"
+    },
+    subtitle: {
+        textAlign: "center",
+        margin: "1rem 20%"
+    },
+    textHighlight: {
+        color: theme.palette.primary.main
+    }
+});
+
 HomeParallax.propTypes = {};
 
 export default withStyles(styles)(
-        withTranslation()(HomeParallax)
-    );
+    withTranslation()(HomeParallax)
+);

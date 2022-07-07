@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 import LoadingOverlay from '../Loading/LoadingOverlay';
@@ -15,7 +14,7 @@ class PrimaryButton extends Component {
     return (
       <LoadingOverlay loading={isWorking}>
         <Button {...this.props}
-          color="primary"
+          color="secondary"
           className={classes.root}
           variant="contained"
           size="medium">
@@ -28,29 +27,21 @@ class PrimaryButton extends Component {
 
 const styles = theme => ({
   root: {
+    border: 'solid',
+    borderWidth: '1px',
+    borderColor: theme.palette.secondary.main,
     borderRadius: "5px",
-    boxShadow: `3px 3px 0px 0px ${theme.palette.secondary.main}`,
+    boxShadow: `3px 3px 0px 0px ${theme.palette.primary.main}`,
     textTransform: "none",
     '&:hover': {
-      boxShadow: `3px 3px 0px 0px ${theme.palette.secondary.light}`,
-      backgroundColor: theme.palette.primary.light
+      boxShadow: `3px 3px 0px 0px ${theme.palette.primary.light}`,
+      backgroundColor: theme.palette.secondary.light
     }
   }
 });
 
 PrimaryButton.defaultProps = {
-  color: "primary",
   isWorking: false
 }
-
-PrimaryButton.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-  ])
-};
 
 export default withStyles(styles)(PrimaryButton);

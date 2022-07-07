@@ -38,9 +38,7 @@ export default withTranslation()(function LandingPage(props) {
         <Grid item xs={12}>
           <HomeParallax history={props.history} />
         </Grid>
-
-        <Grid item sm={1} lg={2}></Grid>
-        <Grid item sm={10} lg={8}>
+        <Grid item xs={12}>
           <KnowPlatform />
         </Grid>
         <Grid item sm={1} lg={2}></Grid>

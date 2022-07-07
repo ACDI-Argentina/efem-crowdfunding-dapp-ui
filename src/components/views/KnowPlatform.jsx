@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
-import styles from "assets/jss/material-kit-react/views/landingPageSections/knowPlatformStyle.js";
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import { Hidden, Button } from '@material-ui/core';
+import { Hidden } from '@material-ui/core';
 import { history } from 'lib/helpers'
+import knowPlatformImg from "assets/img/know-platform.png";
+import SecondaryButton from 'components/buttons/SecondaryButton';
+import Typography from '@material-ui/core/Typography';
 
 /**
  * The KnowPlatform section
@@ -22,25 +24,63 @@ class KnowPlatform extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container className={classes.container}>
-        <Grid item xs={10} sm={8} lg={8}>
-          <div className={classes.paragraphText}><span className={classes.paragraphTextHighlight}>{t('knowPlatform1')}</span><span>{t('knowPlatform2')}</span></div>
-          <Button variant="contained" color="default" size="medium" className={classes.dropShadowButton} onClick={() => this.handleClickAbout()}>
-            {t('knowPlatformKnowMoreButton')}
-          </Button>
+      <div className={classes.root}>
+
+        <Grid container
+          direction="row"
+          justifyContent="center"
+          alignItems="flex-end"
+          spacing={2}
+          className={classes.container}>
+
+          <Grid item xs={5}>
+
+            <Grid container
+              spacing={2}>
+              <Grid item>
+                <Typography variant="h6">
+                  <span className={classes.textHighlight}>{t('knowPlatform1')}</span><span>{t('knowPlatform2')}</span>
+                </Typography>
+              </Grid>
+              <Grid item>
+                <SecondaryButton onClick={() => this.handleClickAbout()}>
+                  {t('knowPlatformKnowMoreButton')}
+                </SecondaryButton>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Hidden xsDown>
+              <center>
+                <img src={require("assets/img/logos/give4forestBadge.png")}
+                  className={classes.knowPlatformImg} />
+              </center>
+            </Hidden>
+          </Grid>
         </Grid>
-        <Grid item sm={4} lg={4}>
-          <Hidden xsDown>
-            <center>
-              <img
-                src={require("assets/img/logos/give4forestBadge.svg")} alt={t('telegram')} className={classes.knowPlatformImg} />
-            </center>
-          </Hidden>
-        </Grid>
-      </Grid>
+      </div>
     )
   }
 }
+
+const styles = theme => ({
+  root: {
+    backgroundImage: "url(" + knowPlatformImg + ")",
+    backgroundSize: "100%",
+    backgroundRepeat: 'no-repeat'
+  },
+  container: {
+    padding: "10em 0",
+    alignItems: "center"
+  },
+  textHighlight: {
+    color: theme.palette.secondary.main
+  },
+  knowPlatformImg: {
+    width: "90%"
+  }
+});
 
 KnowPlatform.propTypes = {};
 

@@ -15,7 +15,7 @@ import Page from './Page'
 import Background from 'components/views/Background'
 import { InputField } from '@acdi/efem-dapp';
 import Paper from '@material-ui/core/Paper';
-import SecondaryButton from 'components/buttons/SecondaryButton';
+import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
 /**
@@ -380,10 +380,10 @@ class UserProfilePage extends Component {
                       spacing={2}>
 
                       <Grid item>
-                        <SecondaryButton
+                        <PrimaryButtonOutline
                           onClick={this.cancel}>
                           {t("cancel")}
-                        </SecondaryButton>
+                        </PrimaryButtonOutline>
                       </Grid>
                       <Grid item>
                         <PrimaryButton
