@@ -42,6 +42,9 @@ const theme = createTheme({
       light: '#ff9a75',
       dark: '#C43700'
     },
+    text: {
+      secondary: '#FFFFFF'
+    },
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
   },
   typography: {

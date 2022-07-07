@@ -50,7 +50,7 @@ class KnowPlatform extends Component {
             </Grid>
           </Grid>
 
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Hidden xsDown>
               <center>
                 <img src={require("assets/img/logos/give4forestBadge.png")}
@@ -71,7 +71,7 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat'
   },
   container: {
-    padding: "10em 0",
+    padding: "12em 0",
     alignItems: "center"
   },
   textHighlight: {

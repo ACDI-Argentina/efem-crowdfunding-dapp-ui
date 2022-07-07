@@ -41,23 +41,12 @@ export default withTranslation()(function LandingPage(props) {
         <Grid item xs={12}>
           <KnowPlatform />
         </Grid>
-        <Grid item sm={1} lg={2}></Grid>
-
-        <Grid item sm={1} lg={2}></Grid>
-        <Grid item sm={10} lg={8}>
+        <Grid item xs={12}>
           <Campaigns />
         </Grid>
-        <Grid item sm={1} lg={2}></Grid>
-
-        <Grid container className={classes.platformFeaturesBkg}>
-          <Grid item sm={1} lg={2}></Grid>
-          <Grid item sm={10} lg={8}>
-            <PlatformFeatures />
-          </Grid>
-          <Grid item sm={1} lg={2}></Grid>
+        <Grid item xs={12}>
+          <PlatformFeatures />
         </Grid>
-
-        <Grid item sm={1} lg={2}></Grid>
         <Grid item sm={10} lg={8}>
           <BlockchainBenefits />
         </Grid>
@@ -68,7 +57,7 @@ export default withTranslation()(function LandingPage(props) {
         </Grid>
 
         <Grid item sm={1} lg={2}></Grid>
-        <Grid style={{ margin: "4em 0"}} item sm={10} lg={8}>
+        <Grid style={{ margin: "4em 0" }} item sm={10} lg={8}>
           <Sponsors />
         </Grid>
         <Grid item sm={1} lg={2}></Grid>
