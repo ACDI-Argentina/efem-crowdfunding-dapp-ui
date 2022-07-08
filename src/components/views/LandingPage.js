@@ -53,13 +53,9 @@ export default withTranslation()(function LandingPage(props) {
         <Grid item xs={12}>
           <SupportGive4Forest />
         </Grid>
-
-        <Grid item sm={1} lg={2}></Grid>
-        <Grid style={{ margin: "4em 0" }} item sm={10} lg={8}>
+        <Grid item xs={12}>
           <Sponsors />
         </Grid>
-        <Grid item sm={1} lg={2}></Grid>
-
       </Grid>
     </Page>
   );

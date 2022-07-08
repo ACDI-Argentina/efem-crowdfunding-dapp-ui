@@ -44,8 +44,10 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    /*color: "#000",
-    backgroundColor: "#7868E5"*/
+    margin: '2em 2em 2em 2em'
+  },
+  tap: {
+    color: theme.palette.text.primary
   },
   tapPaper: {
     padding: '1em 0',
@@ -53,11 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   sponsorGrid: {
     textAlign: "center"
-  },
-  logo: {
-    height: '2.5em',
-    textAlign: "center"
-  },
+  }
 }));
 
 export default function Sponsors() {
@@ -75,7 +73,7 @@ export default function Sponsors() {
   };
 
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -147,7 +145,8 @@ export default function Sponsors() {
               </Sponsor>
             </Grid>
           </Grid>
-        </TabPanel> 
+        </TabPanel>
+
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Grid container
             spacing={0}
@@ -164,6 +163,6 @@ export default function Sponsors() {
           </Grid>
         </TabPanel>
       </SwipeableViews>
-    </React.Fragment>
+    </div>
   );
 }

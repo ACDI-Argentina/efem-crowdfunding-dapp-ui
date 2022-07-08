@@ -94,6 +94,10 @@ legend {
   }
 }
 
+button:focus {
+  outline: none !important;
+}
+
 a {
   color: $link-color;
   text-decoration: none;
