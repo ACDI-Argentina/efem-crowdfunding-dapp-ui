@@ -1,7 +1,6 @@
 import { container, title } from "assets/jss/material-kit-react.js";
 
 import { dropShadowButton} from "assets/jss/material-kit-react/components/customButtonStyle.js";
-import platformFeaturesBkg from "assets/img/platformFeaturesBkg.png";
 import parallaxBkg from "assets/img/landing-bg.jpg";
 
 const landingPageStyle = {
@@ -12,10 +11,6 @@ const landingPageStyle = {
     height: "100vh"
   },
 
-  platformFeaturesBkg: {
-    backgroundImage: "url(" + platformFeaturesBkg + ")",
-    backgroundSize: "cover",
-  },
   landingPage: {
     overflowX: "hidden"
   },

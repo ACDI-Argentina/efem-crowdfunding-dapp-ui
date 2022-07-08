@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import platformFeaturesBackground from "assets/img/platformFeaturesBackground.png";
+import platformFeaturesBackground from "assets/img/platform-features-background.png";
 import Typography from '@material-ui/core/Typography';
 
 /**

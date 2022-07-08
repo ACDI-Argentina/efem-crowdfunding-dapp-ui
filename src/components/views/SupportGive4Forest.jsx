@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
-import styles from "assets/jss/material-kit-react/views/landingPageSections/supportGive4ForestStyle.js";
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import { Hidden, Button } from '@material-ui/core';
-import { history } from 'lib/helpers'
+import backgroundImg from "assets/img/supportG4F.jpg";
+import Typography from '@material-ui/core/Typography';
+import SecondaryButton from 'components/buttons/SecondaryButton';
 
 /**
  * The SupportGive4Forest section
@@ -22,22 +22,67 @@ class SupportGive4Forest extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <Grid container alignItems="stretch" className={classes.container}>
-        <Grid item xs={6} sm={6} className={classes.supportBackgroundImg}>
+      <div className={classes.root}>
+
+        <Grid container
+          direction="row"
+          justifyContent="center"
+          alignItems="stretch"
+          spacing={0}>
+
+          <Grid item xs={6} className={classes.leftItem}>
+          </Grid>
+
+          <Grid item xs={6} className={classes.rightItem}>
+
+            <Grid container
+              direction="row"
+              justifyContent="center"
+              alignItems="stretch"
+              spacing={2}>
+
+              <Grid item xs={12}>
+                <Typography variant="h5" gutterBottom="true" >
+                  {t('supportGive4ForestTitle')}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1" gutterBottom="true" >
+                  {t('supportGive4ForestText')}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <SecondaryButton onClick={() => this.handleClickDonate()}>
+                  {t('supportGive4ForestButtonLabel')}
+                </SecondaryButton>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item xs={6} sm={6}>
-          <div className={classes.leftContainer}>
-            <h2 className={classes.title}>{t('supportGive4ForestTitle')}</h2>
-            <div className={classes.paragraphText}>{t('supportGive4ForestText')}</div>
-            <Button variant="contained" size="medium" className={classes.dropShadowButton} onClick={() => this.handleClickDonate()}>
-              {t('supportGive4ForestButtonLabel')}
-            </Button>
-          </div>
-        </Grid>
-      </Grid>
+      </div>
     )
   }
 }
+
+const styles = theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.main
+  },
+  leftItem: {
+    backgroundImage: "url(" + backgroundImg + ")",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    flexGrow: "1",
+    "&:after": {
+      content: "''",
+      backgroundColor: "rgba(22, 222, 222, 0.5)",
+    }
+  },
+  rightItem: {
+    width: "80%",
+    padding: "4em 2em"
+  }
+});
 
 SupportGive4Forest.propTypes = {};
 

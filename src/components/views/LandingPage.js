@@ -47,12 +47,10 @@ export default withTranslation()(function LandingPage(props) {
         <Grid item xs={12}>
           <PlatformFeatures />
         </Grid>
-        <Grid item sm={10} lg={8}>
+        <Grid item xs={12}>
           <BlockchainBenefits />
         </Grid>
-        <Grid item sm={1} lg={2}></Grid>
-
-        <Grid item sm={12} lg={12}>
+        <Grid item xs={12}>
           <SupportGive4Forest />
         </Grid>
 
