@@ -10,22 +10,15 @@ class DAC extends Entity {
 
   constructor(data = {}) {
     super(data);
-
     const {
       campaignIds = [],
-      communityUrl = '',
       delegateAddress = '',
-      requiredConfirmations = '',
-      commitTime,
       status = DAC.PENDING.toStore(),
     } = data;
 
     this._campaignIds = campaignIds;
-    this._communityUrl = communityUrl;
     this._status = StatusUtils.build(status.name, status.isLocal);
     this._delegateAddress = delegateAddress;
-    this._requiredConfirmations = requiredConfirmations;
-    this._commitTime = commitTime;
     this._delegateId = delegateAddress;
   }
 
@@ -36,10 +29,7 @@ class DAC extends Entity {
     let entityStore = super.toStore();
     return Object.assign(entityStore, {
       campaignIds: this._campaignIds,
-      communityUrl: this._communityUrl,
       delegateAddress: this._delegateAddress,
-      requiredConfirmations: this._requiredConfirmations,
-      commitTime: this._commitTime,
       delegateId: this._delegateId,
       status: this._status.toStore()
     });
@@ -81,16 +71,6 @@ class DAC extends Entity {
     this._campaignIds = value;
   }
 
-  get communityUrl() {
-    return this._communityUrl;
-  }
-
-  set communityUrl(value) {
-    this.checkType(value, ['string'], 'communityUrl');
-    this._communityUrl = value;
-  }
-
-
   get delegateAddress() {
     return this._delegateAddress;
   }
@@ -100,17 +80,7 @@ class DAC extends Entity {
   }
 
   set delegateId(value) {
-    this.checkType(value, ['number', 'string'], 'delegateId');
     this._delegateId = value;
-  }
-
-  get commitTime() {
-    return this._commitTime;
-  }
-
-  set commitTime(value) {
-    this.checkType(value, ['number'], 'commitTime');
-    this._commitTime = value;
   }
 
   get status() {
@@ -118,7 +88,6 @@ class DAC extends Entity {
   }
 
   set status(value) {
-    this.checkInstanceOf(value, Status, 'status');
     this._status = value;
   }
 
@@ -137,9 +106,6 @@ class DAC extends Entity {
   isDelegate(user) {
     return user && web3Utils.addressEquals(user.address, this.delegateAddress);
   }
-
-
-
 }
 
 export default DAC;

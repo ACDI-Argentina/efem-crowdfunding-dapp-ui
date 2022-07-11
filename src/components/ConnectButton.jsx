@@ -20,6 +20,9 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoundedButton from './buttons/RoundedButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { OnlyRole } from '@acdi/efem-dapp';
+import { CREATE_DAC_ROLE } from 'constants/Role';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 const useStyles = makeStyles({
   walletIcon: {
@@ -54,6 +57,10 @@ const ConnectButton = (props) => {
 
   const handleClickProfile = () => {
     history.push(`/profile`);
+  };
+
+  const handleClickCreateDac = () => {
+    history.push(`/dacs/new`);
   };
 
   const handleClickLogout = () => {
@@ -113,6 +120,16 @@ const ConnectButton = (props) => {
           </ListItemIcon>
           <ListItemText primary={isUserRegistered ? t('menuProfile') : t('menuSignup')} />
         </MenuItem>
+        <OnlyRole user={currentUser} role={CREATE_DAC_ROLE}>
+          <MenuItem onClick={
+            handleClickCreateDac
+          }>
+            <ListItemIcon>
+              <AccountTreeIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('createDac')} />
+          </MenuItem>
+        </OnlyRole>
         <MenuItem onClick={
           handleClickLogout
         }>

@@ -1,6 +1,5 @@
 import React, { useContext, Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import NetworkUtils from './NetworkUtils';
 import { Image, MetaMaskButton } from 'rimble-ui';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +10,7 @@ import TransactionProgressBanner from './components/TransactionProgressBanner';
 import { Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/components/web3BannerStyle.js";
-import networkManager from './NetworkManager';
+import { networkManager } from 'commons';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 
 import Bounce from 'components/Animated/Bounce';

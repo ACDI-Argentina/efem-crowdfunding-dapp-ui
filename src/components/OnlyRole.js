@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectRoles } from '../redux/reducers/currentUserSlice';
+import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 
 class OnlyRole extends Component {
 
     render() {
-        const currentRoles = this.props.currentRoles;
-        const allowToRol = this.props.role;
-
-        if (currentRoles.includes(allowToRol)) {
+        const currentUser = this.props.currentUser;
+        const role = this.props.role;
+        if (currentUser.roles.includes(role)) {
             return this.props.children;
         } else {
             return null;
@@ -16,6 +15,10 @@ class OnlyRole extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({currentRoles: selectRoles(state)});
+const mapStateToProps = (state, ownProps) => (
+    {
+        currentUser: selectCurrentUser(state)
+    }
+);
 
-export default connect(mapStateToProps,{})(OnlyRole);
+export default connect(mapStateToProps, {})(OnlyRole);

@@ -1,6 +1,7 @@
 import {
     Web3Utils,
     Web3Manager,
+    NetworkManager,
     AccountManager,
     TransactionsManager,
     MessageManager,
@@ -35,6 +36,9 @@ commonsContext.feathersUsersClient = feathersUsersClient;
 
 export const web3Manager = new Web3Manager(commonsContext);
 commonsContext.web3Manager = web3Manager;
+
+export const networkManager = new NetworkManager(commonsContext);
+commonsContext.networkManager = networkManager;
 
 export const messageManager = new MessageManager();
 commonsContext.messageManager = messageManager;

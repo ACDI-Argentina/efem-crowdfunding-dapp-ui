@@ -15,7 +15,7 @@ import { User } from '@acdi/efem-dapp';
 import ErrorPopup from '../ErrorPopup';
 import { connect } from 'react-redux'
 import { saveDac, selectDac } from '../../redux/reducers/dacsSlice';
-import { selectRoles , selectCurrentUser} from '../../redux/reducers/currentUserSlice';
+import { selectCurrentUser} from '../../redux/reducers/currentUserSlice';
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import Parallax from "components/Parallax/Parallax.js";
@@ -27,6 +27,7 @@ import styles from "assets/jss/material-kit-react/views/dacPage.js";
 import { Box } from '@material-ui/core';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
+import { DELEGATE_ROLE } from 'constants/Role';
 
 /**
  * View to create or edit a DAC
@@ -107,7 +108,7 @@ class EditDAC extends Component {
       return Promise.reject("Not allowed. No user logged in");
     }
 
-    if(!this.props.isDelegate){
+    if(!currentUser.hasRole(DELEGATE_ROLE)){
       history.push('/');
       return Promise.reject("Not allowed. User is not delegate");
     }
@@ -317,8 +318,7 @@ EditDAC.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }).isRequired,
-  }).isRequired,
-  isDelegate: PropTypes.bool.isRequired,
+  }).isRequired
 };
 
 EditDAC.defaultProps = {
@@ -330,8 +330,6 @@ const mapStateToProps = (state, props) => {
   const dacId = parseInt(props.match.params.id);
   return {
     currentUser: selectCurrentUser(state),
-    roles: selectRoles(state),
-    isDelegate: selectCurrentUser(state).isDelegate(),
     dac: selectDac(state, dacId),
   }
 };

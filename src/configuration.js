@@ -293,47 +293,66 @@ config.anonymousDonationThreshold = REACT_APP_ANONYMOUS_DONATION_THRESHOLD ||  c
 
 //config.sendErrors = ['develop', 'release', 'beta', 'rsk_testnet'].includes(REACT_APP_ENVIRONMENT);
 
-config.ADMIN_ROLE = "ADMIN_ROLE";
-config.AVALDAO_ROLE = "AVALDAO_ROLE";
-config.SOLICITANTE_ROLE = "SOLICITANTE_ROLE";
-config.COMERCIANTE_ROLE = "COMERCIANTE_ROLE";
-config.AVALADO_ROLE = "AVALADO_ROLE";
-
 config.roles = [
   {
-      value: config.ADMIN_ROLE,
-      //hash: Web3Utils.toKeccak256(config.ADMIN_ROLE),
-      hash: '0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775',
-      label: 'Admin',
-      app: config.adminContractAddress
+    value: "DELEGATE_ROLE",
+    hash: "0x1a82baf2b928242f69f7147fb92490c6288d044f7257b88817e6284f1eec0f15",
+    label: "Delegate",
+    app: config.crowdfundingAddress
   },
   {
-      value: config.AVALDAO_ROLE,
-      //hash: Web3Utils.toKeccak256(config.AVALDAO_ROLE),
-      hash: '0x6fe48ba75814b08c0dddc279841efe9da58be3efa246107d47304a151682bb53',
-      label: 'Avaldao',
-      app: config.avaldaoContractAddress
+    value: "CAMPAIGN_MANAGER_ROLE",
+    hash: "0x5022544358ee0bece556b72ae8983c7f24341bd5b9483ce8a19bff5efbb2de92",
+    label: "Campaign Manager",
+    app: config.crowdfundingAddress
   },
   {
-      value: config.SOLICITANTE_ROLE,
-      //hash: Web3Utils.toKeccak256(config.SOLICITANTE_ROLE),
-      hash: '0xfb35233533db5c7fd0b9bddd918dc9ee7dc650bcb29116685e303e733d8351bb',
-      label: 'Solicitante',
-      app: config.avaldaoContractAddress
+    value: "CAMPAIGN_REVIEWER_ROLE",
+    hash: "0x634e3ca2e6368700bbf08d9508419cd87488d87c36c701a117b27ea1e3efb94e",
+    label: "Campaign Reviewer",
+    app: config.crowdfundingAddress
   },
   {
-      value: config.COMERCIANTE_ROLE,
-      //hash: Web3Utils.toKeccak256(config.COMERCIANTE_ROLE),
-      hash: '0xf95d0e1c3ba95ce4614532f244d16b0981be4cfc6964c018cf3b9e6d860c5c6e',
-      label: 'Comerciante',
-      app: config.avaldaoContractAddress
+    value: "MILESTONE_MANAGER_ROLE",
+    hash: "0xa3a2c0788fca84104c8a174fd5021fe337cdd81ef2dab39dfed0f397582c2efb",
+    label: "Milestone Manager",
+    app: config.crowdfundingAddress
   },
   {
-      value: config.AVALADO_ROLE,
-      //hash: Web3Utils.toKeccak256(config.AVALADO_ROLE),
-      hash: '0x780a0ec41e5ee507f458f09f4a20097a58d10125acb87277c67891025e16cef6',
-      label: 'Avalado',
-      app: config.avaldaoContractAddress
+    value: "MILESTONE_REVIEWER_ROLE",
+    hash: "0x4d6e65593aeec72da9930817128ec8271cfd271f40a90712d7163837a7835ede",
+    label: "Milestone Reviewer",
+    app: config.crowdfundingAddress
+  },
+  {
+    value: "RECIPIENT_ROLE",
+    hash: "0x8b42d4fd5c2527b7732a4b075ccb928f88ffc087de1e4c401c8fc7ab80ea882e",
+    label: "Recipient",
+    app: config.crowdfundingAddress
+  },
+  {
+    value: "CREATE_DAC_ROLE",
+    hash: "0x27dcfaa805d739418c9c74189b634c1005c4272ef394c344d4a04a451d57e6c8",
+    label: "Create DAC",
+    app: config.crowdfundingAddress
+  },
+  {
+    value: "CREATE_CAMPAIGN_ROLE",
+    hash: "0x16d50609795428ec5fa457db737ec3568047847f63bf070b2edc21ed1f2aab7b",
+    label: "Create Campaign",
+    app: config.crowdfundingAddress
+  },
+  {
+    value: "CREATE_MILESTONE_ROLE",
+    hash: "0x324aca30d130a854e55500f1a7b303629413b3c281a79ce243e4f7e90314cf39",
+    label: "Create Milestone",
+    app: config.crowdfundingAddress
+  },
+  {
+    value: "TRANSFER_ROLE",
+    hash: "0x8502233096d909befbda0999bb8ea2f3a6be3c138b9fbf003752a4c8bce86f6c",
+    label: "Transfer",
+    app: config.crowdfundingAddress
   }
 ];
 

@@ -74,6 +74,5 @@ export const {
 } = currentUserSlice.actions;
 
 export const selectCurrentUser = state => new User(state.currentUser);
-export const selectRoles = state => state.currentUser.roles;
 
 export default currentUserSlice.reducer;

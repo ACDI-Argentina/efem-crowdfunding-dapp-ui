@@ -373,5 +373,13 @@
     "edit": "Editar",
     "view": "Visualizar",
 
-    "logoutTitle": "Salir"
+    "logoutTitle": "Salir",
+
+    "createDac": "Crear DAC",
+    "createDacTitle": "Creación de DAC",
+
+    "dacTitle": "Título",
+    "dacDescription": "Descripción",
+    "dacUrl": "URL"
+
 }

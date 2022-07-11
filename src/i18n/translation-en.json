@@ -371,5 +371,12 @@
     "edit": "Edit",
     "view": "View",
 
-    "logoutTitle": "Logout"
+    "logoutTitle": "Logout",
+    
+    "createDac": "Create DAC",
+    "createDacTitle": "Create a DAC",
+
+    "dacTitle": "Title",
+    "dacDescription": "Description",
+    "dacUrl": "URL"
 }

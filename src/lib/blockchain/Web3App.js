@@ -6,10 +6,12 @@ import { feathersClient } from '../feathersClient';
 import { web3Utils } from 'commons';
 import { history } from '../helpers';
 import { utils } from 'web3';
-import { web3Manager } from '../../commons';
-import networkManager from "./NetworkManager";
-import { accountManager } from "../../commons";
-
+import {
+  web3Manager,
+  networkManager,
+  accountManager,
+  authService
+} from '../../commons';
 
 export const Web3AppContext = React.createContext({
   contract: {},
@@ -162,7 +164,8 @@ class Web3App extends React.Component {
 
   logoutAccount = async () => {
     await web3Manager.disconnect();
-    await accountManager.logout();
+    //await accountManager.logout();
+    await authService.logout();
   }
 
   // CONNECTION MODAL METHODS

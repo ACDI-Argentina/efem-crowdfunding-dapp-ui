@@ -14,8 +14,7 @@ import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
-import { web3Utils } from 'commons';
-import web3Manager from './Web3Manager';
+import { web3Manager, web3Utils } from 'commons';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
 import TransactionTracker from './TransactionTracker';
@@ -66,6 +65,8 @@ class CrowdfundingContractApi {
             let infoCid = await dacIpfsConnector.upload(dac);
 
             const clientId = dac.clientId;
+
+            console.log('Guardando', dacId, dac, infoCid);
 
             const method = this.crowdfunding.methods.saveDac(infoCid, dacId);
 
@@ -1541,8 +1542,8 @@ class CrowdfundingContractApi {
     }
 
     updateContracts() {
-        console.log('[Crowdfunding Contract API] Se actualizan contratos.');
         const { crowdfundingAddress, exchangeRateProviderAddress } = config;
+        console.log('[Crowdfunding Contract API] Se actualizan contratos.', crowdfundingAddress, exchangeRateProviderAddress);
         this.crowdfunding = new this.web3.eth.Contract(CrowdfundingAbi, crowdfundingAddress);
         this.exchangeRateProvider = new this.web3.eth.Contract(ExchangeRateProviderAbi, exchangeRateProviderAddress);
     }
