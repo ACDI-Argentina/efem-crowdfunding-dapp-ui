@@ -37,7 +37,7 @@ export const fetchDacEpic = action$ => action$.pipe(
  */
 export const saveDacEpic = action$ => action$.pipe(
   ofType('dacs/saveDac'),
-  mergeMap(action => crowdfundingContractApi.saveDAC(action.payload)),
+  mergeMap(action => crowdfundingContractApi.saveDac(action.payload)),
   map(dac => ({
     type: 'dacs/updateDacByClientId',
     payload: dac

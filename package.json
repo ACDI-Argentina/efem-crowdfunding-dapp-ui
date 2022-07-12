@@ -4,8 +4,8 @@
   "private": true,
   "main": "src/index.js",
   "dependencies": {
-    "@acdi/efem-dapp": "^1.0.0-alpha.4",
     "@acdi/efem-contract": "1.0.0-alpha.2",
+    "@acdi/efem-dapp": "^1.0.0-alpha.4",
     "@acdi/give4forests-crowdfunding-contract": "1.2.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",

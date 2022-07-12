@@ -378,5 +378,6 @@
 
     "dacTitle": "Title",
     "dacDescription": "Description",
-    "dacUrl": "URL"
+    "dacUrl": "URL",
+    "dacAvatarChoose": "Choose an image for the DAC"
 }

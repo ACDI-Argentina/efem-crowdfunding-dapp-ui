@@ -32,8 +32,7 @@ class DacPage extends Component {
 
     const { currentUser } = props;
 
-    // DAC model
-    const dac = new DAC({ 
+    const dac = new DAC({
       delegateAddress: this.props.currentUser.address,
       status: DAC.PENDING
     });
@@ -47,22 +46,18 @@ class DacPage extends Component {
       descriptionHelperText: '',
       descriptionError: false,
 
-      title: '',
-      titleHelperText: '',
-      titleError: false,
+      url: '',
+      urlHelperText: '',
+      urlError: false,
 
       avatar: null,
       avatarPreview: null,
+      avatarImg: ipfsService.resolveUrl(dac.imageCid),
 
       dac: dac,
-      avatarImg: ipfsService.resolveUrl(currentUser.avatarCid),
-      registered: false,
-      
+
       formValid: false,
-      isLoading: false,
-      isSaving: false,
-      formIsValid: false,
-      isBlocking: false
+      isSaving: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,12 +66,10 @@ class DacPage extends Component {
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
-
   }
 
   clearForm() {
-    // DAC model
-    const dac = new DAC({ 
+    const dac = new DAC({
       delegateAddress: this.props.currentUser.address,
       status: DAC.PENDING
     });
@@ -84,6 +77,7 @@ class DacPage extends Component {
       title: "",
       description: "",
       url: "",
+      avatarImg: ipfsService.resolveUrl(dac.imageCid),
       dac: dac
     })
   }
@@ -181,12 +175,21 @@ class DacPage extends Component {
     dac.title = this.state.title;
     dac.description = this.state.description;
     dac.url = this.state.url;
-    dac.avatar = this.state.avatarPreview;
+    dac.image = this.state.avatarPreview;
 
-    this.setState({ isSaving: true, dac: dac }, () => {
-      this.props.saveDac(this.state.dac);
-      history.push(`/`);
-    });
+    this.setState(
+      {
+        dac: dac,
+        isSaving: true
+      },
+      () => {
+        this.props.saveDac(this.state.dac);
+        this.setState(
+          {
+            isSaving: false
+          });
+        history.push(`/`);
+      });
   }
 
   cancel() {
@@ -232,81 +235,86 @@ class DacPage extends Component {
                           this.setFormValid();
                         }}
                         labels={{
-                          choose: t('userAvatarChoose')
+                          choose: t('dacAvatarChoose')
                         }}
                       />
                     </Grid>
 
-                    <Grid container spacing={1} xs={12} md={7}>
-                      <Grid item xs={12}>
-                        <InputField
-                          id="titleTextField"
-                          value={this.state.title}
-                          onChange={this.handleChangeTitle}
-                          label={t('dacTitle')}
-                          helperText={titleHelperText}
-                          fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={titleError}
-                          required
-                          inputProps={{ maxLength: 42 }}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <InputField id="descriptionTextField"
-                          value={this.state.description}
-                          onChange={this.handleChangeDescription}
-                          label={t('dacDescription')}
-                          helperText={descriptionHelperText}
-                          fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={descriptionError}
-                          required
-                          inputProps={{ maxLength: 42 }}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <InputField id="urlTextField"
-                          value={this.state.url}
-                          onChange={this.handleChangeUrl}
-                          label={t('dacUrl')}
-                          helperText={urlHelperText}
-                          fullWidth
-                          margin="normal"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          error={urlError}
-                          required
-                          inputProps={{ maxLength: 42 }}
-                        />
+                    <Grid item xs={12} md={7}>
+
+                      <Grid container spacing={1}>
+                        <Grid item xs={12}>
+                          <InputField
+                            id="titleTextField"
+                            value={this.state.title}
+                            onChange={this.handleChangeTitle}
+                            label={t('dacTitle')}
+                            helperText={titleHelperText}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            error={titleError}
+                            required
+                            inputProps={{ maxLength: 42 }}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <InputField id="descriptionTextField"
+                            value={this.state.description}
+                            onChange={this.handleChangeDescription}
+                            label={t('dacDescription')}
+                            helperText={descriptionHelperText}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            error={descriptionError}
+                            required
+                            inputProps={{ maxLength: 42 }}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <InputField id="urlTextField"
+                            value={this.state.url}
+                            onChange={this.handleChangeUrl}
+                            label={t('dacUrl')}
+                            helperText={urlHelperText}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            error={urlError}
+                            required
+                            inputProps={{ maxLength: 42 }}
+                          />
+                        </Grid>
                       </Grid>
                     </Grid>
 
-                    <Grid container
-                      xs={12}
-                      justifyContent="flex-end"
-                      spacing={2}>
+                    <Grid item xs={12}>
 
-                      <Grid item>
-                        <PrimaryButtonOutline
-                          onClick={this.cancel}>
-                          {t("cancel")}
-                        </PrimaryButtonOutline>
-                      </Grid>
-                      <Grid item>
-                        <PrimaryButton
-                          type="submit"
-                          disabled={!formValid || isSaving}
-                          isWorking={isSaving}>
-                          {t("save")}
-                        </PrimaryButton>
+                      <Grid container
+                        justifyContent="flex-end"
+                        spacing={2}>
+
+                        <Grid item>
+                          <PrimaryButtonOutline
+                            onClick={this.cancel}>
+                            {t("cancel")}
+                          </PrimaryButtonOutline>
+                        </Grid>
+                        <Grid item>
+                          <PrimaryButton
+                            type="submit"
+                            disabled={!formValid || isSaving}
+                            isWorking={isSaving}>
+                            {t("save")}
+                          </PrimaryButton>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </Grid>

@@ -115,7 +115,6 @@ class Entity extends Model {
   }
 
   set image(value) {
-    this.checkType(value, ['string'], 'image');
     this._image = value;
   }
 

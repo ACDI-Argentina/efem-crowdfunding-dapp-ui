@@ -246,12 +246,19 @@ class UserProfilePage extends Component {
     user.url = this.state.url;
     user.avatar = this.state.avatarPreview;
 
-    this.setState({ isSaving: true, user: user }, () => {
-      console.log(`[UserProfilePage] handleSubmit`, user)
-      this.props.registerCurrentUser(this.state.user);
-      //history.push(`/`);
-    });
-
+    this.setState(
+      {
+        user: user,
+        isSaving: true
+      },
+      () => {
+        this.props.registerCurrentUser(this.state.user);
+        this.setState(
+          {
+            isSaving: false
+          });
+        history.push(`/`);
+      });
   }
 
   cancel() {

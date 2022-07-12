@@ -14,7 +14,7 @@ import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
 import ExchangeRate from '../../models/ExchangeRate';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
-import { web3Manager, web3Utils } from 'commons';
+import { web3Manager, transactionsManager, web3Utils } from 'commons';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
 import TransactionTracker from './TransactionTracker';
@@ -30,7 +30,7 @@ class CrowdfundingContractApi {
         web3Manager.getWeb3().subscribe(web3 => {
             this.web3 = web3;
             this.updateContracts();
-            this.crowdfundingUtils = new CrowdfundingUtils(web3,config.crowdfundingAddress);
+            this.crowdfundingUtils = new CrowdfundingUtils(web3, config.crowdfundingAddress);
         });
         this.transactionTracker = new TransactionTracker();
     }
@@ -41,7 +41,7 @@ class CrowdfundingContractApi {
             const response = await this.crowdfunding.methods.canPerform(address, hashedRole, []).call();
             return response;
         } catch (err) {
-            if(!this.crowdfunding){ //TODO: Add common error handling to this class
+            if (!this.crowdfunding) { //TODO: Add common error handling to this class
                 console.log(`Crowdfundign smart contract is not initialized`)
             }
             console.log("Fail to invoke canPerform on smart contract.", err);
@@ -54,7 +54,7 @@ class CrowdfundingContractApi {
      * 
      * @param dac
      */
-    saveDAC(dac) {
+    saveDac(dac) {
         return new Observable(async subscriber => {
             let thisApi = this;
 
@@ -66,17 +66,13 @@ class CrowdfundingContractApi {
 
             const clientId = dac.clientId;
 
-            console.log('Guardando', dacId, dac, infoCid);
-
             const method = this.crowdfunding.methods.saveDac(infoCid, dacId);
 
-            const gasEstimated = await method.estimateGas({
-                from: dac.delegateAddress
-            });
+            const gasEstimated = await this.estimateGas(method, dac.delegateAddress);
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
-                gasEstimated: new BigNumber(gasEstimated),
+            let transaction = transactionsManager.addTransaction({
+                gasEstimated: gasEstimated,
                 gasPrice: gasPrice,
                 createdTitle: {
                     key: isNew ? 'transactionCreatedTitleCreateDac' : 'transactionCreatedTitleUpdateDac',
@@ -121,7 +117,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     dac.txHash = hash;
                     subscriber.next(dac);
@@ -129,7 +125,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                     // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
@@ -143,7 +139,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.dac = dac;
                     console.error(`Error procesando transacción de almacenamiento de dac.`, error);
@@ -159,12 +155,12 @@ class CrowdfundingContractApi {
      * @returns Dac cuyo Id coincide con el especificado.
      */
     async getDacById(dacId) {
-        const { id, 
-            infoCid, 
-            donationIds, 
-            campaignIds, 
-            budgetDonationIds, 
-            users, 
+        const { id,
+            infoCid,
+            donationIds,
+            campaignIds,
+            budgetDonationIds,
+            users,
             status } = await this.crowdfunding.methods.getDac(dacId).call();
         // Se obtiene la información de la Dac desde IPFS.
         const dacOnIpfs = await dacIpfsConnector.download(infoCid);
@@ -719,24 +715,24 @@ class CrowdfundingContractApi {
             const onTransactionHash = async (hash) => { // La transacción ha sido creada.
                 transaction.submit(hash);
                 transactionUtils.updateTransaction(transaction);
-                
+
                 donation.txHash = hash;
                 subscriber.next(donation);
 
-                if(this.web3.providerName == "WalletConnect"){
+                /*if (this.web3.providerName == "WalletConnect") {
                     try {
                         const receipt = await this.transactionTracker.listenTransactionReceipt(hash);
                         if (receipt.status) { //Transaction was confirmed
-                            onConfirmation(undefined,receipt);
+                            onConfirmation(undefined, receipt);
                         } else {//Transaction was reverted
                             onError(new Error(`Transaction reverted`));
                         }
 
-                    }  catch(err){
+                    } catch (err) {
                         console.log(err);
                         onError(new Error(`Transaction reverted`));
                     }
-                }
+                }*/
             }
 
             const onConfirmation = async (confNumber, receipt) => {
@@ -745,19 +741,19 @@ class CrowdfundingContractApi {
 
                 let idFromEvent;
 
-                if(this.web3?.providerName == "WalletConnect"){
-                    const { donationId } = this.crowdfundingUtils.getEventData(receipt,`NewDonation`);
+                if (this.web3?.providerName == "WalletConnect") {
+                    const { donationId } = this.crowdfundingUtils.getEventData(receipt, `NewDonation`);
                     idFromEvent = donationId;
                 } else {
                     // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                     // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
                     idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
                 }
-                
+
                 const donation = await thisApi.getDonationById(idFromEvent);
                 donation.clientId = clientId;
                 subscriber.next(donation);
-                
+
                 entityUtils.refreshEntity(donation.entityId);
             };
 
@@ -774,7 +770,7 @@ class CrowdfundingContractApi {
             promiEvent
                 .once('transactionHash', onTransactionHash)
                 .once('confirmation', onConfirmation)
-                .on('error',onError);
+                .on('error', onError);
         });
     }
 
@@ -858,9 +854,9 @@ class CrowdfundingContractApi {
                             if (this.web3.providerName == "WalletConnect") {
                                 try {
                                     const receipt = await this.transactionTracker.listenTransactionReceipt(hash);
-                                
+
                                     if (receipt.status) { //Transaction was confirmed
-                                        onConfirmation(undefined,receipt);
+                                        onConfirmation(undefined, receipt);
                                     } else {//Transaction was reverted
                                         onError(new Error(`Transaction reverted`));
                                     }
@@ -877,15 +873,15 @@ class CrowdfundingContractApi {
 
                             let idFromEvent;
 
-                            if(this.web3?.providerName == "WalletConnect"){
-                                const { donationId } = this.crowdfundingUtils.getEventData(receipt,`NewDonation`);
+                            if (this.web3?.providerName == "WalletConnect") {
+                                const { donationId } = this.crowdfundingUtils.getEventData(receipt, `NewDonation`);
                                 idFromEvent = donationId;
                             } else {
                                 // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                                 // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
                                 idFromEvent = parseInt(receipt.events['NewDonation'].returnValues.id);
                             }
-                            
+
                             thisApi.getDonationById(idFromEvent).then(donation => {
                                 donation.clientId = clientId;
                                 subscriber.next(donation);
@@ -893,7 +889,7 @@ class CrowdfundingContractApi {
                             entityUtils.refreshEntity(donation.entityId);
                         }
 
-                        const onError =  function (error) {
+                        const onError = function (error) {
 
                             transaction.fail();
                             transactionUtils.updateTransaction(transaction);
@@ -904,9 +900,9 @@ class CrowdfundingContractApi {
                         }
 
                         promiEvent
-                            .once('transactionHash',onTransactionHash)
-                            .once('confirmation',onConfirmation)
-                            .on('error',onError);
+                            .once('transactionHash', onTransactionHash)
+                            .once('confirmation', onConfirmation)
+                            .on('error', onError);
 
                     } else {
                         // No se aprobó la transferencia de fondos desde el token.
@@ -1100,7 +1096,7 @@ class CrowdfundingContractApi {
      * 
      * @param milestone a marcar como completado.
      */
-     milestoneCancel(milestone, activity) {
+    milestoneCancel(milestone, activity) {
 
         return new Observable(async subscriber => {
 
@@ -1536,16 +1532,21 @@ class CrowdfundingContractApi {
         }
     }
 
-    async getGasPrice() {
-        const gasPrice = await this.web3.eth.getGasPrice();
-        return new BigNumber(gasPrice);
-    }
-
     updateContracts() {
         const { crowdfundingAddress, exchangeRateProviderAddress } = config;
         console.log('[Crowdfunding Contract API] Se actualizan contratos.', crowdfundingAddress, exchangeRateProviderAddress);
         this.crowdfunding = new this.web3.eth.Contract(CrowdfundingAbi, crowdfundingAddress);
         this.exchangeRateProvider = new this.web3.eth.Contract(ExchangeRateProviderAbi, exchangeRateProviderAddress);
+    }
+
+    async estimateGas(method, from) {
+        const estimateGas = await method.estimateGas({ from: from });
+        return new BigNumber(estimateGas);
+    }
+
+    async getGasPrice() {
+        const gasPrice = await this.web3.eth.getGasPrice();
+        return new BigNumber(gasPrice);
     }
 }
 
