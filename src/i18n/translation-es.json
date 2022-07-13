@@ -380,6 +380,7 @@
 
     "dacTitle": "Título",
     "dacDescription": "Descripción",
+    "dacDescriptionHelp": "Describe qué se resoverá con la DAC.",
     "dacUrl": "URL",
     "dacAvatarChoose": "Elija una imagen para la DAC"
 

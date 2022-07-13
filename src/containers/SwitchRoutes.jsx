@@ -8,7 +8,6 @@ import DacPage from 'components/Pages/DacPage';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
-const EditDAC = React.lazy(() => import('../components/views/EditDAC'));
 const ViewDAC = React.lazy(() => import('../components/views/ViewDAC'));
 const EditCampaign = React.lazy(() => import('../components/views/EditCampaign'));
 const ViewCampaign = React.lazy(() => import('../components/views/ViewCampaign'));
@@ -27,14 +26,13 @@ const SwitchRoutes = ({ currentUser }) => (
     <Switch>
       {/*NOTE order matters, wrong order breaks routes!*/}
 
-      {/*<Route exact path="/dacs/new" render={(props) => <EditDAC isNew {...props} />} />*/}
       <Route exact path="/dacs/new" render={(props) => <DacPage />} />
       <Route
         exact
         path="/dacs/:id"
         render={(props) => <ViewDAC currentUser={currentUser} {...props} />}
       />
-      <Route
+      {/*<Route
         exact
         path="/dacs/:id/edit"
         render={(props) => (
@@ -44,7 +42,7 @@ const SwitchRoutes = ({ currentUser }) => (
             {...props}
           />
         )}
-      />
+        />*/}
 
       <Route exact path="/campaigns/new" render={(props) => <EditCampaign isNew {...props} />} />
       <Route

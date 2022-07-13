@@ -27,7 +27,6 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import { withStyles } from '@material-ui/core/styles';
 import styles from "assets/jss/material-kit-react/views/dacView.js";
-import EditDACButton from 'components/EditDACButton';
 import { User } from 'models';
 
 import { Avatar, Box } from '@material-ui/core'
@@ -105,10 +104,7 @@ class ViewDAC extends Component {
                       </Donate>
 
                       <TransferDac dac={dac}></TransferDac>
-                      <EditDACButton
-                        currentUser={currentUser}
-                        dac={dac}
-                        title={t('donateCampaignTitle')}
+  
                       />
                     </div>
                   </Box>

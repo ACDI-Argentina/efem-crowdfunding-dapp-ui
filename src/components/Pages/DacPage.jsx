@@ -6,11 +6,8 @@ import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
-import { User } from '@acdi/efem-dapp';
 import { history } from 'lib/helpers';
 import Avatar from '../Avatar/Avatar';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Page from './Page'
 import Background from 'components/views/Background'
 import { InputField } from '@acdi/efem-dapp';
@@ -19,7 +16,8 @@ import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
 import { DAC } from 'models';
-import { saveDac, selectDac } from '../../redux/reducers/dacsSlice';
+import { saveDac } from '../../redux/reducers/dacsSlice';
+import RichTextEditor from '../RichTextEditor';
 
 /**
  * Formulario de creación de DAC.
@@ -100,11 +98,16 @@ class DacPage extends Component {
     });
   }
 
-  handleChangeDescription(event) {
+  /**
+   * TODO Validar que la descripción de entidades tenga contendido ya que ahora falla porque interpreta que "<p></p>" tiene contenido.
+   * 
+   */
+  handleChangeDescription(value) {
     const { t } = this.props;
     let descriptionError = false;
     let descriptionHelperText = '';
-    const description = event.target.value;
+    //const description = event.target.value;
+    const description = value;
     if (description === undefined || description === '') {
       descriptionHelperText = t('errorRequired');
       descriptionError = true;
@@ -176,6 +179,8 @@ class DacPage extends Component {
     dac.description = this.state.description;
     dac.url = this.state.url;
     dac.image = this.state.avatarPreview;
+
+    console.log('Guardado de DAC', dac);
 
     this.setState(
       {
@@ -260,22 +265,15 @@ class DacPage extends Component {
                             inputProps={{ maxLength: 42 }}
                           />
                         </Grid>
+
                         <Grid item xs={12}>
-                          <InputField id="descriptionTextField"
+                          <RichTextEditor
                             value={this.state.description}
-                            onChange={this.handleChangeDescription}
-                            label={t('dacDescription')}
-                            helperText={descriptionHelperText}
-                            fullWidth
-                            margin="normal"
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                            error={descriptionError}
-                            required
-                            inputProps={{ maxLength: 42 }}
-                          />
+                            placeholder={t('dacDescriptionHelp')}
+                            onChange={this.handleChangeDescription}>
+                          </RichTextEditor>
                         </Grid>
+
                         <Grid item xs={12}>
                           <InputField id="urlTextField"
                             value={this.state.url}

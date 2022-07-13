@@ -378,6 +378,7 @@
 
     "dacTitle": "Title",
     "dacDescription": "Description",
+    "dacDescriptionHelp": "Describes what will be resolved with the DAC.",
     "dacUrl": "URL",
     "dacAvatarChoose": "Choose an image for the DAC"
 }
