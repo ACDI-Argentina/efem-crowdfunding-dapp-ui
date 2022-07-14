@@ -77,18 +77,15 @@
     "dacs": "Decentralized Funds",
     "dac": "Decentralized Fund",
     "dacsSectionDescription":"These Funds are solving causes. Help them realise their goals by giving Bitcoin or tokens!",
-    "campaigns": "Digital solutions for development",
     "campaign": "Campaign",
     "noCampaignsYet": "There are no campaings yet!",
     "newCampaignTitle": "Start a new campaign!",
     "editCampaignTitle": "Edit campaign",
-    "campaignDescription": "A campaign solves a specific cause by executing a project via its Milestones. Funds raised by a campaign need to be delegated to its Milestones in order to be paid out.",
     "campaignTitleLabel": "What are you working on?",
     "campaignTitlePlaceholder": "E.g. Installing 1000 solar panels.",
     "campaignTitleHelp": "Describe your campaign in 1 sentence.",
     "campaignTitleValidationMinLength": "Please provide at least 3 characters.",
     "campaignDescriptionLabel": "Explain how you are going to do this successfully.",
-    "campaignDescriptionHelp": "Make it as extensive as necessary. Your goal is to build trust, so that people donate to your campaign.",
     "campaignDescriptionPlaceholder": "Describe how you're going to execute your campaign successfully...",
     "campaignDescriptionError": "Please provide at least 10 characters.",
 
@@ -112,7 +109,7 @@
     "campaignUrlLabel": "Url to join your Community",
     "campaignUrlHelp": "Where can people join your Community? The dapp redirects people there.",
     "campaignUrlError": "Please provide a url.",
-    "campaignReviewerLabel": "Select a reviewer",
+    
     "campaignReviewerCta": "--- Select a reviewer ---",
     "campaignReviewerHelpText": "This person or smart contract will be reviewing your Campaign to increase trust for Givers.",
     "campaignReviewerError": "Please select a reviewer.",
@@ -380,5 +377,19 @@
     "dacDescription": "Description",
     "dacDescriptionHelp": "Describes what will be resolved with the DAC.",
     "dacUrl": "URL",
-    "dacAvatarChoose": "Choose an image for the DAC"
+    "dacAvatarChoose": "Choose an image for the DAC",
+
+    "createCampaign": "Create Project",
+    "createCampaignTitle": "Create a Project",
+
+    "campaignTitle": "Title",
+    "campaignAbstract": "Abstract",
+    "campaignDescription": "Description",
+    "campaignDescriptionHelp": "Make it as extensive as necessary. Your goal is to build trust, so that people donate to your campaign.",
+    "campaignUrl": "URL",
+    "campaignAvatarChoose": "Choose an image for the project",
+    "campaignReviewerLabel": "Select a reviewer",
+    "campaignsTitle": "Digital solutions for development",
+    
+    "selectUsersEmpty": "There aren't users to select"
 }

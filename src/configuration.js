@@ -96,7 +96,10 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 5000
+    anonymousDonationThreshold: 5000,
+    dac: {
+      defaultId: 1
+    }
   },
   rsk_testnet: {
     network: {
@@ -171,7 +174,10 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 10000
+    anonymousDonationThreshold: 10000,
+    dac: {
+      defaultId: 1
+    }
   },
   rsk_mainnet: {
     network: {
@@ -246,7 +252,10 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 10000
+    anonymousDonationThreshold: 10000,
+    dac: {
+      defaultId: 1
+    }
   }  
 };
 

@@ -21,7 +21,10 @@ import RoundedButton from './buttons/RoundedButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { OnlyRole } from '@acdi/efem-dapp';
-import { CREATE_DAC_ROLE } from 'constants/Role';
+import {
+  CREATE_DAC_ROLE,
+  CREATE_CAMPAIGN_ROLE
+} from 'constants/Role';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 const useStyles = makeStyles({
@@ -61,6 +64,10 @@ const ConnectButton = (props) => {
 
   const handleClickCreateDac = () => {
     history.push(`/dacs/new`);
+  };
+
+  const handleClickCreateCampaign = () => {
+    history.push(`/campaigns/new`);
   };
 
   const handleClickLogout = () => {
@@ -128,6 +135,16 @@ const ConnectButton = (props) => {
               <AccountTreeIcon />
             </ListItemIcon>
             <ListItemText primary={t('createDac')} />
+          </MenuItem>
+        </OnlyRole>
+        <OnlyRole user={currentUser} role={CREATE_CAMPAIGN_ROLE}>
+          <MenuItem onClick={
+            handleClickCreateCampaign
+          }>
+            <ListItemIcon>
+              <AccountTreeIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('createCampaign')} />
           </MenuItem>
         </OnlyRole>
         <MenuItem onClick={

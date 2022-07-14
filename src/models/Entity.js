@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit'
 import Model from './Model';
 import { cleanIpfsPath } from '../lib/helpers';
-import ipfsService from '../ipfs/IpfsService';
+import { ipfsService } from 'commons';
 
 /**
  * Base de DAC, Milestone y Campaign.
@@ -12,6 +12,7 @@ class Entity extends Model {
     id,
     clientId = nanoid(),
     title = '',
+    abstract = '',
     description = '',
     url = '',
     image = '',
@@ -27,6 +28,7 @@ class Entity extends Model {
     // ID utilizado solamente del lado cliente
     this._clientId = clientId;
     this._title = title;
+    this._abstract = abstract;
     this._description = description;
     this._url = url;
     this._image = image;
@@ -42,6 +44,7 @@ class Entity extends Model {
   toIpfs() {
     return {
       title: this._title,
+      abstract: this._abstract,
       description: this._description,
       url: this._url,
       imageCid: cleanIpfsPath(this._imageCid)
@@ -56,6 +59,7 @@ class Entity extends Model {
       id: this._id,
       clientId: this._clientId,
       title: this._title,
+      abstract: this._abstract,
       description: this._description,
       url: this._url,
       imageCid: this._imageCid,
@@ -90,6 +94,15 @@ class Entity extends Model {
   set title(value) {
     this.checkType(value, ['string'], 'title');
     this._title = value;
+  }
+
+  get abstract() {
+    return this._abstract;
+  }
+
+  set abstract(value) {
+    this.checkType(value, ['string'], 'abstract');
+    this._abstract = value;
   }
 
   get description() {

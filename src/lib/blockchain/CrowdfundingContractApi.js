@@ -263,11 +263,12 @@ class CrowdfundingContractApi {
         const { id, infoCid, dacIds, milestoneIds, donationIds, budgetDonationIds, users, status } = campaingOnChain;
         // Se obtiene la información de la Campaign desde IPFS.
         const campaignOnIpfs = await campaignIpfsConnector.download(infoCid);
-        const { title, description, imageCid, beneficiaries, categories, url } = campaignOnIpfs;
+        const { title, abstract, description, imageCid, beneficiaries, categories, url } = campaignOnIpfs;
 
         return new Campaign({
             id: parseInt(id),
             title: title,
+            abstract: abstract,
             description: description,
             imageCid: imageCid,
             url: url,
@@ -294,7 +295,7 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const dacId = 1; //preguntar a Mauri que vamos a hacer con esto, esto existe?
+            const dacId = config.dac.defaultId;
             const campaignId = campaign.id || 0; //zero is for new campaigns;
             const isNew = campaignId === 0;
 
@@ -310,13 +311,11 @@ class CrowdfundingContractApi {
                 campaign.reviewerAddress,
                 campaignId);
 
-            const gasEstimated = await method.estimateGas({
-                from: campaign.managerAddress,
-            });
+            const gasEstimated = await this.estimateGas(method, campaign.managerAddress);
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
-                gasEstimated: new BigNumber(gasEstimated),
+            let transaction = transactionsManager.addTransaction({
+                gasEstimated: gasEstimated,
                 gasPrice: gasPrice,
                 createdTitle: {
                     key: isNew ? 'transactionCreatedTitleCreateCampaign' : 'transactionCreatedTitleUpdateCampaign',
@@ -361,7 +360,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     campaign.txHash = hash;
                     subscriber.next(campaign);
@@ -369,7 +368,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                     // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
@@ -383,7 +382,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.campaign = campaign;
                     console.error(`Error procesando transacción de almacenamiento de campaign.`, error);

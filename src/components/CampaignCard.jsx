@@ -49,15 +49,15 @@ class CampaignCard extends Component {
             image={campaign.imageCidUrl}
           />
           <CardContent>
-            <Typography style={{ fontWeight: 600 }} gutterBottom variant="h6" component="h2">
+            <Typography variant="h6" gutterBottom>
               {getTruncatedText(campaign.title, 40)}
             </Typography>
             <Typography
               variant="body2"
-              color="textSecondary"
+              color="textPrimary"
               component="p"
-              className={classes.description}>
-              {getTruncatedText(campaign.description, 200)}
+              className={classes.abstract}>
+              {campaign.abstract}
             </Typography>
             <DonationsBalanceMini
               donationIds={cascadeDonationIds}
@@ -103,7 +103,7 @@ const styles = theme => ({
   root: {
 
   },
-  description: {
+  abstract: {
     height: '7em'
   },
   actions: {

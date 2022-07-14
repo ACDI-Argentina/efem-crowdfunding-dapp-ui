@@ -15,27 +15,33 @@ import Paper from '@material-ui/core/Paper';
 import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
-import { DAC } from 'models';
-import { saveDac } from '../../redux/reducers/dacsSlice';
+import { Campaign } from 'models';
+import { saveCampaign } from '../../redux/reducers/campaignsSlice';
 import RichTextEditor from '../RichTextEditor';
+import SelectUsers from 'components/SelectUsers';
+import { CAMPAIGN_REVIEWER_ROLE } from '../../constants/Role';
 
 /**
- * Formulario de creación de DAC.
+ * Formulario de creación de Campaign.
  * 
  */
-class DacPage extends Component {
+class CampaignPage extends Component {
 
   constructor(props) {
     super(props);
-    const dac = new DAC({
-      delegateAddress: props.currentUser.address,
-      status: DAC.PENDING
+    const campaign = new Campaign({
+      managerAddress: props.currentUser.address,
+      status: Campaign.PENDING
     });
 
     this.state = {
       title: '',
       titleHelperText: '',
       titleError: false,
+
+      abstract: '',
+      abstractHelperText: '',
+      abstractError: false,
 
       description: '',
       descriptionHelperText: '',
@@ -45,11 +51,15 @@ class DacPage extends Component {
       urlHelperText: '',
       urlError: false,
 
+      reviewerAddress: '',
+      reviewerAddressHelperText: '',
+      reviewerAddressError: false,
+
       avatar: null,
       avatarPreview: null,
-      avatarImg: ipfsService.resolveUrl(dac.imageCid),
+      avatarImg: ipfsService.resolveUrl(campaign.imageCid),
 
-      dac: dac,
+      campaign: campaign,
 
       formValid: false,
       isSaving: false
@@ -57,23 +67,26 @@ class DacPage extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeAbstract = this.handleChangeAbstract.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
+    this.handleChangeReviewer = this.handleChangeReviewer.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
   }
 
   clearForm() {
-    const dac = new DAC({
-      delegateAddress: this.props.currentUser.address,
-      status: DAC.PENDING
+    const campaign = new Campaign({
+      managerAddress: this.props.currentUser.address,
+      status: Campaign.PENDING
     });
     this.setState({
       title: "",
+      abstract: "",
       description: "",
       url: "",
-      avatarImg: ipfsService.resolveUrl(dac.imageCid),
-      dac: dac
+      avatarImg: ipfsService.resolveUrl(campaign.imageCid),
+      campaign: campaign
     })
   }
 
@@ -90,6 +103,24 @@ class DacPage extends Component {
       title: title,
       titleHelperText: titleHelperText,
       titleError: titleError
+    }, () => {
+      this.setFormValid();
+    });
+  }
+
+  handleChangeAbstract(event) {
+    const { t } = this.props;
+    let abstractError = false;
+    let abstractHelperText = '';
+    const abstract = event.target.value;
+    if (abstract === undefined || abstract === '') {
+      abstractHelperText = t('errorRequired');
+      abstractError = true;
+    }
+    this.setState({
+      abstract: abstract,
+      abstractHelperText: abstractHelperText,
+      abstractError: abstractError
     }, () => {
       this.setFormValid();
     });
@@ -147,10 +178,33 @@ class DacPage extends Component {
     });
   }
 
+
+  handleChangeReviewer(event) {
+    const { t } = this.props;
+    let reviewerAddressError = false;
+    let reviewerAddressHelperText = '';
+    //const description = event.target.value;
+    const reviewerAddress = event.target.value;
+    if (reviewerAddress === undefined || reviewerAddress === '') {
+      reviewerAddressHelperText = t('errorRequired');
+      reviewerAddressError = true;
+    }
+    this.setState({
+      reviewerAddress: reviewerAddress,
+      reviewerAddressHelperText: reviewerAddressHelperText,
+      reviewerAddressError: reviewerAddressError
+    }, () => {
+      this.setFormValid();
+    });
+  }
+
   setFormValid() {
-    const { title, description, url } = this.state;
+    const { title, abstract, description, url, reviewerAddress } = this.state;
     let formValid = true;
     if (title === undefined || title === '') {
+      formValid = false;
+    }
+    if (abstract === undefined || abstract === '') {
       formValid = false;
     }
     if (description === undefined || description === '') {
@@ -159,6 +213,9 @@ class DacPage extends Component {
     if (url === undefined || url === '') {
       formValid = false;
     } else if (!validatorUtils.isValidUrl(url)) {
+      formValid = false;
+    }
+    if (reviewerAddress === undefined || reviewerAddress === '') {
       formValid = false;
     }
     this.setState({
@@ -170,22 +227,24 @@ class DacPage extends Component {
 
     event.preventDefault();
 
-    let dac = this.state.dac;
+    let campaign = this.state.campaign;
 
-    dac.title = this.state.title;
-    dac.description = this.state.description;
-    dac.url = this.state.url;
-    dac.image = this.state.avatarPreview;
+    campaign.title = this.state.title;
+    campaign.abstract = this.state.abstract;
+    campaign.description = this.state.description;
+    campaign.url = this.state.url;
+    campaign.image = this.state.avatarPreview;
+    campaign.reviewerAddress = this.state.reviewerAddress;
 
-    console.log('Guardado de DAC', dac);
+    console.log('Guardado de Campaign', campaign);
 
     this.setState(
       {
-        dac: dac,
+        campaign: campaign,
         isSaving: true
       },
       () => {
-        this.props.saveDac(this.state.dac);
+        this.props.saveCampaign(this.state.campaign);
         this.setState(
           {
             isSaving: false
@@ -202,6 +261,8 @@ class DacPage extends Component {
     const {
       titleHelperText,
       titleError,
+      abstractHelperText,
+      abstractError,
       descriptionHelperText,
       descriptionError,
       urlHelperText,
@@ -210,7 +271,7 @@ class DacPage extends Component {
       avatarImg,
       isSaving
     } = this.state;
-    const { currentUser, classes, t, ...rest } = this.props;
+    const { currentUser, classes, t } = this.props;
 
     return (
       <Page>
@@ -219,7 +280,7 @@ class DacPage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('createDacTitle')}
+                  {t('createCampaignTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -237,7 +298,7 @@ class DacPage extends Component {
                           this.setFormValid();
                         }}
                         labels={{
-                          choose: t('dacAvatarChoose')
+                          choose: t('campaignAvatarChoose')
                         }}
                       />
                     </Grid>
@@ -250,7 +311,7 @@ class DacPage extends Component {
                             id="titleTextField"
                             value={this.state.title}
                             onChange={this.handleChangeTitle}
-                            label={t('dacTitle')}
+                            label={t('campaignTitle')}
                             helperText={titleHelperText}
                             fullWidth
                             margin="normal"
@@ -264,9 +325,27 @@ class DacPage extends Component {
                         </Grid>
 
                         <Grid item xs={12}>
+                          <InputField
+                            id="abstractTextField"
+                            value={this.state.abstract}
+                            onChange={this.handleChangeAbstract}
+                            label={t('campaignAbstract')}
+                            helperText={abstractHelperText}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            error={abstractError}
+                            required
+                            inputProps={{ maxLength: 200 }}
+                          />
+                        </Grid>
+
+                        <Grid item xs={12}>
                           <RichTextEditor
                             value={this.state.description}
-                            placeholder={t('dacDescriptionHelp')}
+                            placeholder={t('campaignDescriptionHelp')}
                             onChange={this.handleChangeDescription}>
                           </RichTextEditor>
                         </Grid>
@@ -275,7 +354,7 @@ class DacPage extends Component {
                           <InputField id="urlTextField"
                             value={this.state.url}
                             onChange={this.handleChangeUrl}
-                            label={t('dacUrl')}
+                            label={t('campaignUrl')}
                             helperText={urlHelperText}
                             fullWidth
                             margin="normal"
@@ -286,6 +365,17 @@ class DacPage extends Component {
                             required
                             inputProps={{ maxLength: 42 }}
                           />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <SelectUsers
+                            id="reviewerAddress"
+                            label={t('campaignReviewerLabel')}
+                            value={this.state.reviewerAddress}
+                            roles={[CAMPAIGN_REVIEWER_ROLE]}
+                            onChange={this.handleChangeReviewer}
+                            helperText={this.state.reviewerAddressHelperText}>
+                          </SelectUsers>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -323,7 +413,7 @@ class DacPage extends Component {
   }
 }
 
-DacPage.contextType = Web3AppContext;
+CampaignPage.contextType = Web3AppContext;
 
 const styles = theme => ({
 
@@ -334,8 +424,8 @@ const mapStateToProps = (state, ownProps) => {
     currentUser: selectCurrentUser(state)
   };
 }
-const mapDispatchToProps = { registerCurrentUser, saveDac }
+const mapDispatchToProps = { registerCurrentUser, saveCampaign }
 
 export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(
-  withTranslation()(DacPage)))
+  withTranslation()(CampaignPage)))
 );

@@ -6,9 +6,8 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 import BigNumber from 'bignumber.js'
 import Grid from '@material-ui/core/Grid'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import FiatUtils from '../utils/FiatUtils'
-import CustomLinearProgress from './CustomLinearProgress/CustomLinearProgress';
+import CustomLinearProgress from './CustomLinearProgress';
 
 class FiatTargetProgress extends Component {
 
@@ -30,6 +29,9 @@ class FiatTargetProgress extends Component {
         progress = 100.00;
       }
     }
+
+    progress = 70;
+
     let progressText = `${progress}%`;
 
     return (
@@ -46,7 +48,6 @@ class FiatTargetProgress extends Component {
         </Grid>
         <Grid item xs={12}>
           <CustomLinearProgress
-            color="primary"
             variant="determinate"
             value={progress} />
         </Grid>

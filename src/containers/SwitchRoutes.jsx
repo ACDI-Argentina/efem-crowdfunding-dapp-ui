@@ -5,6 +5,7 @@ import Loader from '../components/Loader';
 import LandingPage from 'components/views/LandingPage.js';
 import UserProfilePage from 'components/Pages/UserProfilePage';
 import DacPage from 'components/Pages/DacPage';
+import CampaignPage from 'components/Pages/CampaignPage';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
@@ -27,6 +28,7 @@ const SwitchRoutes = ({ currentUser }) => (
       {/*NOTE order matters, wrong order breaks routes!*/}
 
       <Route exact path="/dacs/new" render={(props) => <DacPage />} />
+      <Route exact path="/campaigns/new" render={(props) => <CampaignPage />} />
       <Route
         exact
         path="/dacs/:id"
