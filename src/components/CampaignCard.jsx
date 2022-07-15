@@ -5,7 +5,6 @@ import Campaign from '../models/Campaign'
 import messageUtils from '../redux/utils/messageUtils'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import StatusCard from './StatusCard'
 import { selectCascadeDonationsByCampaign, selectCascadeFiatAmountTargetByCampaign } from '../redux/reducers/campaignsSlice'
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
@@ -20,6 +19,7 @@ import CampaignCardMini from './CampaignCardMini'
 import Grid from '@material-ui/core/Grid'
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle'
 import { Button } from '@material-ui/core'
+import SecondaryButton from './buttons/SecondaryButton'
 
 class CampaignCard extends Component {
 
@@ -40,52 +40,48 @@ class CampaignCard extends Component {
     const { cascadeDonationIds, cascadeFiatAmountTarget, t, classes, campaign } = this.props;
 
     return (
-      <Card
-        className={classes.root}>
-        <CardActionArea onClick={this.viewCampaign}>
-          <CardMedia
-            component="img"
-            height="150"
-            image={campaign.imageCidUrl}
-          />
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              {getTruncatedText(campaign.title, 40)}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textPrimary"
-              component="p"
-              className={classes.abstract}>
-              {campaign.abstract}
-            </Typography>
-            <DonationsBalanceMini
-              donationIds={cascadeDonationIds}
-              fiatTarget={cascadeFiatAmountTarget}>
-            </DonationsBalanceMini>
-            <StatusCard status={campaign.status} />
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
+      <Card className={classes.root}>
+        <CardMedia
+          component="img"
+          height="150"
+          image={campaign.imageCidUrl}
+        />
+        <CardContent>
+          <Typography variant="h6" gutterBottom>
+            {getTruncatedText(campaign.title, 40)}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textPrimary"
+            component="p"
+            className={classes.abstract}>
+            {campaign.abstract}
+          </Typography>
+          <DonationsBalanceMini
+            donationIds={cascadeDonationIds}
+            fiatTarget={cascadeFiatAmountTarget}>
+          </DonationsBalanceMini>
+        </CardContent>
+        <CardActions className={classes.actions}>
           <Grid
-            xs={12}
             container
             direction="row"
-            style={{ justifyContent: "center" }}>
-              <span>
-                <Donate
-                  entityId={campaign.id}
-                  entityCard={<CampaignCardMini campaign={campaign} />}
-                  title={t('donateCampaignTitle')}
-                  description={t('donateCampaignDescription')}
-                  enabled={campaign.canReceiveFunds}>
-                </Donate>
-              </span>
-              <span>
-                <Button variant="contained" color="default" size="md" className={classes.dropShadowButton} onClick={this.viewCampaign}>
-                  {t('openDetail')}
-                </Button>
-              </span>
+            spacing={3}>
+            <Grid item xs={6} className={classes.actionGridLeft}>
+              <Donate
+                entityId={campaign.id}
+                entityCard={<CampaignCardMini campaign={campaign} />}
+                title={t('donateCampaignTitle')}
+                description={t('donateCampaignDescription')}
+                enabled={campaign.canReceiveFunds}>
+              </Donate>
+            </Grid>
+            <Grid item xs={6} className={classes.actionGridRight}>
+              <SecondaryButton
+                onClick={this.viewCampaign}>
+                {t('openDetail')}
+              </SecondaryButton>
+            </Grid>
           </Grid>
         </CardActions>
       </Card>
@@ -107,11 +103,14 @@ const styles = theme => ({
     height: '7em'
   },
   actions: {
+    marginTop: '0.5em',
+    marginBottom: '1em'
+  },
+  actionGridLeft: {
     textAlign: 'right'
   },
-  dropShadowButton: {
-    ...dropShadowButton,
-    margin: ".5em"
+  actionGridRight: {
+    textAlign: 'left'
   }
 });
 

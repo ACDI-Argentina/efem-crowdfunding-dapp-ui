@@ -33,6 +33,7 @@ import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice'
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
+import PrimaryButton from './buttons/PrimaryButton';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -246,7 +247,7 @@ class Donate extends Component {
     return (
       <div>
         {enabled && (
-            <Button
+            <PrimaryButton
               variant="contained"
               color="primary"
               size="md"
@@ -254,7 +255,7 @@ class Donate extends Component {
               onClick={this.handleClickOpen}
             >
               {t('donate')}
-            </Button>
+            </PrimaryButton>
             )}
         <Dialog fullWidth={true}
           maxWidth="md"

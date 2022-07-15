@@ -38,11 +38,9 @@ class FiatTargetProgress extends Component {
       <Grid container
         spacing={0}
         direction="row"
-        justifyContent="space-around"
-        alignItems="center"
         className={classes.root}>
         <Grid item xs={12}>
-          <Typography variant="subtitle1" component="span">
+          <Typography variant="body2">
             {progressText}
           </Typography>
         </Grid>
@@ -51,36 +49,21 @@ class FiatTargetProgress extends Component {
             variant="determinate"
             value={progress} />
         </Grid>
-        <Grid container
-            spacing={2}
-            justifyContent="flex-start"
-            alignItems="center">
-          <Grid item xs={7}>
-            <Typography variant="body2"
-              color="textSecondary"
-              component="div"
-              style={{ fontWeight: 600 }}>
-              {t('targetProgressRaised')}
-            </Typography>
-            <Typography variant="body2"
-              color="textSecondary"
-              component="div">
-              {FiatUtils.format(fiatBalance)}
-            </Typography>
-          </Grid>
-          <Grid item xs={5}>
-          <Typography variant="body2"
-              color="textSecondary"
-              component="div"
-              style={{ fontWeight: 600 }}>
-              {t('targetProgressGoal')}
-            </Typography>
-            <Typography variant="body2"
-              color="textSecondary"
-              component="div">
-              {FiatUtils.format(fiatTarget)}
-            </Typography>
-          </Grid>
+        <Grid item xs={6}>
+          <Typography variant="subtitle2">
+            {t('targetProgressRaised')}
+          </Typography>
+          <Typography variant="body2">
+            {FiatUtils.format(fiatBalance)}
+          </Typography>
+        </Grid>
+        <Grid item xs={6} style={{ textAlign: 'right' }}>
+          <Typography variant="subtitle2">
+            {t('targetProgressGoal')}
+          </Typography>
+          <Typography variant="body2" className={classes.goal}>
+            {FiatUtils.format(fiatTarget)}
+          </Typography>
         </Grid>
       </Grid>
     );
@@ -93,12 +76,15 @@ FiatTargetProgress.propTypes = {
 };
 
 FiatTargetProgress.defaultProps = {
-  
+
 };
 
 const styles = theme => ({
   root: {
     marginTop: '0.5em'
+  },
+  goal: {
+    color: theme.palette.primary.main
   }
 });
 
