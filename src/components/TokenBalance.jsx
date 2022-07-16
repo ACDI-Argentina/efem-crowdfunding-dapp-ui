@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Typography from '@material-ui/core/Typography';
 import { withTranslation } from 'react-i18next';
 import config from '../configuration';
 import PropTypes from 'prop-types';
@@ -11,6 +10,7 @@ import BigNumber from 'bignumber.js';
 import CryptoAmount from './CryptoAmount';
 import TokenUtils from 'utils/TokenUtils';
 import TokenAvatar from './TokenAvatar';
+import Typography from '@material-ui/core/Typography';
 
 class TokenBalance extends Component {
 
@@ -25,22 +25,21 @@ class TokenBalance extends Component {
           <TokenAvatar tokenAddress={tokenAddress} />
         </ListItemAvatar>
         <ListItemText
-          primary={symbol}
+          primary={
+            <Typography variant="subtitle2">
+              {symbol}
+            </Typography>
+          }
           secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {t('tokenBalance')}&nbsp;
-              </Typography>
+            <Typography
+              variant="body2"
+              color="textPrimary"
+            >
               <CryptoAmount
                 tokenAddress={tokenAddress}
                 amount={balance}>
               </CryptoAmount>
-            </React.Fragment>
+            </Typography>
           }
         />
       </ListItem>
@@ -60,9 +59,6 @@ TokenBalance.defaultProps = {
 const styles = theme => ({
   root: {
     padding: '0px'
-  },
-  inline: {
-    display: 'inline',
   }
 });
 

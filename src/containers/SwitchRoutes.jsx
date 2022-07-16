@@ -6,6 +6,7 @@ import LandingPage from 'components/views/LandingPage.js';
 import UserProfilePage from 'components/Pages/UserProfilePage';
 import DacPage from 'components/Pages/DacPage';
 import CampaignPage from 'components/Pages/CampaignPage';
+import CampaignViewPage from 'components/Pages/CampaignViewPage';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
@@ -27,31 +28,32 @@ const SwitchRoutes = ({ currentUser }) => (
     <Switch>
       {/*NOTE order matters, wrong order breaks routes!*/}
 
-      <Route exact path="/dacs/new" render={(props) => <DacPage />} />
-      <Route exact path="/campaigns/new" render={(props) => <CampaignPage />} />
+      <Route
+        exact
+        path="/dacs/new"
+        render={(props) => <DacPage />} />
       <Route
         exact
         path="/dacs/:id"
         render={(props) => <ViewDAC currentUser={currentUser} {...props} />}
       />
-      {/*<Route
+      <Route
         exact
-        path="/dacs/:id/edit"
-        render={(props) => (
-          <EditDAC
-            key={currentUser ? currentUser.id : 0}
-            currentUser={currentUser}
-            {...props}
-          />
-        )}
-        />*/}
+        path="/campaigns/new"
+        render={(props) => <CampaignPage />} />
 
-      <Route exact path="/campaigns/new" render={(props) => <EditCampaign isNew {...props} />} />
       <Route
         exact
         path="/campaigns/:id"
-        render={(props) => <ViewCampaign currentUser={currentUser} {...props} />}
+        render={(props) => <CampaignViewPage {...props} />}
       />
+
+      <Route
+        exact
+        path="/campaigns2/:id"
+        render={(props) => <ViewCampaign {...props} />}
+      />
+
       <Route
         exact
         path="/campaigns/:id/edit"
@@ -157,12 +159,12 @@ const SwitchRoutes = ({ currentUser }) => (
             )}
         />*/}
       <Route
-            exact
-            path="/profile"
-            render={props => (
-                <UserProfilePage />
-            )}
-        />
+        exact
+        path="/profile"
+        render={props => (
+          <UserProfilePage />
+        )}
+      />
       <Route exact path="/profile/:userAddress" render={(props) => <Profile {...props} />} />
       <Route path="/" render={(props) => <LandingPage {...props} />} />
 

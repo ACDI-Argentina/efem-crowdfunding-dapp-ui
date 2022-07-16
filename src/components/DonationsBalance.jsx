@@ -14,9 +14,10 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import CardHeader from '@material-ui/core/CardHeader';
 import FiatAmount from './FiatAmount'
-import { green } from '@material-ui/core/colors';
 import FiatTargetProgress from './FiatTargetProgress';
 import { fetchDonationsByIds } from '../redux/reducers/donationsSlice'
+import { red } from '@material-ui/core/colors';
+import Divider from '@material-ui/core/Divider';
 
 class DonationsBalance extends Component {
 
@@ -46,7 +47,11 @@ class DonationsBalance extends Component {
           title={
             <FiatAmount amount={balances.fiatTotalBalance}></FiatAmount>
           }
-          subheader={t('donationsBalance')}>
+          subheader={
+            <Typography variant="body2">
+              {t('donationsBalance')}
+            </Typography>
+          }>
         </CardHeader>
         <CardContent className={classes.content}>
 
@@ -57,21 +62,21 @@ class DonationsBalance extends Component {
               </Avatar>
             </ListItemAvatar>
             <ListItemText
-              primary={t('donations')}
+              primary={
+                <Typography variant="subtitle2">
+                  {t('donations')}
+                </Typography>
+              }
               secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    {donationsCount}
-                  </Typography>
-                </React.Fragment>
+                <Typography variant="body2">
+                  {donationsCount}
+                </Typography>
               }
             />
           </ListItem>
+
+          <Divider />
+
           {balances.tokenBalances.map(b => (
             <TokenBalance
               key={b.tokenAddress}
@@ -79,6 +84,9 @@ class DonationsBalance extends Component {
               balance={b.tokenBalance}>
             </TokenBalance>
           ))}
+
+          <Divider />
+
           {fiatTarget && (
             <FiatTargetProgress
               fiatBalance={balances.fiatTotalBalance}
@@ -86,7 +94,7 @@ class DonationsBalance extends Component {
             </FiatTargetProgress>
           )}
         </CardContent>
-      </Card>
+      </Card >
     );
   }
 }
@@ -115,8 +123,8 @@ const styles = theme => ({
   donationsCountAvatar: {
     width: theme.spacing(5),
     height: theme.spacing(5),
-    color: '#fff',
-    backgroundColor: green[500],
+    color: red[500],
+    backgroundColor: 'transparent'
   },
 });
 

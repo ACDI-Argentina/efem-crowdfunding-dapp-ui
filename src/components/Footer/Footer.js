@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
-import styles from "assets/jss/material-kit-react/views/landingPageSections/footerStyle.js";
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import { SocialIcon } from 'react-social-icons';
@@ -15,7 +14,7 @@ class Footer extends Component {
     const { classes, t, } = this.props;
 
     return (
-      <div className={classes.section}>
+      <div className={classes.root}>
         <Grid
           container
           direction="row"
@@ -93,6 +92,51 @@ class Footer extends Component {
     )
   }
 }
+
+const styles = (theme) => ({
+  root: {
+    color: theme.palette.text.secondary,
+    padding: "0",
+    textAlign: "left",
+    backgroundColor: theme.palette.primary.dark,
+    marginTop: '4em'
+  },
+  dappLogo: {
+    padding: "1em 0",
+    maxHeight: "180px",
+    position: "absolute",
+    top: "-120px",
+    zIndex: "10"
+  },
+  socialMediaIcon: {
+    maxWidth: "30px",
+    maxHeight: "30px",
+    marginLeft: "20px"
+  },
+  sectionlink: {
+    color: theme.palette.text.secondary,
+    textTransform: "uppercase",
+    marginRight: "40px",
+    fontSize: ".8em",
+    "&:hover,&:focus": {
+      color: theme.palette.text.secondary
+    },
+  },
+  disclaimer: {
+    color: theme.palette.text.secondary,
+    fontWeight: "normal",
+    padding: "1em",
+    textAlign: "center",
+    fontSize: ".7em",
+    margin: "0",
+  },
+  link: {
+    color: theme.palette.text.secondary,
+    "&:hover,&:focus": {
+      color: theme.palette.text.secondary
+    },
+  }
+});
 
 Footer.propTypes = {};
 

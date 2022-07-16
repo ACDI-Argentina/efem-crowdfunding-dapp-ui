@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import DonationItem from './DonationItem';
-import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { withTranslation } from 'react-i18next';
 import { fetchDonationsByIds } from '../redux/reducers/donationsSlice'
@@ -27,33 +26,32 @@ class DonationList extends Component {
 
   render() {
     const { donationIds, classes, t } = this.props;
+
+    if (donationIds.length == 0) {
+      return (
+        <Typography variant="body2">
+          {t('donationsEmpty')}
+        </Typography>
+      );
+    }
+
     return (
-      <Container fixed>
         <List className={classes.root}>
           {donationIds.map(donationId => (
             <DonationItem key={donationId} donationId={donationId}></DonationItem>
           ))}
         </List>
-        {donationIds.length == 0 && (
-          <Typography variant="body2">
-            {t('donationsEmpty')}
-          </Typography>
-        )}
-      </Container>
     );
   }
 }
 
 DonationList.propTypes = {
-  
+
 };
 
 const styles = {
   root: {
     width: '100%'
-  },
-  inline: {
-    display: 'inline',
   }
 };
 

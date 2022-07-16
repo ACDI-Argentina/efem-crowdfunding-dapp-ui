@@ -34,6 +34,8 @@ import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
 import PrimaryButton from './buttons/PrimaryButton';
+import IconPrimaryButton from './buttons/IconPrimaryButton';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -69,50 +71,50 @@ class Donate extends Component {
   }
 
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     const tokenAddress = this.state.tokenAddress;
     const balance = this.props.currentUser?.tokenBalances[tokenAddress];
 
-    if(this.props.currentUser != prevProps.currentUser){
+    if (this.props.currentUser != prevProps.currentUser) {
       balance && this.updateMax();
     }
-    if(tokenAddress!= prevState.tokenAddress) {
+    if (tokenAddress != prevState.tokenAddress) {
       balance && this.updateMax();
     }
   }
 
-  updateMax(){
+  updateMax() {
     const { tokenAddress } = this.state;
     const balance = this.props.currentUser.tokenBalances[tokenAddress];
     const max = web3Utils.weiToEther(balance);
-          
+
     this.setState(prev => ({
-        donateInputProps: {
-          ...prev.donateInputProps,
-          max: max.toString()
-        }
-      }));
+      donateInputProps: {
+        ...prev.donateInputProps,
+        max: max.toString()
+      }
+    }));
   }
 
   async handleClickOpen() {
     const { currentUser } = this.props;
-    const { network, modals,loginAccount } = this.context;
+    const { network, modals, loginAccount } = this.context;
 
     const isConnectedUser = currentUser.address;
     const isCorrectNetwork = network.isCorrect;
 
-    
-    if(isConnectedUser && isCorrectNetwork){ 
+
+    if (isConnectedUser && isCorrectNetwork) {
       this.open();
-    } else if(!isCorrectNetwork){ 
+    } else if (!isCorrectNetwork) {
       modals.methods.bounceNotification();
     } else {
       const connected = await loginAccount();
-      if(connected){
+      if (connected) {
         this.open();
       }
     }
-    
+
   };
 
   handleClose() {
@@ -135,28 +137,28 @@ class Donate extends Component {
 
   handleAmountChange(event) {
     const value = event.target.value
-    
-    try{
+
+    try {
       const parsed = Number(value.trim());
-      if(!isNaN(parsed)){
-        if(value.includes('.') && value.split('.').length === 2){
+      if (!isNaN(parsed)) {
+        if (value.includes('.') && value.split('.').length === 2) {
           //Check number of decimal places
           const decimalPlaces = value.split('.')[1].length;
-          if(decimalPlaces > 18){ //Cae por fuera de lo que podamos manejar con wei
+          if (decimalPlaces > 18) { //Cae por fuera de lo que podamos manejar con wei
             return;
           }
 
 
         }
 
-       return this.setState({amount:value});
+        return this.setState({ amount: value });
       }
-  
-    } catch(err){
+
+    } catch (err) {
       console.log(err);
     }
-    this.setState({amount:''});
-    
+    this.setState({ amount: '' });
+
   };
 
   handleAmountBlur() {
@@ -216,22 +218,22 @@ class Donate extends Component {
 
 
     let amountWei;
-    try{
+    try {
       amountWei = web3Utils.etherToWei(amount || 0);
-    } catch(err){
+    } catch (err) {
       console.log(err);
       amountWei = 0;
     }
-     
 
-    let tokenOptions = Object.keys(config.tokens).map(tokenKey => 
+
+    let tokenOptions = Object.keys(config.tokens).map(tokenKey =>
       <MenuItem key={config.tokens[tokenKey].address}
-          value={config.tokens[tokenKey].address}>
+        value={config.tokens[tokenKey].address}>
         <Grid container
-            spacing={2}
-            justifyContent="flex-start"
-            alignItems="center"
-            className={classes.selectToken}>
+          spacing={2}
+          justifyContent="flex-start"
+          alignItems="center"
+          className={classes.selectToken}>
           <Grid item xs={5}>
             <TokenAvatar tokenAddress={config.tokens[tokenKey].address} />
           </Grid>
@@ -247,16 +249,12 @@ class Donate extends Component {
     return (
       <div>
         {enabled && (
-            <PrimaryButton
-              variant="contained"
-              color="primary"
-              size="md"
-              className={classNames(classes.button, classes.dropShadowButton)}
-              onClick={this.handleClickOpen}
-            >
-              {t('donate')}
-            </PrimaryButton>
-            )}
+          <IconPrimaryButton
+            icon={<FavoriteBorderIcon />}
+            onClick={this.handleClickOpen}>
+            {t('donate')}
+          </IconPrimaryButton>
+        )}
         <Dialog fullWidth={true}
           maxWidth="md"
           open={open}
@@ -290,9 +288,9 @@ class Donate extends Component {
                   </Typography>
                   <ProfileCard address={currentUser.address} />
                   <Grid container
-                      spacing={2}
-                      justifyContent="flex-start"
-                      alignItems="center">
+                    spacing={2}
+                    justifyContent="flex-start"
+                    alignItems="center">
                     <Grid item xs={4}>
                       <Select value={tokenAddress} onChange={this.handleTokenChange} >
                         {tokenOptions}

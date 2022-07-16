@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 import { selectUserByAddress, fetchUserByAddress } from '../redux/reducers/usersSlice'
 import ProfileCardMiniAnonymous from './ProfileCardMiniAnonymous';
 import { withStyles } from '@material-ui/core/styles';
+import { Card, CardHeader } from '@material-ui/core';
+import { web3Utils } from 'commons';
+import { history } from '../lib/helpers'
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Typography from '@material-ui/core/Typography';
+import { ipfsService } from 'commons';
 
-class ProfileCardMini extends Component {  //va a recibir como prop un address
+class ProfileCardMini extends Component {
+
+    constructor(props) {
+        super(props);
+        this.viewUser = this.viewUser.bind(this);
+    }
+
+    viewUser() {
+        history.push(`/profile/${this.props.user.address}`);
+    }
+
     componentDidMount() {
         if (this.props.address) {
             this.props.fetchUserByAddress(this.props.address);
@@ -25,22 +40,34 @@ class ProfileCardMini extends Component {  //va a recibir como prop un address
         const { user, namePosition, classes } = this.props;
         const descriptionClass = namePosition === "left" || namePosition === "right" ? "" : "small";
         if (!user) {
-            return (
-                <div></div>
-            )
+            return null;
         }
         if (!user.registered) {
             return (
                 <ProfileCardMiniAnonymous address={user.address} />
             )
         }
+        const avatarSrc = ipfsService.resolveUrl(user.avatarCid);
         return (
-            <div>
-                <Link className={`profile-card ${namePosition}`} to={`/profile/${user.address}`}>
-                    <Avatar src={user.avatarCidUrl} className={classes.logo} /> 
-                    <p className={`description ${descriptionClass}`}>{user.name}</p>
-                </Link>
-            </div>
+            <Card className={classes.root}>
+                <CardActionArea onClick={this.viewUser}>
+                    <CardHeader
+                        title={
+                            user.name
+                        }
+                        subheader={
+                            <Typography variant="caption" noWrap>
+                                {web3Utils.abbreviateAddress(user.address)}
+                            </Typography>
+                        }
+                        avatar={
+                            <Avatar src={avatarSrc}
+                                className={classes.avatar}>
+                            </Avatar>
+                        }>
+                    </CardHeader>
+                </CardActionArea>
+            </Card>
         );
     }
 }
@@ -55,7 +82,10 @@ ProfileCardMini.defaultProps = {
 };
 
 const styles = theme => ({
-    logo: {
+    root: {
+        minWidth: 275,
+    },
+    avatar: {
         width: theme.spacing(6),
         height: theme.spacing(6),
     }

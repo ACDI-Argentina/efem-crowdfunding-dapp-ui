@@ -118,13 +118,7 @@
     "createCampaignBtn": "Crear Campaña",
     "updateCampaignBtn": "Actualizar Campaña",
         
-    "campaignDescriptionTab": "Descripción",
-    "campaignDonationsTab": "Donaciones",
-    "campaignBalanceTab": "Balance",
-    "campaignRevisorTab": "Revisor",
-    "supportCampaign": "Apoya esta campaña",
-    "campaignShare": "Comparte",
-    "campaignShareTitle": "Apoya esta campaña en Give4Forest",
+   
 
     "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro que deseas salir de esta página?",
     "noMilestonesYet": "¡Aún no hay hitos!",
@@ -382,7 +376,9 @@
     "dacAvatarChoose": "Elija una imagen para la DAC",
 
     "createCampaign": "Crear Proyecto",
-    "createCampaignTitle": "Creación de Proyecto",
+    "campaignCreateTitle": "Creación de Proyecto",
+
+    "campaignSupportTitle": "Apoyá este proyecto",
 
     "campaignTitle": "Título",
     "campaignAbstract": "Resumen",
@@ -392,6 +388,13 @@
     "campaignAvatarChoose": "Elija una imagen para el proyecto",
     "campaignReviewerLabel": "Seleccione un revisor",
     "campaignsTitle": "Soluciones digitales para el desarrollo",
+    "campaignDescriptionTab": "Descripción",
+    "campaignDonationsTab": "Donaciones",
+    "campaignBalanceTab": "Balance",
+    "campaignRevisorTab": "Revisor",
+    "supportCampaign": "Apoya esta campaña",
+    "campaignShare": "Comparte",
+    "campaignShareTitle": "Apoya esta campaña en Give4Forest",
 
     "selectUsersEmpty": "No hay usuarios para seleccionar"
 }

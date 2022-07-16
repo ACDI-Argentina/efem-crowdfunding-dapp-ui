@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import BigNumber from 'bignumber.js'
 import Grid from '@material-ui/core/Grid'
 import FiatUtils from '../utils/FiatUtils'
-import CustomLinearProgress from './CustomLinearProgress';
+import CustomCircularProgress from './CustomCircularProgress';
 
-class FiatTargetProgress extends Component {
+class FiatTargetProgressCircular extends Component {
 
   constructor() {
     super();
@@ -36,13 +36,13 @@ class FiatTargetProgress extends Component {
 
     return (
       <Grid container
-        spacing={1}
         direction="row"
-        className={classes.root}>
-
-        <Grid item xs={12}>
-          <CustomLinearProgress
-            value={progress} />
+        className={classes.root}
+        spacing={3}>
+        <Grid item xs={12} style={{textAlign: 'center'}}>
+          <CustomCircularProgress
+            value={progress}
+            label={t('targetProgressRaised')} />
         </Grid>
         <Grid item xs={6}>
           <Typography variant="subtitle2">
@@ -65,12 +65,12 @@ class FiatTargetProgress extends Component {
   }
 }
 
-FiatTargetProgress.propTypes = {
+FiatTargetProgressCircular.propTypes = {
   fiatBalance: PropTypes.instanceOf(BigNumber).isRequired,
   fiatTarget: PropTypes.instanceOf(BigNumber).isRequired
 };
 
-FiatTargetProgress.defaultProps = {
+FiatTargetProgressCircular.defaultProps = {
 
 };
 
@@ -93,6 +93,6 @@ const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(
-    withTranslation()(FiatTargetProgress)
+    withTranslation()(FiatTargetProgressCircular)
   )
 );

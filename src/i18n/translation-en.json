@@ -117,13 +117,7 @@
     "createCampaignBtn": "Create Campaign",
     "updateCampaignBtn": "Update Campaign",
     
-    "campaignDescriptionTab": "Description",
-    "campaignDonationsTab": "Donations",
-    "campaignBalanceTab": "Balance",
-    "campaignRevisorTab": "Revisor",
-    "supportCampaign": "Support this campaign",
-    "campaignShare": "Share",
-    "campaignShareTitle": "Support this campaign on Give4Forest",
+    
 
     "unsavedChanges": "You have unsaved changes. Are you sure you want to navigate from this page?",
     "noMilestonesYet": "There are no milestones yet!",
@@ -380,7 +374,9 @@
     "dacAvatarChoose": "Choose an image for the DAC",
 
     "createCampaign": "Create Project",
-    "createCampaignTitle": "Create a Project",
+    "campaignCreateTitle": "Create a Project",
+
+    "campaignSupportTitle": "Support this project",
 
     "campaignTitle": "Title",
     "campaignAbstract": "Abstract",
@@ -390,6 +386,13 @@
     "campaignAvatarChoose": "Choose an image for the project",
     "campaignReviewerLabel": "Select a reviewer",
     "campaignsTitle": "Digital solutions for development",
+    "campaignDescriptionTab": "Description",
+    "campaignDonationsTab": "Donations",
+    "campaignBalanceTab": "Balance",
+    "campaignRevisorTab": "Revisor",
+    "supportCampaign": "Support this campaign",
+    "campaignShare": "Share",
+    "campaignShareTitle": "Support this campaign on Give4Forest",
     
     "selectUsersEmpty": "There aren't users to select"
 }

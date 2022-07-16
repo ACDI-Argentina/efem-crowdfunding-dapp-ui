@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 class RichTextEditor extends Component {
     constructor(props) {

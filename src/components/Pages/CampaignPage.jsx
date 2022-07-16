@@ -280,7 +280,7 @@ class CampaignPage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('createCampaignTitle')}
+                  {t('campaignCreateTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

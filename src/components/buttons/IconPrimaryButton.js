@@ -3,21 +3,22 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/core/styles';
 import LoadingOverlay from '../Loading/LoadingOverlay';
 
-class PrimaryButton extends Component {
+class IconPrimaryButton extends Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { children, classes, isWorking } = this.props;
+    const { icon, children, classes, isWorking } = this.props;
     return (
       <LoadingOverlay loading={isWorking}>
         <Button {...this.props}
           color="primary"
           className={classes.root}
           variant="contained"
-          size="medium">
+          size="medium"
+          startIcon={icon}>
           {children}
         </Button>
       </LoadingOverlay>
@@ -27,6 +28,9 @@ class PrimaryButton extends Component {
 
 const styles = theme => ({
   root: {
+    border: 'solid',
+    borderWidth: '1px',
+    borderColor: theme.palette.primary.main,
     borderRadius: "5px",
     boxShadow: `3px 3px 0px 0px ${theme.palette.secondary.main}`,
     textTransform: "none",
@@ -37,8 +41,8 @@ const styles = theme => ({
   }
 });
 
-PrimaryButton.defaultProps = {
+IconPrimaryButton.defaultProps = {
   isWorking: false
 }
 
-export default withStyles(styles)(PrimaryButton);
+export default withStyles(styles)(IconPrimaryButton);
