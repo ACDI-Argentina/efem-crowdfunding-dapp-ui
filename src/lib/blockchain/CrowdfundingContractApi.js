@@ -475,6 +475,15 @@ class CrowdfundingContractApi {
 
             let clientId = milestone.clientId;
 
+            console.log('Debug', infoCid,
+            milestone.campaignId,
+            milestone.fiatAmountTarget,
+            milestone.managerAddress, //Por ahora el milestone manager es el campaign manager, pero podemos pasarle cualquier address con el rol CREATE_MILESTONE_ROLE
+            milestone.reviewerAddress,
+            milestone.recipientAddress,
+            milestone.campaignReviewerAddress,
+            milestoneId);
+            
             const method = this.crowdfunding.methods.saveMilestone(
                 infoCid,
                 milestone.campaignId,
@@ -486,12 +495,10 @@ class CrowdfundingContractApi {
                 milestoneId
             );
 
-            const gasEstimated = await method.estimateGas({
-                from: milestone.managerAddress
-            });
+            const gasEstimated = await this.estimateGas(method, milestone.managerAddress);
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -537,7 +544,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     milestone.txHash = hash;
                     subscriber.next(milestone);
@@ -545,7 +552,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido incluida en un bloque sin bloques de confirmación (once).                        
                     // TODO Aquí debería gregarse lógica para esperar un número determinado de bloques confirmados (on, confNumber).
@@ -559,7 +566,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.milestone = milestone;
                     console.error(`Error procesando transacción de almacenamiento de milestone.`, error);

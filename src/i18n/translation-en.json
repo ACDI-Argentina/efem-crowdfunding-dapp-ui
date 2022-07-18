@@ -123,7 +123,7 @@
     "noMilestonesYet": "There are no milestones yet!",
     "milestones": "Milestones",
     "milestone": "Milestone",
-    "milestoneAdd": "Add milestone",
+    
     "milestoneComplete": "Complete",
     "milestoneCompleteTitle": "Milestone complete",
     "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary. This information will be publicly visible and emailed to the reviewer.",
@@ -356,6 +356,7 @@
     "errorInvalidAddress": "Invalid address",
     "errorInvalidEmail": "Invalid E-Mail",
     "errorInvalidUrl": "Invalid URL",
+    "errorGreaterThanZero": "The number must be greater than zero",
 
     "cancel": "Cancel",
     "save": "Save",
@@ -393,6 +394,26 @@
     "supportCampaign": "Support this campaign",
     "campaignShare": "Share",
     "campaignShareTitle": "Support this campaign on Give4Forest",
+
+    "createMilestone": "Create Milestone",
+    "milestoneCreateTitle": "Create a Milestone",
+
+    "milestoneTitle": "Title",
+    "milestoneAbstract": "Abstract",
+    "milestoneDescription": "Description",
+    "milestoneDescriptionHelp": "Make it as extensive as necessary. Your goal is to build trust, so that people donate crypto to your Campaign. Don't hesitate to add a detailed budget for this Milestone.",
+    "milestoneUrl": "URL",
+    "milestoneFiatAmountTarget": "Fiat target amount",
+    "milestoneAvatarChoose": "Choose an image for the milestone",
+    "milestoneReviewerLabel": "Select a reviewer",
+    "milestoneRecipientLabel": "Select a recipient",
+    "milestoneDescriptionTab": "Description",
+    "milestoneDonationsTab": "Donations",
+    "milestoneBalanceTab": "Balance",
+    "milestoneRevisorTab": "Revisor",
+    "supportMilestone": "Support this milestone",
+    "milestoneShare": "Share",
+    "milestoneShareTitle": "Support this campaign on Give4Forest",
     
     "selectUsersEmpty": "There aren't users to select"
 }

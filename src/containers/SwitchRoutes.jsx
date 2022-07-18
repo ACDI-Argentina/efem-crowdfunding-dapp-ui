@@ -7,6 +7,7 @@ import UserProfilePage from 'components/Pages/UserProfilePage';
 import DacPage from 'components/Pages/DacPage';
 import CampaignPage from 'components/Pages/CampaignPage';
 import CampaignViewPage from 'components/Pages/CampaignViewPage';
+import MilestonePage from 'components/Pages/MilestonePage';
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
@@ -44,6 +45,14 @@ const SwitchRoutes = ({ currentUser }) => (
 
       <Route
         exact
+        path="/campaigns/:id/milestones/new"
+        render={(props) => (
+          <MilestonePage {...props} />
+        )}
+      />
+
+      <Route
+        exact
         path="/campaigns/:id"
         render={(props) => <CampaignViewPage {...props} />}
       />
@@ -66,9 +75,11 @@ const SwitchRoutes = ({ currentUser }) => (
         )}
       />
 
+
+
       <Route
         exact
-        path="/campaigns/:id/milestones/new"
+        path="/campaigns2/:id/milestones/new"
         render={(props) => (
           <EditMilestone
             isNew
@@ -78,6 +89,7 @@ const SwitchRoutes = ({ currentUser }) => (
           />
         )}
       />
+
       <Route
         exact
         path="/campaigns/:id/milestones/propose"

@@ -10,7 +10,7 @@ import config from '../configuration';
 import { web3Utils } from 'commons';
 
 export const isOwner = (address, user) => {
-  return address !== undefined && user !== undefined && web3Utils.addressEquals(address, user.address);
+  return address && user && user.address && web3Utils.addressEquals(address, user.address);
 }
   
 

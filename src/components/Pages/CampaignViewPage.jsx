@@ -19,6 +19,7 @@ import { saveCampaign } from '../../redux/reducers/campaignsSlice';
 import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
 import { CAMPAIGN_REVIEWER_ROLE } from '../../constants/Role';
+import { PlaylistAdd } from '@material-ui/icons';
 import {
   selectCampaign,
   selectCascadeDonationsByCampaign,
@@ -42,7 +43,10 @@ import makeSelectDonationsBalance from '../../redux/selectors/donationsBalanceSe
 import SupportEntity from 'components/SupportEntity';
 import Donate from 'components/Donate';
 import CampaignCardMini from 'components/CampaignCardMini';
-
+import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
+import { isOwner } from '../../lib/helpers';
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
 
 /**
  * Visualización de Campaign.
@@ -53,11 +57,22 @@ class CampaignViewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleClickCreateMilestone = this.handleClickCreateMilestone.bind(this);
+  }
+
+  handleClickCreateMilestone() {
+    const { campaign } = this.props;
+    history.push(`/campaigns/${campaign.id}/milestones/new`);
   }
 
   render() {
 
-    const { campaign, balances, fiatTarget, cascadeDonationIds, cascadeFiatAmountTarget, classes, t } = this.props;
+    const { currentUser,
+      campaign,
+      cascadeDonationIds,
+      cascadeFiatAmountTarget,
+      classes,
+      t } = this.props;
 
     const tabs = [
       {
@@ -205,20 +220,41 @@ class CampaignViewPage extends Component {
               </Grid>
 
               <Grid item xs={3}>
-                <SupportEntity
-                  title={t('campaignSupportTitle')}
-                  donationIds={cascadeDonationIds}
-                  fiatTarget={cascadeFiatAmountTarget}
-                  donateButton={
-                    <Donate
-                      entityId={campaign.id}
-                      entityCard={<CampaignCardMini campaign={campaign} />}
-                      title={t('donateCampaignTitle')}
-                      description={t('donateCampaignDescription')}
-                      enabled={campaign.canReceiveFunds}>
-                    </Donate>
-                  }>
-                </SupportEntity>
+
+
+                <Grid container
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="flex-start">
+
+                  <Grid item xs={12}>
+                    {isOwner(campaign.managerAddress, currentUser) && (
+                      <OnlyCorrectNetwork>
+                        <PrimaryButton
+                          onClick={this.handleClickCreateMilestone}>
+                          {t('createMilestone')}
+                        </PrimaryButton>
+                      </OnlyCorrectNetwork>
+                    )}
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <SupportEntity
+                      title={t('campaignSupportTitle')}
+                      donationIds={cascadeDonationIds}
+                      fiatTarget={cascadeFiatAmountTarget}
+                      donateButton={
+                        <Donate
+                          entityId={campaign.id}
+                          entityCard={<CampaignCardMini campaign={campaign} />}
+                          title={t('donateCampaignTitle')}
+                          description={t('donateCampaignDescription')}
+                          enabled={campaign.canReceiveFunds}>
+                        </Donate>
+                      }>
+                    </SupportEntity>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

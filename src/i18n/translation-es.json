@@ -124,7 +124,7 @@
     "noMilestonesYet": "¡Aún no hay hitos!",
     "milestones": "Hitos",
     "milestone": "Hito",
-    "milestoneAdd": "Agregar hito",
+
     "milestoneComplete": "Completar",
     "milestoneCompleteTitle": "Completar hito",
     "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario. Esta información será visible públicamente y se enviará por correo electrónico al revisor.",
@@ -358,6 +358,7 @@
     "errorInvalidAddress": "Dirección inválida",
     "errorInvalidEmail": "E-Mail inválido",
     "errorInvalidUrl": "URL inválida",
+    "errorGreaterThanZero": "El número debe ser mayor que cero",
 
     "cancel": "Cancelar",
     "save": "Guardar",
@@ -392,9 +393,29 @@
     "campaignDonationsTab": "Donaciones",
     "campaignBalanceTab": "Balance",
     "campaignRevisorTab": "Revisor",
-    "supportCampaign": "Apoya esta campaña",
+    "supportCampaign": "Apoyá esta campaña",
     "campaignShare": "Comparte",
     "campaignShareTitle": "Apoya esta campaña en Give4Forest",
+
+    "createMilestone": "Crear Hito",
+    "milestoneCreateTitle": "Crear un Hito",
+
+    "milestoneTitle": "Título",
+    "milestoneAbstract": "Resumen",
+    "milestoneDescription": "Descripción",
+    "milestoneDescriptionHelp": "Hazlo tan extenso como sea necesario. Su objetivo es generar confianza para que las personas donen criptomonedas a su campaña. No dudes en añadir un presupuesto detallado para este Hito.",
+    "milestoneUrl": "URL",
+    "milestoneFiatAmountTarget": "Monto objeto en moneda Fiat",
+    "milestoneAvatarChoose": "Elija una imagen para el hito",
+    "milestoneReviewerLabel": "Seleccione un revisor",
+    "milestoneRecipientLabel": "Seleccione un beneficiario",
+    "milestoneDescriptionTab": "Descripción",
+    "milestoneDonationsTab": "Donaciones",
+    "milestoneBalanceTab": "Balance",
+    "milestoneRevisorTab": "Revisor",
+    "supportMilestone": "Apoyá este hito",
+    "milestoneShare": "Comparte",
+    "milestoneShareTitle": "Apoya este hito en Give4Forest",
 
     "selectUsersEmpty": "No hay usuarios para seleccionar"
 }
