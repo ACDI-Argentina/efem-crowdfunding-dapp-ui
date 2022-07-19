@@ -30,7 +30,7 @@ class SupportEntity extends Component {
     const { title, balances, fiatTarget, donationIds, donateButton, classes, t } = this.props;
     const donationsCount = donationIds.length;
     return (
-      <Paper className={classes.root}>
+      <div className={classes.root}>
         <Grid container
           spacing={2}
           direction="row">
@@ -49,7 +49,7 @@ class SupportEntity extends Component {
             {donateButton}
           </Grid>
         </Grid>
-      </Paper>
+      </div>
     );
   }
 }

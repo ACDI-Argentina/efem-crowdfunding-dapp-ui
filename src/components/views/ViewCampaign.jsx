@@ -31,7 +31,7 @@ import Typography from '@material-ui/core/Typography'
 import { Avatar, Box } from '@material-ui/core'
 import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork'
 import Grid from '@material-ui/core/Grid';
-import CustomTabs from 'components/CustomTabs/CustomTabs';
+import CustomTabsOld from 'components/CustomTabs/CustomTabsOld';
 import SupportCampaignCard from 'components/SupportCampaignCard';
 import Button from '@material-ui/core/Button';
 
@@ -228,7 +228,7 @@ class ViewCampaign extends Component {
               <div className={classNames(classes.main, classes.container)}>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={12} md={8}>
-                    <CustomTabs
+                    <CustomTabsOld
                       plainTabs
                       headerColor="info"
                       customClasses={classes.cardHeader}

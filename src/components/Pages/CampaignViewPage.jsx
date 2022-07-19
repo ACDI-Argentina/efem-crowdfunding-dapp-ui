@@ -47,6 +47,8 @@ import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
 import { isOwner } from '../../lib/helpers';
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import MilestoneCard from 'components/MilestoneCard';
+
 
 /**
  * Visualización de Campaign.
@@ -71,19 +73,23 @@ class CampaignViewPage extends Component {
       campaign,
       cascadeDonationIds,
       cascadeFiatAmountTarget,
+      milestones,
       classes,
       t } = this.props;
 
     const tabs = [
       {
+        tabIndex: 0,
         tabName: t('campaignDescriptionTab'),
         tabContent: (
+
           <RichTextViewer
             value={campaign.description}>
           </RichTextViewer>
         )
       },
       {
+        tabIndex: 1,
         tabName: t('campaignDonationsTab'),
         tabContent: (
           <DonationList
@@ -92,6 +98,7 @@ class CampaignViewPage extends Component {
         )
       },
       {
+        tabIndex: 2,
         tabName: t('campaignBalanceTab'),
         tabContent: (
           <DonationsBalance
@@ -101,6 +108,7 @@ class CampaignViewPage extends Component {
         )
       },
       {
+        tabIndex: 3,
         tabName: t('campaignRevisorTab'),
         tabContent: (
           <ProfileCardMini address={campaign.reviewerAddress} />
@@ -208,7 +216,8 @@ class CampaignViewPage extends Component {
             <Grid container
               direction="row"
               justifyContent="center"
-              alignItems="flex-start">
+              alignItems="flex-start"
+              spacing={3}>
 
               <Grid item xs={9}>
                 <CustomTabs
@@ -221,22 +230,11 @@ class CampaignViewPage extends Component {
 
               <Grid item xs={3}>
 
-
                 <Grid container
                   direction="row"
                   justifyContent="center"
-                  alignItems="flex-start">
-
-                  <Grid item xs={12}>
-                    {isOwner(campaign.managerAddress, currentUser) && (
-                      <OnlyCorrectNetwork>
-                        <PrimaryButton
-                          onClick={this.handleClickCreateMilestone}>
-                          {t('createMilestone')}
-                        </PrimaryButton>
-                      </OnlyCorrectNetwork>
-                    )}
-                  </Grid>
+                  alignItems="flex-start"
+                  spacing={3}>
 
                   <Grid item xs={12}>
                     <SupportEntity
@@ -254,6 +252,39 @@ class CampaignViewPage extends Component {
                       }>
                     </SupportEntity>
                   </Grid>
+
+                  <Grid item xs={12}>
+                    <Typography variant="subtitle2">
+                      {t('milestonesTitle')}
+                    </Typography>
+                  </Grid>
+
+                  {milestones.lenght === 0 && (
+                    <Typography variant="body2">
+                      {t('milestonesEmpty')}
+                    </Typography>
+                  )}
+
+                  {milestones.map(milestone => (
+                    <Grid item xs={12}>
+                      <MilestoneCard
+                        key={milestone.clientId}
+                        milestone={milestone}
+                      />
+                    </Grid>
+                  ))}
+
+                  <Grid item xs={12}>
+                    {isOwner(campaign.managerAddress, currentUser) && (
+                      <OnlyCorrectNetwork>
+                        <PrimaryButton
+                          onClick={this.handleClickCreateMilestone}>
+                          {t('createMilestone')}
+                        </PrimaryButton>
+                      </OnlyCorrectNetwork>
+                    )}
+                  </Grid>
+
                 </Grid>
               </Grid>
             </Grid>
@@ -271,7 +302,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.dark,
     padding: '0px !important'
   },
-
   headerLeft: {
     paddingTop: '7em'
   },
@@ -289,6 +319,9 @@ const styles = theme => ({
   socialMediaIcon: {
     color: theme.palette.primary.main,
     cursor: 'pointer'
+  },
+  description: {
+    padding: '1em',
   }
 });
 

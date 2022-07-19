@@ -13,149 +13,106 @@ import Icon from "@material-ui/core/Icon";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
+import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
 
-const styles = {
-
-  cardTitle: {
-    float: "left",
-    padding: "10px 10px 10px 0px",
-    lineHeight: "24px"
+const styles = (theme) => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
   },
-  cardTitleRTL: {
-    float: "right",
-    padding: "10px 0px 10px 10px !important"
+  tabs: {
+    backgroundColor: theme.palette.secondary.light,
   },
-  displayNone: {
-    display: "none !important"
-  },
-  tabsRoot: {
-    minHeight: "unset !important"
-  },
-  tabRootButton: {
-    minHeight: "unset !important",
-    minWidth: "unset !important",
-    width: "unset !important",
-    height: "unset !important",
-    maxWidth: "unset !important",
-    maxHeight: "unset !important",
-    padding: "10px 20px",
-    borderRadius: "25px",
-    lineHeight: "24px",
-    border: "1px solid #004634",
-    color: "#004634",
-    marginRight: "5px",
-    fontWeight: "500",
-    fontSize: "12px",
-    "&:last-child": {
-      marginRight: "0px"
-    }
+  tab: {
+    color: theme.palette.secondary.dark,
   },
   tabSelected: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    backgroundColor: "#39CA98",
-    border: "1px solid #39CA98"
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.dark
   },
-  tabWrapper: {
-    display: "inline-block",
-    minHeight: "unset !important",
-    minWidth: "unset !important",
-    width: "unset !important",
-    height: "unset !important",
-    maxWidth: "unset !important",
-    maxHeight: "unset !important",
-    "& > svg": {
-      verticalAlign: "middle",
-      margin: "-1.55px 5px 0 0 !important"
-    },
-    "&,& *": {
-      letterSpacing: "normal !important"
-    }
+  tabBox: {
+    paddingTop: '1em'
   }
-};
+});
 
 const useStyles = makeStyles(styles);
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  const classes = useStyles();
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box className={classes.tabBox}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
 export default function CustomTabs(props) {
   const [value, setValue] = React.useState(0);
-
   const handleChange = (event, value) => {
     setValue(value);
   };
   const classes = useStyles();
-  const { headerColor, plainTabs, tabs, title, rtlActive, customClasses } = props;
-  const cardTitle = classNames({
-    [classes.cardTitle]: true,
-    [classes.cardTitleRTL]: rtlActive
-  });
+  const { tabs } = props;
+
   return (
-    <Card plain={plainTabs}>
-      <CardHeader classcolor={headerColor} plain={plainTabs} className={customClasses}>
-        {title !== undefined ? <div className={cardTitle}>{title}</div> : null}
+    <div className={classes.root}>
+      <AppBar position="static"
+        className={classes.tabs}>
         <Tabs
           value={value}
           onChange={handleChange}
-          classes={{
-            root: classes.tabsRoot,
-            indicator: classes.displayNone
-          }}
+          indicatorColor="secondary"
+          centered
         >
+
           {tabs.map((prop, key) => {
-            var icon = {};
-            if (prop.tabIcon) {
-              icon = {
-                icon:
-                  typeof prop.tabIcon === "string" ? (
-                    <Icon>{prop.tabIcon}</Icon>
-                  ) : (
-                    <prop.tabIcon />
-                  )
-              };
-            }
             return (
               <Tab
-                classes={{
-                  root: classes.tabRootButton,
-                  label: classes.tabLabel,
-                  selected: classes.tabSelected,
-                  wrapper: classes.tabWrapper
-                }}
                 key={key}
                 label={prop.tabName}
-                {...icon}
+                classes={{
+                  root: classes.tab,
+                  selected: classes.tabSelected
+                }}
               />
             );
           })}
         </Tabs>
-      </CardHeader>
-      <CardBody>
-        {tabs.map((prop, key) => {
-          if (key === value) {
-            return <div key={key}>{prop.tabContent}</div>;
-          }
-          return null;
-        })}
-      </CardBody>
-    </Card>
+      </AppBar>
+
+      {tabs.map((prop, key) => {
+        if (key === value) {
+          return (
+            <TabPanel index={prop.tabIndex} value={value}>
+              {prop.tabContent}
+            </TabPanel>
+          );
+        }
+      })}
+    </div>
   );
 }
 
 CustomTabs.propTypes = {
-  headerColor: PropTypes.oneOf([
-    "warning",
-    "success",
-    "danger",
-    "info",
-    "primary",
-    "rose"
-  ]),
-  title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
+      tabIndex: PropTypes.number.isRequired,
       tabName: PropTypes.string.isRequired,
-      tabIcon: PropTypes.object,
       tabContent: PropTypes.node.isRequired
     })
-  ),
-  rtlActive: PropTypes.bool,
-  plainTabs: PropTypes.bool
+  )
 };

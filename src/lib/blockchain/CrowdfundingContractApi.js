@@ -435,12 +435,13 @@ class CrowdfundingContractApi {
         const { id, campaignId, infoCid, fiatAmountTarget, users, activityIds, donationIds, budgetDonationIds, status } = milestoneOnChain;
         // Se obtiene la información del Milestone desde IPFS.
         const milestoneOnIpfs = await milestoneIpfsConnector.download(infoCid);
-        const { title, description, imageCid, url } = milestoneOnIpfs;
+        const { title, abstract, description, imageCid, url } = milestoneOnIpfs;
 
         return new Milestone({
             id: parseInt(id),
             campaignId: parseInt(campaignId),
             title: title,
+            abstract: abstract,
             description: description,
             imageCid: imageCid,
             url: url,
@@ -474,15 +475,6 @@ class CrowdfundingContractApi {
             let infoCid = await milestoneIpfsConnector.upload(milestone);
 
             let clientId = milestone.clientId;
-
-            console.log('Debug', infoCid,
-            milestone.campaignId,
-            milestone.fiatAmountTarget,
-            milestone.managerAddress, //Por ahora el milestone manager es el campaign manager, pero podemos pasarle cualquier address con el rol CREATE_MILESTONE_ROLE
-            milestone.reviewerAddress,
-            milestone.recipientAddress,
-            milestone.campaignReviewerAddress,
-            milestoneId);
             
             const method = this.crowdfunding.methods.saveMilestone(
                 infoCid,

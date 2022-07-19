@@ -120,8 +120,7 @@
     
 
     "unsavedChanges": "You have unsaved changes. Are you sure you want to navigate from this page?",
-    "noMilestonesYet": "There are no milestones yet!",
-    "milestones": "Milestones",
+    
     "milestone": "Milestone",
     
     "milestoneComplete": "Complete",
@@ -398,6 +397,9 @@
     "createMilestone": "Create Milestone",
     "milestoneCreateTitle": "Create a Milestone",
 
+    
+    "milestonesTitle": "Milestones",
+    "milestonesEmpty": "There are no milestones yet",
     "milestoneTitle": "Title",
     "milestoneAbstract": "Abstract",
     "milestoneDescription": "Description",

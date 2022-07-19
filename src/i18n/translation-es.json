@@ -121,8 +121,7 @@
    
 
     "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro que deseas salir de esta página?",
-    "noMilestonesYet": "¡Aún no hay hitos!",
-    "milestones": "Hitos",
+    
     "milestone": "Hito",
 
     "milestoneComplete": "Completar",
@@ -400,6 +399,9 @@
     "createMilestone": "Crear Hito",
     "milestoneCreateTitle": "Crear un Hito",
 
+    
+    "milestonesTitle": "Hitos",
+    "milestonesEnpty": "Aún no hay hitos",
     "milestoneTitle": "Título",
     "milestoneAbstract": "Resumen",
     "milestoneDescription": "Descripción",

@@ -6,7 +6,7 @@ import { selectCampaigns } from '../../redux/reducers/campaignsSlice'
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import Badge from "components/Badge/Badge.js";
-import CustomTabs from 'components/CustomTabs/CustomTabs';
+import CustomTabsOld from 'components/CustomTabs/CustomTabsOld';
 import { ALL_CATEGORIES } from 'constants/Categories';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
@@ -60,7 +60,7 @@ class Campaigns extends Component {
           <Grid item xs={8}>
 
             {campaigns.length > 0 && (
-              <CustomTabs
+              <CustomTabsOld
                 plainTabs
                 headerColor="info"
                 customClasses={classes.cardHeader}

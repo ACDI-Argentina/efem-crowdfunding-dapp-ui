@@ -9,7 +9,6 @@ import { selectCascadeDonationsByCampaign, selectCascadeFiatAmountTargetByCampai
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
@@ -17,8 +16,6 @@ import Typography from '@material-ui/core/Typography'
 import Donate from './Donate'
 import CampaignCardMini from './CampaignCardMini'
 import Grid from '@material-ui/core/Grid'
-import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle'
-import { Button } from '@material-ui/core'
 import SecondaryButton from './buttons/SecondaryButton'
 
 class CampaignCard extends Component {
@@ -37,7 +34,11 @@ class CampaignCard extends Component {
   }
 
   render() {
-    const { cascadeDonationIds, cascadeFiatAmountTarget, t, classes, campaign } = this.props;
+    const { campaign,
+      cascadeDonationIds,
+      cascadeFiatAmountTarget,
+      t,
+      classes } = this.props;
 
     return (
       <Card className={classes.root}>
@@ -48,7 +49,7 @@ class CampaignCard extends Component {
         />
         <CardContent>
           <Typography variant="h6" gutterBottom>
-            {getTruncatedText(campaign.title, 40)}
+            {campaign.title}
           </Typography>
           <Typography
             variant="body2"
