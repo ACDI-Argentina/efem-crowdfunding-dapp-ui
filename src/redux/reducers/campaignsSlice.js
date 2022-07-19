@@ -101,6 +101,7 @@ export const selectCascadeDonationsByCampaign = (state, id) => {
   }
   return donationIds;
 }
+
 export const selectCascadeFiatAmountTargetByCampaign = (state, id) => {
   let fiatAmountTarget = new BigNumber(0);
   let campaignStore = state.campaigns.find(c => c.id === id);

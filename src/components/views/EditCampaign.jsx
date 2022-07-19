@@ -298,7 +298,7 @@ class EditCampaign extends Component {
                               roles={[CAMPAIGN_REVIEWER_ROLE]}
                               id="reviewer-select"
                               name="reviewerAddress"
-                              label={t('campaignReviewerLabel')}
+                              label={t('campaignReviewer')}
                               helpText={t('campaignReviewerHelpText')}
                               value={campaign.reviewerAddress}
                               cta={t('campaignReviewerCta')}

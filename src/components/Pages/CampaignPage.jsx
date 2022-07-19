@@ -370,7 +370,7 @@ class CampaignPage extends Component {
                         <Grid item xs={12}>
                           <SelectUsers
                             id="reviewerAddress"
-                            label={t('campaignReviewerLabel')}
+                            label={t('campaignReviewer')}
                             value={this.state.reviewerAddress}
                             roles={[CAMPAIGN_REVIEWER_ROLE]}
                             onChange={this.handleChangeReviewer}

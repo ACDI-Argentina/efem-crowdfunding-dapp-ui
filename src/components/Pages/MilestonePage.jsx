@@ -40,7 +40,6 @@ class MilestonePage extends Component {
     const { currentUser, campaign } = this.props;
 
     const milestone = new Milestone({
-      managerAddress: campaign.managerAddress,
       campaignReviewerAddress: campaign.reviewerAddress,
       campaignId: campaign.id,
       managerAddress: currentUser.address,
@@ -464,7 +463,7 @@ class MilestonePage extends Component {
                         <Grid item xs={12}>
                           <SelectUsers
                             id="reviewerAddress"
-                            label={t('milestoneReviewerLabel')}
+                            label={t('milestoneReviewer')}
                             value={this.state.reviewerAddress}
                             roles={[MILESTONE_REVIEWER_ROLE]}
                             onChange={this.handleChangeReviewer}
@@ -475,7 +474,7 @@ class MilestonePage extends Component {
                         <Grid item xs={12}>
                           <SelectUsers
                             id="recipientAddress"
-                            label={t('milestoneRecipientLabel')}
+                            label={t('milestoneRecipient')}
                             value={this.state.recipientAddress}
                             roles={[RECIPIENT_ROLE]}
                             onChange={this.handleChangeRecipient}

@@ -79,7 +79,6 @@
     "dac": "Comunidad Altruista Descentralizada",
     "dacsSectionDescription":"Estas Comunidades están llevando proyectos a cabo. ¡Ayúdelas a alcanzar sus objetivos dándoles Bitcoins o tokens!",
     
-    "campaign": "Campaña",
     "noCampaignsYet": "¡Aún no hay campañas!",
     "newCampaignTitle": "Comienza una nueva campaña!",
     "editCampaignTitle": "Editar campaña",
@@ -375,31 +374,29 @@
     "dacUrl": "URL",
     "dacAvatarChoose": "Elija una imagen para la DAC",
 
-    "createCampaign": "Crear Proyecto",
+    "campaign": "Proyecto",
+    "campaignCreate": "Crear Proyecto",
     "campaignCreateTitle": "Creación de Proyecto",
-
-    "campaignSupportTitle": "Apoyá este proyecto",
-
     "campaignTitle": "Título",
     "campaignAbstract": "Resumen",
     "campaignDescription": "Descripción",
     "campaignDescriptionHelp": "Hágalo tan extenso como sea necesario. Su objetivo es generar confianza para que la gente done a su campaña.",
     "campaignUrl": "URL",
     "campaignAvatarChoose": "Elija una imagen para el proyecto",
-    "campaignReviewerLabel": "Seleccione un revisor",
+    "campaignReviewer": "Revisor",
     "campaignsTitle": "Soluciones digitales para el desarrollo",
     "campaignDescriptionTab": "Descripción",
     "campaignDonationsTab": "Donaciones",
     "campaignBalanceTab": "Balance",
-    "campaignRevisorTab": "Revisor",
+    "campaignParticipantsTab": "Participantes",
     "supportCampaign": "Apoyá esta campaña",
     "campaignShare": "Comparte",
     "campaignShareTitle": "Apoya esta campaña en Give4Forest",
+    "campaignSupportTitle": "Apoyá este proyecto",
 
     "createMilestone": "Crear Hito",
     "milestoneCreateTitle": "Crear un Hito",
 
-    
     "milestonesTitle": "Hitos",
     "milestonesEnpty": "Aún no hay hitos",
     "milestoneTitle": "Título",
@@ -409,15 +406,18 @@
     "milestoneUrl": "URL",
     "milestoneFiatAmountTarget": "Monto objeto en moneda Fiat",
     "milestoneAvatarChoose": "Elija una imagen para el hito",
-    "milestoneReviewerLabel": "Seleccione un revisor",
-    "milestoneRecipientLabel": "Seleccione un beneficiario",
+    "milestoneManager": "Manager",
+    "milestoneCampaignReviewer": "Revisor de proyecto",
+    "milestoneReviewer": "Revisor",
+    "milestoneRecipient": "Beneficiario",
     "milestoneDescriptionTab": "Descripción",
     "milestoneDonationsTab": "Donaciones",
     "milestoneBalanceTab": "Balance",
-    "milestoneRevisorTab": "Revisor",
+    "milestoneParticipantsTab": "Participantes",
     "supportMilestone": "Apoyá este hito",
     "milestoneShare": "Comparte",
     "milestoneShareTitle": "Apoya este hito en Give4Forest",
+    "milestoneSupportTitle": "Apoyá este hito",
 
     "selectUsersEmpty": "No hay usuarios para seleccionar"
 }

@@ -4,7 +4,6 @@ import { history } from '../lib/helpers'
 import messageUtils from '../redux/utils/messageUtils'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import { selectCascadeDonationsByCampaign, selectCascadeFiatAmountTargetByCampaign } from '../redux/reducers/campaignsSlice'
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card'
@@ -29,17 +28,12 @@ class MilestoneCard extends Component {
     if (this.props.milestone.isPending) {
       messageUtils.addMessageWarn({ text: 'El milestone no ha sido confirmado aún.' });
     } else {
-      history.push(`/campaigns/${this.props.campaign.id}/milestones/${this.props.milestone.id}`,);
+      history.push(`/milestones/${this.props.milestone.id}`,);
     }
   }
 
   render() {
-    const { milestone,
-      cascadeDonationIds, 
-      cascadeFiatAmountTarget, 
-      t, 
-      classes } = this.props;
-
+    const { milestone, t, classes } = this.props;
     return (
       <Card className={classes.root}>
         <CardMedia
@@ -59,8 +53,8 @@ class MilestoneCard extends Component {
             {milestone.abstract}
           </Typography>
           <DonationsBalanceMini
-            donationIds={cascadeDonationIds}
-            fiatTarget={cascadeFiatAmountTarget}>
+            donationIds={milestone.budgetDonationIds}
+            fiatTarget={milestone.fiatAmountTarget}>
           </DonationsBalanceMini>
         </CardContent>
         <CardActions className={classes.actions}>
@@ -117,8 +111,6 @@ const styles = theme => ({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    cascadeDonationIds: selectCascadeDonationsByCampaign(state, ownProps.milestone.id),
-    cascadeFiatAmountTarget: selectCascadeFiatAmountTargetByCampaign(state, ownProps.milestone.id)
   }
 }
 

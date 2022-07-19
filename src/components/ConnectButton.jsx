@@ -144,7 +144,7 @@ const ConnectButton = (props) => {
             <ListItemIcon>
               <AccountTreeIcon />
             </ListItemIcon>
-            <ListItemText primary={t('createCampaign')} />
+            <ListItemText primary={t('campaignCreate')} />
           </MenuItem>
         </OnlyRole>
         <MenuItem onClick={

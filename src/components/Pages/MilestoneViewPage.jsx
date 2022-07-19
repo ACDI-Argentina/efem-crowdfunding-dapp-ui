@@ -6,15 +6,7 @@ import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
-import { history } from 'lib/helpers';
 import Page from './Page'
-import PrimaryButton from 'components/buttons/PrimaryButton';
-import {
-  selectCampaign,
-  selectCascadeDonationsByCampaign,
-  selectCascadeFiatAmountTargetByCampaign
-} from '../../redux/reducers/campaignsSlice'
-import { selectMilestonesByCampaign } from '../../redux/reducers/milestonesSlice'
 import DonationList from '../DonationList'
 import DonationsBalance from '../DonationsBalance'
 import ProfileCardMini from '../ProfileCardMini'
@@ -27,72 +19,62 @@ import { Avatar } from '@material-ui/core'
 import RichTextViewer from 'components/RichTextViewer';
 import SupportEntity from 'components/SupportEntity';
 import Donate from 'components/Donate';
-import CampaignCardMini from 'components/CampaignCardMini';
-import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
-import { isOwner } from '../../lib/helpers';
-import MilestoneCard from 'components/MilestoneCard';
-
+import MilestoneCardMini from 'components/MilestoneCardMini';
+import { selectMilestone } from 'redux/reducers/milestonesSlice';
+import { selectCampaign } from 'redux/reducers/campaignsSlice';
+import CampaignCard from 'components/CampaignCard';
 
 /**
- * Visualización de Campaign.
+ * Visualización de Milestone.
  * 
  */
-class CampaignViewPage extends Component {
+class MilestoneViewPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleClickCreateMilestone = this.handleClickCreateMilestone.bind(this);
-  }
-
-  handleClickCreateMilestone() {
-    const { campaign } = this.props;
-    history.push(`/campaigns/${campaign.id}/milestones/new`);
   }
 
   render() {
 
     const { currentUser,
+      milestone,
       campaign,
-      cascadeDonationIds,
-      cascadeFiatAmountTarget,
-      milestones,
       classes,
       t } = this.props;
 
     const tabs = [
       {
         tabIndex: 0,
-        tabName: t('campaignDescriptionTab'),
+        tabName: t('milestoneDescriptionTab'),
         tabContent: (
-
           <RichTextViewer
-            value={campaign.description}>
+            value={milestone.description}>
           </RichTextViewer>
         )
       },
       {
         tabIndex: 1,
-        tabName: t('campaignDonationsTab'),
+        tabName: t('milestoneDonationsTab'),
         tabContent: (
           <DonationList
-            donationIds={campaign.budgetDonationIds}>
+            donationIds={milestone.budgetDonationIds}>
           </DonationList>
         )
       },
       {
         tabIndex: 2,
-        tabName: t('campaignBalanceTab'),
+        tabName: t('milestoneBalanceTab'),
         tabContent: (
           <DonationsBalance
-            donationIds={cascadeDonationIds}
-            fiatTarget={cascadeFiatAmountTarget}>
+            donationIds={milestone.budgetDonationIds}
+            fiatTarget={milestone.fiatAmountTarget}>
           </DonationsBalance>
         )
       },
       {
         tabIndex: 3,
-        tabName: t('campaignParticipantsTab'),
+        tabName: t('milestoneParticipantsTab'),
         tabContent: (
           <Grid container
             direction="row"
@@ -104,9 +86,36 @@ class CampaignViewPage extends Component {
               <Typography variant="subtitle2"
                 color="textPrimary"
                 gutterBottom>
-                {t('campaignReviewer')}
+                {t('milestoneManager')}
               </Typography>
-              <ProfileCardMini address={campaign.reviewerAddress} />
+              <ProfileCardMini address={milestone.managerAddress} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle2"
+                color="textPrimary"
+                gutterBottom>
+                {t('milestoneCampaignReviewer')}
+              </Typography>
+              <ProfileCardMini address={milestone.campaignReviewerAddress} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle2"
+                color="textPrimary"
+                gutterBottom>
+                {t('milestoneReviewer')}
+              </Typography>
+              <ProfileCardMini address={milestone.reviewerAddress} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography variant="subtitle2"
+                color="textPrimary"
+                gutterBottom>
+                {t('milestoneRecipient')}
+              </Typography>
+              <ProfileCardMini address={milestone.recipientAddress} />
             </Grid>
           </Grid>
         )
@@ -115,22 +124,22 @@ class CampaignViewPage extends Component {
     function compartirWhatsapp(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("text", "*" + campaign.title + "*\n" + t('campaignShareTitle') + "\n" + window.location.href);
+      params.append("text", "*" + milestone.title + "*\n" + t('campaignShareTitle') + "\n" + window.location.href);
       window.open("https://web.whatsapp.com/send?" + params.toString(), "_blank");
     }
 
     function compartirReddit(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("title", campaign.title);
-      params.append("text", t('campaignShareTitle') + "\n" + window.location.href);
+      params.append("title", milestone.title);
+      params.append("text", t('milestoneShareTitle') + "\n" + window.location.href);
       window.open("https://www.reddit.com/submit?" + params.toString(), "_blank");
     }
 
     function compartirTelegram(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("text", campaign.title + ". " + t('campaignShareTitle'));
+      params.append("text", milestone.title + ". " + t('milestoneShareTitle'));
       params.append("url", window.location.href);
       window.open("https://telegram.me/share/url?" + params.toString(), "_blank");
     }
@@ -159,19 +168,19 @@ class CampaignViewPage extends Component {
               alignItems="center">
 
               <Grid item xs={2} className={classes.headerLeft}>
-                <Avatar className={classes.headerAvatar} src={campaign.imageCidUrl} />
+                <Avatar className={classes.headerAvatar} src={milestone.imageCidUrl} />
               </Grid>
 
               <Grid item xs={8} className={classes.headerRight}>
 
                 <Typography variant="h5"
                   color="textSecondary">
-                  {campaign.title}
+                  {milestone.title}
                 </Typography>
 
                 <Typography variant="subtitle1"
                   color="textSecondary">
-                  {campaign.abstract}
+                  {milestone.abstract}
                 </Typography>
 
                 <Grid container
@@ -200,8 +209,6 @@ class CampaignViewPage extends Component {
                   </Grid>
                 </Grid>
               </Grid>
-
-
             </Grid>
           </Grid>
 
@@ -232,16 +239,16 @@ class CampaignViewPage extends Component {
 
                   <Grid item xs={12}>
                     <SupportEntity
-                      title={t('campaignSupportTitle')}
-                      donationIds={cascadeDonationIds}
-                      fiatTarget={cascadeFiatAmountTarget}
+                      title={t('milestoneSupportTitle')}
+                      donationIds={milestone.budgetDonationIds}
+                      fiatTarget={milestone.fiatAmountTarget}
                       donateButton={
                         <Donate
-                          entityId={campaign.id}
-                          entityCard={<CampaignCardMini campaign={campaign} />}
-                          title={t('donateCampaignTitle')}
-                          description={t('donateCampaignDescription')}
-                          enabled={campaign.canReceiveFunds}>
+                          entityId={milestone.id}
+                          entityCard={<MilestoneCardMini milestone={milestone} />}
+                          title={t('donateMilestoneTitle')}
+                          description={t('donatemilestoneDescription')}
+                          enabled={milestone.canReceiveFunds}>
                         </Donate>
                       }>
                     </SupportEntity>
@@ -249,36 +256,13 @@ class CampaignViewPage extends Component {
 
                   <Grid item xs={12}>
                     <Typography variant="subtitle2">
-                      {t('milestonesTitle')}
+                      {t('campaign')}
                     </Typography>
                   </Grid>
-
-                  {milestones.lenght === 0 && (
-                    <Typography variant="body2">
-                      {t('milestonesEmpty')}
-                    </Typography>
-                  )}
-
-                  {milestones.map(milestone => (
-                    <Grid item xs={12}>
-                      <MilestoneCard
-                        key={milestone.clientId}
-                        milestone={milestone}
-                      />
-                    </Grid>
-                  ))}
 
                   <Grid item xs={12}>
-                    {isOwner(campaign.managerAddress, currentUser) && (
-                      <OnlyCorrectNetwork>
-                        <PrimaryButton
-                          onClick={this.handleClickCreateMilestone}>
-                          {t('createMilestone')}
-                        </PrimaryButton>
-                      </OnlyCorrectNetwork>
-                    )}
+                    <CampaignCard campaign={campaign} />
                   </Grid>
-
                 </Grid>
               </Grid>
             </Grid>
@@ -289,7 +273,7 @@ class CampaignViewPage extends Component {
   }
 }
 
-CampaignViewPage.contextType = Web3AppContext;
+MilestoneViewPage.contextType = Web3AppContext;
 
 const styles = theme => ({
   header: {
@@ -320,17 +304,16 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  const campaignId = parseInt(ownProps.match.params.id);
+  const milestoneId = parseInt(ownProps.match.params.id);
+  const milestone = selectMilestone(state, milestoneId);
   return {
     currentUser: selectCurrentUser(state),
-    campaign: selectCampaign(state, campaignId),
-    milestones: selectMilestonesByCampaign(state, campaignId),
-    cascadeDonationIds: selectCascadeDonationsByCampaign(state, campaignId),
-    cascadeFiatAmountTarget: selectCascadeFiatAmountTargetByCampaign(state, campaignId)
+    milestone: milestone,
+    campaign: selectCampaign(state, milestone.campaignId),
   };
 }
 const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(
-  withTranslation()(CampaignViewPage)))
+  withTranslation()(MilestoneViewPage)))
 );
