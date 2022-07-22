@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
+import IconPrimaryButton from './buttons/IconPrimaryButton';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -93,23 +94,23 @@ class MilestoneApprove extends Component {
       open
     } = this.state;
     const { milestone, currentUser, classes, t } = this.props;
-    let showButton = milestone.isReviewer(currentUser) && milestone.isCompleted;
+
+    let isEnabled = false;
+    if (milestone.isReviewer(currentUser) && milestone.isCompleted) {
+      isEnabled = true;
+    }
 
     return (
       <div>
-        {showButton && (
+        {isEnabled && (
           <OnlyCorrectNetwork>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<ThumbUpIcon />}
-              onClick={this.handleClickOpen}
-            >
+            <IconPrimaryButton
+              icon={<ThumbUpIcon />}
+              onClick={this.handleClickOpen}>
               {t('milestoneApprove')}
-            </Button>
+            </IconPrimaryButton>
           </OnlyCorrectNetwork>
-          )
+        )
         }
         <Dialog fullWidth={true}
           maxWidth="md"

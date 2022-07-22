@@ -125,7 +125,7 @@
 
     "milestoneComplete": "Completar",
     "milestoneCompleteTitle": "Completar hito",
-    "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario. Esta información será visible públicamente y se enviará por correo electrónico al revisor.",
+    "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario.",
     "milestoneCompleteMessagePlaceholder": "Describe lo que has hecho",
     "milestoneCompleteMessageMinLength": "Se agradece mucho si escribe algo significativo",
 

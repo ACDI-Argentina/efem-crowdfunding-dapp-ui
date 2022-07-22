@@ -47,7 +47,6 @@ class HomeParallax extends Component {
                         <Grid item xs={12} sm={12} md={12}>
 
                             <Grid container
-                                xs={12}
                                 justifyContent="center"
                                 spacing={2}>
 

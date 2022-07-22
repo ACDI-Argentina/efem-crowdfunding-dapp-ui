@@ -83,7 +83,7 @@ ProfileCardMini.defaultProps = {
 
 const styles = theme => ({
     root: {
-        minWidth: 275,
+        /*minWidth: 275,*/
     },
     avatar: {
         width: theme.spacing(6),

@@ -31,6 +31,7 @@ import CampaignCardMini from 'components/CampaignCardMini';
 import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
 import { isOwner } from '../../lib/helpers';
 import MilestoneCard from 'components/MilestoneCard';
+import TransferCampaign from 'components/TransferCampaign';
 
 
 /**
@@ -65,7 +66,6 @@ class CampaignViewPage extends Component {
         tabIndex: 0,
         tabName: t('campaignDescriptionTab'),
         tabContent: (
-
           <RichTextViewer
             value={campaign.description}>
           </RichTextViewer>
@@ -268,17 +268,23 @@ class CampaignViewPage extends Component {
                     </Grid>
                   ))}
 
-                  <Grid item xs={12}>
-                    {isOwner(campaign.managerAddress, currentUser) && (
+
+                  {isOwner(campaign.managerAddress, currentUser) && (
+                    <Grid item xs={12}>
                       <OnlyCorrectNetwork>
                         <PrimaryButton
                           onClick={this.handleClickCreateMilestone}>
                           {t('createMilestone')}
                         </PrimaryButton>
                       </OnlyCorrectNetwork>
-                    )}
-                  </Grid>
+                    </Grid>
+                  )}
 
+                  {isOwner(campaign.managerAddress, currentUser) && (
+                    <Grid item xs={12}>
+                      <TransferCampaign campaign={campaign}></TransferCampaign>
+                    </Grid>
+                  )}
                 </Grid>
               </Grid>
             </Grid>

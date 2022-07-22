@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getTruncatedText, history } from '../lib/helpers'
 import Campaign from '../models/Campaign'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import StatusCard from './StatusCard'
-import { selectCascadeDonationsByCampaign, selectCascadeFiatAmountTargetByCampaign } from '../redux/reducers/campaignsSlice'
+import {
+  selectCascadeDonationsByCampaign,
+  selectCascadeFiatAmountTargetByCampaign
+} from '../redux/reducers/campaignsSlice'
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card';
@@ -20,25 +21,33 @@ class CampaignCardMini extends Component {
   }
 
   render() {
-    const { cascadeDonationIds, cascadeFiatAmountTarget, t, classes, campaign } = this.props;
-
+    const { cascadeDonationIds,
+      cascadeFiatAmountTarget,
+      t,
+      classes,
+      campaign } = this.props;
     return (
       <Card className={classes.root}>
-
         <CardMedia
           component="img"
           height="150"
           image={campaign.imageCidUrl}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {getTruncatedText(campaign.title, 40)}
+          <Typography variant="h6" gutterBottom>
+            {campaign.title}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textPrimary"
+            component="p"
+            className={classes.abstract}>
+            {campaign.abstract}
           </Typography>
           <DonationsBalanceMini
             donationIds={cascadeDonationIds}
             fiatTarget={cascadeFiatAmountTarget}>
           </DonationsBalanceMini>
-          <StatusCard status={campaign.status} />
         </CardContent>
       </Card>
     );

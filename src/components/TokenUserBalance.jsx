@@ -23,7 +23,7 @@ class TokenUserBalance extends Component {
     let symbol = tokenConfig.symbol;
 
     let balance = currentUser.balance;
-    if(!tokenConfig.isNative) {
+    if (!tokenConfig.isNative) {
       balance = currentUser.tokenBalances[tokenAddress] || new BigNumber(0);
     }
 
@@ -35,20 +35,12 @@ class TokenUserBalance extends Component {
         <ListItemText
           primary={symbol}
           secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {t('tokenBalance')}&nbsp;
-              </Typography>
+            <Typography variant="body2">
               <CryptoAmount
                 tokenAddress={tokenAddress}
                 amount={balance}>
               </CryptoAmount>
-            </React.Fragment>
+            </Typography>
           }
         />
       </ListItem>
@@ -68,9 +60,6 @@ const styles = theme => ({
   root: {
     padding: '0px'
   },
-  inline: {
-    display: 'inline',
-  },
   logo: {
     width: theme.spacing(6),
     height: theme.spacing(6),
@@ -83,7 +72,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = {  }
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(

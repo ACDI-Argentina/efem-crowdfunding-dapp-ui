@@ -42,8 +42,13 @@ const theme = createTheme({
       light: '#ff9a75',
       dark: '#C43700'
     },
+    error: {
+      main: '#D32F2F',
+      light: '#EF5350',
+      dark: '#C62828'
+    },
     text: {
-      secondary: '#FFFFFF'
+      secondary: '#BDBDBD'
     },
     fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
   },

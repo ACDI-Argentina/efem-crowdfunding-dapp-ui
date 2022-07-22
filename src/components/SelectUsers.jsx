@@ -66,7 +66,7 @@ class SelectUsers extends Component {
           onChange={onChange} >
           {userOptions}
         </Select>
-        <FormHelperText>${helperText}</FormHelperText>
+        <FormHelperText>{helperText}</FormHelperText>
       </FormControl>
 
     )

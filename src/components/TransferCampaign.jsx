@@ -29,6 +29,8 @@ import { selectMilestonesByCampaign } from '../redux/reducers/milestonesSlice';
 import CampaignCardMini from './CampaignCardMini';
 import TransferMilestoneSelector from './TransferMilestoneSelector';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
+import IconPrimaryButton from './buttons/IconPrimaryButton';
+import { isOwner } from '../lib/helpers';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -228,25 +230,26 @@ class TransferCampaign extends Component {
       transferIsValid = true;
     }
 
-    let buttonEnabled = true;
+    let isEnabled = false;
+    if (currentUser &&
+      currentUser.authenticated &&
+      isOwner(campaign.managerAddress, currentUser)) {
+        isEnabled = true;
+    }
 
     return (
       <div>
-        {buttonEnabled && (
+        {isEnabled && (
           <OnlyCorrectNetwork>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<FastForwardIcon />}
-              onClick={this.handleClickOpen}
-            >
+            <IconPrimaryButton
+              icon={<FastForwardIcon />}
+              onClick={this.handleClickOpen}>
               {t('transfer')}
-            </Button>
+            </IconPrimaryButton>
           </OnlyCorrectNetwork>
         )}
         <Dialog fullWidth={true}
-          maxWidth="lg"
+          maxWidth="md"
           open={open}
           onClose={this.handleClose}
           TransitionComponent={Transition}>
@@ -267,11 +270,11 @@ class TransferCampaign extends Component {
             </Toolbar>
           </AppBar>
           <div className={classes.root}>
-            <Grid container spacing={3}>
-              <Grid item xs={3}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
                 {<CampaignCardMini campaign={campaign} />}
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={8}>
                 <Grid container spacing={2}>
 
                   <Grid item xs={12}>
@@ -282,8 +285,8 @@ class TransferCampaign extends Component {
 
                   <Grid item xs={12}>
                     <TransferMilestoneSelector
-                       milestoneIds={campaign.milestoneIds}
-                       onChange={this.onChangeMilestone}>
+                      milestoneIds={campaign.milestoneIds}
+                      onChange={this.onChangeMilestone}>
                     </TransferMilestoneSelector>
                   </Grid>
 
@@ -310,7 +313,7 @@ class TransferCampaign extends Component {
                           aria-label="move selected left"
                         >
                           &lt;
-                      </Button>
+                        </Button>
                       </Grid>
                     </Grid>
                     <Grid item xs={5}>{this.customList(t('donationsToTransfer'), right)}</Grid>

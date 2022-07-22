@@ -23,6 +23,10 @@ import MilestoneCardMini from 'components/MilestoneCardMini';
 import { selectMilestone } from 'redux/reducers/milestonesSlice';
 import { selectCampaign } from 'redux/reducers/campaignsSlice';
 import CampaignCard from 'components/CampaignCard';
+import MilestoneActions from 'components/MilestoneActions';
+import MilestoneComplete from 'components/MilestoneComplete';
+import MilestoneApprove from 'components/MilestoneApprove';
+import MilestoneReject from 'components/MilestoneReject';
 
 /**
  * Visualización de Milestone.
@@ -262,6 +266,18 @@ class MilestoneViewPage extends Component {
 
                   <Grid item xs={12}>
                     <CampaignCard campaign={campaign} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <MilestoneComplete milestone={milestone} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <MilestoneApprove milestone={milestone} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <MilestoneReject milestone={milestone} />
                   </Grid>
                 </Grid>
               </Grid>

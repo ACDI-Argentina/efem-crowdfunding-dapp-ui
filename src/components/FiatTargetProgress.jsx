@@ -30,10 +30,6 @@ class FiatTargetProgress extends Component {
       }
     }
 
-    progress = 70;
-
-    let progressText = `${progress}%`;
-
     return (
       <Grid container
         spacing={1}

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import DateTimeViewer from './DateTimeViewer';
 import Divider from '@material-ui/core/Divider';
 import { withTranslation } from 'react-i18next';
@@ -23,22 +20,10 @@ class DonationItem extends Component {
   constructor() {
     super();
     this.state = {
-      activities: {},
-      isLoading: false,
-      open: false
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    let open = !this.state.open;
-    this.setState({
-      open: open
-    });
-  };
-
   render() {
-    const { user, open } = this.state;
     const { donation, entity, classes, t } = this.props;
 
     if (!donation) {
@@ -47,49 +32,51 @@ class DonationItem extends Component {
     }
 
     return (
-      <React.Fragment>
-        <ListItem alignItems="flex-start" onClick={this.handleClick}>
-          <ListItemAvatar className={classes.avatar}>
-            <ProfileCardMini address={donation.giverAddress} namePosition="bottom" />
-          </ListItemAvatar>
-          <ListItemText
-            className={classes.text}
-            primary={
-              <Grid container spacing={1}>
-                <Grid item xs={1}>
-                  <TokenAvatar tokenAddress={donation.tokenAddress}></TokenAvatar>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography variant="h6">
-                    <CryptoAmount amount={donation.amountRemainding} tokenAddress={donation.tokenAddress} />
-                  </Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <StatusIndicator status={donation.status}></StatusIndicator>
-                </Grid>
+      <div className={classes.root}>
+        <Grid container
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          onClick={this.handleClick}
+          spacing={2}>
+
+          <Grid item xs={4}>
+            <ProfileCardMini address={donation.giverAddress} />
+          </Grid>
+
+          <Grid item xs={8}>
+            <Grid container spacing={1}>
+
+              <Grid item xs={1}>
+                <TokenAvatar tokenAddress={donation.tokenAddress}></TokenAvatar>
               </Grid>
-            }
-            secondary={
-              <Grid container spacing={0}>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1">
-                    <DateTimeViewer value={donation.createdAt} />
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1">
-                    {t('donationInitial', {
-                      amount: TokenUtils.format(donation.tokenAddress, donation.amount),
-                      entity: entity.title
-                    })}
-                  </Typography>
-                </Grid>
+              <Grid item xs={8}>
+                <Typography variant="h6">
+                  <CryptoAmount amount={donation.amountRemainding} tokenAddress={donation.tokenAddress} />
+                </Typography>
               </Grid>
-            }
-          />
-        </ListItem>
+              <Grid item xs={3}>
+                <StatusIndicator status={donation.status}></StatusIndicator>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  <DateTimeViewer value={donation.createdAt} />
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2">
+                  {t('donationInitial', {
+                    amount: TokenUtils.format(donation.tokenAddress, donation.amount),
+                    entity: entity.title
+                  })}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
         <Divider />
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -99,9 +86,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
+    padding: '1em 0px 1em 0px'
   },
   text: {
     marginLeft: '2em'

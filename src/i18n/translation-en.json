@@ -124,7 +124,7 @@
     
     "milestoneComplete": "Complete",
     "milestoneCompleteTitle": "Milestone complete",
-    "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary. This information will be publicly visible and emailed to the reviewer.",
+    "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary.",
     "milestoneCompleteMessagePlaceholder": "Describe what you've done",
     "milestoneCompleteMessageMinLength": "It is really appreciated if you write something meaningful",
 

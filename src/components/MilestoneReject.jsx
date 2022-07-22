@@ -22,6 +22,7 @@ import TextField from '@material-ui/core/TextField';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
+import IconPrimaryButton from './buttons/IconPrimaryButton';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -93,29 +94,30 @@ class MilestoneReject extends Component {
       open
     } = this.state;
     const { milestone, currentUser, classes, t } = this.props;
-    let showButton = milestone.isReviewer(currentUser) && milestone.isCompleted;
+
+    let isEnabled = false;
+    if (milestone.isReviewer(currentUser) && milestone.isCompleted) {
+      isEnabled = true;
+    }
 
     return (
       <div>
-        {showButton && (
+        {isEnabled && (
           <OnlyCorrectNetwork>
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              startIcon={<ThumbDownIcon />}
+            <IconPrimaryButton
+              icon={<ThumbDownIcon />}
               onClick={this.handleClickOpen}
-            >
+              color="error">
               {t('milestoneReject')}
-            </Button>
+            </IconPrimaryButton>
           </OnlyCorrectNetwork>
         )
         }
         <Dialog fullWidth={true}
-            maxWidth="md"
-            open={open}
-            onClose={this.handleClose}
-            TransitionComponent={Transition}>
+          maxWidth="md"
+          open={open}
+          onClose={this.handleClose}
+          TransitionComponent={Transition}>
           <AppBar className={classes.appBar}>
             <Toolbar>
               <IconButton edge="start" color="inherit" onClick={this.handleClose} aria-label="close">

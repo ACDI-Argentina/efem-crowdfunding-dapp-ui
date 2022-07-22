@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getTruncatedText, history } from '../lib/helpers'
-import Campaign from '../models/Campaign'
+import { getTruncatedText } from '../lib/helpers'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import StatusCard from './StatusCard'
-import { selectCascadeDonationsByCampaign, selectCascadeFiatAmountTargetByCampaign } from '../redux/reducers/campaignsSlice'
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card';
@@ -38,7 +35,6 @@ class MilestoneCardMini extends Component {
             donationIds={milestone.budgetDonationIds}
             fiatTarget={milestone.fiatAmountTarget}>
           </DonationsBalanceMini>
-          <StatusCard status={milestone.status} />
         </CardContent>
       </Card>
     );

@@ -30,8 +30,6 @@ class FiatTargetProgressCircular extends Component {
       }
     }
 
-    progress = 70;
-
     let progressText = `${progress}%`;
 
     return (

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classNames from "classnames";
 import PropTypes from 'prop-types';
 import Donation from '../models/Donation';
 import Button from '@material-ui/core/Button';
@@ -16,8 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 import { addDonation } from '../redux/reducers/donationsSlice'
 import { User } from '@acdi/efem-dapp';
-import TextField from '@material-ui/core/TextField';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import config from '../configuration';
 import TokenUserBalance from './TokenUserBalance';
@@ -25,7 +22,6 @@ import TokenAvatar from './TokenAvatar';
 import { web3Utils } from 'commons';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
-import ProfileCard from './ProfileCard';
 import ProfilePopup from './ProfilePopup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -33,9 +29,11 @@ import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice'
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
-import PrimaryButton from './buttons/PrimaryButton';
 import IconPrimaryButton from './buttons/IconPrimaryButton';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ProfileCardMini from './ProfileCardMini';
+import { InputField } from '@acdi/efem-dapp';
+import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -216,7 +214,6 @@ class Donate extends Component {
       donationIsValid = true;
     }
 
-
     let amountWei;
     try {
       amountWei = web3Utils.etherToWei(amount || 0);
@@ -246,14 +243,21 @@ class Donate extends Component {
       </MenuItem>
     );
 
+    let isEnabled = false;
+    if (enabled && currentUser && currentUser.authenticated) {
+      isEnabled = true;
+    }
+
     return (
       <div>
-        {enabled && (
-          <IconPrimaryButton
-            icon={<FavoriteBorderIcon />}
-            onClick={this.handleClickOpen}>
-            {t('donate')}
-          </IconPrimaryButton>
+        {isEnabled && (
+          <OnlyCorrectNetwork>
+            <IconPrimaryButton
+              icon={<FavoriteBorderIcon />}
+              onClick={this.handleClickOpen}>
+              {t('donate')}
+            </IconPrimaryButton>
+          </OnlyCorrectNetwork>
         )}
         <Dialog fullWidth={true}
           maxWidth="md"
@@ -278,49 +282,61 @@ class Donate extends Component {
           </AppBar>
           <div className={classes.root}>
             <Grid container spacing={3}>
-              <Grid item sm={5} xs={12}>
+              <Grid item sm={4} xs={12}>
                 {entityCard}
               </Grid>
-              <Grid item sm={7} xs={12}>
-                <Grid container>
-                  <Typography variant="subtitle1" gutterBottom>
-                    {description}
-                  </Typography>
-                  <ProfileCard address={currentUser.address} />
-                  <Grid container
-                    spacing={2}
-                    justifyContent="flex-start"
-                    alignItems="center">
-                    <Grid item xs={4}>
-                      <Select value={tokenAddress} onChange={this.handleTokenChange} >
-                        {tokenOptions}
-                      </Select>
-                    </Grid>
-                    <Grid item xs={8}>
-                      <TokenUserBalance tokenAddress={tokenAddress} />
-                    </Grid>
+              <Grid item sm={8} xs={12}>
+                <Grid container
+                  direction="row"
+                  justifyContent="flex-start"
+                  alignItems="flex-end"
+                  spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="subtitle1" gutterBottom>
+                      {description}
+                    </Typography>
                   </Grid>
-                  <TextField
-                    id="donate-amount"
-                    label={t('donateAmount')}
-                    className={classes.amount}
-                    type="number"
-                    value={amount}
-                    onChange={this.handleAmountChange}
-                    onBlur={this.handleAmountBlur}
-                    InputLabelProps={
-                      {
-                        shrink: true,
+                  <Grid item xs={6}>
+                    <ProfileCardMini address={currentUser.address} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TokenUserBalance tokenAddress={tokenAddress} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Select value={tokenAddress} onChange={this.handleTokenChange} >
+                      {tokenOptions}
+                    </Select>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <InputField
+                      id="donateAmount"
+                      label={t('donateAmount')}
+                      className={classes.amount}
+                      type="number"
+                      value={amount}
+                      onChange={this.handleAmountChange}
+                      onBlur={this.handleAmountBlur}
+                      InputLabelProps={
+                        {
+                          shrink: true,
+                        }
                       }
-                    }
-                    InputProps={
-                      {
-                        startAdornment: <InputAdornment position="start">{tokenSelectedSymbol}</InputAdornment>
+                      InputProps={
+                        {
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Typography variant="body2"
+                                color="textPrimary">
+                                {tokenSelectedSymbol}
+                              </Typography>
+                            </InputAdornment>
+                          )
+                        }
                       }
-                    }
-                    inputProps={donateInputProps}
-                  />
-                  <FiatAmountByToken tokenAddress={tokenAddress} amount={amountWei} />
+                      inputProps={donateInputProps}
+                    />
+                    <FiatAmountByToken tokenAddress={tokenAddress} amount={amountWei} />
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

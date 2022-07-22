@@ -42,12 +42,12 @@ class SupportGive4Forest extends Component {
               spacing={2}>
 
               <Grid item xs={12}>
-                <Typography variant="h5" gutterBottom="true" >
+                <Typography variant="h5" gutterBottom >
                   {t('supportGive4ForestTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" gutterBottom="true" >
+                <Typography variant="body1" gutterBottom >
                   {t('supportGive4ForestText')}
                 </Typography>
               </Grid>

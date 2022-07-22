@@ -45,7 +45,7 @@ class Campaigns extends Component {
 
           <Grid item xs={8}>
             <Typography variant="h3"
-              gutterBottom="true"
+              gutterBottom
               className={classes.title}>
               {t('campaignsTitle')}
               {total > 0 &&

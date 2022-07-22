@@ -13,12 +13,13 @@ class IconPrimaryButton extends Component {
     const { icon, children, classes, isWorking } = this.props;
     return (
       <LoadingOverlay loading={isWorking}>
-        <Button {...this.props}
+        <Button
           color="primary"
           className={classes.root}
           variant="contained"
           size="medium"
-          startIcon={icon}>
+          startIcon={icon}
+          {...this.props}>
           {children}
         </Button>
       </LoadingOverlay>

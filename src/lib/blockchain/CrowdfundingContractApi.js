@@ -68,7 +68,7 @@ class CrowdfundingContractApi {
 
             const method = this.crowdfunding.methods.saveDac(infoCid, dacId);
 
-            const gasEstimated = await this.estimateGas(method, dac.delegateAddress);
+            const gasEstimated = await this.estimateGas(method, { from: dac.delegateAddress });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionsManager.addTransaction({
@@ -311,7 +311,7 @@ class CrowdfundingContractApi {
                 campaign.reviewerAddress,
                 campaignId);
 
-            const gasEstimated = await this.estimateGas(method, campaign.managerAddress);
+            const gasEstimated = await this.estimateGas(method, { from: campaign.managerAddress });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionsManager.addTransaction({
@@ -475,7 +475,7 @@ class CrowdfundingContractApi {
             let infoCid = await milestoneIpfsConnector.upload(milestone);
 
             let clientId = milestone.clientId;
-            
+
             const method = this.crowdfunding.methods.saveMilestone(
                 infoCid,
                 milestone.campaignId,
@@ -487,7 +487,7 @@ class CrowdfundingContractApi {
                 milestoneId
             );
 
-            const gasEstimated = await this.estimateGas(method, milestone.managerAddress);
+            const gasEstimated = await this.estimateGas(method, { from: milestone.managerAddress });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionsManager.addTransaction({
@@ -662,7 +662,7 @@ class CrowdfundingContractApi {
     saveDonationNative(donation) {
 
         return new Observable(async subscriber => {
-            console.log("save donation - observable");
+
             let thisApi = this;
 
             let clientId = donation.clientId;
@@ -672,13 +672,13 @@ class CrowdfundingContractApi {
                 donation.tokenAddress,
                 donation.amount);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: donation.giverAddress,
                 value: donation.amount
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -712,7 +712,7 @@ class CrowdfundingContractApi {
 
             const onTransactionHash = async (hash) => { // La transacción ha sido creada.
                 transaction.submit(hash);
-                transactionUtils.updateTransaction(transaction);
+                transactionsManager.updateTransaction(transaction);
 
                 donation.txHash = hash;
                 subscriber.next(donation);
@@ -735,7 +735,7 @@ class CrowdfundingContractApi {
 
             const onConfirmation = async (confNumber, receipt) => {
                 transaction.confirme();
-                transactionUtils.updateTransaction(transaction);
+                transactionsManager.updateTransaction(transaction);
 
                 let idFromEvent;
 
@@ -758,7 +758,7 @@ class CrowdfundingContractApi {
             const onError = function (error) {
 
                 transaction.fail();
-                transactionUtils.updateTransaction(transaction);
+                transactionsManager.updateTransaction(transaction);
 
                 error.donation = donation;
                 console.error(`Error procesando transacción de almacenamiento de donación.`, error);
@@ -804,12 +804,12 @@ class CrowdfundingContractApi {
                             donation.tokenAddress,
                             donation.amount);
 
-                        const gasEstimated = await method.estimateGas({
+                        const gasEstimated = await this.estimateGas(method, {
                             from: donation.giverAddress
                         });
                         const gasPrice = await this.getGasPrice();
 
-                        let transaction = transactionUtils.addTransaction({
+                        let transaction = transactionsManager.addTransaction({
                             gasEstimated: new BigNumber(gasEstimated),
                             gasPrice: gasPrice,
                             createdTitle: {
@@ -839,12 +839,9 @@ class CrowdfundingContractApi {
                             from: donation.giverAddress
                         });
 
-
-
-
                         const onTransactionHash = async (hash) => { // La transacción ha sido creada.
                             transaction.submit(hash);
-                            transactionUtils.updateTransaction(transaction);
+                            transactionsManager.updateTransaction(transaction);
 
                             donation.txHash = hash;
                             subscriber.next(donation);
@@ -867,7 +864,7 @@ class CrowdfundingContractApi {
                         const onConfirmation = (confNumber, receipt) => {
 
                             transaction.confirme();
-                            transactionUtils.updateTransaction(transaction);
+                            transactionsManager.updateTransaction(transaction);
 
                             let idFromEvent;
 
@@ -890,7 +887,7 @@ class CrowdfundingContractApi {
                         const onError = function (error) {
 
                             transaction.fail();
-                            transactionUtils.updateTransaction(transaction);
+                            transactionsManager.updateTransaction(transaction);
 
                             error.donation = donation;
                             console.error(`Error procesando transacción de almacenamiento de donación.`, error);
@@ -927,12 +924,12 @@ class CrowdfundingContractApi {
                 entityIdTo,
                 donationIds);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: userAddress
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -966,12 +963,12 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
                 })
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     subscriber.next(donationIds);
 
@@ -981,7 +978,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     console.error(`Error procesando transacción de transferencia de donaciones.`, error);
                     subscriber.error(error);
@@ -1009,12 +1006,12 @@ class CrowdfundingContractApi {
                 milestone.id,
                 activityInfoCid);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: activity.userAddress
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -1060,7 +1057,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido creada.
                     milestone.txHash = hash;
@@ -1069,7 +1066,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     let milestoneId = parseInt(receipt.events['MilestoneComplete'].returnValues.milestoneId);
                     thisApi.getMilestoneById(milestoneId).then(milestone => {
@@ -1080,7 +1077,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.milestone = milestone;
                     console.error(`Error procesando transacción para completar el milestone.`, error);
@@ -1210,12 +1207,12 @@ class CrowdfundingContractApi {
                 activity.isApprove,
                 activityInfoCid);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: activity.userAddress
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -1261,7 +1258,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido creada.
                     milestone.txHash = hash;
@@ -1270,7 +1267,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     let milestoneId;
                     if (activity.isApprove) {
@@ -1287,7 +1284,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.milestone = milestone;
                     console.error(`Error procesando transacción para revisión el milestone.`, error);
@@ -1537,8 +1534,8 @@ class CrowdfundingContractApi {
         this.exchangeRateProvider = new this.web3.eth.Contract(ExchangeRateProviderAbi, exchangeRateProviderAddress);
     }
 
-    async estimateGas(method, from) {
-        const estimateGas = await method.estimateGas({ from: from });
+    async estimateGas(method, data) {
+        const estimateGas = await method.estimateGas(data);
         return new BigNumber(estimateGas);
     }
 

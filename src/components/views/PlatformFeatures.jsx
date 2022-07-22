@@ -44,7 +44,7 @@ class PlatformFeatures extends Component {
                 <img src={require("assets/img/platformFeatures1.jpg")} className={classes.image} />
               </Grid>
               <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom="true">
+                <Typography variant="h4" color="textSecondary" gutterBottom>
                   {t('platformFeatures1Title')}
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
@@ -63,7 +63,7 @@ class PlatformFeatures extends Component {
               spacing={1}>
 
               <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom="true">
+                <Typography variant="h4" color="textSecondary" gutterBottom>
                   {t('platformFeatures2Title')}
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
@@ -89,7 +89,7 @@ class PlatformFeatures extends Component {
                 <img src={require("assets/img/platformFeatures3.jpg")} className={classes.image} />
               </Grid>
               <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom="true">
+                <Typography variant="h4" color="textSecondary" gutterBottom>
                   {t('platformFeatures3Title')}
                 </Typography>
                 <Typography variant="body1" color="textSecondary">
