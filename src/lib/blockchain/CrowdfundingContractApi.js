@@ -5,7 +5,6 @@ import Activity from '../../models/Activity';
 import Donation from '../../models/Donation';
 import { Observable } from 'rxjs'
 import BigNumber from 'bignumber.js';
-import transactionUtils from '../../redux/utils/transactionUtils'
 import entityUtils from '../../redux/utils/entityUtils'
 import dacIpfsConnector from '../../ipfs/DacIpfsConnector'
 import campaignIpfsConnector from '../../ipfs/CampaignIpfsConnector'
@@ -1106,12 +1105,12 @@ class CrowdfundingContractApi {
                 milestone.id,
                 activityInfoCid);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: activity.userAddress
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -1157,7 +1156,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido creada.
                     milestone.txHash = hash;
@@ -1166,7 +1165,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     let milestoneId = parseInt(receipt.events['MilestoneCancel'].returnValues.milestoneId);
                     thisApi.getMilestoneById(milestoneId).then(milestone => {
@@ -1177,7 +1176,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.milestone = milestone;
                     console.error(`Error procesando transacción para cancelar el milestone.`, error);
@@ -1308,12 +1307,12 @@ class CrowdfundingContractApi {
 
             const method = this.crowdfunding.methods.milestoneWithdraw(milestone.id);
 
-            const gasEstimated = await method.estimateGas({
+            const gasEstimated = await this.estimateGas(method, {
                 from: milestone.recipientAddress
             });
             const gasPrice = await this.getGasPrice();
 
-            let transaction = transactionUtils.addTransaction({
+            let transaction = transactionsManager.addTransaction({
                 gasEstimated: new BigNumber(gasEstimated),
                 gasPrice: gasPrice,
                 createdTitle: {
@@ -1359,7 +1358,7 @@ class CrowdfundingContractApi {
                 .once('transactionHash', (hash) => { // La transacción ha sido creada.
 
                     transaction.submit(hash);
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     // La transacción ha sido creada.
                     milestone.txHash = hash;
@@ -1368,7 +1367,7 @@ class CrowdfundingContractApi {
                 .once('confirmation', (confNumber, receipt) => {
 
                     transaction.confirme();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
 
                     let milestoneId = parseInt(receipt.events['MilestoneWithdraw'].returnValues.milestoneId);
@@ -1380,7 +1379,7 @@ class CrowdfundingContractApi {
                 .on('error', function (error) {
 
                     transaction.fail();
-                    transactionUtils.updateTransaction(transaction);
+                    transactionsManager.updateTransaction(transaction);
 
                     error.milestone = milestone;
                     console.error(`Error procesando transacción de retiro de fondos de milestone.`, error);

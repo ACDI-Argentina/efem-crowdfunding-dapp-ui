@@ -32,6 +32,7 @@ import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
 import { isOwner } from '../../lib/helpers';
 import MilestoneCard from 'components/MilestoneCard';
 import TransferCampaign from 'components/TransferCampaign';
+import StatusIndicator from 'components/StatusIndicator';
 
 
 /**
@@ -142,6 +143,13 @@ class CampaignViewPage extends Component {
       window.open("https://www.facebook.com/sharer/sharer.php?" + params.toString(), "_blank");
     }
 
+    let isCreateMilestoneEnabled = false;
+    if (currentUser &&
+      currentUser.authenticated &&
+      isOwner(campaign.managerAddress, currentUser)) {
+      isCreateMilestoneEnabled = true;
+    }
+
     return (
       <Page>
 
@@ -230,6 +238,11 @@ class CampaignViewPage extends Component {
                   alignItems="flex-start"
                   spacing={3}>
 
+                  <Grid item xs={12}
+                    className={classes.center}>
+                    <StatusIndicator status={campaign.status}></StatusIndicator>
+                  </Grid>
+
                   <Grid item xs={12}>
                     <SupportEntity
                       title={t('campaignSupportTitle')}
@@ -269,8 +282,9 @@ class CampaignViewPage extends Component {
                   ))}
 
 
-                  {isOwner(campaign.managerAddress, currentUser) && (
-                    <Grid item xs={12}>
+                  {isCreateMilestoneEnabled && (
+                    <Grid item xs={12}
+                      className={classes.center}>
                       <OnlyCorrectNetwork>
                         <PrimaryButton
                           onClick={this.handleClickCreateMilestone}>
@@ -280,11 +294,10 @@ class CampaignViewPage extends Component {
                     </Grid>
                   )}
 
-                  {isOwner(campaign.managerAddress, currentUser) && (
-                    <Grid item xs={12}>
-                      <TransferCampaign campaign={campaign}></TransferCampaign>
-                    </Grid>
-                  )}
+                  <Grid item xs={12}
+                    className={classes.center}>
+                    <TransferCampaign campaign={campaign}></TransferCampaign>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -320,8 +333,8 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     cursor: 'pointer'
   },
-  description: {
-    padding: '1em',
+  center: {
+    textAlign: 'center'
   }
 });
 

@@ -96,7 +96,10 @@ class MilestoneReject extends Component {
     const { milestone, currentUser, classes, t } = this.props;
 
     let isEnabled = false;
-    if (milestone.isReviewer(currentUser) && milestone.isCompleted) {
+    if (currentUser &&
+      currentUser.authenticated &&
+      milestone.isReviewer(currentUser) &&
+      milestone.isCompleted) {
       isEnabled = true;
     }
 

@@ -36,7 +36,8 @@ const styles = theme => ({
     '&:hover': {
       boxShadow: `3px 3px 0px 0px ${theme.palette.primary.light}`,
       backgroundColor: theme.palette.secondary.light
-    }
+    },
+    margin: '0.5em 0px 0.5em 0px'
   }
 });
 

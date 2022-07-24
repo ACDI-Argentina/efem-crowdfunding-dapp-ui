@@ -8,7 +8,7 @@ import DeleteProposedMilestoneButton from 'components/DeleteProposedMilestoneBut
 import AcceptRejectProposedMilestoneButtons from 'components/AcceptRejectProposedMilestoneButtons';
 import CancelMilestoneButton from 'components/CancelMilestoneButton';
 import MilestoneCancel from './MilestoneCancel';
-import MilestoneWithdrawButton from './MilestoneWithdrawButton';
+import MilestoneWithdraw from './MilestoneWithdraw';
 import MilestoneComplete from './MilestoneComplete';
 import MilestoneApprove from './MilestoneApprove';
 import MilestoneReject from './MilestoneReject';
@@ -27,7 +27,7 @@ class MilestoneActions extends Component {
         <MilestoneApprove milestone={milestone}></MilestoneApprove>
         <MilestoneReject milestone={milestone}></MilestoneReject>
         <MilestoneCancel milestone={milestone}></MilestoneCancel>
-        {/*<MilestoneWithdrawButton milestone={milestone} user={user} />
+        {/*<MilestoneWithdraw milestone={milestone} user={user} />
         <EditMilestoneButton milestone={milestone} user={user}/>*/}
       </Fragment>
     );

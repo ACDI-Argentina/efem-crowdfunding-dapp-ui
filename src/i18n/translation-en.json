@@ -130,7 +130,7 @@
 
     "milestoneCancel": "Cancel",
     "milestoneCancelTitle": "Milestone cancel",
-    "milestoneCancelDescription": "Explain why you cancelled this milestone. This information will be publicly visible and emailed to the milestone owner.",
+    "milestoneCancelDescription": "Explain why you cancelled this milestone.",
     "milestoneCancelMessagePlaceholder": "Explain why you cancelled this milestone",
     "milestoneCancelMessageMinLength": "It is really appreciated if you write something meaningful",
     "milestoneCancelButtonLabel": "Confirm cancellation",
@@ -167,7 +167,6 @@
     "transferCampaignDescription": "Select the destination milestone and the donations you want to transfer from the campaign.",
     "tokenBalance": "Balance",
     "milestoneProofDescription": "Attach an expense, invoice or anything else that requires payment.",
-    "activities": "Activities",
     "activitiesEmpty": "No activities have been done on the milestone yet.",
     "attachements": "Attachements",
     "message": "Message",
@@ -413,10 +412,13 @@
     "milestoneDonationsTab": "Donations",
     "milestoneBalanceTab": "Balance",
     "milestoneParticipantsTab": "Participants",
+    "milestoneActivitiesTab": "Activities",
     "supportMilestone": "Support this milestone",
     "milestoneShare": "Share",
     "milestoneShareTitle": "Support this campaign on Give4Forest",
     "milestoneSupportTitle": "Support this milestone",
+    "milestoneWithdrawLabel": "Withdraw",
+    "milestoneRefundLabel": "Refund",
     
     "selectUsersEmpty": "There aren't users to select"
 }

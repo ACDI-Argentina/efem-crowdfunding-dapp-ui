@@ -10,7 +10,7 @@ import DeleteProposedMilestoneButton from 'components/DeleteProposedMilestoneBut
 import AcceptRejectProposedMilestoneButtons from 'components/AcceptRejectProposedMilestoneButtons';
 import MilestoneCompleteButton from './MilestoneCompleteButton';
 import MilestoneReviewButtons from './MilestoneReviewButtons';
-import MilestoneWithdrawButton from 'components/MilestoneWithdrawButton';
+import MilestoneWithdraw from 'components/MilestoneWithdraw';
 
 class MilestoneConversationAction extends Component {
   render() {
@@ -46,7 +46,7 @@ class MilestoneConversationAction extends Component {
 
       case 'Completed':
         return (
-          <MilestoneWithdrawButton
+          <MilestoneWithdraw
             milestone={milestone}
             balance={balance}
             currentUser={currentUser}

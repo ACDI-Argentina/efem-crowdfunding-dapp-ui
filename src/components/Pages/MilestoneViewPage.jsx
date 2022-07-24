@@ -23,10 +23,14 @@ import MilestoneCardMini from 'components/MilestoneCardMini';
 import { selectMilestone } from 'redux/reducers/milestonesSlice';
 import { selectCampaign } from 'redux/reducers/campaignsSlice';
 import CampaignCard from 'components/CampaignCard';
-import MilestoneActions from 'components/MilestoneActions';
 import MilestoneComplete from 'components/MilestoneComplete';
 import MilestoneApprove from 'components/MilestoneApprove';
 import MilestoneReject from 'components/MilestoneReject';
+import { selectActivitiesByMilestone } from 'redux/reducers/activitiesSlice';
+import ActivityList from 'components/ActivityList';
+import MilestoneWithdraw from 'components/MilestoneWithdraw';
+import StatusIndicator from 'components/StatusIndicator';
+import MilestoneCancel from 'components/MilestoneCancel';
 
 /**
  * Visualización de Milestone.
@@ -41,9 +45,10 @@ class MilestoneViewPage extends Component {
 
   render() {
 
-    const { currentUser,
+    const {
       milestone,
       campaign,
+      activities,
       classes,
       t } = this.props;
 
@@ -123,7 +128,15 @@ class MilestoneViewPage extends Component {
             </Grid>
           </Grid>
         )
-      }];
+      },
+      {
+        tabIndex: 4,
+        tabName: t('milestoneActivitiesTab'),
+        tabContent: (
+          <ActivityList activityIds={milestone.activityIds} />
+        )
+      }
+    ];
 
     function compartirWhatsapp(e) {
       e.preventDefault();
@@ -241,6 +254,11 @@ class MilestoneViewPage extends Component {
                   alignItems="flex-start"
                   spacing={3}>
 
+                  <Grid item xs={12}
+                    className={classes.center}>
+                    <StatusIndicator status={milestone.status}></StatusIndicator>
+                  </Grid>
+
                   <Grid item xs={12}>
                     <SupportEntity
                       title={t('milestoneSupportTitle')}
@@ -268,17 +286,15 @@ class MilestoneViewPage extends Component {
                     <CampaignCard campaign={campaign} />
                   </Grid>
 
-                  <Grid item xs={12}>
+                  <Grid item xs={12}
+                    className={classes.center}>
+
                     <MilestoneComplete milestone={milestone} />
-                  </Grid>
-
-                  <Grid item xs={12}>
                     <MilestoneApprove milestone={milestone} />
-                  </Grid>
-
-                  <Grid item xs={12}>
                     <MilestoneReject milestone={milestone} />
-                  </Grid>
+                    <MilestoneWithdraw milestone={milestone} />
+                    <MilestoneCancel milestone={milestone} />
+                  </Grid>                  
                 </Grid>
               </Grid>
             </Grid>
@@ -316,6 +332,9 @@ const styles = theme => ({
   },
   description: {
     padding: '1em',
+  },
+  center: {
+    textAlign: 'center'
   }
 });
 
@@ -326,6 +345,7 @@ const mapStateToProps = (state, ownProps) => {
     currentUser: selectCurrentUser(state),
     milestone: milestone,
     campaign: selectCampaign(state, milestone.campaignId),
+    activities: selectActivitiesByMilestone(state, milestoneId)
   };
 }
 const mapDispatchToProps = {}

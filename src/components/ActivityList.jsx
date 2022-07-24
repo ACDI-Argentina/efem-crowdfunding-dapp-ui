@@ -7,27 +7,32 @@ import ActivityItem from './ActivityItem';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import { withTranslation } from 'react-i18next';
+import { fetchActivitiesByIds, selectActivitiesByIds } from '../redux/reducers/activitiesSlice'
+import { connect } from 'react-redux';
 
 class ActivityList extends Component {
 
+  componentDidMount() {
+    this.props.fetchActivitiesByIds(this.props.activityIds);
+  }
+
   render() {
     const { activities, classes, t } = this.props;
-    return (
-      <Container fixed>
-        <Typography variant="overline">
-          {t('activities')}
+
+    if (activities.length == 0) {
+      return (
+        <Typography variant="body2">
+          {t('activitiesEmpty')}
         </Typography>
-        <List className={classes.root}>
-          {activities.map(activity => (
-            <ActivityItem key={activity.clientId} activity={activity}></ActivityItem>
-          ))}
-        </List>
-        {activities.length == 0 && (
-          <Typography variant="body2">
-            {t('activitiesEmpty')}
-          </Typography>
-        )}
-      </Container>
+      );
+    }
+
+    return (
+      <List className={classes.root}>
+        {activities.map(activity => (
+          <ActivityItem key={activity.clientId} activity={activity}></ActivityItem>
+        ))}
+      </List>
     );
   }
 }
@@ -38,15 +43,19 @@ ActivityList.propTypes = {
 
 const styles = {
   root: {
-    width: '100%',
-    //maxWidth: '36ch',
-    //backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
+    width: '100%'
   }
 };
 
-export default withStyles(styles)(
-  withTranslation()(ActivityList)
+const mapStateToProps = (state, ownProps) => {
+  return {
+    activities: selectActivitiesByIds(state, ownProps.activityIds)
+  };
+}
+const mapDispatchToProps = {
+  fetchActivitiesByIds
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(
+  withTranslation()(ActivityList)))
 );

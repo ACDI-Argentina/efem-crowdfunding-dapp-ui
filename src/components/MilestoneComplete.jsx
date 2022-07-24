@@ -107,7 +107,10 @@ class MilestoneComplete extends Component {
     const { milestone, currentUser, classes, t } = this.props;
 
     let isEnabled = false;
-    if (milestone.isManager(currentUser) && milestone.canComplete()) {
+    if (currentUser &&
+      currentUser.authenticated &&
+      milestone.isManager(currentUser) &&
+      milestone.canComplete()) {
       isEnabled = true;
     }
 

@@ -36,6 +36,12 @@ export const {
   fetchActivitiesByIds,
   mergeActivities } = activitiesSlice.actions;
 
+export const selectActivitiesByIds = (state, ids) => {
+  return state.activities.filter(a => ids.includes(a.id)).map(function (activityStore) {
+    return new Activity(activityStore);
+  });
+}
+
 export const selectActivitiesByMilestone = (state, milestoneId) => {
   return state.activities.filter(a => a.milestoneId === milestoneId).map(function (activityStore) {
     return new Activity(activityStore);

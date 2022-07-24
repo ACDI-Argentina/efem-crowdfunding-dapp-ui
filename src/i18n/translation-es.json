@@ -131,7 +131,7 @@
 
     "milestoneCancel": "Cancelar",
     "milestoneCancelTitle": "Cancelar hito",
-    "milestoneCancelDescription": "Explique por qué canceló este hito. Esta información será visible públicamente y se enviará por correo electrónico al propietario del hito.",
+    "milestoneCancelDescription": "Explique por qué canceló este hito.",
     "milestoneCancelMessagePlaceholder": "Explique por qué canceló este hito",
     "milestoneCancelMessageMinLength": "Se agradece mucho si escribe algo significativo",
     "milestoneCancelButtonLabel": "Confirmar cancelación",
@@ -168,7 +168,6 @@
     "transferCampaignDescription": "Seleccione el hito destino y las donaciones que desea transferir desde la campaña.",
     "tokenBalance": "Balance",
     "milestoneProofDescription": "Adjunte un gasto, factura o cualquier otra cosa que requiera pago.",
-    "activities": "Actividades",
     "activitiesEmpty": "Aún no se han realizado actividades sobre el milestone.",
     "attachements": "Adjuntos",
     "message": "Mensaje",
@@ -414,10 +413,13 @@
     "milestoneDonationsTab": "Donaciones",
     "milestoneBalanceTab": "Balance",
     "milestoneParticipantsTab": "Participantes",
+    "milestoneActivitiesTab": "Actividades",
     "supportMilestone": "Apoyá este hito",
     "milestoneShare": "Comparte",
     "milestoneShareTitle": "Apoya este hito en Give4Forest",
     "milestoneSupportTitle": "Apoyá este hito",
+    "milestoneWithdrawLabel": "Retirar",
+    "milestoneRefundLabel": "Reembolsar",
 
     "selectUsersEmpty": "No hay usuarios para seleccionar"
 }

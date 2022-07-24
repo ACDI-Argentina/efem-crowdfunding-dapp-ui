@@ -27,7 +27,8 @@ class PrimaryButtonOutline extends Component {
 const styles = theme => ({
   root: {
     borderRadius: "5px",
-    textTransform: "none"
+    textTransform: "none",
+    margin: '0.5em 0px 0.5em 0px'
   }
 });
 
