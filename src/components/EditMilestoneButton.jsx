@@ -23,9 +23,9 @@ class EditMilestoneButton extends Component {
 
   render() {
     const { milestone, user, t } = this.props;
-    if (!user || !milestone.inEditableStatus() || !milestone.canUserEdit(user)) {
+    //if (!user || !milestone.inEditableStatus() || !milestone.canUserEdit(user)) {
       return null;
-    }
+    //}
 
     return (
       <OnlyCorrectNetwork>

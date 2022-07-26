@@ -122,6 +122,8 @@
     
     "milestone": "Milestone",
     
+    "milestoneNew": "New milestone",
+    "milestoneEdit": "Edit",
     "milestoneComplete": "Complete",
     "milestoneCompleteTitle": "Milestone complete",
     "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary.",

@@ -123,6 +123,8 @@
     
     "milestone": "Hito",
 
+    "milestoneNew": "Nuevo hito",
+    "milestoneEdit": "Editar",
     "milestoneComplete": "Completar",
     "milestoneCompleteTitle": "Completar hito",
     "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario.",

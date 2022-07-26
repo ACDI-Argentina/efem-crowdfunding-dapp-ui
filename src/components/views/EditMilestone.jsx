@@ -79,7 +79,7 @@ class EditMilestone extends Component {
           const campaign = this.props.campaign;
           const milestone = this.props.milestone;
 
-          if (!milestone.canUserEdit(this.props.currentUser)) {
+          if (!milestone.isManager(this.props.currentUser)) {
             this.props.history.goBack();
           }
 

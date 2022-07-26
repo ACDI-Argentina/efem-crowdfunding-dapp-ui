@@ -16,7 +16,7 @@ import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
 import { Milestone } from 'models';
-import { saveMilestone } from '../../redux/reducers/milestonesSlice';
+import { saveMilestone, selectMilestone } from '../../redux/reducers/milestonesSlice';
 import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
 import {
@@ -37,49 +37,53 @@ class MilestonePage extends Component {
   constructor(props) {
     super(props);
 
-    const { currentUser, campaign } = this.props;
+    const { currentUser, campaign, milestone } = this.props;
 
-    const milestone = new Milestone({
-      campaignReviewerAddress: campaign.reviewerAddress,
-      campaignId: campaign.id,
-      managerAddress: currentUser.address,
-      status: Milestone.PENDING
-    });
+    let milestoneInit = milestone;
+    if (!milestone) {
+      // Nuevo milestone
+      milestoneInit = new Milestone({
+        campaignReviewerAddress: campaign.reviewerAddress,
+        campaignId: campaign.id,
+        managerAddress: currentUser.address,
+        status: Milestone.PENDING
+      });
+    }
 
     this.state = {
-      title: '',
+      title: milestoneInit.title,
       titleHelperText: '',
       titleError: false,
 
-      abstract: '',
+      abstract: milestoneInit.abstract,
       abstractHelperText: '',
       abstractError: false,
 
-      description: '',
+      description: milestoneInit.description,
       descriptionHelperText: '',
       descriptionError: false,
 
-      url: '',
+      url: milestoneInit.url,
       urlHelperText: '',
       urlError: false,
 
-      fiatAmountTarget: 0,
+      fiatAmountTarget: FiatUtils.centToDollar(milestoneInit.fiatAmountTarget).toFixed(),
       fiatAmountTargetHelperText: '',
       fiatAmountTargetError: false,
 
-      reviewerAddress: '',
+      reviewerAddress: milestoneInit.reviewerAddress,
       reviewerAddressHelperText: '',
       reviewerAddressError: false,
 
-      recipientAddress: '',
+      recipientAddress: milestoneInit.recipientAddress,
       recipientAddressHelperText: '',
       recipientAddressError: false,
 
-      avatar: null,
+      avatar: milestoneInit.avatar,
       avatarPreview: null,
-      avatarImg: ipfsService.resolveUrl(milestone.imageCid),
+      avatarImg: ipfsService.resolveUrl(milestoneInit.imageCid),
 
-      milestone: milestone,
+      milestone: milestoneInit,
 
       formValid: false,
       isSaving: false
@@ -95,21 +99,6 @@ class MilestonePage extends Component {
     this.handleChangeReviewer = this.handleChangeReviewer.bind(this);
     this.handleChangeRecipient = this.handleChangeRecipient.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
-  }
-
-  clearForm() {
-    const milestone = new Milestone({
-      managerAddress: this.props.currentUser.address,
-      status: Milestone.PENDING
-    });
-    this.setState({
-      title: "",
-      abstract: "",
-      description: "",
-      url: "",
-      avatarImg: ipfsService.resolveUrl(milestone.imageCid),
-      milestone: milestone
-    })
   }
 
   handleChangeTitle(event) {
@@ -258,12 +247,12 @@ class MilestonePage extends Component {
   }
 
   setFormValid() {
-    const { title, 
-      abstract, 
-      description, 
-      url, 
-      fiatAmountTarget, 
-      reviewerAddress, 
+    const { title,
+      abstract,
+      description,
+      url,
+      fiatAmountTarget,
+      reviewerAddress,
       recipientAddress } = this.state;
     let formValid = true;
     if (title === undefined || title === '') {
@@ -525,14 +514,18 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  const campaignId = parseInt(ownProps.match.params.id);
-  //const milestoneId = parseInt(ownProps.match.params.milestoneId);
-  return {
+  const props = {
     currentUser: selectCurrentUser(state),
-    campaign: selectCampaign(state, campaignId),
-    //milestone: selectMilestone(state, milestoneId),
-    //isCampaignManager: selectCurrentUser(state).isCampaignManager(),
+  };
+  if (ownProps.match.params.campaignId) {
+    const campaignId = parseInt(ownProps.match.params.campaignId);
+    props.campaign = selectCampaign(state, campaignId);
   }
+  if (ownProps.match.params.milestoneId) {
+    const milestoneId = parseInt(ownProps.match.params.milestoneId);
+    props.milestone = selectMilestone(state, milestoneId);
+  }
+  return props;
 }
 const mapDispatchToProps = { registerCurrentUser, saveMilestone }
 

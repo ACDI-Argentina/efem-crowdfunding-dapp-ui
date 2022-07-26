@@ -46,7 +46,15 @@ const SwitchRoutes = ({ currentUser }) => (
 
       <Route
         exact
-        path="/campaigns/:id/milestones/new"
+        path="/campaigns/:campaignId/milestones/new"
+        render={(props) => (
+          <MilestonePage {...props} />
+        )}
+      />
+
+      <Route
+        exact
+        path="/milestones/:milestoneId/edit"
         render={(props) => (
           <MilestonePage {...props} />
         )}

@@ -31,6 +31,7 @@ import ActivityList from 'components/ActivityList';
 import MilestoneWithdraw from 'components/MilestoneWithdraw';
 import StatusIndicator from 'components/StatusIndicator';
 import MilestoneCancel from 'components/MilestoneCancel';
+import MilestoneEdit from 'components/MilestoneEdit';
 
 /**
  * Visualización de Milestone.
@@ -289,6 +290,7 @@ class MilestoneViewPage extends Component {
                   <Grid item xs={12}
                     className={classes.center}>
 
+                    <MilestoneEdit milestone={milestone} />
                     <MilestoneComplete milestone={milestone} />
                     <MilestoneApprove milestone={milestone} />
                     <MilestoneReject milestone={milestone} />

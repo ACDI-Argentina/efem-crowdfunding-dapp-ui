@@ -98,8 +98,8 @@ class MilestoneCancel extends Component {
     let isEnabled = false;
     if (currentUser &&
       currentUser.authenticated &&
-      (milestone.isReviewer(currentUser) ||
-        milestone.canUserEdit(currentUser)) && milestone.canCancel()) {
+      milestone.isActive &&
+      (milestone.isReviewer(currentUser) || milestone.isManager(currentUser))) {
       isEnabled = true;
     }
 

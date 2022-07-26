@@ -6,9 +6,7 @@ import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
-import { history } from 'lib/helpers';
 import Page from './Page'
-import PrimaryButton from 'components/buttons/PrimaryButton';
 import {
   selectCampaign,
   selectCascadeDonationsByCampaign,
@@ -28,12 +26,11 @@ import RichTextViewer from 'components/RichTextViewer';
 import SupportEntity from 'components/SupportEntity';
 import Donate from 'components/Donate';
 import CampaignCardMini from 'components/CampaignCardMini';
-import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork';
 import { isOwner } from '../../lib/helpers';
 import MilestoneCard from 'components/MilestoneCard';
 import TransferCampaign from 'components/TransferCampaign';
 import StatusIndicator from 'components/StatusIndicator';
-
+import MilestoneNew from 'components/MilestoneNew';
 
 /**
  * Visualización de Campaign.
@@ -44,13 +41,9 @@ class CampaignViewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleClickCreateMilestone = this.handleClickCreateMilestone.bind(this);
   }
 
-  handleClickCreateMilestone() {
-    const { campaign } = this.props;
-    history.push(`/campaigns/${campaign.id}/milestones/new`);
-  }
+
 
   render() {
 
@@ -141,13 +134,6 @@ class CampaignViewPage extends Component {
       const params = new URLSearchParams();
       params.append("u", window.location.href);
       window.open("https://www.facebook.com/sharer/sharer.php?" + params.toString(), "_blank");
-    }
-
-    let isCreateMilestoneEnabled = false;
-    if (currentUser &&
-      currentUser.authenticated &&
-      isOwner(campaign.managerAddress, currentUser)) {
-      isCreateMilestoneEnabled = true;
     }
 
     return (
@@ -281,21 +267,10 @@ class CampaignViewPage extends Component {
                     </Grid>
                   ))}
 
-
-                  {isCreateMilestoneEnabled && (
-                    <Grid item xs={12}
-                      className={classes.center}>
-                      <OnlyCorrectNetwork>
-                        <PrimaryButton
-                          onClick={this.handleClickCreateMilestone}>
-                          {t('createMilestone')}
-                        </PrimaryButton>
-                      </OnlyCorrectNetwork>
-                    </Grid>
-                  )}
-
                   <Grid item xs={12}
                     className={classes.center}>
+
+                    <MilestoneNew campaign={campaign}></MilestoneNew>
                     <TransferCampaign campaign={campaign}></TransferCampaign>
                   </Grid>
                 </Grid>
