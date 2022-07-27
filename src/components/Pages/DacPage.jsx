@@ -16,7 +16,7 @@ import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
 import { DAC } from 'models';
-import { saveDac } from '../../redux/reducers/dacsSlice';
+import { saveDac, selectDac } from '../../redux/reducers/dacsSlice';
 import RichTextEditor from '../RichTextEditor';
 
 /**
@@ -27,29 +27,39 @@ class DacPage extends Component {
 
   constructor(props) {
     super(props);
-    const dac = new DAC({
-      delegateAddress: props.currentUser.address,
-      status: DAC.PENDING
-    });
+
+    const { currentUser, dac } = this.props;
+    let dacInit = dac;
+    if (!dac) {
+      // Nueva DAC
+      dacInit = new DAC({
+        delegateAddress: currentUser.address,
+        status: DAC.PENDING
+      });
+    }
 
     this.state = {
-      title: '',
+      title: dacInit.title,
       titleHelperText: '',
       titleError: false,
 
-      description: '',
+      abstract: dacInit.abstract,
+      abstractHelperText: '',
+      abstractError: false,
+
+      description: dacInit.description,
       descriptionHelperText: '',
       descriptionError: false,
 
-      url: '',
+      url: dacInit.url,
       urlHelperText: '',
       urlError: false,
 
-      avatar: null,
+      avatar: dacInit.avatar,
       avatarPreview: null,
-      avatarImg: ipfsService.resolveUrl(dac.imageCid),
+      avatarImg: ipfsService.resolveUrl(dacInit.imageCid),
 
-      dac: dac,
+      dac: dacInit,
 
       formValid: false,
       isSaving: false
@@ -57,24 +67,11 @@ class DacPage extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeAbstract = this.handleChangeAbstract.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
-  }
-
-  clearForm() {
-    const dac = new DAC({
-      delegateAddress: this.props.currentUser.address,
-      status: DAC.PENDING
-    });
-    this.setState({
-      title: "",
-      description: "",
-      url: "",
-      avatarImg: ipfsService.resolveUrl(dac.imageCid),
-      dac: dac
-    })
   }
 
   handleChangeTitle(event) {
@@ -90,6 +87,24 @@ class DacPage extends Component {
       title: title,
       titleHelperText: titleHelperText,
       titleError: titleError
+    }, () => {
+      this.setFormValid();
+    });
+  }
+
+  handleChangeAbstract(event) {
+    const { t } = this.props;
+    let abstractError = false;
+    let abstractHelperText = '';
+    const abstract = event.target.value;
+    if (abstract === undefined || abstract === '') {
+      abstractHelperText = t('errorRequired');
+      abstractError = true;
+    }
+    this.setState({
+      abstract: abstract,
+      abstractHelperText: abstractHelperText,
+      abstractError: abstractError
     }, () => {
       this.setFormValid();
     });
@@ -148,9 +163,12 @@ class DacPage extends Component {
   }
 
   setFormValid() {
-    const { title, description, url } = this.state;
+    const { title, abstract, description, url } = this.state;
     let formValid = true;
     if (title === undefined || title === '') {
+      formValid = false;
+    }
+    if (abstract === undefined || abstract === '') {
       formValid = false;
     }
     if (description === undefined || description === '') {
@@ -173,6 +191,7 @@ class DacPage extends Component {
     let dac = this.state.dac;
 
     dac.title = this.state.title;
+    dac.abstract = this.state.abstract;
     dac.description = this.state.description;
     dac.url = this.state.url;
     dac.image = this.state.avatarPreview;
@@ -202,6 +221,8 @@ class DacPage extends Component {
     const {
       titleHelperText,
       titleError,
+      abstractHelperText,
+      abstractError,
       descriptionHelperText,
       descriptionError,
       urlHelperText,
@@ -260,6 +281,24 @@ class DacPage extends Component {
                             error={titleError}
                             required
                             inputProps={{ maxLength: 42 }}
+                          />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <InputField
+                            id="abstractTextField"
+                            value={this.state.abstract}
+                            onChange={this.handleChangeAbstract}
+                            label={t('dacAbstract')}
+                            helperText={abstractHelperText}
+                            fullWidth
+                            margin="normal"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            error={abstractError}
+                            required
+                            inputProps={{ maxLength: 200 }}
                           />
                         </Grid>
 
@@ -330,9 +369,14 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    currentUser: selectCurrentUser(state)
+  const props = {
+    currentUser: selectCurrentUser(state),
   };
+  if (ownProps.match.params.dacId) {
+    const dacId = parseInt(ownProps.match.params.dacId);
+    props.dac = selectDac(state, dacId);
+  }
+  return props;
 }
 const mapDispatchToProps = { registerCurrentUser, saveDac }
 

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import { useSelector } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
-import { withTranslation } from 'react-i18next';
 import { web3Utils } from 'commons';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core';
@@ -12,9 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { history } from '../lib/helpers';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import PeopleIcon from '@material-ui/icons/People';
-import InfoIcon from '@material-ui/icons/Info';
+import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoundedButton from './buttons/RoundedButton';
@@ -22,10 +20,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { OnlyRole } from '@acdi/efem-dapp';
 import {
-  CREATE_DAC_ROLE,
-  CREATE_CAMPAIGN_ROLE
+  CREATE_DAC_ROLE
 } from 'constants/Role';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import { selectDac } from 'redux/reducers/dacsSlice';
+import config from 'configuration';
 
 const useStyles = makeStyles({
   walletIcon: {
@@ -45,6 +44,7 @@ const ConnectButton = (props) => {
     web3,
   } = useContext(Web3AppContext);
   const currentUser = useSelector(selectCurrentUser);
+  const dac = useSelector(state => selectDac(state, config.dac.defaultId));
 
   const isUserConnected = currentUser?.address || false;
   const isUserRegistered = currentUser?.registered || false;
@@ -62,12 +62,12 @@ const ConnectButton = (props) => {
     history.push(`/profile`);
   };
 
-  const handleClickCreateDac = () => {
+  const handleClickDacNew = () => {
     history.push(`/dacs/new`);
   };
 
-  const handleClickCreateCampaign = () => {
-    history.push(`/campaigns/new`);
+  const handleClickDacView = () => {
+    history.push(`/dacs/${config.dac.defaultId}`);
   };
 
   const handleClickLogout = () => {
@@ -127,26 +127,28 @@ const ConnectButton = (props) => {
           </ListItemIcon>
           <ListItemText primary={isUserRegistered ? t('menuProfile') : t('menuSignup')} />
         </MenuItem>
-        <OnlyRole user={currentUser} role={CREATE_DAC_ROLE}>
+        {!dac &&
+          <OnlyRole user={currentUser} role={CREATE_DAC_ROLE}>
+            <MenuItem onClick={
+              handleClickDacNew
+            }>
+              <ListItemIcon>
+                <AccountTreeIcon />
+              </ListItemIcon>
+              <ListItemText primary={t('dacNew')} />
+            </MenuItem>
+          </OnlyRole>
+        }
+        {dac &&
           <MenuItem onClick={
-            handleClickCreateDac
+            handleClickDacView
           }>
             <ListItemIcon>
               <AccountTreeIcon />
             </ListItemIcon>
-            <ListItemText primary={t('createDac')} />
+            <ListItemText primary={t('dacView')} />
           </MenuItem>
-        </OnlyRole>
-        <OnlyRole user={currentUser} role={CREATE_CAMPAIGN_ROLE}>
-          <MenuItem onClick={
-            handleClickCreateCampaign
-          }>
-            <ListItemIcon>
-              <AccountTreeIcon />
-            </ListItemIcon>
-            <ListItemText primary={t('campaignCreate')} />
-          </MenuItem>
-        </OnlyRole>
+        }
         <MenuItem onClick={
           handleClickLogout
         }>

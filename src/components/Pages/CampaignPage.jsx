@@ -16,10 +16,11 @@ import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import { ipfsService, validatorUtils } from 'commons';
 import { Campaign } from 'models';
-import { saveCampaign } from '../../redux/reducers/campaignsSlice';
+import { saveCampaign, selectCampaign } from '../../redux/reducers/campaignsSlice';
 import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
 import { CAMPAIGN_REVIEWER_ROLE } from '../../constants/Role';
+import { selectDac } from 'redux/reducers/dacsSlice';
 
 /**
  * Formulario de creación de Campaign.
@@ -29,37 +30,44 @@ class CampaignPage extends Component {
 
   constructor(props) {
     super(props);
-    const campaign = new Campaign({
-      managerAddress: props.currentUser.address,
-      status: Campaign.PENDING
-    });
+
+    const { currentUser, dac, campaign } = this.props;
+    let campaignInit = campaign;
+    if (!campaign) {
+      // Nueva campaign
+      campaignInit = new Campaign({
+        dacIds: [dac.id],
+        managerAddress: currentUser.address,
+        status: Campaign.PENDING
+      });
+    }
 
     this.state = {
-      title: '',
+      title: campaignInit.title,
       titleHelperText: '',
       titleError: false,
 
-      abstract: '',
+      abstract: campaignInit.abstract,
       abstractHelperText: '',
       abstractError: false,
 
-      description: '',
+      description: campaignInit.description,
       descriptionHelperText: '',
       descriptionError: false,
 
-      url: '',
+      url: campaignInit.url,
       urlHelperText: '',
       urlError: false,
 
-      reviewerAddress: '',
+      reviewerAddress: campaignInit.reviewerAddress,
       reviewerAddressHelperText: '',
       reviewerAddressError: false,
 
-      avatar: null,
+      avatar: campaignInit.avatar,
       avatarPreview: null,
-      avatarImg: ipfsService.resolveUrl(campaign.imageCid),
+      avatarImg: ipfsService.resolveUrl(campaignInit.imageCid),
 
-      campaign: campaign,
+      campaign: campaignInit,
 
       formValid: false,
       isSaving: false
@@ -73,21 +81,6 @@ class CampaignPage extends Component {
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleChangeReviewer = this.handleChangeReviewer.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
-  }
-
-  clearForm() {
-    const campaign = new Campaign({
-      managerAddress: this.props.currentUser.address,
-      status: Campaign.PENDING
-    });
-    this.setState({
-      title: "",
-      abstract: "",
-      description: "",
-      url: "",
-      avatarImg: ipfsService.resolveUrl(campaign.imageCid),
-      campaign: campaign
-    })
   }
 
   handleChangeTitle(event) {
@@ -420,9 +413,18 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  return {
-    currentUser: selectCurrentUser(state)
+  const props = {
+    currentUser: selectCurrentUser(state),
   };
+  if (ownProps.match.params.dacId) {
+    const dacId = parseInt(ownProps.match.params.dacId);
+    props.dac = selectDac(state, dacId);
+  }
+  if (ownProps.match.params.campaignId) {
+    const campaignId = parseInt(ownProps.match.params.campaignId);
+    props.campaign = selectCampaign(state, campaignId);
+  }
+  return props;
 }
 const mapDispatchToProps = { registerCurrentUser, saveCampaign }
 

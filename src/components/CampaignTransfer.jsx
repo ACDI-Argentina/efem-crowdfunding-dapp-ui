@@ -36,7 +36,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class TransferCampaign extends Component {
+class CampaignTransfer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -329,13 +329,13 @@ class TransferCampaign extends Component {
   }
 }
 
-TransferCampaign.propTypes = {
+CampaignTransfer.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,
   campaign: PropTypes.instanceOf(Campaign).isRequired,
   tokenAddress: PropTypes.string.isRequired
 };
 
-TransferCampaign.defaultProps = {
+CampaignTransfer.defaultProps = {
   tokenAddress: config.nativeToken.address
 };
 
@@ -389,6 +389,6 @@ const mapDispatchToProps = { fetchDonationsByIds, transferDonations }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(
-    withTranslation()(TransferCampaign)
+    withTranslation()(CampaignTransfer)
   )
 );

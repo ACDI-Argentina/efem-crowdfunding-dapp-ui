@@ -18,7 +18,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Box } from '@material-ui/core'
 import EditCampaignButton from './EditCampaignButton'
-import TransferCampaign from './TransferCampaign'
+import CampaignTransfer from './CampaignTransfer'
 
 
 class SupportCampaignCard extends Component {
@@ -62,7 +62,7 @@ class SupportCampaignCard extends Component {
                       description={t('donateCampaignDescription')}
                       enabled={campaign.canReceiveFunds}>
                     </Donate>
-                    <TransferCampaign campaign={campaign}></TransferCampaign>
+                    <CampaignTransfer campaign={campaign}></CampaignTransfer>
                     <EditCampaignButton 
                       currentUser={currentUser}
                       campaign={campaign}

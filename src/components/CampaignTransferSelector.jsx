@@ -6,7 +6,7 @@ import { selectCampaignsByIds } from '../redux/reducers/campaignsSlice';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-class TransferCampaignSelector extends Component {
+class CampaignTransferSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,7 +51,7 @@ class TransferCampaignSelector extends Component {
   }
 }
 
-TransferCampaignSelector.defaultProps = {
+CampaignTransferSelector.defaultProps = {
   campaignIds: []
 };
 
@@ -71,6 +71,6 @@ const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(
-    withTranslation()(TransferCampaignSelector)
+    withTranslation()(CampaignTransferSelector)
   )
 );

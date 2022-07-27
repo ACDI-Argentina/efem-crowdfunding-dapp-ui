@@ -31,52 +31,55 @@ import CampaignTransfer from 'components/CampaignTransfer';
 import StatusIndicator from 'components/StatusIndicator';
 import MilestoneNew from 'components/MilestoneNew';
 import CampaignEdit from 'components/CampaignEdit';
+import DacCardMini from 'components/DacCardMini';
+import CampaignNew from 'components/CampaignNew';
+import { selectDac } from 'redux/reducers/dacsSlice';
+import { selectCascadeDonationsByDac } from 'redux/reducers/dacsSlice';
+import { selectCascadeFiatAmountTargetByDac } from 'redux/reducers/dacsSlice';
+import DacEdit from 'components/DacEdit';
 
 /**
- * Visualización de Campaign.
+ * Visualización de DAC.
  * 
  */
-class CampaignViewPage extends Component {
+class DacViewPage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-
-
   render() {
 
-    const { currentUser,
-      campaign,
+    const {
+      dac,
       cascadeDonationIds,
       cascadeFiatAmountTarget,
-      milestones,
       classes,
       t } = this.props;
 
     const tabs = [
       {
         tabIndex: 0,
-        tabName: t('campaignDescriptionTab'),
+        tabName: t('dacDescriptionTab'),
         tabContent: (
           <RichTextViewer
-            value={campaign.description}>
+            value={dac.description}>
           </RichTextViewer>
         )
       },
       {
         tabIndex: 1,
-        tabName: t('campaignDonationsTab'),
+        tabName: t('dacDonationsTab'),
         tabContent: (
           <DonationList
-            donationIds={campaign.budgetDonationIds}>
+            donationIds={dac.budgetDonationIds}>
           </DonationList>
         )
       },
       {
         tabIndex: 2,
-        tabName: t('campaignBalanceTab'),
+        tabName: t('dacBalanceTab'),
         tabContent: (
           <DonationsBalance
             donationIds={cascadeDonationIds}
@@ -86,7 +89,7 @@ class CampaignViewPage extends Component {
       },
       {
         tabIndex: 3,
-        tabName: t('campaignParticipantsTab'),
+        tabName: t('dacParticipantsTab'),
         tabContent: (
           <Grid container
             direction="row"
@@ -98,9 +101,9 @@ class CampaignViewPage extends Component {
               <Typography variant="subtitle2"
                 color="textPrimary"
                 gutterBottom>
-                {t('campaignReviewer')}
+                {t('dacDelegate')}
               </Typography>
-              <ProfileCardMini address={campaign.reviewerAddress} />
+              <ProfileCardMini address={dac.delegateAddress} />
             </Grid>
           </Grid>
         )
@@ -109,22 +112,22 @@ class CampaignViewPage extends Component {
     function compartirWhatsapp(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("text", "*" + campaign.title + "*\n" + t('campaignShareTitle') + "\n" + window.location.href);
+      params.append("text", "*" + dac.title + "*\n" + t('dacShareTitle') + "\n" + window.location.href);
       window.open("https://web.whatsapp.com/send?" + params.toString(), "_blank");
     }
 
     function compartirReddit(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("title", campaign.title);
-      params.append("text", t('campaignShareTitle') + "\n" + window.location.href);
+      params.append("title", dac.title);
+      params.append("text", t('dacShareTitle') + "\n" + window.location.href);
       window.open("https://www.reddit.com/submit?" + params.toString(), "_blank");
     }
 
     function compartirTelegram(e) {
       e.preventDefault();
       const params = new URLSearchParams();
-      params.append("text", campaign.title + ". " + t('campaignShareTitle'));
+      params.append("text", dac.title + ". " + t('dacShareTitle'));
       params.append("url", window.location.href);
       window.open("https://telegram.me/share/url?" + params.toString(), "_blank");
     }
@@ -153,19 +156,19 @@ class CampaignViewPage extends Component {
               alignItems="center">
 
               <Grid item xs={2} className={classes.headerLeft}>
-                <Avatar className={classes.headerAvatar} src={campaign.imageCidUrl} />
+                <Avatar className={classes.headerAvatar} src={dac.imageCidUrl} />
               </Grid>
 
               <Grid item xs={8} className={classes.headerRight}>
 
                 <Typography variant="h5"
                   color="textSecondary">
-                  {campaign.title}
+                  {dac.title}
                 </Typography>
 
                 <Typography variant="subtitle1"
                   color="textSecondary">
-                  {campaign.abstract}
+                  {dac.abstract}
                 </Typography>
 
                 <Grid container
@@ -226,53 +229,31 @@ class CampaignViewPage extends Component {
 
                   <Grid item xs={12}
                     className={classes.center}>
-                    <StatusIndicator status={campaign.status}></StatusIndicator>
+                    <StatusIndicator status={dac.status}></StatusIndicator>
                   </Grid>
 
                   <Grid item xs={12}>
                     <SupportEntity
-                      title={t('campaignSupportTitle')}
+                      title={t('dacSupportTitle')}
                       donationIds={cascadeDonationIds}
                       fiatTarget={cascadeFiatAmountTarget}
                       donateButton={
                         <Donate
-                          entityId={campaign.id}
-                          entityCard={<CampaignCardMini campaign={campaign} />}
-                          title={t('donateCampaignTitle')}
-                          description={t('donateCampaignDescription')}
-                          enabled={campaign.canReceiveFunds}>
+                          entityId={dac.id}
+                          entityCard={<DacCardMini dac={dac} />}
+                          title={t('donateDacTitle')}
+                          description={t('donateDacDescription')}
+                          enabled={dac.canReceiveFunds}>
                         </Donate>
                       }>
                     </SupportEntity>
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <Typography variant="subtitle2">
-                      {t('milestonesTitle')}
-                    </Typography>
-                  </Grid>
-
-                  {milestones.lenght === 0 && (
-                    <Typography variant="body2">
-                      {t('milestonesEmpty')}
-                    </Typography>
-                  )}
-
-                  {milestones.map(milestone => (
-                    <Grid item xs={12}>
-                      <MilestoneCard
-                        key={milestone.clientId}
-                        milestone={milestone}
-                      />
-                    </Grid>
-                  ))}
-
                   <Grid item xs={12}
                     className={classes.center}>
 
-                    <CampaignEdit campaign={campaign}></CampaignEdit>
-                    <CampaignTransfer campaign={campaign}></CampaignTransfer>
-                    <MilestoneNew campaign={campaign}></MilestoneNew>
+                    <DacEdit dac={dac}></DacEdit>
+                    <CampaignNew dac={dac}></CampaignNew>
                   </Grid>
                 </Grid>
               </Grid>
@@ -284,7 +265,7 @@ class CampaignViewPage extends Component {
   }
 }
 
-CampaignViewPage.contextType = Web3AppContext;
+DacViewPage.contextType = Web3AppContext;
 
 const styles = theme => ({
   header: {
@@ -315,17 +296,16 @@ const styles = theme => ({
 });
 
 const mapStateToProps = (state, ownProps) => {
-  const campaignId = parseInt(ownProps.match.params.id);
+  const dacId = parseInt(ownProps.match.params.id);
   return {
     currentUser: selectCurrentUser(state),
-    campaign: selectCampaign(state, campaignId),
-    milestones: selectMilestonesByCampaign(state, campaignId),
-    cascadeDonationIds: selectCascadeDonationsByCampaign(state, campaignId),
-    cascadeFiatAmountTarget: selectCascadeFiatAmountTargetByCampaign(state, campaignId)
+    dac: selectDac(state, dacId),
+    cascadeDonationIds: selectCascadeDonationsByDac(state, dacId),
+    cascadeFiatAmountTarget: selectCascadeFiatAmountTargetByDac(state, dacId)
   };
 }
 const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(
-  withTranslation()(CampaignViewPage)))
+  withTranslation()(DacViewPage)))
 );

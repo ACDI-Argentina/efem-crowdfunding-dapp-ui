@@ -27,7 +27,8 @@ const styles = theme => ({
   root: {
     borderRadius: "1.5em",
     textTransform: "none",
-    margin: "0.5em 0.5em 0.5em 0.5em"
+    margin: "0.5em 0.5em 0.5em 0.5em",
+    minWidth: '8em'
   }
 });
 

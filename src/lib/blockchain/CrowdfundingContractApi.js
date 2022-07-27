@@ -163,10 +163,11 @@ class CrowdfundingContractApi {
             status } = await this.crowdfunding.methods.getDac(dacId).call();
         // Se obtiene la información de la Dac desde IPFS.
         const dacOnIpfs = await dacIpfsConnector.download(infoCid);
-        const { title, description, imageCid, url } = dacOnIpfs;
+        const { title, abstract, description, imageCid, url } = dacOnIpfs;
         return new DAC({
             id: parseInt(id),
             title,
+            abstract,
             description,
             imageCid,
             url,
@@ -259,7 +260,7 @@ class CrowdfundingContractApi {
     async getCampaignById(campaignId) {
         const campaingOnChain = await this.crowdfunding.methods.getCampaign(campaignId).call();
         // Se obtiene la información de la Campaign desde IPFS.
-        const { id, infoCid, dacIds, milestoneIds, donationIds, budgetDonationIds, users, status } = campaingOnChain;
+        const { id, infoCid, dacId, dacIds, milestoneIds, donationIds, budgetDonationIds, users, status } = campaingOnChain;
         // Se obtiene la información de la Campaign desde IPFS.
         const campaignOnIpfs = await campaignIpfsConnector.download(infoCid);
         const { title, abstract, description, imageCid, beneficiaries, categories, url } = campaignOnIpfs;
@@ -294,7 +295,6 @@ class CrowdfundingContractApi {
 
             let thisApi = this;
 
-            const dacId = config.dac.defaultId;
             const campaignId = campaign.id || 0; //zero is for new campaigns;
             const isNew = campaignId === 0;
 
@@ -304,9 +304,10 @@ class CrowdfundingContractApi {
 
             const clientId = campaign.clientId;
 
+            // Por defecto se guarda la campaign con la primer DAC relacionada porque solo hay una.
             const method = this.crowdfunding.methods.saveCampaign(
                 campaign.infoCid,
-                dacId,
+                campaign.dacIds[0],
                 campaign.reviewerAddress,
                 campaignId);
 

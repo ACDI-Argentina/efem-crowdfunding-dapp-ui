@@ -17,7 +17,7 @@ import { fetchDonationsByIds } from '../../redux/reducers/donationsSlice'
 import DacCardMini from '../DacCardMini';
 import { withTranslation } from 'react-i18next';
 import Donate from '../Donate';
-import TransferDac from '../TransferDac';
+import DacTransfer from '../DacTransfer';
 import DonationsBalance from '../DonationsBalance';
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -103,7 +103,7 @@ class ViewDAC extends Component {
                         enabled={dac.canReceiveFunds}>
                       </Donate>
 
-                      <TransferDac dac={dac}></TransferDac>
+                      <DacTransfer dac={dac}></DacTransfer>
   
                       />
                     </div>

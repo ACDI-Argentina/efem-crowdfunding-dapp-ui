@@ -25,7 +25,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
 import { fetchDonationsByIds, transferDonations } from '../redux/reducers/donationsSlice'
 import DonationItemTransfer from './DonationItemTransfer';
-import CampaignSelector from './TransferCampaignSelector';
+import CampaignSelector from './CampaignTransferSelector';
 import TransferMilestoneSelector from './TransferMilestoneSelector';
 import DacCard from './DacCard';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
@@ -34,7 +34,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-class TransferDac extends Component {
+class DacTransfer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -350,13 +350,13 @@ class TransferDac extends Component {
   }
 }
 
-TransferDac.propTypes = {
+DacTransfer.propTypes = {
   currentUser: PropTypes.instanceOf(User).isRequired,
   dac: PropTypes.instanceOf(DAC).isRequired,
   tokenAddress: PropTypes.string.isRequired
 };
 
-TransferDac.defaultProps = {
+DacTransfer.defaultProps = {
   tokenAddress: config.nativeToken.address
 };
 
@@ -409,6 +409,6 @@ const mapDispatchToProps = { fetchDonationsByIds, transferDonations }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withStyles(styles)(
-    withTranslation()(TransferDac)
+    withTranslation()(DacTransfer)
   )
 );
