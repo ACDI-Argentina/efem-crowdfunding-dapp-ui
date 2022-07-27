@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import { history } from 'lib/helpers'
+import { history } from '@acdi/efem-dapp';
 import JoinGivethCommunity from 'components/JoinGivethCommunity';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import SecondaryButton from 'components/buttons/SecondaryButton';

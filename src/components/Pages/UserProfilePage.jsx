@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
 import { User } from '@acdi/efem-dapp';
-import { history } from 'lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import Avatar from '../Avatar/Avatar';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import InputAdornment from '@material-ui/core/InputAdornment'

@@ -8,7 +8,7 @@ import LanguageSelector from "components/LanguageSelector";
 import { useTranslation } from 'react-i18next';
 import { Button } from "@material-ui/core"
 import { styled } from "@material-ui/styles"
-import { history } from 'lib/helpers'
+import { history } from '@acdi/efem-dapp';
 import ConnectButton from "components/ConnectButton";
 import Grid from '@material-ui/core/Grid';
 

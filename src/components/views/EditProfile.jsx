@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from "classnames";
 
-import { history } from '../../lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import { registerCurrentUser, selectCurrentUser } from '../../redux/reducers/currentUserSlice';
 import { withStyles } from '@material-ui/core/styles';
 

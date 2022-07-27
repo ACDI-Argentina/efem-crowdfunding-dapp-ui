@@ -11,7 +11,8 @@ import SelectUsers from '../SelectUsers';
 
 import FormsyImageUploader from '../FormsyImageUploader';
 import GoBackButton from '../GoBackButton';
-import { isOwner, history } from '../../lib/helpers';
+import { isOwner } from '../../lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import LoaderButton from '../LoaderButton';
 import { User } from '@acdi/efem-dapp';
 import Campaign from '../../models/Campaign';

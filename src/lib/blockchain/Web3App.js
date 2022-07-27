@@ -4,7 +4,7 @@ import config from '../../configuration';
 import BigNumber from 'bignumber.js';
 import { feathersClient } from '../feathersClient';
 import { web3Utils } from 'commons';
-import { history } from '../helpers';
+import { history } from '@acdi/efem-dapp';
 import { utils } from 'web3';
 import {
   web3Manager,

@@ -9,7 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { history } from '../lib/helpers';
+//import { history } from '../lib/helpers';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
@@ -18,7 +18,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import RoundedButton from './buttons/RoundedButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { OnlyRole } from '@acdi/efem-dapp';
+import { OnlyRole, history } from '@acdi/efem-dapp';
 import {
   CREATE_DAC_ROLE
 } from 'constants/Role';

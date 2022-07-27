@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Milestone from '../models/Milestone';
-import { history } from 'lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux'

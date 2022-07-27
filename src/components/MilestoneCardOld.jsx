@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getTruncatedText, history } from '../lib/helpers'
+import { getTruncatedText } from '../lib/helpers'
+import { history } from '@acdi/efem-dapp';
 import messageUtils from '../redux/utils/messageUtils'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'

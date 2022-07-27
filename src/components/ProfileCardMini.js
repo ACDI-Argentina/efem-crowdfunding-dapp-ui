@@ -8,7 +8,7 @@ import ProfileCardMiniAnonymous from './ProfileCardMiniAnonymous';
 import { withStyles } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 import { web3Utils } from 'commons';
-import { history } from '../lib/helpers'
+import { history } from '@acdi/efem-dapp';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from '@material-ui/core/Typography';
 import { ipfsService } from 'commons';

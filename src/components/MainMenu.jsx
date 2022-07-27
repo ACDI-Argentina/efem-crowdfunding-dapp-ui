@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import { history } from '../lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
 import List from '@material-ui/core/List';

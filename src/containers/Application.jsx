@@ -14,8 +14,8 @@ import Sweetalert from 'sweetalert';
 
 import GA from 'lib/GoogleAnalytics';
 
-import { ScrollToTop, history } from '../lib/helpers';
-
+import { ScrollToTop } from '../lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import config from '../configuration';
 
 import ErrorBoundary from '../components/ErrorBoundary';

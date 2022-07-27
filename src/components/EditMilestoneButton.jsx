@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Milestone from 'models/Milestone';
 import { User } from '@acdi/efem-dapp';
-import { history } from 'lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import { Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 

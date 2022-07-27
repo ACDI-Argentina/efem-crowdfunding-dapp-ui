@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import { Hidden } from '@material-ui/core';
-import { history } from 'lib/helpers'
+import { history } from '@acdi/efem-dapp';
 import knowPlatformImg from "assets/img/know-platform.png";
 import SecondaryButton from 'components/buttons/SecondaryButton';
 import Typography from '@material-ui/core/Typography';

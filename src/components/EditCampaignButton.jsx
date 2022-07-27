@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { User } from '@acdi/efem-dapp';
-import { history } from 'lib/helpers';
+import { history } from '@acdi/efem-dapp';
 import Campaign from '../models/Campaign';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
