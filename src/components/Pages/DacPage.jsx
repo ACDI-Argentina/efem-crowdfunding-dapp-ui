@@ -219,6 +219,7 @@ class DacPage extends Component {
 
   render() {
     const {
+      dac,
       titleHelperText,
       titleError,
       abstractHelperText,
@@ -240,7 +241,7 @@ class DacPage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('createDacTitle')}
+                  {dac.id ? t('dacEditTitle') : t('dacNewTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

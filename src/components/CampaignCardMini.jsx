@@ -37,13 +37,6 @@ class CampaignCardMini extends Component {
           <Typography variant="h6" gutterBottom>
             {campaign.title}
           </Typography>
-          <Typography
-            variant="body2"
-            color="textPrimary"
-            component="p"
-            className={classes.abstract}>
-            {campaign.abstract}
-          </Typography>
           <DonationsBalanceMini
             donationIds={cascadeDonationIds}
             fiatTarget={cascadeFiatAmountTarget}>

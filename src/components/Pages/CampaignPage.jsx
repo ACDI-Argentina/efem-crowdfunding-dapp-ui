@@ -252,6 +252,7 @@ class CampaignPage extends Component {
 
   render() {
     const {
+      campaign,
       titleHelperText,
       titleError,
       abstractHelperText,
@@ -273,7 +274,7 @@ class CampaignPage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('campaignCreateTitle')}
+                  {campaign.id ? t('campaignEditTitle') : t('campaignNewTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

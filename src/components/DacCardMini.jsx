@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getTruncatedText } from '../lib/helpers'
 import DAC from '../models/DAC'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import StatusCard from './StatusCard'
-import { selectCascadeDonationsByDac, selectCascadeFiatAmountTargetByDac } from '../redux/reducers/dacsSlice'
+import {
+  selectCascadeDonationsByDac,
+  selectCascadeFiatAmountTargetByDac
+} from '../redux/reducers/dacsSlice'
 import DonationsBalanceMini from './DonationsBalanceMini'
 import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card';
@@ -31,14 +32,13 @@ class DacCardMini extends Component {
           image={dac.imageCidUrl}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {getTruncatedText(dac.title, 40)}
+          <Typography variant="h6" gutterBottom>
+            {dac.title}
           </Typography>
           <DonationsBalanceMini
             donationIds={cascadeDonationIds}
             fiatTarget={cascadeFiatAmountTarget}>
           </DonationsBalanceMini>
-          <StatusCard status={dac.status} />
         </CardContent>
       </Card>
     );

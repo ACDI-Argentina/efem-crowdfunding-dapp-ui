@@ -10,8 +10,10 @@ import {
   web3Manager,
   networkManager,
   accountManager,
+  feathersUsersClient,
   authService
 } from '../../commons';
+import currentUserUtils from "redux/utils/currentUserUtils";
 
 export const Web3AppContext = React.createContext({
   contract: {},
@@ -164,7 +166,6 @@ class Web3App extends React.Component {
 
   logoutAccount = async () => {
     await web3Manager.disconnect();
-    //await accountManager.logout();
     await authService.logout();
   }
 

@@ -121,10 +121,7 @@
 
     "unsavedChanges": "Tienes cambios sin guardar. ¿Estás seguro que deseas salir de esta página?",
     
-    "milestone": "Hito",
-
-    "milestoneNew": "Nuevo hito",
-    "milestoneEdit": "Editar",
+    
     "milestoneComplete": "Completar",
     "milestoneCompleteTitle": "Completar hito",
     "milestoneCompleteDescription": "Describe lo que has hecho para terminar el trabajo de este hito y adjunta pruebas si es necesario.",
@@ -369,7 +366,8 @@
     "dacNew": "Nuevo DAC",
     "dacView": "Ver DAC",
     "dacEdit": "Editar",
-    "createDacTitle": "Creación de DAC",
+    "dacNewTitle": "Nueva DAC",
+    "dacEditTitle": "Edición de DAC",
 
     "dacTitle": "Título",
     "dacAbstract": "Resumen",
@@ -390,7 +388,8 @@
     "campaign": "Proyecto",
     "campaignNew": "Nuevo Proyecto",
     "campaignEdit": "Edit",
-    "campaignCreateTitle": "Creación de Proyecto",
+    "campaignNewTitle": "Nuevo Proyecto",
+    "campaignEditTitle": "Edición de Proyecto",
     "campaignTitle": "Título",
     "campaignAbstract": "Resumen",
     "campaignDescription": "Descripción",
@@ -408,9 +407,11 @@
     "campaignShareTitle": "Apoya esta campaña en Give4Forest",
     "campaignSupportTitle": "Apoyá este proyecto",
 
-    "createMilestone": "Crear Hito",
-    "milestoneCreateTitle": "Crear un Hito",
-
+    "milestone": "Hito",
+    "milestoneNew": "Nuevo hito",
+    "milestoneEdit": "Editar",
+    "milestoneNewTitle": "Nuevo Hito",
+    "milestoneEditTitle": "Edición de Hito",
     "milestonesTitle": "Hitos",
     "milestonesEnpty": "Aún no hay hitos",
     "milestoneTitle": "Título",

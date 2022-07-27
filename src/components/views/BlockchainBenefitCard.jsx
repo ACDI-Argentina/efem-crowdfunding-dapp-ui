@@ -29,7 +29,7 @@ class BlockchainBenefitCard extends Component {
               <img src={iconSrc} className={classes.image} />
             </Grid>
             <Grid item xs={12} className={classes.grid}>
-              <Typography variant="body1" color="textSecondary">
+              <Typography variant="body1">
                 {legend}
               </Typography>
             </Grid>
@@ -42,6 +42,7 @@ class BlockchainBenefitCard extends Component {
 
 const styles = theme => ({
   root: {
+    color: theme.palette.common.white,
     paddingTop: '1em',
     paddingBottom: '1em',
     borderRadius: "5px",

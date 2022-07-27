@@ -120,10 +120,7 @@
 
     "unsavedChanges": "You have unsaved changes. Are you sure you want to navigate from this page?",
     
-    "milestone": "Milestone",
     
-    "milestoneNew": "New milestone",
-    "milestoneEdit": "Edit",
     "milestoneComplete": "Complete",
     "milestoneCompleteTitle": "Milestone complete",
     "milestoneCompleteDescription": "Describe what you've done to finish the work of this milestone and attach proof if necessary.",
@@ -367,8 +364,8 @@
     "dacNew": "New DAC",
     "dacView": "View DAC",
     "dacEdit": "Edit",
-    "createDacTitle": "Create a DAC",
-
+    "dacNewTitle": "New DAC",
+    "dacEditTitle": "Edit DAC",
     "dacTitle": "Title",
     "dacAbstract": "Abstract",
     "dacDescription": "Description",
@@ -388,7 +385,8 @@
     "campaign": "Project",
     "campaignNew": "New Project",
     "campaignEdit": "Edit",
-    "campaignCreateTitle": "Create a Project",
+    "campaignNewTitle": "New Project",
+    "campaignEditTitle": "Edit Project",
     "campaignTitle": "Title",
     "campaignAbstract": "Abstract",
     "campaignDescription": "Description",
@@ -406,10 +404,11 @@
     "campaignShareTitle": "Support this campaign on Give4Forest",
     "campaignSupportTitle": "Support this project",
 
-    "createMilestone": "Create Milestone",
-    "milestoneCreateTitle": "Create a Milestone",
-
-    
+    "milestone": "Milestone",
+    "milestoneNew": "New milestone",
+    "milestoneEdit": "Edit",
+    "milestoneNewTitle": "New Milestone",
+    "milestoneEditTitle": "Edit Milestone",    
     "milestonesTitle": "Milestones",
     "milestonesEmpty": "There are no milestones yet",
     "milestoneTitle": "Title",

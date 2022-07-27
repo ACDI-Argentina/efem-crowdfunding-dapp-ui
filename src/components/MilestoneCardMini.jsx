@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getTruncatedText } from '../lib/helpers'
 import { withStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
 import DonationsBalanceMini from './DonationsBalanceMini'
@@ -28,8 +27,8 @@ class MilestoneCardMini extends Component {
           image={milestone.imageCidUrl}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {getTruncatedText(milestone.title, 40)}
+          <Typography variant="h6" gutterBottom>
+            {milestone.title}
           </Typography>
           <DonationsBalanceMini
             donationIds={milestone.budgetDonationIds}

@@ -73,9 +73,9 @@ class CampaignTransfer extends Component {
 
   handleTransfer() {
     const { milestone, right } = this.state;
-    const { campaign, transferDonations } = this.props;
+    const { campaign, currentUser, transferDonations } = this.props;
     transferDonations({
-      userAddress: campaign.managerAddress,
+      userAddress: currentUser.address,
       entityIdFrom: campaign.id,
       entityIdTo: milestone.id,
       donationIds: right

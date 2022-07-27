@@ -323,6 +323,7 @@ class MilestonePage extends Component {
 
   render() {
     const {
+      milestone,
       titleHelperText,
       titleError,
       abstractHelperText,
@@ -344,7 +345,7 @@ class MilestonePage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('milestoneCreateTitle')}
+                  {milestone.id ? t('milestoneEditTitle') : t('milestoneNewTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>

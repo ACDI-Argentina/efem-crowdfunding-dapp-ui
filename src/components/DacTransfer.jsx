@@ -27,8 +27,10 @@ import { fetchDonationsByIds, transferDonations } from '../redux/reducers/donati
 import DonationItemTransfer from './DonationItemTransfer';
 import CampaignSelector from './CampaignTransferSelector';
 import TransferMilestoneSelector from './TransferMilestoneSelector';
-import DacCard from './DacCard';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
+import DacCardMini from './DacCardMini';
+import { isOwner } from 'lib/helpers';
+import IconPrimaryButton from './buttons/IconPrimaryButton';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -73,13 +75,13 @@ class DacTransfer extends Component {
 
   handleTransfer() {
     const { campaign, milestone, right } = this.state;
-    const { dac, transferDonations } = this.props;
+    const { dac, currentUser, transferDonations } = this.props;
     let entityIdTo = campaign.id;
     if (milestone) {
       entityIdTo = milestone.id;
     }
     transferDonations({
-      userAddress: dac.delegate,
+      userAddress: currentUser.address,
       entityIdFrom: dac.id,
       entityIdTo: entityIdTo,
       donationIds: right
@@ -245,25 +247,26 @@ class DacTransfer extends Component {
       transferIsValid = true;
     }
 
-    let buttonEnabled = true;
+    let isEnabled = false;
+    if (currentUser &&
+      currentUser.authenticated &&
+      isOwner(dac.delegateAddress, currentUser)) {
+      isEnabled = true;
+    }
 
     return (
       <div>
-        {buttonEnabled && (
+        {isEnabled && (
           <OnlyCorrectNetwork>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<FastForwardIcon />}
-              onClick={this.handleClickOpen}
-            >
+            <IconPrimaryButton
+              icon={<FastForwardIcon />}
+              onClick={this.handleClickOpen}>
               {t('transfer')}
-            </Button>
+            </IconPrimaryButton>
           </OnlyCorrectNetwork>
         )}
         <Dialog fullWidth={true}
-          maxWidth="lg"
+          maxWidth="md"
           open={open}
           onClose={this.handleClose}
           TransitionComponent={Transition}>
@@ -284,11 +287,11 @@ class DacTransfer extends Component {
             </Toolbar>
           </AppBar>
           <div className={classes.root}>
-            <Grid container spacing={3}>
-              <Grid item xs={3}>
-                {<DacCard dac={dac} />}
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                {<DacCardMini dac={dac} />}
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={8}>
                 <Grid container spacing={2}>
 
                   <Grid item xs={12}>
@@ -334,7 +337,7 @@ class DacTransfer extends Component {
                           aria-label="move selected left"
                         >
                           &lt;
-                      </Button>
+                        </Button>
                       </Grid>
                     </Grid>
                     <Grid item xs={5}>{this.customList(t('donationsToTransfer'), right)}</Grid>
@@ -377,10 +380,10 @@ const styles = theme => ({
     flex: 1
   },
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0.5),
   },
   /*root: {
-    margin: 'auto',
+          margin: 'auto',
   },*/
   cardHeader: {
     padding: theme.spacing(1, 2),

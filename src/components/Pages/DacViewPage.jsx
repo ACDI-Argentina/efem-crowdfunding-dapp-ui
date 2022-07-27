@@ -37,6 +37,7 @@ import { selectDac } from 'redux/reducers/dacsSlice';
 import { selectCascadeDonationsByDac } from 'redux/reducers/dacsSlice';
 import { selectCascadeFiatAmountTargetByDac } from 'redux/reducers/dacsSlice';
 import DacEdit from 'components/DacEdit';
+import DacTransfer from 'components/DacTransfer';
 
 /**
  * Visualización de DAC.
@@ -253,6 +254,7 @@ class DacViewPage extends Component {
                     className={classes.center}>
 
                     <DacEdit dac={dac}></DacEdit>
+                    <DacTransfer dac={dac}></DacTransfer>
                     <CampaignNew dac={dac}></CampaignNew>
                   </Grid>
                 </Grid>
