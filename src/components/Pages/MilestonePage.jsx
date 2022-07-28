@@ -147,7 +147,7 @@ class MilestonePage extends Component {
     let descriptionHelperText = '';
     //const description = event.target.value;
     const description = value;
-    if (description === undefined || description === '') {
+    if (!validatorUtils.htmlHasText(description)) {
       descriptionHelperText = t('errorRequired');
       descriptionError = true;
     }
@@ -261,7 +261,7 @@ class MilestonePage extends Component {
     if (abstract === undefined || abstract === '') {
       formValid = false;
     }
-    if (description === undefined || description === '') {
+    if (!validatorUtils.htmlHasText(description)) {
       formValid = false;
     }
     if (url === undefined || url === '') {

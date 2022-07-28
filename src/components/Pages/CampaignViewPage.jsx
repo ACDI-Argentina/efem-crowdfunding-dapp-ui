@@ -31,6 +31,7 @@ import CampaignTransfer from 'components/CampaignTransfer';
 import StatusIndicator from 'components/StatusIndicator';
 import MilestoneNew from 'components/MilestoneNew';
 import CampaignEdit from 'components/CampaignEdit';
+import CategoryChipList from 'components/CategoryChipList';
 
 /**
  * Visualización de Campaign.
@@ -60,9 +61,12 @@ class CampaignViewPage extends Component {
         tabIndex: 0,
         tabName: t('campaignDescriptionTab'),
         tabContent: (
-          <RichTextViewer
-            value={campaign.description}>
-          </RichTextViewer>
+          <div>
+            <CategoryChipList categoryIds={campaign.categories}></CategoryChipList>
+            <RichTextViewer
+              value={campaign.description}>
+            </RichTextViewer>
+          </div>
         )
       },
       {

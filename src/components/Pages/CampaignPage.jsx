@@ -21,6 +21,7 @@ import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
 import { CAMPAIGN_REVIEWER_ROLE } from '../../constants/Role';
 import { selectDac } from 'redux/reducers/dacsSlice';
+import SelectCategories from 'components/SelectCategories';
 
 /**
  * Formulario de creación de Campaign.
@@ -59,6 +60,8 @@ class CampaignPage extends Component {
       urlHelperText: '',
       urlError: false,
 
+      categories: campaignInit.categories,
+
       reviewerAddress: campaignInit.reviewerAddress,
       reviewerAddressHelperText: '',
       reviewerAddressError: false,
@@ -79,6 +82,7 @@ class CampaignPage extends Component {
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
+    this.handleChangeCategories = this.handleChangeCategories.bind(this);
     this.handleChangeReviewer = this.handleChangeReviewer.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
   }
@@ -129,7 +133,7 @@ class CampaignPage extends Component {
     let descriptionHelperText = '';
     //const description = event.target.value;
     const description = value;
-    if (description === undefined || description === '') {
+    if (!validatorUtils.htmlHasText(description)) {
       descriptionHelperText = t('errorRequired');
       descriptionError = true;
     }
@@ -171,6 +175,13 @@ class CampaignPage extends Component {
     });
   }
 
+  handleChangeCategories(categories) {
+    this.setState({
+      categories: categories
+    }, () => {
+      this.setFormValid();
+    });
+  }
 
   handleChangeReviewer(event) {
     const { t } = this.props;
@@ -200,7 +211,7 @@ class CampaignPage extends Component {
     if (abstract === undefined || abstract === '') {
       formValid = false;
     }
-    if (description === undefined || description === '') {
+    if (!validatorUtils.htmlHasText(description)) {
       formValid = false;
     }
     if (url === undefined || url === '') {
@@ -226,6 +237,7 @@ class CampaignPage extends Component {
     campaign.abstract = this.state.abstract;
     campaign.description = this.state.description;
     campaign.url = this.state.url;
+    campaign.categories = this.state.categories;
     campaign.image = this.state.avatarPreview;
     campaign.reviewerAddress = this.state.reviewerAddress;
 
@@ -359,6 +371,14 @@ class CampaignPage extends Component {
                             required
                             inputProps={{ maxLength: 42 }}
                           />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <SelectCategories
+                            id="categories"
+                            value={this.state.categories}
+                            onChange={this.handleChangeCategories}>
+                          </SelectCategories>
                         </Grid>
 
                         <Grid item xs={12}>

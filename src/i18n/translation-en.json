@@ -88,19 +88,6 @@
     "campaignDescriptionPlaceholder": "Describe how you're going to execute your campaign successfully...",
     "campaignDescriptionError": "Please provide at least 10 characters.",
 
-    "campaignCategoriesLabel": "Categories",
-    "campaignCategoriesHelp": "Which of these categories best describes your campaign?",
-    "campaignCategoriesAllLabel": "All",
-    "campaignCategories1Label": "Environment",
-    "campaignCategories2Label": "Personal development",
-    "campaignCategories3Label": "Education",
-    "campaignCategories4Label": "Work",
-    "campaignCategories5Label": "Financial inclusion",
-    "campaignCategories6Label": "Sustainable agriculture",
-    "campaignCategories7Label": "Markets access",
-    "campaignCategories8Label": "Climate adaptation",
-    "campaignCategories9Label": "Give4Forest sustainability",
-
     "campaignBeneficiariesLabel": "Beneficiaries",
     "campaignBeneficiariesPlaceholder": "E.g. 30 families in the area",
     "campaignBeneficiariesHelp": "Tell us in a few words who or how many will be the beneficiaries of this campaign.",
@@ -434,5 +421,15 @@
     "milestoneWithdrawLabel": "Withdraw",
     "milestoneRefundLabel": "Refund",
     
-    "selectUsersEmpty": "There aren't users to select"
+    "selectUsersEmpty": "There aren't users to select",
+
+    "categories": "Categories",
+    "categoriesEmpty": "There aren't categories",
+    "categoriesHelp": "Which of these categories best describes your campaign?",
+    "categoryAllLabel": "All",
+    "category1Label": "Financial inclusion",
+    "category2Label": "Sustainable agriculture",
+    "category3Label": "Markets access",
+    "category4Label": "Climate adaptation",
+    "category5Label": "Give4Forest sustainability"
 }

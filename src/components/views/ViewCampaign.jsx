@@ -32,7 +32,6 @@ import { Avatar, Box } from '@material-ui/core'
 import OnlyCorrectNetwork from 'components/OnlyCorrectNetwork'
 import Grid from '@material-ui/core/Grid';
 import CustomTabsOld from 'components/CustomTabs/CustomTabsOld';
-import SupportCampaignCard from 'components/SupportCampaignCard';
 import Button from '@material-ui/core/Button';
 
 import TelegramIcon from '@material-ui/icons/Telegram';
@@ -272,8 +271,7 @@ class ViewCampaign extends Component {
                         </Typography>
                       </Box>
                     </Box>
-                    <SupportCampaignCard key={campaign.clientId} campaign={campaign} currentUser={currentUser}/>
-                  
+                    
                     <Box display="flex">
                       <Box my={1} flexGrow={1}>
                         <Typography variant="h6">

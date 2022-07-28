@@ -14,7 +14,6 @@ const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 const EditProfile = React.lazy(() => import('../components/views/EditProfile'));
 
 const ViewDAC = React.lazy(() => import('../components/views/ViewDAC'));
-const EditCampaign = React.lazy(() => import('../components/views/EditCampaign'));
 const ViewCampaign = React.lazy(() => import('../components/views/ViewCampaign'));
 const EditMilestone = React.lazy(() => import('../components/views/EditMilestone'));
 const ViewMilestone = React.lazy(() => import('../components/views/ViewMilestone'));

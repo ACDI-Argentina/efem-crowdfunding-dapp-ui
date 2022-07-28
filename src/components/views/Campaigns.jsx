@@ -7,9 +7,9 @@ import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import Badge from "components/Badge/Badge.js";
 import CustomTabsOld from 'components/CustomTabs/CustomTabsOld';
-import { ALL_CATEGORIES } from 'constants/Categories';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
+import config from 'configuration';
 
 /**
  * The Campaigns view mapped to /campaigns
@@ -66,7 +66,7 @@ class Campaigns extends Component {
                 customClasses={classes.cardHeader}
                 tabs={[
                   {
-                    tabName: t('campaignCategoriesAllLabel'),
+                    tabName: t('categoryAllLabel'),
                     tabContent: (
                       <div className={classes.cardsContainer}>
                         {campaigns.map(campaign => (
@@ -74,9 +74,9 @@ class Campaigns extends Component {
                         ))}
                       </div>
                     )
-                  }].concat(ALL_CATEGORIES.map(cat => (
+                  }].concat(config.categories.map(cat => (
                     {
-                      tabName: t('campaignCategories' + cat + 'Label'),
+                      tabName: t('category' + cat + 'Label'),
                       tabContent: (
                         <div className={classes.cardsContainer}>
                           {campaigns

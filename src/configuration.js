@@ -99,7 +99,14 @@ const configurations = {
     anonymousDonationThreshold: 5000,
     dac: {
       defaultId: 1
-    }
+    },
+    categories: [
+      1, // Inclusión Financiera.
+      2, // Agricultura sostenible
+      3, // Acceso a mercados
+      4, // Adaptación climática
+      5  // Sostenimiento de Give4Forest
+    ]
   },
   rsk_testnet: {
     network: {
@@ -177,7 +184,14 @@ const configurations = {
     anonymousDonationThreshold: 10000,
     dac: {
       defaultId: 1
-    }
+    },
+    categories: [
+      1, // Inclusión Financiera.
+      2, // Agricultura sostenible
+      3, // Acceso a mercados
+      4, // Adaptación climática
+      5  // Sostenimiento de Give4Forest
+    ]
   },
   rsk_mainnet: {
     network: {
@@ -255,7 +269,14 @@ const configurations = {
     anonymousDonationThreshold: 10000,
     dac: {
       defaultId: 1
-    }
+    },
+    categories: [
+      1, // Inclusión Financiera.
+      2, // Agricultura sostenible
+      3, // Acceso a mercados
+      4, // Adaptación climática
+      5  // Sostenimiento de Give4Forest
+    ]
   }  
 };
 

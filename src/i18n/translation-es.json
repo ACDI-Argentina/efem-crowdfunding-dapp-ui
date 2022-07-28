@@ -90,19 +90,6 @@
     "campaignDescriptionPlaceholder": "Describe cómo vas a ejecutar tu campaña con éxito...",
     "campaignDescriptionError": "Proporciona al menos 10 caracteres.",
 
-    "campaignCategoriesLabel": "Categorías",
-    "campaignCategoriesHelp": "¿Cuáles de estas categorías describen mejor tu campaña?",
-    "campaignCategoriesAllLabel": "Todas",
-    "campaignCategories1Label": "Ambiente",
-    "campaignCategories2Label": "Desarrollo personal",
-    "campaignCategories3Label": "Educación",
-    "campaignCategories4Label": "Trabajo",
-    "campaignCategories5Label": "Inclusión financiera",
-    "campaignCategories6Label": "Agricultura sostenible",
-    "campaignCategories7Label": "Acceso a mercados",
-    "campaignCategories8Label": "Adaptación climática",
-    "campaignCategories9Label": "Sostenimiento de Give4Forest",
-
     "campaignBeneficiariesLabel": "Beneficiarios",
     "campaignBeneficiariesPlaceholder": "Ej. 30 familias de la región",
     "campaignBeneficiariesHelp": "Cuéntanos en pocas palabras quiénes o cuántos serán los beneficiarios de esta campaña.",
@@ -437,5 +424,15 @@
     "milestoneWithdrawLabel": "Retirar",
     "milestoneRefundLabel": "Reembolsar",
 
-    "selectUsersEmpty": "No hay usuarios para seleccionar"
+    "selectUsersEmpty": "No hay usuarios para seleccionar",
+
+    "categories": "Categorías",
+    "categoriesEmpty": "No hay categorías",
+    "categoriesHelp": "¿Cuáles de estas categorías describen mejor tu campaña?",
+    "categoryAllLabel": "Todas",
+    "category1Label": "Inclusión financiera",
+    "category2Label": "Agricultura sostenible",
+    "category3Label": "Acceso a mercados",
+    "category4Label": "Adaptación climática",
+    "category5Label": "Sostenimiento de Give4Forest"
 }
