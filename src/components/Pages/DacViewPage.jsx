@@ -38,6 +38,7 @@ import { selectCascadeDonationsByDac } from 'redux/reducers/dacsSlice';
 import { selectCascadeFiatAmountTargetByDac } from 'redux/reducers/dacsSlice';
 import DacEdit from 'components/DacEdit';
 import DacTransfer from 'components/DacTransfer';
+import LoadingOverlay from '../Loading/LoadingOverlay';
 
 /**
  * Visualización de DAC.
@@ -58,6 +59,10 @@ class DacViewPage extends Component {
       cascadeFiatAmountTarget,
       classes,
       t } = this.props;
+
+    if (!dac) {
+      return null;
+    }
 
     const tabs = [
       {
@@ -156,11 +161,15 @@ class DacViewPage extends Component {
               justifyContent="center"
               alignItems="center">
 
+              <Grid item xs={1}>
+
+              </Grid>
+
               <Grid item xs={2} className={classes.headerLeft}>
                 <Avatar className={classes.headerAvatar} src={dac.imageCidUrl} />
               </Grid>
 
-              <Grid item xs={8} className={classes.headerRight}>
+              <Grid item xs={6} className={classes.headerRight}>
 
                 <Typography variant="h5"
                   color="textSecondary">
@@ -199,7 +208,9 @@ class DacViewPage extends Component {
                 </Grid>
               </Grid>
 
+              <Grid item xs={3}>
 
+              </Grid>
             </Grid>
           </Grid>
 

@@ -6,7 +6,7 @@ import { Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
-import { history } from '@acdi/efem-dapp';
+import { History, history } from '@acdi/efem-dapp';
 import Avatar from '../Avatar/Avatar';
 import Page from './Page'
 import Background from 'components/views/Background'
@@ -233,6 +233,10 @@ class DacPage extends Component {
       isSaving
     } = this.state;
     const { currentUser, classes, t, ...rest } = this.props;
+
+    if (!currentUser || !currentUser.authenticated) {
+      history.push(`/`);
+    }
 
     return (
       <Page>

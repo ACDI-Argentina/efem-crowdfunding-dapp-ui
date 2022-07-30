@@ -53,6 +53,10 @@ class MilestoneViewPage extends Component {
       classes,
       t } = this.props;
 
+    if (!milestone || !campaign) {
+      return null;
+    }
+
     const tabs = [
       {
         tabIndex: 0,
@@ -185,11 +189,15 @@ class MilestoneViewPage extends Component {
               justifyContent="center"
               alignItems="center">
 
+              <Grid item xs={1}>
+
+              </Grid>
+
               <Grid item xs={2} className={classes.headerLeft}>
                 <Avatar className={classes.headerAvatar} src={milestone.imageCidUrl} />
               </Grid>
 
-              <Grid item xs={8} className={classes.headerRight}>
+              <Grid item xs={6} className={classes.headerRight}>
 
                 <Typography variant="h5"
                   color="textSecondary">
@@ -226,6 +234,10 @@ class MilestoneViewPage extends Component {
                       onClick={compartirFacebook} />
                   </Grid>
                 </Grid>
+              </Grid>
+
+              <Grid item xs={3}>
+
               </Grid>
             </Grid>
           </Grid>
@@ -296,7 +308,7 @@ class MilestoneViewPage extends Component {
                     <MilestoneReject milestone={milestone} />
                     <MilestoneWithdraw milestone={milestone} />
                     <MilestoneCancel milestone={milestone} />
-                  </Grid>                  
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -343,12 +355,18 @@ const styles = theme => ({
 const mapStateToProps = (state, ownProps) => {
   const milestoneId = parseInt(ownProps.match.params.id);
   const milestone = selectMilestone(state, milestoneId);
-  return {
-    currentUser: selectCurrentUser(state),
-    milestone: milestone,
-    campaign: selectCampaign(state, milestone.campaignId),
-    activities: selectActivitiesByMilestone(state, milestoneId)
-  };
+  if (milestone) {
+    return {
+      currentUser: selectCurrentUser(state),
+      milestone: milestone,
+      campaign: selectCampaign(state, milestone.campaignId),
+      activities: selectActivitiesByMilestone(state, milestoneId)
+    };
+  } else {
+    return {
+
+    }
+  }
 }
 const mapDispatchToProps = {}
 

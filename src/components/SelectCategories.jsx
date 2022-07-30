@@ -79,9 +79,8 @@ class SelectCategories extends Component {
 
 const styles = theme => ({
   root: {
-    margin: theme.spacing(1),
     minWidth: 120,
-    width: '80%'
+    width: '100%'
   }
 });
 

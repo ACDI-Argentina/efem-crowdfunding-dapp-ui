@@ -32,12 +32,12 @@ class CampaignPage extends Component {
   constructor(props) {
     super(props);
 
-    const { currentUser, dac, campaign } = this.props;
+    const { currentUser, campaign } = this.props;
     let campaignInit = campaign;
     if (!campaign) {
       // Nueva campaign
       campaignInit = new Campaign({
-        dacIds: [dac.id],
+        //dacIds: [dac.id],
         managerAddress: currentUser.address,
         status: Campaign.PENDING
       });
@@ -231,7 +231,13 @@ class CampaignPage extends Component {
 
     event.preventDefault();
 
-    let campaign = this.state.campaign;
+    const { dac } = this.props;
+    const { campaign } = this.state;
+
+    if (dac && (!campaign.dacIds || campaign.dacIds.length === 0)) {
+      // Es una nueva Campaign.
+      campaign.dacIds = [dac.id];
+    }
 
     campaign.title = this.state.title;
     campaign.abstract = this.state.abstract;
@@ -278,6 +284,14 @@ class CampaignPage extends Component {
       isSaving
     } = this.state;
     const { currentUser, classes, t } = this.props;
+
+    if (!campaign) {
+      return null;
+    }
+
+    if (!currentUser || !currentUser.authenticated) {
+      history.push(`/`);
+    }
 
     return (
       <Page>

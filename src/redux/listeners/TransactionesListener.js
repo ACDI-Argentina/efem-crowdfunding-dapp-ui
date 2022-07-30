@@ -1,5 +1,5 @@
-import { setTransactions } from 'redux/reducers/transactionsSlice';
-import { transactionsManager } from '../../commons';
+import { addOrUpdateTransaction } from 'redux/reducers/transactionsSlice';
+import { transactionManager } from '../../commons';
 import { store } from '../store';
 
 /**
@@ -8,13 +8,18 @@ import { store } from '../store';
 class TransactionsListener {
 
   constructor() {
-    transactionsManager.getTransactions().subscribe(transactions => {
-      this.processTransactions(transactions);
+    transactionManager.getTransaction().subscribe(transaction => {
+      this.processTransaction(transaction);
     });
   }
 
-  processTransactions = (transactions) => {
-    store.dispatch(setTransactions(transactions));
+  /**
+   * Agrega la última tranasacción al store de Redux.
+   */
+  processTransaction = (transaction) => {
+    if(transaction) {
+      store.dispatch(addOrUpdateTransaction(transaction));
+    }    
   }
 }
 

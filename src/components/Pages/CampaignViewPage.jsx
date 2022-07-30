@@ -48,13 +48,17 @@ class CampaignViewPage extends Component {
 
   render() {
 
-    const { currentUser,
+    const {
       campaign,
       cascadeDonationIds,
       cascadeFiatAmountTarget,
       milestones,
       classes,
       t } = this.props;
+
+    if (!campaign) {
+      return null;
+    }
 
     const tabs = [
       {
@@ -156,11 +160,15 @@ class CampaignViewPage extends Component {
               justifyContent="center"
               alignItems="center">
 
+              <Grid item xs={1}>
+
+              </Grid>
+
               <Grid item xs={2} className={classes.headerLeft}>
                 <Avatar className={classes.headerAvatar} src={campaign.imageCidUrl} />
               </Grid>
 
-              <Grid item xs={8} className={classes.headerRight}>
+              <Grid item xs={6} className={classes.headerRight}>
 
                 <Typography variant="h5"
                   color="textSecondary">
@@ -199,7 +207,9 @@ class CampaignViewPage extends Component {
                 </Grid>
               </Grid>
 
+              <Grid item xs={3}>
 
+              </Grid>
             </Grid>
           </Grid>
 
@@ -256,7 +266,7 @@ class CampaignViewPage extends Component {
                     </Typography>
                   </Grid>
 
-                  {milestones.lenght === 0 && (
+                  {milestones.length === 0 && (
                     <Typography variant="body2">
                       {t('milestonesEmpty')}
                     </Typography>

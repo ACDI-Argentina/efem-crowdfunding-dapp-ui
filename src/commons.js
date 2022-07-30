@@ -3,6 +3,7 @@ import {
     Web3Manager,
     NetworkManager,
     AccountManager,
+    TransactionManager,
     TransactionsManager,
     MessageManager,
     ERC20ContractApi,
@@ -45,6 +46,9 @@ commonsContext.messageManager = messageManager;
 
 export const transactionsManager = new TransactionsManager();
 commonsContext.transactionsManager = transactionsManager;
+
+export const transactionManager = new TransactionManager();
+commonsContext.transactionManager = transactionManager;
 
 export const erc20ContractApi = new ERC20ContractApi(commonsContext);
 commonsContext.erc20ContractApi = erc20ContractApi;

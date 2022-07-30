@@ -37,14 +37,14 @@ class MilestonePage extends Component {
   constructor(props) {
     super(props);
 
-    const { currentUser, campaign, milestone } = this.props;
+    const { currentUser, milestone } = this.props;
 
     let milestoneInit = milestone;
     if (!milestone) {
       // Nuevo milestone
       milestoneInit = new Milestone({
-        campaignReviewerAddress: campaign.reviewerAddress,
-        campaignId: campaign.id,
+        //campaignReviewerAddress: campaign.reviewerAddress,
+        //campaignId: campaign.id,
         managerAddress: currentUser.address,
         status: Milestone.PENDING
       });
@@ -289,7 +289,14 @@ class MilestonePage extends Component {
 
     event.preventDefault();
 
-    let milestone = this.state.milestone;
+    const { campaign } = this.props;
+    const { milestone } = this.state;
+
+    if (campaign && !milestone.campaignId) {
+      // Es un nuevo Milestone.
+      milestone.campaignId = campaign.id;
+      milestone.campaignReviewerAddress = campaign.reviewerAddress;
+    }
 
     milestone.title = this.state.title;
     milestone.abstract = this.state.abstract;
@@ -337,6 +344,14 @@ class MilestonePage extends Component {
       isSaving
     } = this.state;
     const { currentUser, classes, t } = this.props;
+
+    if (!milestone) {
+      return null;
+    }
+
+    if (!currentUser || !currentUser.authenticated) {
+      history.push(`/`);
+    }
 
     return (
       <Page>

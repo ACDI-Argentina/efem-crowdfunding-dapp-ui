@@ -5,7 +5,15 @@ export const transactionsSlice = createSlice({
   name: 'transactions',
   initialState: [],
   reducers: {
-
+    addOrUpdateTransaction: (state, action) => {
+      let transactionStore = action.payload.toStore();
+      let index = state.findIndex(t => t.clientId === transactionStore.clientId);
+      if (index != -1) {
+        state[index] = transactionStore;
+      } else {
+        state.push(transactionStore);
+      }
+    },
     addTransaction: (state, action) => {
       let transactionStore = action.payload.toStore();
       state.push(transactionStore);
@@ -38,7 +46,7 @@ export const transactionsSlice = createSlice({
   },
 });
 
-export const { addTransaction, updateTransaction, deleteTransaction, setTransactions } = transactionsSlice.actions;
+export const { addOrUpdateTransaction, addTransaction, updateTransaction, deleteTransaction, setTransactions } = transactionsSlice.actions;
 
 export const selectLastCreated = (state) => {
   let transactionsCreated = state.transactions.filter(t => t.status.name === Transaction.CREATED.name);
