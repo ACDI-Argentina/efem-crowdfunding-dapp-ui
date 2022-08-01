@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import Loader from '../components/Loader';
 
-import LandingPage from 'components/views/LandingPage.js';
+import LandingPage from 'components/Pages/LandingPage';
+import AboutPage from 'components/Pages/AboutPage';
 import UserProfilePage from 'components/Pages/UserProfilePage';
 import DacPage from 'components/Pages/DacPage';
 import CampaignPage from 'components/Pages/CampaignPage';
@@ -29,6 +30,9 @@ const SwitchRoutes = ({ currentUser }) => (
   <React.Suspense fallback={<Loader className="fixed" />}>
     <Switch>
       {/*NOTE order matters, wrong order breaks routes!*/}
+
+      <Route path="/about"
+        render={(props) => <AboutPage {...props} />} />
 
       <Route
         exact
@@ -176,12 +180,9 @@ const SwitchRoutes = ({ currentUser }) => (
         )}
       />
       <Route exact path="/profile/:userAddress" render={(props) => <Profile {...props} />} />
-      <Route path="/" render={(props) => <LandingPage {...props} />} />
 
-      <Route exact path="/campaigns" render={(props) => <Campaigns {...props} />} />
-      <Route exact path="/dacs" render={(props) => <DACs {...props} />} />
-      {/* Other material react routes. Not used*/})
-      <Route path="/landing-page" render={(props) => <LandingPage {...props} />} />
+      
+      
 
       <Route
         exact
@@ -189,6 +190,9 @@ const SwitchRoutes = ({ currentUser }) => (
         render={(props) => <TermsAndConditions {...props} />}
       />
       <Route exact path="/privacypolicy" render={(props) => <PrivacyPolicy {...props} />} />
+
+      <Route path="/"
+        render={(props) => <LandingPage {...props} />} />
 
       <Route component={NotFound} />
     </Switch>

@@ -106,7 +106,39 @@ const configurations = {
       3, // Acceso a mercados
       4, // Adaptación climática
       5  // Sostenimiento de Give4Forest
-    ]
+    ],
+    team: {
+      primary: [
+        {
+          name: "Mauricio M.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        },
+        {
+          name: "Stephanie L.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        }
+      ],
+      secondary: [
+        {
+          name: "Belén Arostegui",
+          role: "Marketing & Communications"
+        },
+        {
+          name: "Mauricio Coronel",
+          role: "Developer IT (ver)"
+        },
+        {
+          name: "Lucía B. Cueto",
+          role: "Exp. & Program Devel. Manager"
+        },
+        {
+          name: "Gonzalo Paz",
+          role: "Social Media Manager"
+        },
+      ]
+    }
   },
   rsk_testnet: {
     network: {
@@ -191,7 +223,39 @@ const configurations = {
       3, // Acceso a mercados
       4, // Adaptación climática
       5  // Sostenimiento de Give4Forest
-    ]
+    ],
+    team: {
+      primary: [
+        {
+          name: "Mauricio M.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        },
+        {
+          name: "Stephanie L.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        }
+      ],
+      secondary: [
+        {
+          name: "Belén Arostegui",
+          role: "Marketing & Communications"
+        },
+        {
+          name: "Mauricio Coronel",
+          role: "Developer IT (ver)"
+        },
+        {
+          name: "Lucía B. Cueto",
+          role: "Exp. & Program Devel. Manager"
+        },
+        {
+          name: "Gonzalo Paz",
+          role: "Social Media Manager"
+        },
+      ]
+    }
   },
   rsk_mainnet: {
     network: {
@@ -276,7 +340,39 @@ const configurations = {
       3, // Acceso a mercados
       4, // Adaptación climática
       5  // Sostenimiento de Give4Forest
-    ]
+    ],
+    team: {
+      primary: [
+        {
+          name: "Mauricio M.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        },
+        {
+          name: "Stephanie L.",
+          role: "Advisor",
+          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
+        }
+      ],
+      secondary: [
+        {
+          name: "Belén Arostegui",
+          role: "Marketing & Communications"
+        },
+        {
+          name: "Mauricio Coronel",
+          role: "Developer IT (ver)"
+        },
+        {
+          name: "Lucía B. Cueto",
+          role: "Exp. & Program Devel. Manager"
+        },
+        {
+          name: "Gonzalo Paz",
+          role: "Social Media Manager"
+        },
+      ]
+    }
   }  
 };
 

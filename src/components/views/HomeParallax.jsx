@@ -25,7 +25,7 @@ class HomeParallax extends Component {
     }
 
     render() {
-        const { classes, t, history } = this.props;
+        const { classes, t } = this.props;
 
         return (
             <div className={classes.background}>
@@ -63,7 +63,7 @@ class HomeParallax extends Component {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12}>
-                            <JoinGivethCommunity history={history} />
+                            <JoinGivethCommunity/>
                         </Grid>
                     </Grid>
                 </div>

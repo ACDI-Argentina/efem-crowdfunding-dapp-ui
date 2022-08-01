@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-// import CommunityButton from './CommunityButton';
+import { history } from '@acdi/efem-dapp';
 import { User } from '@acdi/efem-dapp';
-
 import { connect } from 'react-redux';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice';
-
 import OnlyRole from '../components/OnlyRole';
-
 import { CREATE_DAC_ROLE, CREATE_CAMPAIGN_ROLE } from "../constants/Role";
-
 import Button from "components/CustomButtons/Button.js";
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
@@ -49,7 +44,7 @@ class JoinGivethCommunity extends Component {
     }
 
     if (this.props.currentUser) {
-      this.props.history.push('/dacs/new');
+      history.push('/dacs/new');
     } else {
       React.swal({
         title: "You're almost there...",
@@ -62,7 +57,7 @@ class JoinGivethCommunity extends Component {
         icon: 'info',
         buttons: ['Cancel', 'Sign up now!'],
       }).then(isConfirmed => {
-        if (isConfirmed) this.props.history.push('/signup');
+        if (isConfirmed) history.push('/signup');
       });
     }
   }
@@ -88,7 +83,7 @@ class JoinGivethCommunity extends Component {
       return;
     }
     if (this.props.currentUser) {
-      this.props.history.push('/campaigns/new');
+      history.push('/campaigns/new');
     } else {
       React.swal({
         title: "You're almost there...",
@@ -101,7 +96,7 @@ class JoinGivethCommunity extends Component {
         icon: 'info',
         buttons: ['Cancel', 'Sign up now!'],
       }).then(isConfirmed => {
-        if (isConfirmed) this.props.history.push('/signup');
+        if (isConfirmed) history.push('/signup');
       });
     }
   }

@@ -434,5 +434,26 @@
     "category2Label": "Agricultura sostenible",
     "category3Label": "Acceso a mercados",
     "category4Label": "Adaptación climática",
-    "category5Label": "Sostenimiento de Give4Forest"
+    "category5Label": "Sostenimiento de Give4Forest",
+
+    "aboutSubtitle": "Nosotros",
+    "aboutTitle": "Give for forest",
+    "aboutDescription": "<strong>Creemos</strong> que las comunidades que habitan las selvas, los humedales, las praderas, son las más adecuadas para cuidar estos bienes comunes globales, porque su vida depende diariamente de ellos.<br/><br/><strong>Vemos</strong> continuamente como en estas comunidades locales surgen ideas, soluciones y emprendimientos basados en tecnologías digitales para ayudar a las personas que habitan, trabajan y cuidan el capital natural de todos nosotros. Sin embargo enfrentan a diario dificultades estructurales para un desarrollo sostenible y el acceso a la financiación para emprender sus soluciones e ideas.<br/><br/><strong>Queremos</strong> ayudar a estas emprendedoras y emprendedores a conseguir el capital inicial para desarrollar y hacer crecer sus economías locales a través de soluciones digitales que conserven nuestro planeta.",
+    "aboutVision": "<h4>Nuestra visión</h4>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la fuente de progreso de las economías locales en armonía con nuestro planeta.",
+    "aboutMision": "<h4>Nuestra misión</h4>Give for forest nace con el objetivo de vincular la necesidad de financiación temprana de las creaciones y soluciones digitales orientadas a la naturaleza con aquellas personas, empresas e instituciones que creen en la fuerza transformadora de las personas que emprenden y utilizan todo el potencial de las tecnologías digitales para el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
+    "aboutFeatureFinanciacion": "Financiación temprana",
+    "aboutFeatureTecnologia": "Tecnología blockchain",
+    "aboutFeatureSolucion": "Soluciones digitales",
+    "aboutFeatureDesarrollo": "Preservación, desarrollo, regeneración",
+    "aboutWhy": "<h4>¿Por qué los bosques?</h4>Para nosotros <strong>Forest</strong> es una simplificación denominativa de todos los ambientes naturales fuentes de salud para nuestro planeta. Nuestra salud depende de la salud de la naturaleza y su cuidado y regeneración, la herramienta para hacer frente al cambio climático. Sin embargo, vemos a diario como estos ambientes son descuidados, destruidos y mal aprovechados afectando inmediatamente a las comunidades que lo habitan y más tarde o más temprano a toda la humanidad.<h4>La revolución de la tecnología</h4>Un desarrollo sostenible necesita de una revolución tecnológica y una evolución humana más solidaria y conectada con la naturaleza. Creemos que la tecnología blockchain, la criptoeconomía y las herramientas de finanzas descentralizadas pueden brindar soluciones innovadoras para traccionar recursos financieros a gran escala y orientarlos hacia emprendimientos que impulsen una economía ecológica.",
+    "aboutUsTeam": "¿Quiénes somos?",
+
+    "roadmapTitle": "Roadmap",
+
+    "roadmapStep1Title": "2022",
+    "roadmapStep1Description": "Certificación NFTs de donación realizada (retroactivo), permitiendo al usuario un registro de su historial de donaciones y almacenamiento o gestión a través de billetera virtual.",
+
+    "roadmapStep2Title": "2023",
+    "roadmapStep2Description": "Gobierno descentralizado de la plataforma, integrado por todos los que contribuyan con G4F."
+
 }
