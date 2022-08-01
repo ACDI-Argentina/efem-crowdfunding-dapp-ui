@@ -322,7 +322,7 @@
     "menuSignup":"Sign up" ,
 
     "aboutUs":"ABOUT US",
-    "faqTitle": "FAQs",
+    "faq": "FAQs",
 
     "sponsorTap1Title": "Partners",
     "sponsorTap2Title": "Investors",
@@ -451,5 +451,19 @@
     "roadmapStep1Description": "NFTs certification of donation made (retroactive), allowing the user to record their donation history and storage or management through a virtual wallet.",
 
     "roadmapStep2Title": "2023",
-    "roadmapStep2Description": "Decentralized governance of the platform, made up of everyone who contributes to G4F."
+    "roadmapStep2Description": "Decentralized governance of the platform, made up of everyone who contributes to G4F.",
+
+    "faqTitle": "Frequent questions",
+    "faqSubtitle1": "Do you have questions?",
+    "faqSubtitle2": "We have answers for you",
+    "faq1Question": "Question 1",
+    "faq1Answer": "Answer 1",
+    "faq2Question": "Question 2",
+    "faq2Answer": "Answer 2",
+    "faq3Question": "Question 3",
+    "faq3Answer": "Answer 3",
+    "faq4Question": "Question 4",
+    "faq4Answer": "Answer 4",
+    "faq5Question": "Question 5",
+    "faq5Answer": "Answer 5"
 }

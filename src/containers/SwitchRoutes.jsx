@@ -4,6 +4,7 @@ import Loader from '../components/Loader';
 
 import LandingPage from 'components/Pages/LandingPage';
 import AboutPage from 'components/Pages/AboutPage';
+import FaqPage from 'components/Pages/FaqPage';
 import UserProfilePage from 'components/Pages/UserProfilePage';
 import DacPage from 'components/Pages/DacPage';
 import CampaignPage from 'components/Pages/CampaignPage';
@@ -33,6 +34,9 @@ const SwitchRoutes = ({ currentUser }) => (
 
       <Route path="/about"
         render={(props) => <AboutPage {...props} />} />
+
+      <Route path="/faq"
+        render={(props) => <FaqPage {...props} />} />
 
       <Route
         exact
@@ -181,8 +185,8 @@ const SwitchRoutes = ({ currentUser }) => (
       />
       <Route exact path="/profile/:userAddress" render={(props) => <Profile {...props} />} />
 
-      
-      
+
+
 
       <Route
         exact

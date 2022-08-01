@@ -114,7 +114,7 @@ export default function Header(props) {
             onClick={handleClickFAQ}
             sx={{ my: 2, color: 'white', display: 'block' }}
           >
-            {t('faqTitle')}
+            {t('faq')}
           </HeaderButton>
         </Grid>
 

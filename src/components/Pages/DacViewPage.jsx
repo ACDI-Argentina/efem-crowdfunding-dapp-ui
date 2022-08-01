@@ -7,12 +7,6 @@ import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { withTranslation } from 'react-i18next';
 import Page from './Page'
-import {
-  selectCampaign,
-  selectCascadeDonationsByCampaign,
-  selectCascadeFiatAmountTargetByCampaign
-} from '../../redux/reducers/campaignsSlice'
-import { selectMilestonesByCampaign } from '../../redux/reducers/milestonesSlice'
 import DonationList from '../DonationList'
 import DonationsBalance from '../DonationsBalance'
 import ProfileCardMini from '../ProfileCardMini'
@@ -25,12 +19,7 @@ import { Avatar } from '@material-ui/core'
 import RichTextViewer from 'components/RichTextViewer';
 import SupportEntity from 'components/SupportEntity';
 import Donate from 'components/Donate';
-import CampaignCardMini from 'components/CampaignCardMini';
-import MilestoneCard from 'components/MilestoneCard';
-import CampaignTransfer from 'components/CampaignTransfer';
 import StatusIndicator from 'components/StatusIndicator';
-import MilestoneNew from 'components/MilestoneNew';
-import CampaignEdit from 'components/CampaignEdit';
 import DacCardMini from 'components/DacCardMini';
 import CampaignNew from 'components/CampaignNew';
 import { selectDac } from 'redux/reducers/dacsSlice';
@@ -38,7 +27,6 @@ import { selectCascadeDonationsByDac } from 'redux/reducers/dacsSlice';
 import { selectCascadeFiatAmountTargetByDac } from 'redux/reducers/dacsSlice';
 import DacEdit from 'components/DacEdit';
 import DacTransfer from 'components/DacTransfer';
-import LoadingOverlay from '../Loading/LoadingOverlay';
 
 /**
  * Visualización de DAC.

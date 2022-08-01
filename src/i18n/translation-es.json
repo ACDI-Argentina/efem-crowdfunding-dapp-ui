@@ -324,7 +324,7 @@
     "menuSignup":"Regístrate",
 
     "aboutUs":"ACERCA DE",
-    "faqTitle": "FAQs",
+    "faq": "FAQs",
 
     "sponsorTap1Title": "Aliados",
     "sponsorTap2Title": "Inversores",
@@ -454,6 +454,19 @@
     "roadmapStep1Description": "Certificación NFTs de donación realizada (retroactivo), permitiendo al usuario un registro de su historial de donaciones y almacenamiento o gestión a través de billetera virtual.",
 
     "roadmapStep2Title": "2023",
-    "roadmapStep2Description": "Gobierno descentralizado de la plataforma, integrado por todos los que contribuyan con G4F."
+    "roadmapStep2Description": "Gobierno descentralizado de la plataforma, integrado por todos los que contribuyan con G4F.",
 
+    "faqTitle": "Preguntas frecuentes",
+    "faqSubtitle1": "¿Tenés preguntas?",
+    "faqSubtitle2": "Tenemos respuestas para vos",
+    "faq1Question": "Pregunta 1",
+    "faq1Answer": "Respuesta 1",
+    "faq2Question": "Pregunta 2",
+    "faq2Answer": "Respuesta 2",
+    "faq3Question": "Pregunta 3",
+    "faq3Answer": "Respuesta 3",
+    "faq4Question": "Pregunta 4",
+    "faq4Answer": "Respuesta 4",
+    "faq5Question": "Pregunta 5",
+    "faq5Answer": "Respuesta 5"
 }
