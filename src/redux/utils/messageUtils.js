@@ -1,4 +1,4 @@
-import Message, { Severity } from '../../models/Message';
+import { Message, Severity } from '@acdi/efem-dapp';
 import { store } from '../store';
 import { addMessage } from '../reducers/messagesSlice';
 

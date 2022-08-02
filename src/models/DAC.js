@@ -1,6 +1,6 @@
 import Entity from './Entity';
-import StatusUtils from '../utils/StatusUtils';
-import Status from './Status';
+import { StatusUtils } from '@acdi/efem-dapp';
+import { Status } from '@acdi/efem-dapp';
 import { web3Utils } from 'commons';
 
 /**
@@ -17,7 +17,7 @@ class DAC extends Entity {
     } = data;
 
     this._campaignIds = campaignIds;
-    this._status = StatusUtils.build(status.name, status.isLocal);
+    this._status = StatusUtils.build(undefined, status.name, status.isLocal);
     this._delegateAddress = delegateAddress;
     this._delegateId = delegateAddress;
   }
@@ -36,15 +36,15 @@ class DAC extends Entity {
   }
 
   static get PENDING() {
-    return StatusUtils.build('Pending', true);
+    return StatusUtils.build(undefined, 'Pending', true);
   }
 
   static get ACTIVE() {
-    return StatusUtils.build('Active');
+    return StatusUtils.build(0, 'Active');
   }
 
   static get CANCELLED() {
-    return StatusUtils.build('Cancelled');
+    return StatusUtils.build(1, 'Cancelled');
   }
 
   static get type() {

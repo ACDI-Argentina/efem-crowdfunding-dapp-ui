@@ -282,7 +282,7 @@ class MilestoneViewPage extends Component {
                           entityId={milestone.id}
                           entityCard={<MilestoneCardMini milestone={milestone} />}
                           title={t('donateMilestoneTitle')}
-                          description={t('donatemilestoneDescription')}
+                          description={t('donateMilestoneDescription')}
                           enabled={milestone.canReceiveFunds}>
                         </Donate>
                       }>

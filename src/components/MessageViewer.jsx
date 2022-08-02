@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ErrorPopup from '../components/ErrorPopup';
-
-import Message, { Severity } from '../models/Message';
+import { Message, Severity } from '@acdi/efem-dapp';
 import { connect } from 'react-redux'
 import { selectNext, deleteMessage } from '../redux/reducers/messagesSlice';
 

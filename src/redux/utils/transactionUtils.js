@@ -1,4 +1,4 @@
-import Transaction from '../../models/Transaction';
+import { Transaction } from '@acdi/efem-dapp';
 import { store } from '../store';
 import { addTransaction, updateTransaction } from '../reducers/transactionsSlice';
 

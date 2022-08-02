@@ -10,7 +10,7 @@ import dacIpfsConnector from '../../ipfs/DacIpfsConnector'
 import campaignIpfsConnector from '../../ipfs/CampaignIpfsConnector'
 import milestoneIpfsConnector from '../../ipfs/MilestoneIpfsConnector'
 import activityIpfsConnector from '../../ipfs/ActivityIpfsConnector'
-import ExchangeRate from '../../models/ExchangeRate';
+import { ExchangeRate } from '@acdi/efem-dapp';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
 import { web3Manager, transactionManager, web3Utils } from 'commons';

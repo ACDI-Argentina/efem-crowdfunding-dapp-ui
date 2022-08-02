@@ -2,8 +2,8 @@ import { nanoid } from '@reduxjs/toolkit'
 import BigNumber from 'bignumber.js';
 import moment from 'moment';
 import Model from './Model';
-import StatusUtils from '../utils/StatusUtils';
-import Status from './Status';
+import { StatusUtils } from '@acdi/efem-dapp';
+import { Status } from '@acdi/efem-dapp';
 
 /**
  * Modelo de donación de Dapp.
@@ -35,7 +35,7 @@ class Donation extends Model {
     this._createdAt = createdAt;
     this._entityId = entityId;
     this._budgetEntityId = budgetEntityId;
-    this._status = StatusUtils.build(status.name, status.isLocal);
+    this._status = StatusUtils.build(undefined, status.name, status.isLocal);
   }
 
   /**
@@ -57,23 +57,23 @@ class Donation extends Model {
   }
 
   static get PENDING() {
-    return StatusUtils.build('Pending', true);
+    return StatusUtils.build(undefined, 'Pending', true);
   }
 
   static get AVAILABLE() {
-    return StatusUtils.build('Available');
+    return StatusUtils.build(0, 'Available');
   }
 
   static get TRANSFERRING() {
-    return StatusUtils.build('Transferring', true);
+    return StatusUtils.build(undefined, 'Transferring', true);
   }
 
   static get SPENT() {
-    return StatusUtils.build('Spent');
+    return StatusUtils.build(1, 'Spent');
   }
 
   static get RETURNED() {
-    return StatusUtils.build('Returned');
+    return StatusUtils.build(2, 'Returned');
   }
 
   /**

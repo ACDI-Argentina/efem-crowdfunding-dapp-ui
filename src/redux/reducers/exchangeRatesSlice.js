@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { web3Utils } from 'commons';
-import ExchangeRate from '../../models/ExchangeRate'
+import { ExchangeRate } from '@acdi/efem-dapp';
 
 export const exchangeRatesSlice = createSlice({
   name: 'exchangeRates',

@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Status from '../models/Status';
+import { Status } from '@acdi/efem-dapp';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';

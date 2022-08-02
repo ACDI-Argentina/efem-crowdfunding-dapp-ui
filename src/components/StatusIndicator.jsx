@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Status from '../models/Status';
+import { Status } from '@acdi/efem-dapp';
 import Chip from '@material-ui/core/Chip';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -19,7 +19,7 @@ class StatusIndicator extends Component {
         let status = this.props.status;
         let iconSize = 10;
         let icon = (<CheckCircleOutlineIcon size={iconSize} />);
-        if(status.isLocal) {
+        if (status.isLocal) {
             icon = (<CircularProgress size={iconSize} />);
         }
         return (

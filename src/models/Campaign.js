@@ -1,7 +1,7 @@
 import Entity from './Entity';
 import CampaignService from '../services/CampaignService';
-import StatusUtils from '../utils/StatusUtils';
-import Status from './Status';
+import { StatusUtils } from '@acdi/efem-dapp';
+import { Status } from '@acdi/efem-dapp';
 import { web3Utils } from 'commons';
 
 /**
@@ -26,7 +26,7 @@ class Campaign extends Entity {
     this._reviewerAddress = reviewerAddress;
     this._beneficiaries = beneficiaries;
     this._categories = categories;
-    this._status = StatusUtils.build(status.name, status.isLocal);
+    this._status = StatusUtils.build(undefined, status.name, status.isLocal);
   }
 
   /**
@@ -74,19 +74,19 @@ class Campaign extends Entity {
   }
 
   static get PENDING() {
-    return StatusUtils.build('Pending', true);
+    return StatusUtils.build(undefined, 'Pending', true);
   }
 
   static get ACTIVE() {
-    return StatusUtils.build('Active');
+    return StatusUtils.build(0, 'Active');
   }
 
   static get CANCELLED() {
-    return StatusUtils.build('Cancelled');
+    return StatusUtils.build(1, 'Cancelled');
   }
 
   static get FINISHED() {
-    return StatusUtils.build('Finished');
+    return StatusUtils.build(2, 'Finished');
   }
 
   static get type() {

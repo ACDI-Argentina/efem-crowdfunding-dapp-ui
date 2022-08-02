@@ -1,8 +1,8 @@
 import Entity from './Entity';
 import BigNumber from 'bignumber.js';
 import { getStartOfDayUTC } from 'lib/helpers';
-import StatusUtils from '../utils/StatusUtils';
-import Status from './Status';
+import { StatusUtils } from '@acdi/efem-dapp';
+import { Status } from '@acdi/efem-dapp';
 import { web3Utils } from 'commons';
 
 /**
@@ -32,7 +32,7 @@ export default class Milestone extends Entity {
     this._recipientAddress = recipientAddress;
     this._campaignReviewerAddress = campaignReviewerAddress;
     this._activityIds = activityIds;
-    this._status = StatusUtils.build(status.name, status.isLocal);
+    this._status = StatusUtils.build(undefined, status.name, status.isLocal);
 
     // TODO Revisar
     //this._items = items.map(i => new Item(i));
@@ -75,11 +75,11 @@ export default class Milestone extends Entity {
    * @param user a determinar si es revisor del milestone.
    */
   isReviewer(user) {
-    
+
     return user && (
-      web3Utils.addressEquals(user.address, this.reviewerAddress) || 
+      web3Utils.addressEquals(user.address, this.reviewerAddress) ||
       web3Utils.addressEquals(user.address, this.campaignReviewerAddress)
-      );
+    );
   }
 
   /**
@@ -96,51 +96,51 @@ export default class Milestone extends Entity {
   }
 
   static get PENDING() {
-    return StatusUtils.build('Pending', true);
+    return StatusUtils.build(undefined, 'Pending', true);
   }
 
   static get ACTIVE() {
-    return StatusUtils.build('Active');
+    return StatusUtils.build(0, 'Active');
   }
 
   static get CANCELLING() {
-    return StatusUtils.build('Cancelling', true);
+    return StatusUtils.build(undefined, 'Cancelling', true);
   }
 
   static get CANCELLED() {
-    return StatusUtils.build('Cancelled');
+    return StatusUtils.build(1, 'Cancelled');
   }
 
   static get COMPLETING() {
-    return StatusUtils.build('Completing', true);
+    return StatusUtils.build(undefined, 'Completing', true);
   }
 
   static get COMPLETED() {
-    return StatusUtils.build('Completed');
+    return StatusUtils.build(2, 'Completed');
   }
 
   static get APPROVING() {
-    return StatusUtils.build('Appoving', true);
+    return StatusUtils.build(undefined, 'Appoving', true);
   }
 
   static get APPROVED() {
-    return StatusUtils.build('Approved');
+    return StatusUtils.build(3, 'Approved');
   }
 
   static get REJECTING() {
-    return StatusUtils.build('Rejecting', true);
+    return StatusUtils.build(undefined, 'Rejecting', true);
   }
 
   static get REJECTED() {
-    return StatusUtils.build('Rejected');
+    return StatusUtils.build(4, 'Rejected');
   }
 
   static get PAYING() {
-    return StatusUtils.build('Paying', true);
+    return StatusUtils.build(undefined, 'Paying', true);
   }
 
   static get PAID() {
-    return StatusUtils.build('Paid');
+    return StatusUtils.build(5, 'Paid');
   }
 
   get isPending() {

@@ -1,5 +1,5 @@
 import exchangeRateUtils from "../../../redux/utils/exchangeRateUtils";
-import ExchangeRate from 'models/ExchangeRate';
+import { ExchangeRate } from '@acdi/efem-dapp';
 import BigNumber from 'bignumber.js';
 import config from 'configuration';
 import crowdfundingContractApi from '../CrowdfundingContractApi';

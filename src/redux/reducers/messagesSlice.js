@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Message from '../../models/Message'
+import { Message } from '@acdi/efem-dapp'
 
 export const messagesSlice = createSlice({
   name: 'messages',

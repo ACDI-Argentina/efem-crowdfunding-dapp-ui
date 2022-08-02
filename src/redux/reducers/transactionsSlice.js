@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import Transaction from '../../models/Transaction'
+import { Transaction } from '@acdi/efem-dapp'
 
 export const transactionsSlice = createSlice({
   name: 'transactions',

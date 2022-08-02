@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BigNumber from 'bignumber.js';
 import FiatAmount from './FiatAmount';
-import Status from '../models/Status';
+import { Status } from '@acdi/efem-dapp';
 import StatusIndicator from './StatusIndicator';
 
 /**
