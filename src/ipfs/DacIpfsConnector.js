@@ -1,4 +1,4 @@
-import ipfsService from './IpfsService';
+import { ipfsService } from 'commons';
 
 /**
  * Conector encargado de subir y descargar contenido de Dac con IPFS.

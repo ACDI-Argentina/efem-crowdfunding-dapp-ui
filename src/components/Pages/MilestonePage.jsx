@@ -19,13 +19,10 @@ import { Milestone } from 'models';
 import { saveMilestone, selectMilestone } from '../../redux/reducers/milestonesSlice';
 import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
-import {
-  MILESTONE_REVIEWER_ROLE,
-  RECIPIENT_ROLE
-} from '../../constants/Role';
 import { selectCampaign } from '../../redux/reducers/campaignsSlice'
 import FiatUtils from 'utils/FiatUtils';
 import BigNumber from 'bignumber.js';
+import config from 'configuration';
 BigNumber.config({ DECIMAL_PLACES: 18 });
 
 /**
@@ -470,7 +467,7 @@ class MilestonePage extends Component {
                             id="reviewerAddress"
                             label={t('milestoneReviewer')}
                             value={this.state.reviewerAddress}
-                            roles={[MILESTONE_REVIEWER_ROLE]}
+                            roles={[config.MILESTONE_REVIEWER_ROLE]}
                             onChange={this.handleChangeReviewer}
                             helperText={this.state.reviewerAddressHelperText}>
                           </SelectUsers>
@@ -481,7 +478,7 @@ class MilestonePage extends Component {
                             id="recipientAddress"
                             label={t('milestoneRecipient')}
                             value={this.state.recipientAddress}
-                            roles={[RECIPIENT_ROLE]}
+                            roles={[config.RECIPIENT_ROLE]}
                             onChange={this.handleChangeRecipient}
                             helperText={this.state.recipientAddressHelperText}>
                           </SelectUsers>

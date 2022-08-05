@@ -2,7 +2,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import moment from 'moment';
 import Model from './Model';
 import { cleanIpfsPath, getStartOfDayUTC } from '../lib/helpers';
-import ipfsService from '../ipfs/IpfsService';
+import { ipfsService } from '@acdi/efem-dapp';
 
 class Item extends Model {
 

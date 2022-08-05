@@ -12,6 +12,8 @@ import CampaignViewPage from 'components/Pages/CampaignViewPage';
 import MilestonePage from 'components/Pages/MilestonePage';
 import MilestoneViewPage from 'components/Pages/MilestoneViewPage';
 import DacViewPage from 'components/Pages/DacViewPage';
+import UsersPage from 'components/Pages/UsersPage'
+import UserEditPage from 'components/Pages/UserEditPage'
 
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 
@@ -100,6 +102,27 @@ const SwitchRoutes = ({ currentUser }) => (
         exact
         path="/privacypolicy"
         render={(props) => <PrivacyPolicy {...props} />} />
+
+<Route
+            exact
+            path="/users"
+            render={props => (
+                <UsersPage
+                    key={currentUser ? currentUser.id : 0}
+                    {...props}
+                />
+            )}
+        />
+        <Route
+            exact
+            path="/user/:userAddress/edit"
+            render={props => (
+                <UserEditPage
+                    key={currentUser ? currentUser.id : 0}
+                    {...props}
+                />
+            )}
+        />
 
       <Route path="/"
         render={(props) => <LandingPage {...props} />} />

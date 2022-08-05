@@ -14,6 +14,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import { useTranslation } from 'react-i18next';
+import { ipfsService } from 'commons';
 
 
 const sleep = ms => new Promise((resolve, reject) => setTimeout(() => resolve(ms), ms))
@@ -97,7 +98,7 @@ const ProfileForm = ({
         <GridItem xs={12} md={5}>
           <div style={{ display:"flex", justifyContent:"center"}}>
             <Avatar
-              imageSrc={user.avatarCidUrl}
+              imageSrc={ipfsService.resolveUrl(user.avatarCid)}
               onCropped={(cropped) => {
                 setAvatar(cropped);
               }}

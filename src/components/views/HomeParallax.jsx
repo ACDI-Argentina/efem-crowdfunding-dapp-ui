@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import { history } from '@acdi/efem-dapp';
-import JoinGivethCommunity from 'components/JoinGivethCommunity';
 import PrimaryButton from 'components/buttons/PrimaryButton';
 import SecondaryButton from 'components/buttons/SecondaryButton';
 import Grid from '@material-ui/core/Grid';
@@ -61,9 +60,6 @@ class HomeParallax extends Component {
                                     </SecondaryButton>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
-                            <JoinGivethCommunity/>
                         </Grid>
                     </Grid>
                 </div>

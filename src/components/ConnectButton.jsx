@@ -19,12 +19,10 @@ import RoundedButton from './buttons/RoundedButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { OnlyRole, history } from '@acdi/efem-dapp';
-import {
-  CREATE_DAC_ROLE
-} from 'constants/Role';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import { selectDac } from 'redux/reducers/dacsSlice';
 import config from 'configuration';
+import PeopleIcon from '@material-ui/icons/People';
 
 const useStyles = makeStyles({
   walletIcon: {
@@ -49,6 +47,7 @@ const ConnectButton = (props) => {
   const isUserConnected = currentUser?.address || false;
   const isUserRegistered = currentUser?.registered || false;
   const isCorrectNetwork = network?.isCorrect || false;
+  const isUserAdmin = currentUser?.hasRole(config.ADMIN_ROLE) || false;
 
   const handleOpenMenu = (event) => {
     setMenuAnchorEl(event.currentTarget);
@@ -68,6 +67,10 @@ const ConnectButton = (props) => {
 
   const handleClickDacView = () => {
     history.push(`/dacs/${config.dac.defaultId}`);
+  };
+
+  const handleClickUsers = () => {
+    history.push(`/users`);
   };
 
   const handleClickLogout = () => {
@@ -128,7 +131,7 @@ const ConnectButton = (props) => {
           <ListItemText primary={isUserRegistered ? t('menuProfile') : t('menuSignup')} />
         </MenuItem>
         {!dac &&
-          <OnlyRole user={currentUser} role={CREATE_DAC_ROLE}>
+          <OnlyRole user={currentUser} role={config.DELEGATE_ROLE}>
             <MenuItem onClick={
               handleClickDacNew
             }>
@@ -149,6 +152,16 @@ const ConnectButton = (props) => {
             <ListItemText primary={t('dacView')} />
           </MenuItem>
         }
+        {isUserAdmin &&
+          <MenuItem onClick={
+            handleClickUsers
+          }>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('usersTitle')} />
+          </MenuItem>
+          }
         <MenuItem onClick={
           handleClickLogout
         }>

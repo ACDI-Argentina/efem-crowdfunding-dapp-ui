@@ -63,14 +63,7 @@
     "dataHandlingPolicy": "Data handling policy. ",
 
     "userAnonymous": "Anonymous user",
-    
-    "userProfileTitle": "User profile",
-    "userAddress": "Address",
-    "userName": "Name",
-    "userEmail": "E-Mail",
-    "userUrl": "URL",
-    "userAvatar": "Profile photo",
-    "userAvatarChoose": "Choose a profile photo",
+
     "saving": "Saving ...",
 
 
@@ -465,5 +458,26 @@
     "faq4Question": "Question 4",
     "faq4Answer": "Answer 4",
     "faq5Question": "Question 5",
-    "faq5Answer": "Answer 5"
+    "faq5Answer": "Answer 5",
+
+    "usersTitle": "Users",
+    "userProfileTitle": "My profile",
+    "userEditTitle": "User edit",
+    "userAddress": "Address",
+    "userName": "Name",
+    "userEmail": "E-Mail",
+    "userUrl": "URL",
+    "userAvatar": "Profile photo",
+    "userAvatarChoose": "Choose a profile photo",
+    "userUnknown": "Unknown user",
+    "userRoles": "Roles",
+    "userNotRegistered": "Not registered",
+
+    "transactionCreatedTitleSetUserRoles": "Confirm the configuration of user roles in the wallet",
+    "transactionCreatedSubtitleSetUserRoles": "Double check the details here – the configuration of user roles can't be refunded.",
+    "transactionPendingTitleSetUserRoles": "Configuring user roles...",
+    "transactionConfirmedTitleSetUserRoles": "The configuration of user roles has been completed",
+    "transactionConfirmedDescriptionSetUserRoles": "The configuration of user roles has been completed.",
+    "transactionFailuredTitleSetUserRoles": "The configuration of user roles was not completed",
+    "transactionFailuredDescriptionSetUserRoles": "A failure occurred configuring user roles."
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withFormsy } from 'formsy-react';
 import ReactQuill from 'react-quill';
-import ipfsService from 'ipfs/IpfsService';
+//import ipfsService from 'ipfs/IpfsService';
 import config from '../configuration';
 
 import VideoPopup from './VideoPopup';
@@ -36,10 +36,10 @@ class QuillFormsy extends Component {
   handleImageUpload() {
     const file = this.imageUploader.files[0];
 
-    ipfsService.upload(file).then(hash => {
+    /*ipfsService.upload(file).then(hash => {
       console.log('file', config.ipfsGateway + hash.slice(6));
       this.insertToEditor(config.ipfsGateway + hash.slice(6));
-    });
+    });*/
   }
 
   insertToEditor(file) {

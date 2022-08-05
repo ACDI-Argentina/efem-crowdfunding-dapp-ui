@@ -373,7 +373,7 @@ const configurations = {
         },
       ]
     }
-  }  
+  }
 };
 
 // Unknown environment
@@ -414,70 +414,63 @@ config.nativeTokenName = REACT_APP_NATIVE_TOKEN_NAME || config.nativeTokenName;
 config.ipfsGateway = REACT_APP_IPFS_GATEWAY || config.ipfsGateway;
 config.ipfsPinningEnabled = (REACT_APP_IPFS_PINNING_ENABLED !== undefined) ? (REACT_APP_IPFS_PINNING_ENABLED == "true") : config.ipfsPinningEnabled;
 
-config.anonymousDonationThreshold = REACT_APP_ANONYMOUS_DONATION_THRESHOLD ||  config.anonymousDonationThreshold;
+config.anonymousDonationThreshold = REACT_APP_ANONYMOUS_DONATION_THRESHOLD || config.anonymousDonationThreshold;
 
 
 //config.sendErrors = ['develop', 'release', 'beta', 'rsk_testnet'].includes(REACT_APP_ENVIRONMENT);
 
+// Definición de Roles
+
+config.ADMIN_ROLE = "ADMIN_ROLE";
+config.GIVER_ROLE = "GIVER_ROLE";
+config.DELEGATE_ROLE = "DELEGATE_ROLE";
+config.CAMPAIGN_MANAGER_ROLE = "CAMPAIGN_MANAGER_ROLE";
+config.CAMPAIGN_REVIEWER_ROLE = "CAMPAIGN_REVIEWER_ROLE";
+config.MILESTONE_MANAGER_ROLE = "MILESTONE_MANAGER_ROLE";
+config.MILESTONE_REVIEWER_ROLE = "MILESTONE_REVIEWER_ROLE";
+config.RECIPIENT_ROLE = "RECIPIENT_ROLE";
+
 config.roles = [
   {
-    value: "DELEGATE_ROLE",
+    value: config.ADMIN_ROLE,
+    hash: "0xa49807205ce4d355092ef5a8a18f56e8913cf4a201fbe287825b095693c21775",
+    label: 'Admin',
+    app: config.adminContractAddress
+  },
+  {
+    value: config.DELEGATE_ROLE,
     hash: "0x1a82baf2b928242f69f7147fb92490c6288d044f7257b88817e6284f1eec0f15",
     label: "Delegate",
     app: config.crowdfundingAddress
   },
   {
-    value: "CAMPAIGN_MANAGER_ROLE",
+    value: config.CAMPAIGN_MANAGER_ROLE,
     hash: "0x5022544358ee0bece556b72ae8983c7f24341bd5b9483ce8a19bff5efbb2de92",
     label: "Campaign Manager",
     app: config.crowdfundingAddress
   },
   {
-    value: "CAMPAIGN_REVIEWER_ROLE",
+    value: config.CAMPAIGN_REVIEWER_ROLE,
     hash: "0x634e3ca2e6368700bbf08d9508419cd87488d87c36c701a117b27ea1e3efb94e",
     label: "Campaign Reviewer",
     app: config.crowdfundingAddress
   },
   {
-    value: "MILESTONE_MANAGER_ROLE",
+    value: config.MILESTONE_MANAGER_ROLE,
     hash: "0xa3a2c0788fca84104c8a174fd5021fe337cdd81ef2dab39dfed0f397582c2efb",
     label: "Milestone Manager",
     app: config.crowdfundingAddress
   },
   {
-    value: "MILESTONE_REVIEWER_ROLE",
+    value: config.MILESTONE_REVIEWER_ROLE,
     hash: "0x4d6e65593aeec72da9930817128ec8271cfd271f40a90712d7163837a7835ede",
     label: "Milestone Reviewer",
     app: config.crowdfundingAddress
   },
   {
-    value: "RECIPIENT_ROLE",
+    value: config.RECIPIENT_ROLE,
     hash: "0x8b42d4fd5c2527b7732a4b075ccb928f88ffc087de1e4c401c8fc7ab80ea882e",
     label: "Recipient",
-    app: config.crowdfundingAddress
-  },
-  {
-    value: "CREATE_DAC_ROLE",
-    hash: "0x27dcfaa805d739418c9c74189b634c1005c4272ef394c344d4a04a451d57e6c8",
-    label: "Create DAC",
-    app: config.crowdfundingAddress
-  },
-  {
-    value: "CREATE_CAMPAIGN_ROLE",
-    hash: "0x16d50609795428ec5fa457db737ec3568047847f63bf070b2edc21ed1f2aab7b",
-    label: "Create Campaign",
-    app: config.crowdfundingAddress
-  },
-  {
-    value: "CREATE_MILESTONE_ROLE",
-    hash: "0x324aca30d130a854e55500f1a7b303629413b3c281a79ce243e4f7e90314cf39",
-    label: "Create Milestone",
-    app: config.crowdfundingAddress
-  },
-  {
-    value: "TRANSFER_ROLE",
-    hash: "0x8502233096d909befbda0999bb8ea2f3a6be3c138b9fbf003752a4c8bce86f6c",
-    label: "Transfer",
     app: config.crowdfundingAddress
   }
 ];

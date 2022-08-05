@@ -1,4 +1,4 @@
-import ipfsService from './IpfsService';
+import { ipfsService } from 'commons';
 import itemIpfsConnector from './ItemIpfsConnector';
 
 /**

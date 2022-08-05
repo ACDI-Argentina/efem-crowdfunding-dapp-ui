@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
 
 const { Provider, Consumer } = React.createContext();
 export { Consumer };
@@ -9,7 +8,6 @@ export default class RolesListProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            delegates:[],
             managers:[],
             reviewers:[]
         }
@@ -19,7 +17,6 @@ export default class RolesListProvider extends Component {
         //Pedir al servicio de usuarios, los usuarios que tengan un cierto rol
         
         this.setState({
-            delegates:[],
             managers:[],
             reviewers:[]
         });
@@ -33,13 +30,3 @@ export default class RolesListProvider extends Component {
         );
     }
 }
-
-/* 
-RoleProvider.PropTypes = {
-    currentUser: PropTypes.instanceOf(User).isRequired
-}
-
-JoinGivethCommunity.defaultProps = {
-    currentUser: new User(), //?
-  };
-   */

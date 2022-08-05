@@ -1,42 +1,64 @@
-import React, { Component } from 'react';
-import { registerCurrentUser, selectCurrentUser } from '../../redux/reducers/currentUserSlice';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
-import { connect } from 'react-redux';
-import { Web3AppContext } from 'lib/blockchain/Web3App';
-import { withTranslation } from 'react-i18next';
-import { User } from '@acdi/efem-dapp';
-import { history } from '@acdi/efem-dapp';
-import Avatar from '../Avatar/Avatar';
+import React, { Component } from 'react'
+import { selectCurrentUser } from '../../redux/reducers/currentUserSlice'
+import { saveUser } from '../../redux/reducers/usersSlice'
+import { withStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import { Typography } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { Web3AppContext } from 'lib/blockchain/Web3App'
+import { withTranslation } from 'react-i18next'
+import Avatar from '../Avatar/Avatar'
+import { selectUserByAddress } from 'redux/reducers/usersSlice'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import { selectRoles } from 'redux/reducers/rolesSlice'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
 import InputAdornment from '@material-ui/core/InputAdornment'
+import {
+  InputField,
+  User,
+  RoleChip,
+  history
+} from '@acdi/efem-dapp'
 import Page from './Page'
 import Background from 'components/views/Background'
-import { InputField } from '@acdi/efem-dapp';
 import Paper from '@material-ui/core/Paper';
-import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline';
+import SecondaryButton from 'components/buttons/SecondaryButton';
 import PrimaryButton from 'components/buttons/PrimaryButton';
-import { ipfsService, validatorUtils } from 'commons';
+import { validatorUtils } from 'commons';
+import { ipfsService } from 'commons'
+import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline'
+
 /**
- * Formulario de perfil de usuario.
+ * Edición de usuario.
  * 
  */
-class UserProfilePage extends Component {
+class UserEditPage extends Component {
 
   constructor(props) {
     super(props);
 
-    const { currentUser } = props;
+    const { user, roles } = props;
+
+    const rolesSelected = [];
+    roles.forEach(r1 => {
+      if (user.roles.some(r2 => r1.value === r2.value)) {
+        rolesSelected.push(r1);
+      }
+    });
 
     this.state = {
-      name: currentUser.name,
-      email: currentUser.email,
-      url: currentUser.url,
+      name: user.name,
+      email: user.email,
+      url: user.url,
       avatar: null,
       avatarPreview: null,
-      user: new User(currentUser),
-      avatarImg: ipfsService.resolveUrl(currentUser.avatarCid),
+      user: new User(user),
+      avatarImg: ipfsService.resolveUrl(user.avatarCid),
+      rolesSelected: rolesSelected,
       registered: false,
       nameHelperText: '',
       nameError: false,
@@ -54,8 +76,8 @@ class UserProfilePage extends Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeUrl = this.handleChangeUrl.bind(this);
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
+    this.handleChangeRoles = this.handleChangeRoles.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
-
   }
 
   clearForm() {
@@ -63,10 +85,9 @@ class UserProfilePage extends Component {
       name: "",
       email: "",
       url: "",
-      user: new User(this.props.currentUser)
+      user: new User(this.props.user)
     })
   }
-
 
   async requestConnection(translate) {
 
@@ -87,58 +108,6 @@ class UserProfilePage extends Component {
     });
 
     return confirm;
-
-  }
-
-  async componentDidUpdate(prevProps, prevState) {
-    const userHasUpdated = prevProps.currentUser !== this.props.currentUser;
-
-    const prevAddress = prevProps.currentUser && prevProps.currentUser.address;
-    const nextAddress = this.props.currentUser && this.props.currentUser.address;
-
-    const userHasChanged = prevAddress && nextAddress && (prevAddress !== nextAddress);
-    const userHasDisconnected = this.props.currentUser.address === null && prevProps.currentUser.address !== undefined;
-
-    if (userHasDisconnected || userHasChanged) {
-      this.clearForm();
-    }
-
-    const statusHasChanged = this.props.currentUser.status !== prevProps.currentUser.status;
-    if (statusHasChanged) {
-      const isRegistering = this.props.currentUser?.status?.name === "Registering";
-      this.setState({ isSaving: isRegistering });
-    }
-
-    const wasSaving = prevProps.currentUser?.status?.name === "Registering";
-    const isRegistered = this.props.currentUser?.status?.name === "Registered";
-
-    if (wasSaving && isRegistered) {
-      setTimeout(() => history.push("/"), 1000);
-    }
-
-    if (userHasUpdated) {
-      console.log(`[User profile] Load current user addrss - ${this.props.currentUser?.address}`);
-
-      const { name, email, url, registered } = this.props.currentUser;
-
-
-      const state = {};
-      if (name) {
-        state.name = name;
-      }
-      if (email) {
-        state.email = email;
-      }
-      if (url) {
-        state.url = url;
-      }
-
-      if (this.props.currentUser.avatarCid) {
-        state.avatarImg = ipfsService.resolveUrl(this.props.currentUser.avatarCid);
-      }
-
-      this.setState({ ...state, registered, user: new User(this.props.currentUser) })
-    }
 
   }
 
@@ -210,6 +179,14 @@ class UserProfilePage extends Component {
     });
   }
 
+  handleChangeRoles(event) {
+    this.setState({
+      rolesSelected: event.target.value
+    }, () => {
+      this.setFormValid();
+    });
+  }
+
   setFormValid() {
     const { name, email, url } = this.state;
     let formValid = true;
@@ -231,37 +208,45 @@ class UserProfilePage extends Component {
     });
   }
 
+  getStyles(role, rolesSelected, theme) {
+    let isSelected = false;
+    for (let i = 0; i < rolesSelected.length; i++) {
+      if (rolesSelected[i].value === role.value) {
+        isSelected = true;
+        break;
+      }
+    }
+    return {
+      fontWeight: isSelected
+        ? theme.typography.fontWeightMedium
+        : theme.typography.fontWeightRegular,
+    };
+  }
+
   async handleSubmit(event) {
 
     event.preventDefault();
 
-    const { currentUser } = this.props;
     let user = this.state.user;
-
-    user.address = currentUser.address;
-
     user.name = this.state.name;
     user.email = this.state.email;
     user.url = this.state.url;
     user.avatar = this.state.avatarPreview;
+    user.roles = this.state.rolesSelected;
 
     this.setState(
       {
-        user: user,
-        isSaving: true
+        isSaving: true,
+        user: user
       },
       () => {
-        this.props.registerCurrentUser(this.state.user);
-        this.setState(
-          {
-            isSaving: false
-          });
-        history.push(`/`);
+        this.props.saveUser(user);
+        history.push(`/users`);
       });
   }
 
   cancel() {
-    history.push(`/`);
+    history.push(`/users`);
   }
 
   render() {
@@ -274,9 +259,21 @@ class UserProfilePage extends Component {
       urlError,
       formValid,
       avatarImg,
-      isSaving
+      isSaving,
+      rolesSelected
     } = this.state;
-    const { currentUser, classes, t, ...rest } = this.props;
+    const { currentUser, roles, classes, t, theme, ...rest } = this.props;
+
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+      PaperProps: {
+        style: {
+          maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+          width: 250
+        },
+      },
+    };
 
     return (
       <Page>
@@ -285,7 +282,7 @@ class UserProfilePage extends Component {
             <Grid container spacing={1} style={{ padding: "2em" }}>
               <Grid item xs={12}>
                 <Typography variant="h5" component="h5">
-                  {t('userProfileTitle')}
+                  {t('userEditTitle')}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -296,6 +293,7 @@ class UserProfilePage extends Component {
                   <Grid container spacing={1} style={{ margin: "0px" }}>
 
                     <Grid item xs={12} md={5}>
+
                       <Avatar
                         imageSrc={avatarImg}
                         onCropped={(cropped) => {
@@ -378,10 +376,41 @@ class UserProfilePage extends Component {
                           inputProps={{ maxLength: 42 }}
                         />
                       </Grid>
+
+                      <Grid item xs={12}>
+                        <FormControl className={classes.formControl}>
+                          <InputLabel id="rolesLabel">
+                            {t('userRoles')}
+                          </InputLabel>
+                          <Select
+                            id="roles"
+                            labelId="rolesLabel"
+                            multiple
+                            value={rolesSelected}
+                            onChange={this.handleChangeRoles}
+                            input={<Input id="rolesInput" />}
+                            renderValue={(rolesSelected) => (
+                              <div className={classes.chips}>
+                                {rolesSelected.map((roleSelected) => (
+                                  <RoleChip key={roleSelected.value} role={roleSelected} />
+                                ))}
+                              </div>
+                            )}
+                            MenuProps={MenuProps}
+                          >
+                            {roles.map((role) => (
+                              <MenuItem key={role.value}
+                                value={role}
+                                style={this.getStyles(role, rolesSelected, theme)}>
+                                {role.label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
                     </Grid>
 
                     <Grid container
-                      xs={12}
                       justifyContent="flex-end"
                       spacing={2}>
 
@@ -406,24 +435,38 @@ class UserProfilePage extends Component {
             </Grid>
           </Paper>
         </Background>
-      </Page >
+      </Page>
     );
   }
 }
 
-UserProfilePage.contextType = Web3AppContext;
+UserEditPage.contextType = Web3AppContext;
 
 const styles = theme => ({
-
+  formControl: {
+    minWidth: 120
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  }
 });
 
 const mapStateToProps = (state, ownProps) => {
+  const userAddress = ownProps.match.params.userAddress;
   return {
-    currentUser: selectCurrentUser(state)
+    currentUser: selectCurrentUser(state),
+    user: selectUserByAddress(state, userAddress),
+    roles: selectRoles(state)
   };
 }
-const mapDispatchToProps = { registerCurrentUser }
+const mapDispatchToProps = {
+  saveUser
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles)(
-  withTranslation()(UserProfilePage)))
+export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles, { withTheme: true })(
+  withTranslation()(UserEditPage)))
 );

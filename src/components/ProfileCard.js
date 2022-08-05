@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import ProfileCardAnonymous from './ProfileCardAnonymous';
 import AddressLink from './AddressLink';
+import { ipfsService } from 'commons';
 
 class ProfileCard extends Component {
 
@@ -38,7 +39,7 @@ class ProfileCard extends Component {
         return (
             <ListItem alignItems="flex-start" className={classes.root}>
                 <ListItemAvatar>
-                    <Avatar src={user.avatarCidUrl} className={classes.logo} />
+                    <Avatar src={ipfsService.resolveUrl(user.avatarCid)} className={classes.logo} />
                 </ListItemAvatar>
                 <ListItemText
                     primary={user.name}

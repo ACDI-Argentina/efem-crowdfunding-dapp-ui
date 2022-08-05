@@ -10,9 +10,7 @@ import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import IconPrimaryButton from './buttons/IconPrimaryButton';
 import AddIcon from '@material-ui/icons/Add';
-import {
-  CREATE_CAMPAIGN_ROLE
-} from 'constants/Role';
+import config from 'configuration';
 
 class CampaignNew extends Component {
   constructor(props) {
@@ -30,7 +28,7 @@ class CampaignNew extends Component {
     let isEnabled = false;
     if (currentUser &&
       currentUser.authenticated &&
-      currentUser.hasRole(CREATE_CAMPAIGN_ROLE)) {
+      currentUser.hasRole(config.CAMPAIGN_MANAGER_ROLE)) {
       isEnabled = true;
     }
 

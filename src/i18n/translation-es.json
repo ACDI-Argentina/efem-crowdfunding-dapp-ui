@@ -64,14 +64,6 @@
 
     "userAnonymous": "Usuario anónimo",
     
-    "userProfileTitle": "Perfil de usuario",
-    "userAddress": "Dirección",
-    "userName": "Nombre",
-    "userEmail": "E-Mail",
-    "userUrl": "URL",
-    "userAvatar": "Foto de perfil",
-    "userAvatarChoose": "Elige una foto de perfil",
-    "userUnknown": "Usuario desconocido",
     "saving": "Guardando ...",
 
 
@@ -468,5 +460,26 @@
     "faq4Question": "Pregunta 4",
     "faq4Answer": "Respuesta 4",
     "faq5Question": "Pregunta 5",
-    "faq5Answer": "Respuesta 5"
+    "faq5Answer": "Respuesta 5",
+
+    "usersTitle": "Usuarios",
+    "userProfileTitle": "Mi perfil",
+    "userEditTitle": "Edición de usuario",
+    "userAddress": "Dirección",
+    "userName": "Nombre",
+    "userEmail": "E-Mail",
+    "userUrl": "URL",
+    "userAvatar": "Foto de perfil",
+    "userAvatarChoose": "Elige una foto de perfil",
+    "userUnknown": "Usuario desconocido",
+    "userRoles": "Roles",
+    "userNotRegistered": "No registrado",
+
+    "transactionCreatedTitleSetUserRoles": "Confirma la configuración de roles del usuario en la billetera",
+    "transactionCreatedSubtitleSetUserRoles": "Verifique los detalles aquí - la configuración de roles del usuario no puede ser reembolsada.",
+    "transactionPendingTitleSetUserRoles": "Configurando roles del usuario...",
+    "transactionConfirmedTitleSetUserRoles": "La configuración de roles del usuario ha sido completada",
+    "transactionConfirmedDescriptionSetUserRoles": "La configuración de roles del usuario ha sido completada.",
+    "transactionFailuredTitleSetUserRoles": "No se completó la configuración de roles del usuario",
+    "transactionFailuredDescriptionSetUserRoles": "Ocurrió una falla configurando roles del usuario."
 }

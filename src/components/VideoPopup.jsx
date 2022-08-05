@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ipfsService from '../ipfs/IpfsService';
+import { ipfsService } from '@acdi/efem-dapp';
 import config from '../configuration';
 
 const Label = ({ children }) => (

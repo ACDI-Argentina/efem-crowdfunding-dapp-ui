@@ -16,7 +16,6 @@ import {
     UserIpfsConnector,
     ValidatorUtils
 } from '@acdi/efem-dapp';
-
 import config from 'configuration';
 
 const commonsContext = {
@@ -53,11 +52,11 @@ commonsContext.transactionManager = transactionManager;
 export const erc20ContractApi = new ERC20ContractApi(commonsContext);
 commonsContext.erc20ContractApi = erc20ContractApi;
 
-export const adminContractApi = new AdminContractApi(commonsContext);
-commonsContext.adminContractApi = adminContractApi;
-
 export const accountManager = new AccountManager(commonsContext);
 commonsContext.accountManager = accountManager;
+
+export const adminContractApi = new AdminContractApi(commonsContext);
+commonsContext.adminContractApi = adminContractApi;
 
 export const ipfsService = new IpfsService(commonsContext);
 commonsContext.ipfsService = ipfsService;

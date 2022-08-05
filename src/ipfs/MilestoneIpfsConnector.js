@@ -1,4 +1,4 @@
-import ipfsService from './IpfsService';
+import { ipfsService } from 'commons';
 
 /**
  * Conector encargado de subir y descargar contenido de Milestone con IPFS.
@@ -13,7 +13,7 @@ class MilestoneIpfsConnector {
    * @return CID del milestone en IPFS
    */
   async upload(milestone) {
-    if(milestone.image){
+    if (milestone.image) {
       // Se almacena en IPFS la imagen del Milestone.
       let imageCid = await ipfsService.upload(milestone.image);
       milestone.imageCid = imageCid;

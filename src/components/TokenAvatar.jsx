@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { withTranslation } from 'react-i18next';
 import config from '../configuration';
 import PropTypes from 'prop-types';
-import ipfsService from '../ipfs/IpfsService';
+import { ipfsService } from '@acdi/efem-dapp';
 import TokenUtils from 'utils/TokenUtils';
 
 class TokenAvatar extends Component {

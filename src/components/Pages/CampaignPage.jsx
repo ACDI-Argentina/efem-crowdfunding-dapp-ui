@@ -19,9 +19,9 @@ import { Campaign } from 'models';
 import { saveCampaign, selectCampaign } from '../../redux/reducers/campaignsSlice';
 import RichTextEditor from '../RichTextEditor';
 import SelectUsers from 'components/SelectUsers';
-import { CAMPAIGN_REVIEWER_ROLE } from '../../constants/Role';
 import { selectDac } from 'redux/reducers/dacsSlice';
 import SelectCategories from 'components/SelectCategories';
+import config from 'configuration';
 
 /**
  * Formulario de creación de Campaign.
@@ -400,7 +400,7 @@ class CampaignPage extends Component {
                             id="reviewerAddress"
                             label={t('campaignReviewer')}
                             value={this.state.reviewerAddress}
-                            roles={[CAMPAIGN_REVIEWER_ROLE]}
+                            roles={[config.CAMPAIGN_REVIEWER_ROLE]}
                             onChange={this.handleChangeReviewer}
                             helperText={this.state.reviewerAddressHelperText}>
                           </SelectUsers>
