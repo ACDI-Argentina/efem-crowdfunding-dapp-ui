@@ -36,7 +36,7 @@ import PrimaryButtonOutline from 'components/buttons/PrimaryButtonOutline'
  * Edición de usuario.
  * 
  */
-class UserEditPage extends Component {
+class UserPage extends Component {
 
   constructor(props) {
     super(props);
@@ -440,7 +440,7 @@ class UserEditPage extends Component {
   }
 }
 
-UserEditPage.contextType = Web3AppContext;
+UserPage.contextType = Web3AppContext;
 
 const styles = theme => ({
   formControl: {
@@ -468,5 +468,5 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)((withStyles(styles, { withTheme: true })(
-  withTranslation()(UserEditPage)))
+  withTranslation()(UserPage)))
 );

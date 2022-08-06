@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loader from '../components/Loader';
-
 import LandingPage from 'components/Pages/LandingPage';
 import AboutPage from 'components/Pages/AboutPage';
 import FaqPage from 'components/Pages/FaqPage';
@@ -13,7 +12,7 @@ import MilestonePage from 'components/Pages/MilestonePage';
 import MilestoneViewPage from 'components/Pages/MilestoneViewPage';
 import DacViewPage from 'components/Pages/DacViewPage';
 import UsersPage from 'components/Pages/UsersPage'
-import UserEditPage from 'components/Pages/UserEditPage'
+import UserPage from 'components/Pages/UserPage'
 
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
 
@@ -117,7 +116,7 @@ const SwitchRoutes = ({ currentUser }) => (
             exact
             path="/user/:userAddress/edit"
             render={props => (
-                <UserEditPage
+                <UserPage
                     key={currentUser ? currentUser.id : 0}
                     {...props}
                 />

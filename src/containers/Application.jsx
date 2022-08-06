@@ -1,25 +1,14 @@
 import React, { useContext, Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import { Helmet } from 'react-helmet';
-
 import { Router } from 'react-router-dom';
-
 import localforage from 'localforage';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-
 import Sweetalert from 'sweetalert';
-
 import GA from 'lib/GoogleAnalytics';
-
 import { ScrollToTop } from '../lib/helpers';
-import { history } from '@acdi/efem-dapp';
 import config from '../configuration';
-
-import ErrorBoundary from '../components/ErrorBoundary';
-
+import { ErrorBoundary, history } from '@acdi/efem-dapp';
 import '../lib/validators';
 import { connect } from 'react-redux'
 import { fetchDacs } from '../redux/reducers/dacsSlice'
@@ -77,7 +66,6 @@ class Application extends Component {
     this.props.fetchExchangeRates();
     initExchangeRateListener();
     this.props.fetchUsers();
-    //setTimeout(() => this.props.fetchUsers(), 15000)
   }
 
 
