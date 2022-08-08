@@ -15,14 +15,12 @@ class AccountListener {
 
   processAccount = (a) => {
 
-    console.log('account', a);
     if (a.address == null) {
       // La cuenta no está definida.
       this.accountAddress = null;
       currentUserUtils.clearCurrentUser();
     } else if (a.address !== this.accountAddress) {
       // Se definió una nueva cuenta.
-      console.log('Pasa por aca2');
       this.accountAddress = a.address;
       currentUserUtils.loadCurrentUser(a.address);
     } else {

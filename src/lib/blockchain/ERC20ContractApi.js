@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { Observable } from 'rxjs'
 import transactionUtils from '../../redux/utils/transactionUtils'
 import { web3Manager } from '../../commons';
-import { ERC20Abi } from '@acdi/give4forests-crowdfunding-contract';
+import { ERC20Abi } from '@acdi/give4forest-contract';
 import TransactionTracker from './TransactionTracker';
 
 /**

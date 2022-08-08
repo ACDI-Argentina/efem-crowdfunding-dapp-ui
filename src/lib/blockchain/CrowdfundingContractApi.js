@@ -14,7 +14,7 @@ import { ExchangeRate } from '@acdi/efem-dapp';
 import config from '../../configuration';
 import erc20ContractApi from './ERC20ContractApi';
 import { web3Manager, transactionManager, web3Utils } from 'commons';
-import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forests-crowdfunding-contract';
+import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forest-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
 import TransactionTracker from './TransactionTracker';
 
