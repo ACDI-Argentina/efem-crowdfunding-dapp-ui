@@ -3,6 +3,7 @@ const {
   REACT_APP_DECIMALS = 8, // optional
   REACT_APP_FEATHERJS_USERS_CONNECTION_URL,
   REACT_APP_NODE_CONNECTION_URL,
+  REACT_APP_ADMIN_CONTRACT_ADDRESS,
   REACT_APP_CROWDFUNDING_ADDRESS,
   REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS,
   REACT_APP_TOKEN_RIF_ADDRESS,
@@ -384,6 +385,7 @@ if (configurations[REACT_APP_ENVIRONMENT] === undefined)
 const config = Object.assign({}, configurations[REACT_APP_ENVIRONMENT]);
 
 // Overwrite the environment values with parameters
+config.adminContractAddress = REACT_APP_ADMIN_CONTRACT_ADDRESS || config.adminContractAddress;
 config.crowdfundingAddress = REACT_APP_CROWDFUNDING_ADDRESS || config.crowdfundingAddress;
 config.exchangeRateProviderAddress = REACT_APP_EXCHANGE_RATE_PROVIDER_ADDRESS || config.exchangeRateProviderAddress;
 config.tokens.doc.address = REACT_APP_TOKEN_DOC_ADDRESS || config.tokens.doc.address;
