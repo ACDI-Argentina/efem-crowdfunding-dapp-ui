@@ -4,7 +4,6 @@ import {
     NetworkManager,
     AccountManager,
     TransactionManager,
-    TransactionsManager,
     MessageManager,
     ERC20ContractApi,
     AdminContractApi,
@@ -42,9 +41,6 @@ commonsContext.networkManager = networkManager;
 
 export const messageManager = new MessageManager();
 commonsContext.messageManager = messageManager;
-
-export const transactionsManager = new TransactionsManager();
-commonsContext.transactionsManager = transactionsManager;
 
 export const transactionManager = new TransactionManager();
 commonsContext.transactionManager = transactionManager;
