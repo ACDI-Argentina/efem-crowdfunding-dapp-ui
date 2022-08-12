@@ -1,18 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-
 import Milestone from 'models/Milestone';
-import BigNumber from 'bignumber.js';
-
-import DeleteProposedMilestoneButton from 'components/DeleteProposedMilestoneButton';
-import AcceptRejectProposedMilestoneButtons from 'components/AcceptRejectProposedMilestoneButtons';
-import CancelMilestoneButton from 'components/CancelMilestoneButton';
 import MilestoneCancel from './MilestoneCancel';
-import MilestoneWithdraw from './MilestoneWithdraw';
 import MilestoneComplete from './MilestoneComplete';
 import MilestoneApprove from './MilestoneApprove';
 import MilestoneReject from './MilestoneReject';
-import EditMilestoneButton from './EditMilestoneButton';
 import { selectCurrentUser } from 'redux/reducers/currentUserSlice';
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';

@@ -2,7 +2,6 @@ import React from "react";
 import ConnectionModalUtil from "./ConnectionModalsUtil";
 import config from '../../configuration';
 import BigNumber from 'bignumber.js';
-import { feathersClient } from '../feathersClient';
 import { web3Utils } from 'commons';
 import { history } from '@acdi/efem-dapp';
 import { utils } from 'web3';
@@ -13,7 +12,6 @@ import {
   feathersUsersClient,
   authService
 } from '../../commons';
-import currentUserUtils from "redux/utils/currentUserUtils";
 
 export const Web3AppContext = React.createContext({
   contract: {},
@@ -438,20 +436,20 @@ class Web3App extends React.Component {
       strategy: 'web3',
       address,
     };
-    const accessToken = await feathersClient.passport.getJWT();
+    const accessToken = await feathersUsersClient.getClient().passport.getJWT();
     if (accessToken) {
-      const payload = await feathersClient.passport.verifyJWT(accessToken);
+      const payload = await feathersUsersClient.getClient().passport.verifyJWT(accessToken);
       if (web3Utils.addressEquals(address, payload.userId)) {
-        await feathersClient.authenticate(); // authenticate the socket connection
+        await feathersUsersClient.getClient().authenticate(); // authenticate the socket connection
         console.log(`[Web3App] ${address} authenticated using existing token`);
         return true;
       } else {
-        await feathersClient.logout();
+        await feathersUsersClient.getClient().logout();
       }
     }
 
     try {
-      await feathersClient.authenticate(authData);
+      await feathersUsersClient.getClient().authenticate(authData);
       return true;
     } catch (response) {
       // normal flow will issue a 401 with a challenge message we need to sign and send to
@@ -473,7 +471,7 @@ class Web3App extends React.Component {
             try {
               const signature = await web3.eth.personal.sign(msg, address);
               authData.signature = signature;
-              await feathersClient.authenticate(authData);
+              await feathersUsersClient.getClient().authenticate(authData);
               //React.swal.close();
               this.closeSignatureRequestModal();
               clearTimeout(timeOut);

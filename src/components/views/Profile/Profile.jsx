@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'react-avatar';
 
-import { feathersClient } from '../../../lib/feathersClient';
+import { feathersUsersClient } from 'commons';
 import GoBackButton from '../../GoBackButton';
 import Loader from '../../Loader';
 import { getUserName, getUserAvatar } from '../../../lib/helpers';
@@ -58,7 +58,7 @@ class Profile extends Component {
   componentDidMount() {
     const { userAddress } = this.props.match.params;
 
-    feathersClient
+    feathersUsersClient.getClient()
       .service('users')
       .find({ query: { address: userAddress } })
       .then(resp => {

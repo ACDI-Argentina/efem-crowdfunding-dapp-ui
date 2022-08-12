@@ -7,7 +7,6 @@ import {
     MessageManager,
     ERC20ContractApi,
     AdminContractApi,
-    FeathersClient,
     FeathersUsersClient,
     UserService,
     AuthService,
@@ -26,9 +25,6 @@ commonsContext.validatorUtils = validatorUtils;
 
 export const web3Utils = new Web3Utils(commonsContext);
 commonsContext.web3Utils = web3Utils;
-
-export const feathersClient = new FeathersClient(commonsContext);
-commonsContext.feathersClient = feathersClient;
 
 export const feathersUsersClient = new FeathersUsersClient(commonsContext);
 commonsContext.feathersUsersClient = feathersUsersClient;

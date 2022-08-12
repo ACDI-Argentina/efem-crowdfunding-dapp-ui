@@ -1,5 +1,4 @@
 import Entity from './Entity';
-import CampaignService from '../services/CampaignService';
 import { StatusUtils } from '@acdi/efem-dapp';
 import { Status } from '@acdi/efem-dapp';
 import { web3Utils } from 'commons';
@@ -103,17 +102,6 @@ class Campaign extends Entity {
 
   get isPending() {
     return this.status.name === Campaign.PENDING.name;
-  }
-
-  /**
-   * Cancel the campaign in feathers and blockchain
-   *
-   * @param from        Either the owner or reviewer. Whoever is canceling the campaign
-   * @param afterCreate Callback function once a transaction is created
-   * @param afterMined  Callback function once the transaction is mined and feathers updated
-   */
-  cancel(from, afterCreate, afterMined) {
-    CampaignService.cancel(this, from, afterCreate, afterMined);
   }
 
   get dacIds() {
