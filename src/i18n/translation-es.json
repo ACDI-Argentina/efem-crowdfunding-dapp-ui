@@ -451,16 +451,25 @@
     "faqTitle": "Preguntas frecuentes",
     "faqSubtitle1": "¿Tenés preguntas?",
     "faqSubtitle2": "Tenemos respuestas para vos",
-    "faq1Question": "Pregunta 1",
-    "faq1Answer": "Respuesta 1",
-    "faq2Question": "Pregunta 2",
-    "faq2Answer": "Respuesta 2",
-    "faq3Question": "Pregunta 3",
-    "faq3Answer": "Respuesta 3",
-    "faq4Question": "Pregunta 4",
-    "faq4Answer": "Respuesta 4",
-    "faq5Question": "Pregunta 5",
-    "faq5Answer": "Respuesta 5",
+    
+    "faq1Question": "¿Cómo funciona Give4Forest?",
+    "faq1Answer": "Give4Forest es una plataforma descentralizada de recaudación de fondos en criptomonedas para el financiamiento temprano de soluciones digitales orientadas a la protección y desarrollo de la naturaleza y las comunidades que la habitan.<br/><br/>La plataforma está integrada por tres (3) entidades que manejan el flujo de donaciones en el sistema. Cada una de estas entidades corresponde a uno o más smart contracts.<br/><br/><ul><li>DACs: comunidades construidas alrededor de una causa a la que los usuarios pueden donar. Cada DAC es propiedad de un Delegate que puede delegar las donaciones a las soluciones que financian acciones que apoyan la misión del DAC.</li><li>Soluciones: proyectos individuales asociados a un Campaign Manager, que tienen Milestones a través de los cuales el proyecto puede obtener financiación.</li><li>Milestones: hitos dentro de una Solución, que son la única forma de sacar los fondos donados del sistema, bajo certificación de cumplimiento. Los hitos propuestos deben ser aprobados por el Campaign Manager y deben seguir un flujo de trabajo donde varias personas puedan interactuar con él, para garantizar que se logre el hito.</li></ul></br>Los DAC y las Soluciones pueden vincularse entre sí, pero también pueden existir como entidades independientes.",
+    
+    "faq2Question": "¿Qué criptomonedas acepta la plataforma?",
+    "faq2Answer": "Give4Forest opera sobre la red de <linkRsk>RSK</linkRsk>, la plataforma de smart contracts más segura, protegida por la red Bitcoin. Acepta la criptomoneda nativa RBTC de RSK y los tokens ERC20 RIF y DOC. El donante de fondos puede colaborar con la solución tecnológica completa o con un hito.",
+
+    "faq3Question": "¿Qué significa que la plataforma está asociada a certificados descentralizados?",
+    "faq3Answer": "Cada solución presentada tiene un único rol asociado, el Campaign Manager habilitado para financiar un Milestone con donaciones delegadas a la solución. Pero a su vez, cada solución tiene un Campaign Reviewer, responsable de auditar el cumplimiento de cada hito, certificando la finalización del mismo, pudiendo cancelar el proyecto.",
+
+    "faq4Question": "¿Give4Forest cobra porcentaje sobre cada donación?",
+    "faq4Answer": "No, la plataforma no cobra comisión sobre las donaciones. El costo implicado corresponde únicamente al coste propio de transacción en criptomonedas al momento de la misma. Para ayudar a hacer crecer a Give for forest y posibilitar la financiación de más proyectos, se puede colaborar aquí.",
+
+    "faq5Question": "¿Cómo se garantiza la transparencia de fondos?",
+    "faq5Answer": "El flujo de recaudación y liberación de fondos puede visualizarse en cada proyecto.<br/>Por proyecto existen 7 roles con alcance limitado. Un donante puede donar a una solución o directamente a un hito o milestone. Las donaciones pueden bloquearse en un Milestone dentro de la solución. La única forma en que un beneficiario puede retirar fondos del sistema es completando con éxito un Milestone, mediante certificación del Campaign Reviewer.<br/>Para más información visite <linkGive4ForestDoc>Give4Forest Doc</linkGive4ForestDoc>.",
+
+    "faq6Question": "¿Qué datos del donante son visibles?",
+    "faq6Answer": "La plataforma ofrece dos modalidades de uso: mediante registro o anónima. En cualquiera de los casos, la dirección de la wallet es visible. Para donaciones mayores a 10.000 USD requerirá el registro del donante en la plataforma.",
+
 
     "usersTitle": "Usuarios",
     "userProfileTitle": "Mi perfil",

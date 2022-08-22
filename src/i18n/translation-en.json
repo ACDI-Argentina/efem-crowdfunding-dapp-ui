@@ -449,16 +449,24 @@
     "faqTitle": "Frequent questions",
     "faqSubtitle1": "Do you have questions?",
     "faqSubtitle2": "We have answers for you",
-    "faq1Question": "Question 1",
-    "faq1Answer": "Answer 1",
-    "faq2Question": "Question 2",
-    "faq2Answer": "Answer 2",
-    "faq3Question": "Question 3",
-    "faq3Answer": "Answer 3",
-    "faq4Question": "Question 4",
-    "faq4Answer": "Answer 4",
-    "faq5Question": "Question 5",
-    "faq5Answer": "Answer 5",
+    
+    "faq1Question": "How Give4Forest works?",
+    "faq1Answer": "Give4Forest is a decentralized cryptocurrency fundraising platform for early financing of digital solutions aimed at the protection and development of nature and the communities that inhabit it.<br/><br/>The platform is made up of three (3) entities that manage the flow of donations in the system. Each of these entities corresponds to one or more smart contracts.<br/><br/><ul><li>DACs: Communities built around a cause that users can donate to. Each DAC is owned by a Delegate who can delegate donations to solutions that fund actions that support the DAC's mission.</li><li>Solutions: individual projects associated with a Campaign Manager, which have Milestones through which the project can obtain funding.</li><li>Milestones: milestones within a Solution, which are the only way to remove the donated funds from the system, under certification of compliance. Proposed milestones must be approved by the Campaign Manager and must follow a multi-person workflow to ensure the milestone is achieved.</li></ul></br>DACs and Solutions may be linked to each other, but may also exist as independent entities.",
+    
+    "faq2Question": "Which cryptocurrencies does the platform accept?",
+    "faq2Answer": "Give4Forest operates on the <linkRsk>RSK</linkRsk> network, the most secure smart contract platform, protected by the Bitcoin network. It accepts RSK's native RBTC cryptocurrency and ERC20 RIF and DOC tokens. The funder can support the full technology solution or a milestone.",
+
+    "faq3Question": "What do decentralized certifications mean?",
+    "faq3Answer": "Each solution has an associated role, the Campaign Manager, enabled to fund a Milestone with donations delegated to the solution. But also, each solution has a Campaign Reviewer, responsible for auditing compliance with each milestone, certifying its completion, and being able to cancel the project.",
+
+    "faq4Question": "Does Give4Forest have a fee over donations?",
+    "faq4Answer": "No fee charged. The cost involved responds only to the transaction cost in cryptocurrencies at the time of the transaction. To help grow Give for forest and enable the financing of more projects, you can collaborate here.",
+
+    "faq5Question": "How is transparency guaranteed?",
+    "faq5Answer": "Donations and funds release can be viewed at each project.<br/>There are 7 roles per project with limited scope. A donor can donate to a solution or to a milestone. Donations can be locked into a Milestone within the solution. The only way a beneficiary can withdraw funds from the system is by successfully completing a Milestone, through Campaign Reviewer certification.<br/>For more information visit <linkGive4ForestDoc>Give4Forest Doc</linkGive4ForestDoc>.",
+
+    "faq6Question": "Is the donor´s data visible?",
+    "faq6Answer": "The platform offers two usage modes: through registration or anonymously. Only the wallet address is visible. For donations greater than 10,000 USD, it will be required the registration of the donor on the platform.",
 
     "usersTitle": "Users",
     "userProfileTitle": "My profile",

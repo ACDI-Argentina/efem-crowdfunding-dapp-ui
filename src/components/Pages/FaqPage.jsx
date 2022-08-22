@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
-import { withTranslation } from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next'
 import Page from './Page'
 import Background from 'components/views/Background'
 import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
+import { Grid, Link } from '@material-ui/core'
 
 /**
  * Visualización de FAQ.
@@ -43,7 +43,8 @@ class FaqPage extends Component {
                   {t('faq1Question')}
                 </Typography>
                 <Typography variant="body2">
-                  {t('faq1Answer')}
+                  <Trans i18nKey="faq1Answer"
+                    components={{ br: <br/>, ul: <ul />, li: <li /> }} />
                 </Typography>
               </Paper>
 
@@ -52,7 +53,10 @@ class FaqPage extends Component {
                   {t('faq2Question')}
                 </Typography>
                 <Typography variant="body2">
-                  {t('faq2Answer')}
+                  <Trans i18nKey="faq2Answer"
+                    components={{ 
+                      linkRsk: <Link href={"https://www.rsk.co/es/faqs"}>RSK</Link>,
+                      br: <br/>, ul: <ul />, li: <li /> }} />
                 </Typography>
               </Paper>
               
@@ -79,7 +83,19 @@ class FaqPage extends Component {
                   {t('faq5Question')}
                 </Typography>
                 <Typography variant="body2">
-                  {t('faq5Answer')}
+                  <Trans i18nKey="faq5Answer"
+                    components={{ 
+                      linkGive4ForestDoc: <Link href={"https://github.com/ACDI-Argentina/give-4-forest/wiki/give-4-forest-definition"}>Give4Forest Doc</Link>,
+                      br: <br/>, ul: <ul />, li: <li /> }} />
+                </Typography>
+              </Paper>
+
+              <Paper className={classes.faqPanel}>
+                <Typography variant="subtitle2" gutterBottom>
+                  {t('faq6Question')}
+                </Typography>
+                <Typography variant="body2">
+                  {t('faq6Answer')}
                 </Typography>
               </Paper>
             </Grid>
