@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-
 import localForage from 'localforage';
 import * as serviceWorker from './serviceWorker';
 import Application from './containers/Application';
@@ -9,9 +8,7 @@ import { Provider } from 'react-redux'
 import { store } from './redux/store'
 import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@mui/material/styles";
-
 import './i18n/i18n';
-
 import "assets/scss/material-kit-react.scss?v=1.9.0";
 import AccountListener from 'redux/listeners/AccountListener';
 import TransactionsListener from 'redux/listeners/TransactionesListener';
@@ -48,13 +45,19 @@ const theme = createTheme({
       dark: '#C62828'
     },
     text: {
+      primary: '#000000',
       secondary: '#BDBDBD'
-    },
-    fontFamily: '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
+    }
   },
   typography: {
-    "fontFamily": '"Poppins", "Roboto", "Helvetica", "Arial", sans-serif'
-   }
+    fontFamily: 'Poppins',
+    h3: {
+      fontWeight: 600
+    },
+    h5: {
+      fontWeight: 600
+    }
+  }
 });
 
 const rootElement = document.getElementById('root');

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid'
-import { withTranslation } from 'react-i18next';
+import { withTranslation, Trans } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles';
 import platformFeaturesBackground from "assets/img/platform-features-background.png";
 import Typography from '@material-ui/core/Typography';
@@ -27,7 +27,7 @@ class PlatformFeatures extends Component {
           className={classes.container}>
 
           <Grid item xs={8}>
-            <Typography variant="h3" color="textSecondary">
+            <Typography variant="h3" className={classes.text}>
               {t('platformFeaturesTitle')}
             </Typography>
           </Grid>
@@ -36,19 +36,22 @@ class PlatformFeatures extends Component {
 
             <Grid container
               direction="row"
-              justifyContent="center"
-              alignItems="flex-start"
-              spacing={1}>
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={5}>
 
-              <Grid item xs={5}>
-                <img src={require("assets/img/platformFeatures1.jpg")} className={classes.image} />
+              <Grid item xs={6}>
+                <img src={require("assets/img/platformFeatures1.png")} className={classes.image} />
               </Grid>
-              <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom>
+              <Grid item xs={5}>
+                <Typography variant="h4"
+                  className={classes.text}
+                  gutterBottom>
                   {t('platformFeatures1Title')}
                 </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {t('platformFeatures1Text')}
+                <Typography variant="body1"
+                  className={classes.text}>
+                  <Trans i18nKey="platformFeatures1Text" components={{ b: <b /> }} />
                 </Typography>
               </Grid>
             </Grid>
@@ -58,42 +61,48 @@ class PlatformFeatures extends Component {
 
             <Grid container
               direction="row"
-              justifyContent="center"
-              alignItems="flex-start"
-              spacing={1}>
-
-              <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom>
-                  {t('platformFeatures2Title')}
-                </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {t('platformFeatures2Text')}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={5} style={{ textAlign: 'right' }}>
-                <img src={require("assets/img/platformFeatures2.jpg")} className={classes.image} />
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={8}>
-
-            <Grid container
-              direction="row"
-              justifyContent="center"
-              alignItems="flex-start"
-              spacing={1}>
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={5}>
 
               <Grid item xs={5}>
-                <img src={require("assets/img/platformFeatures3.jpg")} className={classes.image} />
+                <Typography variant="h4"
+                  className={classes.text}
+                  gutterBottom>
+                  {t('platformFeatures2Title')}
+                </Typography>
+                <Typography variant="body1"
+                  className={classes.text}>
+                  <Trans i18nKey="platformFeatures2Text" components={{ b: <b /> }} />
+                </Typography>
               </Grid>
-              <Grid item xs={7}>
-                <Typography variant="h4" color="textSecondary" gutterBottom>
+
+              <Grid item xs={6} style={{ textAlign: 'right' }}>
+                <img src={require("assets/img/platformFeatures2.png")} className={classes.image} />
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={8}>
+
+            <Grid container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={5}>
+
+              <Grid item xs={6}>
+                <img src={require("assets/img/platformFeatures3.png")} className={classes.image} />
+              </Grid>
+              <Grid item xs={5}>
+                <Typography variant="h4"
+                  className={classes.text}
+                  gutterBottom>
                   {t('platformFeatures3Title')}
                 </Typography>
-                <Typography variant="body1" color="textSecondary">
-                  {t('platformFeatures3Text')}
+                <Typography variant="body1"
+                  className={classes.text}>
+                  <Trans i18nKey="platformFeatures3Text" components={{ b: <b /> }} />
                 </Typography>
               </Grid>
             </Grid>
@@ -114,8 +123,11 @@ const styles = theme => ({
     paddingTop: '55em',
     paddingBottom: '5em'
   },
+  text: {
+    color: theme.palette.common.white
+  },
   image: {
-    width: "80%"
+    width: "100%"
   }
 });
 

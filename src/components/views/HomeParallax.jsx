@@ -9,10 +9,16 @@ import Typography from '@material-ui/core/Typography';
 import { container } from "assets/jss/material-kit-react.js";
 import parallaxBkg from "assets/img/landing-bg.jpg";
 
-const handleClickAbout = () => {
-    history.push(`/about`);
+const handleClickVerSoluciones = () => {
+    history.push({
+        pathname: ``,
+        hash: `#campaigns`
+    });
 };
 
+const handleClickCrearSoluciones = () => {
+    history.push('/create-solutions')
+}
 
 /**
  * The HomeParallax section
@@ -50,13 +56,13 @@ class HomeParallax extends Component {
                                 spacing={2}>
 
                                 <Grid item>
-                                    <PrimaryButton onClick={() => handleClickAbout()}>
-                                        {t('landingPageConocerSoluciones')}
+                                    <PrimaryButton onClick={() => handleClickVerSoluciones()}>
+                                        {t('landingPageVerSoluciones')}
                                     </PrimaryButton>
                                 </Grid>
                                 <Grid item>
-                                    <SecondaryButton onClick={() => handleClickAbout()}>
-                                        {t('landingPageProponerSoluciones')}
+                                    <SecondaryButton onClick={() => handleClickCrearSoluciones()}>
+                                        {t('landingPageCrearSoluciones')}
                                     </SecondaryButton>
                                 </Grid>
                             </Grid>

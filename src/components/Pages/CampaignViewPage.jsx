@@ -17,10 +17,6 @@ import DonationList from '../DonationList'
 import DonationsBalance from '../DonationsBalance'
 import ProfileCardMini from '../ProfileCardMini'
 import CustomTabs from 'components/CustomTabs/CustomTabs';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import RedditIcon from '@material-ui/icons/Reddit';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import { Avatar } from '@material-ui/core'
 import RichTextViewer from 'components/RichTextViewer';
 import SupportEntity from 'components/SupportEntity';
@@ -32,6 +28,7 @@ import StatusIndicator from 'components/StatusIndicator';
 import MilestoneNew from 'components/MilestoneNew';
 import CampaignEdit from 'components/CampaignEdit';
 import CategoryChipList from 'components/CategoryChipList';
+import { SocialIcon } from 'react-social-icons';
 
 /**
  * Visualización de Campaign.
@@ -43,8 +40,6 @@ class CampaignViewPage extends Component {
     super(props);
     this.state = {};
   }
-
-
 
   render() {
 
@@ -114,36 +109,6 @@ class CampaignViewPage extends Component {
         )
       }];
 
-    function compartirWhatsapp(e) {
-      e.preventDefault();
-      const params = new URLSearchParams();
-      params.append("text", "*" + campaign.title + "*\n" + t('campaignShareTitle') + "\n" + window.location.href);
-      window.open("https://web.whatsapp.com/send?" + params.toString(), "_blank");
-    }
-
-    function compartirReddit(e) {
-      e.preventDefault();
-      const params = new URLSearchParams();
-      params.append("title", campaign.title);
-      params.append("text", t('campaignShareTitle') + "\n" + window.location.href);
-      window.open("https://www.reddit.com/submit?" + params.toString(), "_blank");
-    }
-
-    function compartirTelegram(e) {
-      e.preventDefault();
-      const params = new URLSearchParams();
-      params.append("text", campaign.title + ". " + t('campaignShareTitle'));
-      params.append("url", window.location.href);
-      window.open("https://telegram.me/share/url?" + params.toString(), "_blank");
-    }
-
-    function compartirFacebook(e) {
-      e.preventDefault();
-      const params = new URLSearchParams();
-      params.append("u", window.location.href);
-      window.open("https://www.facebook.com/sharer/sharer.php?" + params.toString(), "_blank");
-    }
-
     return (
       <Page>
 
@@ -180,31 +145,12 @@ class CampaignViewPage extends Component {
                   {campaign.abstract}
                 </Typography>
 
-                <Grid container
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  className={classes.socialMediaContainer}>
-                  <Grid item xs={1}>
-                    <TelegramIcon
-                      className={classes.socialMediaIcon}
-                      onClick={compartirTelegram} />
-                  </Grid>
-                  <Grid item xs={1}>
-                    <RedditIcon
-                      className={classes.socialMediaIcon}
-                      onClick={compartirReddit} />
-                  </Grid>
-                  <Grid item xs={1}>
-                    <WhatsAppIcon
-                      className={classes.socialMediaIcon}
-                      onClick={compartirWhatsapp} />
-                  </Grid>
-                  <Grid item xs={1}>
-                    <FacebookIcon
-                      className={classes.socialMediaIcon}
-                      onClick={compartirFacebook} />
-                  </Grid>
-                </Grid>
+                <SocialIcon url={campaign.url}
+                  className={classes.socialMediaIcon}
+                  bgColor="#FFF"
+                  color="#FF5D49"
+                  target="_blank"
+                  rel="noopener noreferrer" />
               </Grid>
 
               <Grid item xs={3}>
@@ -316,12 +262,12 @@ const styles = theme => ({
     height: '6em',
     margin: 'auto'
   },
-  socialMediaContainer: {
-    marginTop: '1em'
-  },
   socialMediaIcon: {
+    marginTop: '1em',
     color: theme.palette.primary.main,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    maxWidth: '2em',
+    maxHeight: '2em'
   },
   center: {
     textAlign: 'center'

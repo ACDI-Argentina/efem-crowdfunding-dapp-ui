@@ -23,7 +23,7 @@ class BlockchainBenefitCard extends Component {
             direction="row"
             justifyContent="center"
             alignItems="center"
-            spacing={5}
+            spacing={3}
             className={classes.container}>
             <Grid item xs={12} className={classes.grid}>
               <img src={iconSrc} className={classes.image} />
@@ -43,8 +43,8 @@ class BlockchainBenefitCard extends Component {
 const styles = theme => ({
   root: {
     color: theme.palette.common.white,
-    paddingTop: '1em',
-    paddingBottom: '1em',
+    paddingTop: '0.75em',
+    paddingBottom: '0.75em',
     borderRadius: "5px",
     height: "100%",
     "&:hover": {

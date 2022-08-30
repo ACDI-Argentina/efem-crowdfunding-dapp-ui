@@ -1,0 +1,26 @@
+Issue #27: Ajustes web
+
+Home
+Página 3: Se hicieron ajustes sobre los espacios en blanco para mejorar el scrolling. No se puede realizar con exactitud sobre los puntos de corte requeridos.
+Página 4: Hecho.
+Página 5: Se configuró color sólido en el header.
+Página 6: Hecho.
+Página 7: No hice los cambios porque no puedo descargar de figma la imagen exacta que requieren. La adjuntarían al issue por favor?
+Página 8: Hecho.
+Página 9: Hecho.
+
+About us
+Página 11: Hecho. Falta foto.
+Página 12: Hecho. Falta foto.
+Página 13: Hecho.
+Página 14: Hecho.
+
+FAQs
+Página 16: Hecho.
+
+Solución caso Kokue
+Página 18: El proyecto solo puede tener una única red social al crearse, por lo que hay que elegir una al moento de darlo de alta. El botón de donar aparece cuando el usuario conecta la wallet.
+Página 19: No se hicieron cambios en la aplicación porque son cambios de cambios de contenido.
+Página 20: No se hicieron cambios en la aplicación porque son cambios de cambios de contenido.
+Página 21: En progreso. Impactar en Testing los hitos.
+

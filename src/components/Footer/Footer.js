@@ -4,11 +4,25 @@ import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import { SocialIcon } from 'react-social-icons';
 import { Link } from 'react-router-dom';
+import { history } from '@acdi/efem-dapp';
 
 /**
  * The Footer section
  */
 class Footer extends Component {
+
+  handleClickSoluciones = () => {
+    history.push({
+      pathname: ``,
+      hash: `#campaigns`
+    });
+  };
+
+  handleClickNews = () => {
+    history.push({
+      pathname: `/news`
+    });
+  };
 
   render() {
     const { classes, t, } = this.props;
@@ -29,47 +43,46 @@ class Footer extends Component {
             <Link className={classes.sectionlink} to="/about" underline="always">
               {t('aboutUs')}
             </Link>
-            <Link className={classes.sectionlink} to="/" underline="always">
+            <Link className={classes.sectionlink}
+              underline="always"
+              onClick={() => this.handleClickSoluciones()}>
               {t('solutions')}
             </Link>
-            <Link className={classes.sectionlink} to="/" underline="always">
+            <Link className={classes.sectionlink}
+              underline="always"
+              onClick={() => this.handleClickNews()}>
               {t('news')}
             </Link>
-            {/*<SocialIcon url="https://www.facebook.com/ACDIargentina%20/"
-              className={classes.socialMediaIcon}
-              bgColor="#FFF"
-              color="#7868E5"
-              target="_blank" rel="noopener noreferrer" />*/}
-            {/*<SocialIcon url="https://www.instagram.com/acdiargentina/"
-              className={classes.socialMediaIcon}
-              bgColor="#FFF"
-              color="#7868E5"
-              target="_blank" rel="noopener noreferrer" />*/}
-            {/*<SocialIcon url="https://twitter.com/ACDIargentina"
-              className={classes.socialMediaIcon}
-              bgColor="#FFF"
-              color="#7868E5"
-              target="_blank" rel="noopener noreferrer" />*/}
-            {/*<SocialIcon url="https://www.linkedin.com/company/acdiargentina"
-              className={classes.socialMediaIcon}
-              bgColor="#FFF"
-              color="#7868E5"
-              target="_blank" rel="noopener noreferrer" />*/}
-            <SocialIcon url="https://twitter.com"
+            <SocialIcon url="https://twitter.com/Give4Forest"
               className={classes.socialMediaIcon}
               bgColor="#FFF"
               color="#FF5D49"
-              target="_blank" rel="noopener noreferrer" />
-            <SocialIcon url="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer" />
+            <SocialIcon url="https://www.linkedin.com/company/give4forest"
               className={classes.socialMediaIcon}
               bgColor="#FFF"
               color="#FF5D49"
-              target="_blank" rel="noopener noreferrer" />
-            <SocialIcon url="https://telegram.org"
+              target="_blank"
+              rel="noopener noreferrer" />
+            <SocialIcon url="https://t.me/joinchat/et-GV-UFNsdjNzEx"
               className={classes.socialMediaIcon}
               bgColor="#FFF"
               color="#FF5D49"
-              target="_blank" rel="noopener noreferrer" />
+              target="_blank"
+              rel="noopener noreferrer" />
+            <SocialIcon url="https://medium.com/@give4forest"
+              className={classes.socialMediaIcon}
+              bgColor="#FFF"
+              color="#FF5D49"
+              target="_blank"
+              rel="noopener noreferrer" />
+            <SocialIcon url="https://www.instagram.com/giveforforest"
+              className={classes.socialMediaIcon}
+              bgColor="#FFF"
+              color="#FF5D49"
+              target="_blank"
+              rel="noopener noreferrer" />
           </Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={1}></Grid>

@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
 
 const styles = (theme) => ({
   root: {
@@ -12,15 +11,16 @@ const styles = (theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
-  tabs: {
-    backgroundColor: theme.palette.secondary.light,
+  tabs: {   
+    
   },
   tab: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.primary.dark,
+    textTransform: 'none'
   },
   tabSelected: {
-    color: theme.palette.common.white,
-    backgroundColor: theme.palette.secondary.dark
+    color: theme.palette.secondary.main,
+    
   },
   tabBox: {
     paddingTop: '1em'
@@ -59,29 +59,25 @@ export default function CustomTabs(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static"
-        className={classes.tabs}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          centered
-        >
-
-          {tabs.map((prop, key) => {
-            return (
-              <Tab
-                key={key}
-                label={prop.tabName}
-                classes={{
-                  root: classes.tab,
-                  selected: classes.tabSelected
-                }}
-              />
-            );
-          })}
-        </Tabs>
-      </AppBar>
+      <Tabs
+        className={classes.tabs}
+        value={value}
+        onChange={handleChange}
+        centered
+      >
+        {tabs.map((prop, key) => {
+          return (
+            <Tab
+              key={key}
+              label={prop.tabName}
+              classes={{
+                root: classes.tab,
+                selected: classes.tabSelected
+              }}
+            />
+          );
+        })}
+      </Tabs>
 
       {tabs.map((prop, key) => {
         if (key === value) {

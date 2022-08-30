@@ -9,7 +9,7 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 
-const styles = {
+const styles = (theme) => ({
   cardTitle: {
     float: "left",
     padding: "10px 10px 10px 0px",
@@ -26,6 +26,7 @@ const styles = {
     minHeight: "unset !important"
   },
   tabRootButton: {
+    textTransform: 'capitalize !important',
     minHeight: "unset !important",
     minWidth: "unset !important",
     width: "unset !important",
@@ -35,19 +36,18 @@ const styles = {
     padding: "10px 20px",
     borderRadius: "25px",
     lineHeight: "24px",
-    border: "1px solid #004634",
-    color: "#004634",
+    border: `1px solid ${theme.palette.primary.dark}`,
+    color: theme.palette.primary.dark,
     marginRight: "5px",
-    fontWeight: "500",
+    fontWeight: "600",
     fontSize: "12px",
     "&:last-child": {
       marginRight: "0px"
     }
   },
   tabSelected: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    backgroundColor: "#39CA98",
-    border: "1px solid #39CA98"
+    backgroundColor: theme.palette.primary.light,
+    border: `1px solid ${theme.palette.primary.light}`
   },
   tabWrapper: {
     display: "inline-block",
@@ -68,7 +68,7 @@ const styles = {
   tapPaper: {
     padding: '1em',
   }
-};
+});
 
 const useStyles = makeStyles(styles);
 

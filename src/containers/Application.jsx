@@ -8,7 +8,7 @@ import Sweetalert from 'sweetalert';
 import GA from 'lib/GoogleAnalytics';
 import { ScrollToTop } from '../lib/helpers';
 import config from '../configuration';
-import { ErrorBoundary, history } from '@acdi/efem-dapp';
+import { ErrorBoundary, history, NavigateAnchor } from '@acdi/efem-dapp';
 import '../lib/validators';
 import { connect } from 'react-redux'
 import { fetchDacs } from '../redux/reducers/dacsSlice'
@@ -71,7 +71,7 @@ class Application extends Component {
 
   render() {
     const { currentUser } = this.props;
-
+    NavigateAnchor(history);
     return (
       <ErrorBoundary>
         <Web3App>

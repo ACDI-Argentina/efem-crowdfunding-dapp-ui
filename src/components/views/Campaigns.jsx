@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { selectCampaigns } from '../../redux/reducers/campaignsSlice'
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
-import Badge from "components/Badge/Badge.js";
 import CustomTabsOld from 'components/CustomTabs/CustomTabsOld';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
@@ -28,13 +27,8 @@ class Campaigns extends Component {
     const { classes, t, campaigns } = this.props;
     const { isLoading, hasError } = this.state;
 
-    // TODO Por incorporación de Redux, se fija el total
-    // como el tamaño de las campañas.
-    // Falta el desarrollo del Paginado.
-    var total = campaigns.length;
-
     return (
-      <div className={classes.root}>
+      <div id="campaigns" className={classes.root}>
 
         <Grid container
           direction="row"
@@ -48,12 +42,6 @@ class Campaigns extends Component {
               gutterBottom
               className={classes.title}>
               {t('campaignsTitle')}
-              {total > 0 &&
-                <Badge color="success"
-                  className={classes.badge}>
-                  {total}
-                </Badge>
-              }
             </Typography>
           </Grid>
 
@@ -115,15 +103,15 @@ class Campaigns extends Component {
 
 
 const styles = theme => ({
-
   root: {
 
   },
   container: {
-    padding: "4em 0"
+    /*padding: "4em 0"*/
   },
   title: {
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    fontWeight: 600
   },
   badge: {
     marginLeft: '2em'

@@ -13,9 +13,11 @@ import aboutFeatureDesarrollo from "assets/img/about-feature-desarrollo.png";
 import config from "configuration";
 import { ipfsService } from "commons";
 import Roadmap from "components/views/Roadmap";
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   header: {
+    marginTop: '6em',
     backgroundImage: "url(" + aboutBackground + ")",
     backgroundSize: "cover",
     height: "10em"
@@ -23,11 +25,20 @@ const useStyles = makeStyles(theme => ({
   headerGrid: {
     height: "100%"
   },
+  subTitle: {
+    textTransform: 'uppercase'
+  },
   title: {
-    marginTop: '0.5em'
+    marginTop: '0.25em'
   },
   description: {
     marginTop: '2em'
+  },
+  highlight: {
+    color: theme.palette.secondary.main
+  },
+  textTitle: {
+    fontWeight: 600
   },
   visionMision: {
     marginTop: '2em'
@@ -63,7 +74,10 @@ const useStyles = makeStyles(theme => ({
     margin: '1em'
   },
   teamMemberImage: {
-    width: '10em'
+    margin: 'auto',
+    marginBottom: '0.5em',
+    width: theme.spacing(12),
+    height: theme.spacing(12)
   },
   roadmap: {
     marginTop: '3em'
@@ -74,8 +88,7 @@ function AboutPage(props) {
   const classes = useStyles();
   const { t, ...rest } = props;
   return (
-    <Page showHeader={false}>
-
+    <Page>
 
       <Grid container
         direction="row"
@@ -90,7 +103,7 @@ function AboutPage(props) {
               alignItems="flex-end"
               className={classes.headerGrid}>
               <Grid item xs={8}>
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" className={classes.subTitle}>
                   {t('aboutSubtitle')}
                 </Typography>
               </Grid>
@@ -98,15 +111,16 @@ function AboutPage(props) {
           </div>
         </Grid>
 
-        <Grid item xs={8} className={classes.title}>
-          <Typography variant="h4">
+        <Grid item xs={8}>
+          <Typography variant="h3" className={classes.title}>
             {t('aboutTitle')}
           </Typography>
         </Grid>
 
         <Grid item xs={8} className={classes.description}>
           <Typography variant="body2">
-            <Trans i18nKey="aboutDescription" />
+            <Trans i18nKey="aboutDescription"
+              components={{ b: <b className={classes.highlight} /> }} />
           </Typography>
         </Grid>
 
@@ -118,10 +132,10 @@ function AboutPage(props) {
             spacing={2}>
             <Grid item xs={6}>
               <Typography variant="body2">
-                <Trans i18nKey="aboutVision" components={{ h4: <h4 /> }} />
+                <Trans i18nKey="aboutVision" components={{ h3: <h3 className={classes.textTitle} /> }} />
               </Typography>
               <Typography variant="body2">
-                <Trans i18nKey="aboutMision" components={{ h4: <h4 /> }} />
+                <Trans i18nKey="aboutMision" components={{ h3: <h3 className={classes.textTitle} /> }} />
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.visionMisionRigth}>
@@ -171,7 +185,7 @@ function AboutPage(props) {
             spacing={4}>
             <Grid item xs={8}>
               <Typography variant="body2">
-                <Trans i18nKey="aboutWhy" components={{ h4: <h4 /> }} />
+                <Trans i18nKey="aboutWhy" components={{ h3: <h3 className={classes.textTitle} /> }} />
               </Typography>
             </Grid>
           </Grid>
@@ -182,18 +196,26 @@ function AboutPage(props) {
             direction="row"
             justifyContent="center"
             alignItems="flex-start"
-            spacing={4}>
+            spacing={2}>
             <Grid item xs={12} className={classes.teamTitle}>
               <Typography variant="h4">
                 {t('aboutUsTeam')}
               </Typography>
             </Grid>
 
-            {config.team.primary.map(member => {
+            {config.team.map(member => {
               const photo = ipfsService.resolveUrl(member.photoCid);
+              //const photo = ipfsService.resolveUrl('/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf');
               return (
-                <Grid item xs={2} className={classes.teamMember}>
-                  <img src={photo} className={classes.teamMemberImage} />
+                <Grid item
+                  xs={3}
+                  className={classes.teamMember}
+                  onClick={() => {
+                    window.open(member.link, "_blank");
+                  }}>
+                  <Avatar alt={member.name}
+                    src={photo}
+                    className={classes.teamMemberImage} />
                   <Typography variant="subtitle2">
                     {member.name}
                   </Typography>
@@ -203,19 +225,6 @@ function AboutPage(props) {
                 </Grid>
               )
             })}
-
-            <Grid item xs={12}></Grid>
-
-            {config.team.secondary.map(member => (
-              <Grid item xs={2} className={classes.teamMember}>
-                <Typography variant="subtitle2">
-                  {member.name}
-                </Typography>
-                <Typography variant="body2">
-                  {member.role}
-                </Typography>
-              </Grid>
-            ))}
           </Grid>
         </Grid>
 

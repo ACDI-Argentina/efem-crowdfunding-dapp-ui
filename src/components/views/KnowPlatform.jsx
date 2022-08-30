@@ -71,7 +71,7 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat'
   },
   container: {
-    padding: "12em 0",
+    padding: "12em 0px 5em 0px",
     alignItems: "center"
   },
   textHighlight: {

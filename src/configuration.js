@@ -100,44 +100,42 @@ const configurations = {
       defaultId: 1
     },
     categories: [
-      1, // Inclusión Financiera.
-      2, // Agricultura sostenible
-      3, // Acceso a mercados
-      4, // Adaptación climática
-      5  // Sostenimiento de Give4Forest
+      1, // Apps.
+      2, // Dapps
+      3, // Accesibilidad
     ],
-    team: {
-      primary: [
-        {
-          name: "Mauricio M.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        },
-        {
-          name: "Stephanie L.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        }
-      ],
-      secondary: [
-        {
-          name: "Belén Arostegui",
-          role: "Marketing & Communications"
-        },
-        {
-          name: "Mauricio Coronel",
-          role: "Developer IT (ver)"
-        },
-        {
-          name: "Lucía B. Cueto",
-          role: "Exp. & Program Devel. Manager"
-        },
-        {
-          name: "Gonzalo Paz",
-          role: "Social Media Manager"
-        },
-      ]
-    }
+    team: [
+      {
+        name: "Mauricio M.",
+        role: "Advisor",
+        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        link: "https://www.linkedin.com/in/mauriciomoresco"
+      },
+      {
+        name: "Belén Arostegui",
+        role: "Marketing & Communications",
+        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        link: "https://www.linkedin.com/in/belenarostegui"
+      },
+      {
+        name: "Mauricio Coronel",
+        role: "Lead Developer",
+        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
+      },
+      {
+        name: "Lucía B. Cueto",
+        role: "Exp. & Program Devel. Manager",
+        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
+      },
+      {
+        name: "Gonzalo Paz",
+        role: "Social Media Manager",
+        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        link: 'https://www.linkedin.com/in/gonzalo-paz'
+      }
+    ]
   },
   rsk_testnet: {
     network: {
@@ -216,44 +214,42 @@ const configurations = {
       defaultId: 1
     },
     categories: [
-      1, // Inclusión Financiera.
-      2, // Agricultura sostenible
-      3, // Acceso a mercados
-      4, // Adaptación climática
-      5  // Sostenimiento de Give4Forest
+      1, // Apps.
+      2, // Dapps
+      3, // Accesibilidad
     ],
-    team: {
-      primary: [
-        {
-          name: "Mauricio M.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        },
-        {
-          name: "Stephanie L.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        }
-      ],
-      secondary: [
-        {
-          name: "Belén Arostegui",
-          role: "Marketing & Communications"
-        },
-        {
-          name: "Mauricio Coronel",
-          role: "Developer IT (ver)"
-        },
-        {
-          name: "Lucía B. Cueto",
-          role: "Exp. & Program Devel. Manager"
-        },
-        {
-          name: "Gonzalo Paz",
-          role: "Social Media Manager"
-        },
-      ]
-    }
+    team: [
+      {
+        name: "Mauricio M.",
+        role: "Advisor",
+        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        link: "https://www.linkedin.com/in/mauriciomoresco"
+      },
+      {
+        name: "Belén Arostegui",
+        role: "Marketing & Communications",
+        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        link: "https://www.linkedin.com/in/belenarostegui"
+      },
+      {
+        name: "Mauricio Coronel",
+        role: "Lead Developer",
+        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
+      },
+      {
+        name: "Lucía B. Cueto",
+        role: "Exp. & Program Devel. Manager",
+        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
+      },
+      {
+        name: "Gonzalo Paz",
+        role: "Social Media Manager",
+        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        link: 'https://www.linkedin.com/in/gonzalo-paz'
+      }
+    ]
   },
   rsk_mainnet: {
     network: {
@@ -332,44 +328,42 @@ const configurations = {
       defaultId: 1
     },
     categories: [
-      1, // Inclusión Financiera.
-      2, // Agricultura sostenible
-      3, // Acceso a mercados
-      4, // Adaptación climática
-      5  // Sostenimiento de Give4Forest
+      1, // Apps.
+      2, // Dapps
+      3, // Accesibilidad
     ],
-    team: {
-      primary: [
-        {
-          name: "Mauricio M.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        },
-        {
-          name: "Stephanie L.",
-          role: "Advisor",
-          photoCid: "/ipfs/QmeCYvNowpitxcpR2Xs85cykjUksew2kuNJqzzbKL8onxf"
-        }
-      ],
-      secondary: [
-        {
-          name: "Belén Arostegui",
-          role: "Marketing & Communications"
-        },
-        {
-          name: "Mauricio Coronel",
-          role: "Developer IT (ver)"
-        },
-        {
-          name: "Lucía B. Cueto",
-          role: "Exp. & Program Devel. Manager"
-        },
-        {
-          name: "Gonzalo Paz",
-          role: "Social Media Manager"
-        },
-      ]
-    }
+    team: [
+      {
+        name: "Mauricio M.",
+        role: "Advisor",
+        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        link: "https://www.linkedin.com/in/mauriciomoresco"
+      },
+      {
+        name: "Belén Arostegui",
+        role: "Marketing & Communications",
+        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        link: "https://www.linkedin.com/in/belenarostegui"
+      },
+      {
+        name: "Mauricio Coronel",
+        role: "Lead Developer",
+        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
+      },
+      {
+        name: "Lucía B. Cueto",
+        role: "Exp. & Program Devel. Manager",
+        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
+      },
+      {
+        name: "Gonzalo Paz",
+        role: "Social Media Manager",
+        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        link: 'https://www.linkedin.com/in/gonzalo-paz'
+      }
+    ]
   }
 };
 

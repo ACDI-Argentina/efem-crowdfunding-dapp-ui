@@ -1,7 +1,7 @@
 {
     "give4forest": "Give for forest",
 
-    "landingPageTitle": "Cripto donaciones que nos conectan con el planeta",
+    "landingPageTitle": "Criptodonaciones que nos conectan con el planeta",
 
     "connectWallet": "Conectar billetera",
 
@@ -12,8 +12,8 @@
     "landingPageFinanceProject": "Financia tu proyecto",
     "landingPageMakeDonation": "Haz tu donación",
 
-    "landingPageConocerSoluciones": "Conocer soluciones",
-    "landingPageProponerSoluciones": "Proponer soluciones",
+    "landingPageVerSoluciones": "Ver soluciones",
+    "landingPageCrearSoluciones": "Crear soluciones",
 
     "knowPlatform1": "Give for Forest",
     "knowPlatform2": " activa las innovaciones digitales surgidas de las propias comunidades locales, a través de la fiabilidad de la tecnología Blockchain. Con mejores tecnologías podrán cuidar mejor a los bosques, y los bosques seguirán cuidando de todos nosotros.",
@@ -22,14 +22,14 @@
     "platformFeaturesTitle": "Generamos comunidad",
 
     "platformFeatures1Title": "Colaboración",
-    "platformFeatures1Text": "Unimos fuerzas en una red descentralizada para el cuidado de los bienes comunes.",
-    "platformFeatures2Title": "Conexión",
-    "platformFeatures2Text": "Conectamos innovaciones digitales con el crecimiento sostenible de nuestro planeta.",
+    "platformFeatures1Text": "Unimos fuerzas en una <b>red descentralizada</b> para el cuidado de los bienes comunes.",
+    "platformFeatures2Title": "Tecnología",
+    "platformFeatures2Text": "Conectamos <b>innovaciones digitales</b> con el crecimiento sostenible de nuestro planeta.",
     "platformFeatures3Title": "Transparencia",
-    "platformFeatures3Text": "Movilizamos donaciones con trazabilidad e incentivos para todas las partes través de la tecnología.",
+    "platformFeatures3Text": "Movilizamos donaciones con <b>trazabilidad e incentivos</b> para todas las partes través de la tecnología.",
 
     "blockchainBenefitsTitle": "Blockchain para el crecimiento",
-    "blockchainBenefitsDescription": "Una plataforma de financiación abierta y transparente, asociada a resultados certificados descentralizadamente.",
+    "blockchainBenefitsDescription": "Una plataforma de financiación abierta, sin permisos, transparente, asociada a resultados certificados descentralizadamente.",
 
     "blockchainBenefits1Legend": "Tu donación, sin comisiones",
     "blockchainBenefits2Legend": "Trazabilidad pública y en tiempo real",
@@ -392,7 +392,7 @@
     "milestoneNewTitle": "Nuevo Hito",
     "milestoneEditTitle": "Edición de Hito",
     "milestonesTitle": "Hitos",
-    "milestonesEnpty": "Aún no hay hitos",
+    "milestonesEmpty": "Aún no hay hitos",
     "milestoneTitle": "Título",
     "milestoneAbstract": "Resumen",
     "milestoneDescription": "Descripción",
@@ -421,23 +421,21 @@
     "categories": "Categorías",
     "categoriesEmpty": "No hay categorías",
     "categoriesHelp": "¿Cuáles de estas categorías describen mejor tu campaña?",
-    "categoryAllLabel": "Todas",
-    "category1Label": "Inclusión financiera",
-    "category2Label": "Agricultura sostenible",
-    "category3Label": "Acceso a mercados",
-    "category4Label": "Adaptación climática",
-    "category5Label": "Sostenimiento de Give4Forest",
+    "categoryAllLabel": "Todos",
+    "category1Label": "Apps",
+    "category2Label": "Dapps",
+    "category3Label": "Accesibilidad",
 
     "aboutSubtitle": "Nosotros",
     "aboutTitle": "Give for forest",
-    "aboutDescription": "<strong>Creemos</strong> que las comunidades que habitan las selvas, los humedales, las praderas, son las más adecuadas para cuidar estos bienes comunes globales, porque su vida depende diariamente de ellos.<br/><br/><strong>Vemos</strong> continuamente como en estas comunidades locales surgen ideas, soluciones y emprendimientos basados en tecnologías digitales para ayudar a las personas que habitan, trabajan y cuidan el capital natural de todos nosotros. Sin embargo enfrentan a diario dificultades estructurales para un desarrollo sostenible y el acceso a la financiación para emprender sus soluciones e ideas.<br/><br/><strong>Queremos</strong> ayudar a estas emprendedoras y emprendedores a conseguir el capital inicial para desarrollar y hacer crecer sus economías locales a través de soluciones digitales que conserven nuestro planeta.",
-    "aboutVision": "<h4>Nuestra visión</h4>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la fuente de progreso de las economías locales en armonía con nuestro planeta.",
-    "aboutMision": "<h4>Nuestra misión</h4>Give for forest nace con el objetivo de vincular la necesidad de financiación temprana de las creaciones y soluciones digitales orientadas a la naturaleza con aquellas personas, empresas e instituciones que creen en la fuerza transformadora de las personas que emprenden y utilizan todo el potencial de las tecnologías digitales para el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
+    "aboutDescription": "<b>Creemos</b> que las comunidades que habitan las selvas, los humedales, las praderas, son las más adecuadas para cuidar estos bienes comunes globales, porque su vida depende diariamente de ellos.<br/><br/><b>Vemos</b> continuamente como en estas comunidades locales surgen ideas, soluciones y emprendimientos basados en tecnologías digitales para ayudar a las personas que habitan, trabajan y cuidan el capital natural de todos nosotros. Sin embargo enfrentan a diario dificultades estructurales para un desarrollo sostenible y el acceso a la financiación para emprender sus soluciones e ideas.<br/><br/><b>Queremos</b> ayudar a estas emprendedoras y emprendedores a conseguir el capital inicial para desarrollar y hacer crecer sus economías locales a través de soluciones digitales que conserven nuestro planeta.",
+    "aboutVision": "<h3>Nuestra visión</h3>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la fuente de progreso de las economías locales en armonía con nuestro planeta.",
+    "aboutMision": "<h3>Nuestra misión</h3>Give for forest nace con el objetivo de vincular la necesidad de financiación temprana de las creaciones y soluciones digitales orientadas a la naturaleza con aquellas personas, empresas e instituciones que creen en la fuerza transformadora de las personas que emprenden y utilizan todo el potencial de las tecnologías digitales para el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
     "aboutFeatureFinanciacion": "Financiación temprana",
     "aboutFeatureTecnologia": "Tecnología blockchain",
     "aboutFeatureSolucion": "Soluciones digitales",
     "aboutFeatureDesarrollo": "Preservación, desarrollo, regeneración",
-    "aboutWhy": "<h4>¿Por qué los bosques?</h4>Para nosotros <strong>Forest</strong> es una simplificación denominativa de todos los ambientes naturales fuentes de salud para nuestro planeta. Nuestra salud depende de la salud de la naturaleza y su cuidado y regeneración, la herramienta para hacer frente al cambio climático. Sin embargo, vemos a diario como estos ambientes son descuidados, destruidos y mal aprovechados afectando inmediatamente a las comunidades que lo habitan y más tarde o más temprano a toda la humanidad.<h4>La revolución de la tecnología</h4>Un desarrollo sostenible necesita de una revolución tecnológica y una evolución humana más solidaria y conectada con la naturaleza. Creemos que la tecnología blockchain, la criptoeconomía y las herramientas de finanzas descentralizadas pueden brindar soluciones innovadoras para traccionar recursos financieros a gran escala y orientarlos hacia emprendimientos que impulsen una economía ecológica.",
+    "aboutWhy": "<h3>¿Por qué los bosques?</h3><br/>Para nosotros <strong>Forest</strong> es una simplificación denominativa de todos los ambientes naturales fuentes de salud para nuestro planeta. Nuestra salud depende de la salud de la naturaleza y su cuidado y regeneración, la herramienta para hacer frente al cambio climático. Sin embargo, vemos a diario como estos ambientes son descuidados, destruidos y mal aprovechados afectando inmediatamente a las comunidades que lo habitan y más tarde o más temprano a toda la humanidad.<h3>La revolución de la tecnología</h3><br/>Un desarrollo sostenible necesita de una revolución tecnológica y una evolución humana más solidaria y conectada con la naturaleza. Creemos que la tecnología blockchain, la criptoeconomía y las herramientas de finanzas descentralizadas pueden brindar soluciones innovadoras para traccionar recursos financieros a gran escala y orientarlos hacia emprendimientos que impulsen una economía ecológica.",
     "aboutUsTeam": "¿Quiénes somos?",
 
     "roadmapTitle": "Roadmap",
@@ -490,5 +488,11 @@
     "transactionConfirmedTitleSetUserRoles": "La configuración de roles del usuario ha sido completada",
     "transactionConfirmedDescriptionSetUserRoles": "La configuración de roles del usuario ha sido completada.",
     "transactionFailuredTitleSetUserRoles": "No se completó la configuración de roles del usuario",
-    "transactionFailuredDescriptionSetUserRoles": "Ocurrió una falla configurando roles del usuario."
+    "transactionFailuredDescriptionSetUserRoles": "Ocurrió una falla configurando roles del usuario.",
+
+    "createSolutionsTitle": "Crear soluciones",
+    "createSolutionsDescription": "Próximamente podrás proponer soluciones digitales para conseguir financiación a través de Give4Forest.",
+
+    "newsTitle": "Noticias",
+    "newsDescription": ""
 }

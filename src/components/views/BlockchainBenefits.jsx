@@ -23,12 +23,11 @@ class BlockchainBenefits extends Component {
           direction="row"
           justifyContent="center"
           alignItems="flex-end"
-          spacing={3}
+          spacing={4}
           className={classes.container}>
 
           <Grid item xs={8}>
             <Typography variant="h3"
-              gutterBottom
               className={classes.title}>
               {t('blockchainBenefitsTitle')}
             </Typography>

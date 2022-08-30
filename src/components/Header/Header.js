@@ -12,7 +12,7 @@ import { history } from '@acdi/efem-dapp';
 import ConnectButton from "components/ConnectButton";
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   appBar: {
     display: "flex",
     border: "0",
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     color: "#FFF",
     width: "100%",
     height: '6em',
-    backgroundColor: "rgba(0, 43, 33, 0.8)",
+    backgroundColor: theme.palette.primary.dark,
     transition: "all 150ms ease 0s",
     alignItems: "center",
     flexFlow: "row nowrap",
@@ -63,7 +63,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     height: "50px",
   }
-});
+}));
 
 export default function Header(props) {
   const classes = useStyles();

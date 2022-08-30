@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import backgroundImg from "assets/img/supportG4F.jpg";
 import Typography from '@material-ui/core/Typography';
-import SecondaryButton from 'components/buttons/SecondaryButton';
+import TertiaryButton from 'components/buttons/TertiaryButton';
 
 /**
  * The SupportGive4Forest section
@@ -26,14 +26,14 @@ class SupportGive4Forest extends Component {
 
         <Grid container
           direction="row"
-          justifyContent="center"
+          justifyContent="flex-start"
           alignItems="stretch"
           spacing={0}>
 
           <Grid item xs={6} className={classes.leftItem}>
           </Grid>
 
-          <Grid item xs={6} className={classes.rightItem}>
+          <Grid item xs={4} className={classes.rightItem}>
 
             <Grid container
               direction="row"
@@ -52,9 +52,9 @@ class SupportGive4Forest extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <SecondaryButton onClick={() => this.handleClickDonate()}>
+                <TertiaryButton onClick={() => this.handleClickDonate()}>
                   {t('supportGive4ForestButtonLabel')}
-                </SecondaryButton>
+                </TertiaryButton>
               </Grid>
             </Grid>
           </Grid>
