@@ -120,8 +120,8 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat'
   },
   container: {
-    paddingTop: '55em',
-    paddingBottom: '5em'
+    paddingTop: '12em',
+    paddingBottom: '8em'
   },
   text: {
     color: theme.palette.common.white
