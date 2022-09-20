@@ -1,14 +1,13 @@
 import React from "react";
 import Page from "components/Pages/Page";
 import { withTranslation, Trans } from 'react-i18next'
-import { Grid, Link } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 import aboutBackground from "assets/img/about-background.png";
 import visionMisionBackground from "assets/img/vision-mision-background.png";
 import aboutWhy1Image from "assets/img/about-why-1-image.png";
 import aboutWhy2Image from "assets/img/about-why-2-image.png";
-import aboutWhy3Image from "assets/img/about-why-3-image.png";
 import aboutFeatureFinanciacion from "assets/img/about-feature-financiacion.png";
 import aboutFeatureTecnologia from "assets/img/about-feature-tecnologia.png";
 import aboutFeatureSolucion from "assets/img/about-feature-solucion.png";
@@ -62,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   },
   why: {
     marginTop: '3em',
-    padding: '2em 0px 2em 0px',
+    padding: '2em 0px 0px 0px',
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.common.white
   },
@@ -199,11 +198,8 @@ function AboutPage(props) {
                 <Trans i18nKey="aboutWhy2" components={{ h3: <h3 className={classes.textTitle} /> }} />
               </Typography>
             </Grid>
-            <Grid item xs={5}>
-              <img src={aboutWhy2Image} style={{ width: '100%', height: '20em' }} />
-            </Grid>
-            <Grid item xs={3}>
-              <img src={aboutWhy3Image} style={{ width: '100%', height: '20em' }} />
+            <Grid item xs={8}>
+              <img src={aboutWhy2Image} style={{ width: '100%' }} />
             </Grid>
           </Grid>
         </Grid>
