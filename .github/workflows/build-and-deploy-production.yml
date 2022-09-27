@@ -2,7 +2,7 @@ name: Build and deploy dapp - production
 
 on:
   push:
-    tags: [ '[0-9]+.[0-9]+.[0-9]+' ]
+    branches: [production]
 jobs:
   deploy:
     runs-on: ubuntu-latest
