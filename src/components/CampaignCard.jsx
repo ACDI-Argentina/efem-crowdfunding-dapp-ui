@@ -45,11 +45,11 @@ class CampaignCard extends Component {
       <Card className={classes.root}>
         <CardMedia
           component="img"
-          height="150"
+          height="120"
           image={campaign.imageCidUrl}
         />
-        <CardContent>
-          <Typography variant="h6" gutterBottom>
+        <CardContent className={classes.content}>
+          <Typography variant="subtitle2">
             {campaign.title}
           </Typography>
           <Typography
@@ -102,11 +102,14 @@ const styles = theme => ({
 
   },
   abstract: {
-    height: '7em'
+    height: '6em'
+  },
+  content: {
+    paddingBottom: '0px'
   },
   actions: {
-    marginTop: '0.5em',
-    marginBottom: '1em'
+    marginTop: '0px',
+    marginBottom: '0px'
   },
   actionGridLeft: {
     textAlign: 'right'

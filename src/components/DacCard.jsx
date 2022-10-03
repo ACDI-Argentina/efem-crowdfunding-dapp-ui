@@ -44,12 +44,12 @@ class DacCard extends Component {
         <CardActionArea onClick={this.viewDac}>
           <CardMedia
             component="img"
-            height="150"
+            height="120"
             image={dac.imageCidUrl}
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {getTruncatedText(dac.title, 40)}
+          <CardContent className={classes.content}>
+            <Typography variant="subtitle2">
+              {dac.title}
             </Typography>
             <Typography
               variant="body2"
@@ -98,11 +98,15 @@ const styles = theme => ({
 
   },
   description: {
-    height: '7em'
+    height: '6em'
+  },
+  content: {
+    paddingBottom: '0px'
   },
   actions: {
-    textAlign: 'right'
-  }
+    marginTop: '0px',
+    marginBottom: '0px'
+  },
 });
 
 const mapStateToProps = (state, ownProps) => {

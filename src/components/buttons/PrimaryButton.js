@@ -38,7 +38,8 @@ const styles = theme => ({
       backgroundColor: theme.palette.secondary.light
     },
     margin: '0.5em 0px 0.5em 0px',
-    minWidth: '8em'
+    minWidth: '8em',
+    fontSize: '0.9em'
   }
 });
 

@@ -22,14 +22,14 @@
     "platformFeaturesTitle": "We generate community",
     
     "platformFeatures1Title": "Collaboration",
-    "platformFeatures1Text": "We join forces in a <b>decentralized network</b> for the construction and care of common goods.",
+    "platformFeatures1Text": "We <b>build</b> a decentralized network for the <b>protection</b> and care of <b>natural</b> common goods.",
     "platformFeatures2Title": "Technology",
     "platformFeatures2Text": "We connect <b>digital assets</b> with the sustainable development of our planet.",
     "platformFeatures3Title": "Transparency",
-    "platformFeatures3Text": "We mobilize donations with <b>traceability and incentives</b> for all parties through technology.",
+    "platformFeatures3Text": "We mobilize donations with <b>traceability and incentives</b> for all parties through <b>blockchain</b> technology.",
 
     "blockchainBenefitsTitle": "Blockchain for growth",
-    "blockchainBenefitsDescription": "An open financing platform, without permits, transparent, associated with decentralized certified results.",
+    "blockchainBenefitsDescription": "An open financing platform based on smart contracts secured by the Bitcoin network, that enables transparency and accountability through decentralized and immutable validation.",
 
     "blockchainBenefits1Legend": "Your donation, without commissions",
     "blockchainBenefits2Legend": "Public and real-time traceability",
@@ -427,8 +427,8 @@
     "aboutSubtitle": "About us",
     "aboutTitle": "Give for forest",
     "aboutDescription": "<b>We believe</b> that the communities that inhabit the forests, the wetlands, the grasslands, are the best suited to take care of these global common goods, because their lives depend on them on a daily basis.<br/><br/><b>We continually see</b> how ideas, solutions and ventures based on digital technologies arise in these local communities to help the people who live, work and care for the natural capital of all of us. However, they face structural difficulties on a daily basis for sustainable development and access to financing to undertake their solutions and ideas.<br/><br/><b>We want</b> to help these entrepreneurs to obtain the capital initial initiative to develop and grow their local economies through digital solutions that conserve our planet.",
-    "aboutVision": "<h3>Nuestra visión</h3>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la fuente de progreso de las economías locales en armonía con nuestro planeta.",
-    "aboutMision": "<h3>Nuestra misión</h3>Give for forest nace con el objetivo de vincular la necesidad de financiación temprana de las creaciones y soluciones digitales orientadas a la naturaleza con aquellas personas, empresas e instituciones que creen en la fuerza transformadora de las personas que emprenden y utilizan todo el potencial de las tecnologías digitales para el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
+    "aboutVision": "<h3>Our vision</h3>We imagine a world where collaboration, creativity and innovation are the basis of progress for local economies in harmony with our planet.",
+    "aboutMision": "<h3>Our mision</h3>Give for forest was born with the aim of connecting nature-oriented digital innovations and the early funding they need with those givers -people, companies and institutions- that believe in the revolutionary power of people who undertake and use the full potential of technologies for the growth of local economies and the regeneration of global ecosystems.",
     "aboutFeatureFinanciacion": "Early financing",
     "aboutFeatureTecnologia": "Blockchain technology",
     "aboutFeatureSolucion": "Digital solutions",
@@ -488,7 +488,7 @@
     "transactionFailuredTitleSetUserRoles": "The configuration of user roles was not completed",
     "transactionFailuredDescriptionSetUserRoles": "A failure occurred configuring user roles.",
 
-    "createSolutionsTitle": "Create solucions",
+    "createSolutionsTitle": "Create solutions",
     "createSolutionsDescription": "Soon you will be able to propose digital solutions to obtain financing through Give4Forest.",
 
     "newsTitle": "News",

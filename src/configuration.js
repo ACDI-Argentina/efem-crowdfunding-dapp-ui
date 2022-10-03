@@ -108,31 +108,31 @@ const configurations = {
       {
         name: "Mauricio M.",
         role: "Advisor",
-        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
       },
       {
         name: "Belén Arostegui",
         role: "Marketing & Communications",
-        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        photoCid: "/ipfs/QmeY1PoPu3D6FYqCfE4u6arWHVqfP7RQvc52tD4z4nhTEr",
         link: "https://www.linkedin.com/in/belenarostegui"
       },
       {
         name: "Mauricio Coronel",
         role: "Lead Developer",
-        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        photoCid: "/ipfs/QmYRnbRxUCjAsJ3xUBf7Eo5AKd2TW9TrsNdNnvxtf2dZXV",
         link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
       },
       {
         name: "Lucía B. Cueto",
         role: "Exp. & Program Devel. Manager",
-        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        photoCid: "/ipfs/QmVPoLZQ1rh9FKaB83zWq8RF5gGWpEuxDG1Vah3KjjGbQe",
         link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
       },
       {
         name: "Gonzalo Paz",
         role: "Social Media Manager",
-        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        photoCid: "/ipfs/QmV3f83edWLrJuXXgMy8Jr64gRdHEUWAPZzQNbEDdHSGjL",
         link: 'https://www.linkedin.com/in/gonzalo-paz'
       }
     ]
@@ -222,31 +222,31 @@ const configurations = {
       {
         name: "Mauricio M.",
         role: "Advisor",
-        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
       },
       {
         name: "Belén Arostegui",
         role: "Marketing & Communications",
-        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        photoCid: "/ipfs/QmeY1PoPu3D6FYqCfE4u6arWHVqfP7RQvc52tD4z4nhTEr",
         link: "https://www.linkedin.com/in/belenarostegui"
       },
       {
         name: "Mauricio Coronel",
         role: "Lead Developer",
-        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        photoCid: "/ipfs/QmYRnbRxUCjAsJ3xUBf7Eo5AKd2TW9TrsNdNnvxtf2dZXV",
         link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
       },
       {
         name: "Lucía B. Cueto",
         role: "Exp. & Program Devel. Manager",
-        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        photoCid: "/ipfs/QmVPoLZQ1rh9FKaB83zWq8RF5gGWpEuxDG1Vah3KjjGbQe",
         link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
       },
       {
         name: "Gonzalo Paz",
         role: "Social Media Manager",
-        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        photoCid: "/ipfs/QmV3f83edWLrJuXXgMy8Jr64gRdHEUWAPZzQNbEDdHSGjL",
         link: 'https://www.linkedin.com/in/gonzalo-paz'
       }
     ]
@@ -336,31 +336,31 @@ const configurations = {
       {
         name: "Mauricio M.",
         role: "Advisor",
-        photoCid: "/ipfs/Qmb8h9Jg5GpHfgdASBrckW5GGBAbAXFRQr796z7hsxdPCy",
+        photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
       },
       {
         name: "Belén Arostegui",
         role: "Marketing & Communications",
-        photoCid: "/ipfs/QmYbsAsha5WZbHZCxdTNZKhSExYvFjeZ61t1xpPDQwN15S",
+        photoCid: "/ipfs/QmeY1PoPu3D6FYqCfE4u6arWHVqfP7RQvc52tD4z4nhTEr",
         link: "https://www.linkedin.com/in/belenarostegui"
       },
       {
         name: "Mauricio Coronel",
         role: "Lead Developer",
-        photoCid: "/ipfs/QmRTYoXgu52z5FQsre68QTQmeqj6u111tKqD2N1dDR6DE6",
+        photoCid: "/ipfs/QmYRnbRxUCjAsJ3xUBf7Eo5AKd2TW9TrsNdNnvxtf2dZXV",
         link: "https://www.linkedin.com/in/mauricio-coronel-96189958"
       },
       {
         name: "Lucía B. Cueto",
         role: "Exp. & Program Devel. Manager",
-        photoCid: "/ipfs/Qmc7vFJ1xP9BsdboJCenSiipDaaw53YSQAK3uUYKBqNYHk",
+        photoCid: "/ipfs/QmVPoLZQ1rh9FKaB83zWq8RF5gGWpEuxDG1Vah3KjjGbQe",
         link: 'https://www.linkedin.com/in/luc%C3%ADa-bel%C3%A9n-cueto'
       },
       {
         name: "Gonzalo Paz",
         role: "Social Media Manager",
-        photoCid: "/ipfs/QmUrdwdnoMKK1VqMayMGnajdNWuJUdNTZM1y6a5U2esCbm",
+        photoCid: "/ipfs/QmV3f83edWLrJuXXgMy8Jr64gRdHEUWAPZzQNbEDdHSGjL",
         link: 'https://www.linkedin.com/in/gonzalo-paz'
       }
     ]

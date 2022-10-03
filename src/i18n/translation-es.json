@@ -22,14 +22,14 @@
     "platformFeaturesTitle": "Generamos comunidad",
 
     "platformFeatures1Title": "Colaboración",
-    "platformFeatures1Text": "Unimos fuerzas en una <b>red descentralizada</b> para el cuidado de los bienes comunes.",
+    "platformFeatures1Text": "<b>Construimos</b> una red descentralizada para la <b>protección</b> y cuidado de los bienes comunes <b>naturales</b>.",
     "platformFeatures2Title": "Tecnología",
     "platformFeatures2Text": "Conectamos <b>innovaciones digitales</b> con el crecimiento sostenible de nuestro planeta.",
     "platformFeatures3Title": "Transparencia",
-    "platformFeatures3Text": "Movilizamos donaciones con <b>trazabilidad e incentivos</b> para todas las partes través de la tecnología.",
+    "platformFeatures3Text": "Movilizamos donaciones con <b>trazabilidad e incentivos</b> para todas las partes través de la tecnología <b>blockchain</b>.",
 
     "blockchainBenefitsTitle": "Blockchain para el crecimiento",
-    "blockchainBenefitsDescription": "Una plataforma de financiación abierta, sin permisos, transparente, asociada a resultados certificados descentralizadamente.",
+    "blockchainBenefitsDescription": "Una plataforma de financiación abierta basada en contratos inteligentes asegurados por la red Bitcoin, que permite la transparencia y la responsabilidad a través de una validación descentralizada e inmutable.",
 
     "blockchainBenefits1Legend": "Tu donación, sin comisiones",
     "blockchainBenefits2Legend": "Trazabilidad pública y en tiempo real",
@@ -429,8 +429,8 @@
     "aboutSubtitle": "Nosotros",
     "aboutTitle": "Give for forest",
     "aboutDescription": "<b>Creemos</b> que las comunidades que habitan las selvas, los humedales, las praderas, son las más adecuadas para cuidar estos bienes comunes globales, porque su vida depende diariamente de ellos.<br/><br/><b>Vemos</b> continuamente como en estas comunidades locales surgen ideas, soluciones y emprendimientos basados en tecnologías digitales para ayudar a las personas que habitan, trabajan y cuidan el capital natural de todos nosotros. Sin embargo enfrentan a diario dificultades estructurales para un desarrollo sostenible y el acceso a la financiación para emprender sus soluciones e ideas.<br/><br/><b>Queremos</b> ayudar a estas emprendedoras y emprendedores a conseguir el capital inicial para desarrollar y hacer crecer sus economías locales a través de soluciones digitales que conserven nuestro planeta.",
-    "aboutVision": "<h3>Nuestra visión</h3>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la fuente de progreso de las economías locales en armonía con nuestro planeta.",
-    "aboutMision": "<h3>Nuestra misión</h3>Give for forest nace con el objetivo de vincular la necesidad de financiación temprana de las creaciones y soluciones digitales orientadas a la naturaleza con aquellas personas, empresas e instituciones que creen en la fuerza transformadora de las personas que emprenden y utilizan todo el potencial de las tecnologías digitales para el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
+    "aboutVision": "<h3>Nuestra visión</h3>Imaginamos un mundo donde la colaboración, la creatividad y la innovación sean la base del progreso de las economías locales en armonía con nuestro planeta.",
+    "aboutMision": "<h3>Nuestra misión</h3>Give for forest nace con el objetivo de conectar las innovaciones digitales orientadas a la naturaleza y la financiación temprana que necesitan con aquellos donantes -personas, empresas e instituciones- que creen en el poder revolucionario de las personas que emprenden y utilizan todo el potencial de las tecnologías para la el crecimiento de las economías locales y la regeneración de los ecosistemas globales.",
     "aboutFeatureFinanciacion": "Financiación temprana",
     "aboutFeatureTecnologia": "Tecnología blockchain",
     "aboutFeatureSolucion": "Soluciones digitales",
