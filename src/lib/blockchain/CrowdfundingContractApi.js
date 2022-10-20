@@ -17,6 +17,7 @@ import { web3Manager, transactionManager, web3Utils } from 'commons';
 import { CrowdfundingAbi, ExchangeRateProviderAbi } from '@acdi/give4forest-contract';
 import CrowdfundingUtils from './CrowdfundingUtils';
 import TransactionTracker from './TransactionTracker';
+import currentUserUtils from 'redux/utils/currentUserUtils'
 
 /**
  * API encargada de la interacción con el Crowdfunding Smart Contract.
@@ -56,8 +57,7 @@ class CrowdfundingContractApi {
     saveDac(dac) {
         return new Observable(async subscriber => {
 
-            
-
+            const currentUser = currentUserUtils.getCurrentUser();
 
             let thisApi = this;
 
@@ -69,9 +69,9 @@ class CrowdfundingContractApi {
 
             const clientId = dac.clientId;
 
-            const method = this.crowdfunding.methods.saveDac(infoCid, dacId);
+            const method = this.crowdfunding.methods.saveDac(infoCid, dacId, dac.delegateAddress);
 
-            const gasEstimated = await this.estimateGas(method, { from: dac.delegateAddress });
+            const gasEstimated = await this.estimateGas(method, { from: currentUser.address });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionManager.addTransaction({
@@ -113,7 +113,7 @@ class CrowdfundingContractApi {
             });
 
             const promiEvent = method.send({
-                from: dac.delegateAddress
+                from: currentUser.address
             });
 
             promiEvent
@@ -297,6 +297,8 @@ class CrowdfundingContractApi {
 
         return new Observable(async subscriber => {
 
+            const currentUser = currentUserUtils.getCurrentUser();
+
             let thisApi = this;
 
             const campaignId = campaign.id || 0; //zero is for new campaigns;
@@ -312,10 +314,11 @@ class CrowdfundingContractApi {
             const method = this.crowdfunding.methods.saveCampaign(
                 campaign.infoCid,
                 campaign.dacIds[0],
+                campaign.managerAddress,
                 campaign.reviewerAddress,
                 campaignId);
 
-            const gasEstimated = await this.estimateGas(method, { from: campaign.managerAddress });
+            const gasEstimated = await this.estimateGas(method, { from: currentUser.address });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionManager.addTransaction({
@@ -357,7 +360,7 @@ class CrowdfundingContractApi {
             });
 
             const promiEvent = method.send({
-                from: campaign.managerAddress,
+                from: currentUser.address
             });
 
             promiEvent
@@ -470,6 +473,8 @@ class CrowdfundingContractApi {
 
         return new Observable(async subscriber => {
 
+            const currentUser = currentUserUtils.getCurrentUser();
+
             let thisApi = this;
 
             const milestoneId = milestone.id || 0; //zero is for new milestone;
@@ -491,7 +496,7 @@ class CrowdfundingContractApi {
                 milestoneId
             );
 
-            const gasEstimated = await this.estimateGas(method, { from: milestone.managerAddress });
+            const gasEstimated = await this.estimateGas(method, { from: currentUser.address });
             const gasPrice = await this.getGasPrice();
 
             let transaction = transactionManager.addTransaction({
@@ -533,7 +538,7 @@ class CrowdfundingContractApi {
             });
 
             const promiEvent = method.send({
-                from: milestone.managerAddress
+                from: currentUser.address
             });
 
             promiEvent

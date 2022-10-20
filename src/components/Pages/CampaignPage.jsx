@@ -62,6 +62,10 @@ class CampaignPage extends Component {
 
       categories: campaignInit.categories,
 
+      managerAddress: campaignInit.managerAddress,
+      managerAddressHelperText: '',
+      managerAddressError: false,
+
       reviewerAddress: campaignInit.reviewerAddress,
       reviewerAddressHelperText: '',
       reviewerAddressError: false,
@@ -84,6 +88,7 @@ class CampaignPage extends Component {
     this.handleChangeAvatar = this.handleChangeAvatar.bind(this);
     this.handleChangeCategories = this.handleChangeCategories.bind(this);
     this.handleChangeReviewer = this.handleChangeReviewer.bind(this);
+    this.handleChangeManager = this.handleChangeManager.bind(this);
     this.setFormValid = this.setFormValid.bind(this);
   }
 
@@ -183,6 +188,24 @@ class CampaignPage extends Component {
     });
   }
 
+  handleChangeManager(event) {
+    const { t } = this.props;
+    let managerAddressError = false;
+    let managerAddressHelperText = '';
+    const managerAddress = event.target.value;
+    if (managerAddress === undefined || managerAddress === '') {
+      managerAddressHelperText = t('errorRequired');
+      managerAddressError = true;
+    }
+    this.setState({
+      managerAddress: managerAddress,
+      managerAddressHelperText: managerAddressHelperText,
+      managerAddressError: managerAddressError
+    }, () => {
+      this.setFormValid();
+    });
+  }
+
   handleChangeReviewer(event) {
     const { t } = this.props;
     let reviewerAddressError = false;
@@ -203,7 +226,7 @@ class CampaignPage extends Component {
   }
 
   setFormValid() {
-    const { title, abstract, description, url, reviewerAddress } = this.state;
+    const { title, abstract, description, url, managerAddress, reviewerAddress } = this.state;
     let formValid = true;
     if (title === undefined || title === '') {
       formValid = false;
@@ -217,6 +240,9 @@ class CampaignPage extends Component {
     if (url === undefined || url === '') {
       formValid = false;
     } else if (!validatorUtils.isValidUrl(url)) {
+      formValid = false;
+    }
+    if (managerAddress === undefined || managerAddress === '') {
       formValid = false;
     }
     if (reviewerAddress === undefined || reviewerAddress === '') {
@@ -245,6 +271,7 @@ class CampaignPage extends Component {
     campaign.url = this.state.url;
     campaign.categories = this.state.categories;
     campaign.image = this.state.avatarPreview;
+    campaign.managerAddress = this.state.managerAddress;
     campaign.reviewerAddress = this.state.reviewerAddress;
 
     console.log('Guardado de Campaign', campaign);
@@ -383,7 +410,7 @@ class CampaignPage extends Component {
                             }}
                             error={urlError}
                             required
-                            inputProps={{ maxLength: 42 }}
+                            inputProps={{ maxLength: 256 }}
                           />
                         </Grid>
 
@@ -393,6 +420,17 @@ class CampaignPage extends Component {
                             value={this.state.categories}
                             onChange={this.handleChangeCategories}>
                           </SelectCategories>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <SelectUsers
+                            id="managerAddress"
+                            label={t('campaignManager')}
+                            value={this.state.managerAddress}
+                            roles={[config.CAMPAIGN_MANAGER_ROLE]}
+                            onChange={this.handleChangeManager}
+                            helperText={this.state.managerAddressHelperText}>
+                          </SelectUsers>
                         </Grid>
 
                         <Grid item xs={12}>

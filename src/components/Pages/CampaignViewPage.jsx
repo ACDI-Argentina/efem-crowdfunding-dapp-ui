@@ -101,10 +101,22 @@ class CampaignViewPage extends Component {
               <Typography variant="subtitle2"
                 color="textPrimary"
                 gutterBottom>
+                {t('campaignManager')}
+              </Typography>
+              <ProfileCardMini address={campaign.managerAddress} />
+            </Grid>
+            
+            <Grid item xs={12}>
+              <Typography variant="subtitle2"
+                color="textPrimary"
+                gutterBottom>
                 {t('campaignReviewer')}
               </Typography>
               <ProfileCardMini address={campaign.reviewerAddress} />
             </Grid>
+
+            
+
           </Grid>
         )
       }];

@@ -440,7 +440,7 @@ class MilestonePage extends Component {
                             }}
                             error={urlError}
                             required
-                            inputProps={{ maxLength: 42 }}
+                            inputProps={{ maxLength: 256 }}
                           />
                         </Grid>
 
