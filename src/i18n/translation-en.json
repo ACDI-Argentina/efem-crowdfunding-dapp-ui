@@ -16,20 +16,20 @@
     "landingPageCrearSoluciones": "Create solutions",
 
     "knowPlatform1": "Give for Forest",
-    "knowPlatform2": " activates the digital innovations arising from the local communities themselves, through the trust of Blockchain technology. With better technologies they will be able to take better care of the forests, and the forests will continue to take care of all of us.",
+    "knowPlatform2": " stimulates digital innovations arising from the local communities, through the reliability of Blockchain technology. Better technologies will enable them to take better care of forests and they will continue to take care of us all.",
     "knowPlatformKnowMoreButton": "Learn more",
 
-    "platformFeaturesTitle": "We generate community",
+    "platformFeaturesTitle": "We build community",
     
     "platformFeatures1Title": "Collaboration",
     "platformFeatures1Text": "We <b>build</b> a decentralized network for the <b>protection</b> and care of <b>natural</b> common goods.",
     "platformFeatures2Title": "Technology",
-    "platformFeatures2Text": "We connect <b>digital assets</b> with the sustainable development of our planet.",
+    "platformFeatures2Text": "We connect <b>digital innovatios</b> with the right sustainable development of our planet.",
     "platformFeatures3Title": "Transparency",
     "platformFeatures3Text": "We mobilize donations with <b>traceability and incentives</b> for all parties through <b>blockchain</b> technology.",
 
     "blockchainBenefitsTitle": "Blockchain for growth",
-    "blockchainBenefitsDescription": "An open financing platform based on smart contracts secured by the Bitcoin network, that enables transparency and accountability through decentralized and immutable validation.",
+    "blockchainBenefitsDescription": "An open financing platform based on smart contracts secured by the Bitcoin network, which enables transparency and liability through out decentralized and immutable validation.",
 
     "blockchainBenefits1Legend": "Your donation, without commissions",
     "blockchainBenefits2Legend": "Public and real-time traceability",
@@ -46,7 +46,7 @@
     "blockchainSecurityBenefitDescription": "No one will ask you for more information than you want to give.",
 
     "supportGive4ForestTitle": "Do you want to help us grow?",
-    "supportGive4ForestText": "You can collaborate with our mission and the growth of the platform by contributing to Give for forest.",
+    "supportGive4ForestText": "By contributing to Give for Forest you are collaborating with our mission and at the same time helps the growth of the platform.",
     "supportGive4ForestButtonLabel": "Support G4F",
 
     "relatedServices": "Related services",
@@ -423,19 +423,19 @@
     "categoryAllLabel": "All",
     "category1Label": "Apps",
     "category2Label": "Dapps",
-    "category3Label": "Accessibility",
+    "category3Label": "Connectivity",
 
     "aboutSubtitle": "About us",
     "aboutTitle": "Give for forest",
-    "aboutDescription": "<b>We believe</b> that the communities that inhabit the forests, the wetlands, the grasslands, are the best suited to take care of these global common goods, because their lives depend on them on a daily basis.<br/><br/><b>We continually see</b> how ideas, solutions and ventures based on digital technologies arise in these local communities to help the people who live, work and care for the natural capital of all of us. However, they face structural difficulties on a daily basis for sustainable development and access to financing to undertake their solutions and ideas.<br/><br/><b>We want</b> to help these entrepreneurs to obtain the capital initial initiative to develop and grow their local economies through digital solutions that conserve our planet.",
-    "aboutVision": "<h3>Our vision</h3>We imagine a world where collaboration, creativity and innovation are the basis of progress for local economies in harmony with our planet.",
-    "aboutMision": "<h3>Our mision</h3>Give for forest was born with the aim of connecting nature-oriented digital innovations and the early funding they need with those givers -people, companies and institutions- that believe in the revolutionary power of people who undertake and use the full potential of technologies for the growth of local economies and the regeneration of global ecosystems.",
+    "aboutDescription": "<b>We strongly believe</b> the communities which inhabit forests, wetlands and meadows are the best suited to take care of these shared and common global resources, given that their lives depend continuously on them.<br/><br/><b>We constantly see</b> how these local communities develop  new ideas, solutions and possible ventures based on digital technologies with the aim of helping the people who live, work and care for this shared natural capital. Unfortunately,  they face both structural difficulties for sustainable development and access to financing in order for them to undertake their possible solutions and ideas.<br/><br/><b>Our objective is</b> to help these entrepreneurs to obtain the initial capital necessary to develop and grow their local economies through digital solutions that preserve our planet.",
+    "aboutVision": "<h3>Our vision</h3>We imagine a world where collaboration, creativity and innovation are key stone of progress for local economies in harmony with our planet.",
+    "aboutMision": "<h3>Our mision</h3>Give for forest was born with the aim of connecting nature-oriented digital innovations and the early funding needed with those givers -people, companies and institutions- that believe in the revolutionary power of people who undertake and use the full potential of technologies for the growth of local economies and the regeneration of global ecosystems.",
     "aboutFeatureFinanciacion": "Early financing",
     "aboutFeatureTecnologia": "Blockchain technology",
     "aboutFeatureSolucion": "Digital solutions",
     "aboutFeatureDesarrollo": "Preservation, development, regeneration",
-    "aboutWhy1": "<h3>Why forests?</h3><br/>For us <strong>Forest</strong> is a word simplification of all natural environments sources of health for our planet. Our health depends on the health of nature and its care and regeneration, the tool to deal with climate change. However, we see daily how these environments are neglected, destroyed and misused, immediately affecting the communities that inhabit them and sooner or later all of humanity.",
-    "aboutWhy2": "<h3>The technology revolution</h3><br/>Sustainable development it needs a technological revolution and a human evolution that is more supportive and connected with nature.<br/>We believe that blockchain technology, crypto economy and decentralized finance tools can provide innovative solutions to harness large-scale financial resources and direct them towards ventures that drive a green economy.",
+    "aboutWhy1": "<h3>Why forests?</h3><br/><strong>Forest</strong> is a word simplification of all natural environment sources of health for the planet. People's health depends on nature's care and regeneration, which is the known tool to deal with climate change. However, these environments are repeatedly neglected, destroyed and misused, affecting the communities that inhabit them and piecemeal all humanity.",
+    "aboutWhy2": "<h3>The technology revolution</h3><br/>A sustainable development needs technological revolution and human evolution  to be more supportive and connected with nature.<br/>We believe that blockchain technology, crypto economy and decentralized finance tools can provide innovative solutions to pull large scale financial resources and  point them towards ventures that drive a green economy.",
     "aboutUsTeam": "Team",
 
     "roadmapTitle": "Roadmap",
