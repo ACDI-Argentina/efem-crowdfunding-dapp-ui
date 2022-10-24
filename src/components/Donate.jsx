@@ -22,7 +22,6 @@ import TokenAvatar from './TokenAvatar';
 import { web3Utils } from 'commons';
 import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
-import ProfilePopup from './ProfilePopup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
@@ -34,6 +33,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ProfileCardMini from './ProfileCardMini';
 import { InputField } from '@acdi/efem-dapp';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
+import { history } from '@acdi/efem-dapp';
 
 const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
 
@@ -48,7 +48,6 @@ class Donate extends Component {
     let tokenConfig = TokenUtils.getTokenConfig(config.nativeToken.address);
     this.state = {
       open: false,
-      showProfilePopup: false,
       tokenAddress: tokenConfig.address,
       donateInputProps: {
         step: tokenConfig.donateStep,
@@ -179,7 +178,8 @@ class Donate extends Component {
     const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
 
     if (dollarsAmount > ANONYMOUS_DONATION_THRESHOLD && !currentUser.hasCompleteProfile()) {
-      this.setState({ showProfilePopup: true })
+      // Se requiere registración.
+      history.push(`/profile`);
     } else {
       const donation = new Donation();
       donation.entityId = entityId;
@@ -204,7 +204,7 @@ class Donate extends Component {
   }
 
   render() {
-    const { open, tokenAddress, amount, donateInputProps, showProfilePopup } = this.state;
+    const { open, tokenAddress, amount, donateInputProps } = this.state;
     const { title, description, entityCard, enabled, currentUser, classes, t } = this.props;
 
     let tokenSelectedSymbol = TokenUtils.getTokenConfig(tokenAddress).symbol;
@@ -244,7 +244,7 @@ class Donate extends Component {
     );
 
     let isEnabled = false;
-    if (enabled && currentUser && currentUser.authenticated) {
+    if (enabled) {
       isEnabled = true;
     }
 
@@ -341,17 +341,7 @@ class Donate extends Component {
               </Grid>
             </Grid>
           </div>
-          {showProfilePopup &&
-            (
-              <ProfilePopup
-                open={true}
-                requireFullProfile={true}
-                handleClose={() => { this.setState({ showProfilePopup: false }) }}
-                handleSubmit={() => { this.setState({ showProfilePopup: false }) }}
-              ></ProfilePopup>
-            )}
         </Dialog>
-
       </div >
     );
   }

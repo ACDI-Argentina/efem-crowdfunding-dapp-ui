@@ -1,40 +1,54 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles';
+import { Card, CardHeader } from '@material-ui/core';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Typography from '@material-ui/core/Typography';
+import { web3Utils } from 'commons';
 
 class ProfileCardMiniAnonymous extends Component {
 
     render() {
-        const { address, namePosition, classes, t } = this.props;
-        const descriptionClass = namePosition === "left" || namePosition === "right" ? "" : "small";
+        const { address, classes, t } = this.props;
         return (
-            <div>
-                <Link className={`profile-card ${namePosition}`} to={`/profile/${address}`}>
-                    <Avatar src={require("assets/img/default-user-icon.png")} className={classes.logo} />
-                    <p className={`description ${descriptionClass}`}>
-                        {t('userAnonymous')}
-                    </p>
-                </Link>
-            </div>
+            <Card className={classes.root}>
+                <CardActionArea>
+                    <CardHeader
+                        title={
+                            t('userAnonymous')
+                        }
+                        subheader={
+                            <Typography variant="caption" noWrap>
+                                {web3Utils.abbreviateAddress(address)}
+                            </Typography>
+                        }
+                        avatar={
+                            <Avatar src={require("assets/img/default-user-icon.png")}
+                                className={classes.avatar}>
+                            </Avatar>
+                        }>
+                    </CardHeader>
+                </CardActionArea>
+            </Card>
         );
     }
 }
 
 ProfileCardMiniAnonymous.propTypes = {
-    address: PropTypes.string,
-    namePosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    address: PropTypes.string
 };
 
 ProfileCardMiniAnonymous.defaultProps = {
-    namePosition: 'bottom'
 };
 
 const styles = theme => ({
-    logo: {
+    root: {
+        /*minWidth: 275,*/
+    },
+    avatar: {
         width: theme.spacing(6),
         height: theme.spacing(6),
     }
