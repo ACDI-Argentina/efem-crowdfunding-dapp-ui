@@ -177,6 +177,14 @@ class Donate extends Component {
     const centsFiatAmount = amountWei.dividedBy(rate);
     const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
 
+    console.log('handleDonate: amount', amount);
+    console.log('handleDonate: rate', rate);
+    console.log('handleDonate: amountWei', amountWei);
+    console.log('handleDonate: centsFiatAmount', centsFiatAmount);
+    console.log('handleDonate: dollarsAmount', dollarsAmount);
+    console.log('handleDonate: ANONYMOUS_DONATION_THRESHOLD', ANONYMOUS_DONATION_THRESHOLD);
+    console.log('handleDonate: currentUser.hasCompleteProfile()', currentUser.hasCompleteProfile());
+
     if (dollarsAmount > ANONYMOUS_DONATION_THRESHOLD && !currentUser.hasCompleteProfile()) {
       // Se requiere registración.
       history.push(`/profile`);
