@@ -95,7 +95,7 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 5000,
+    anonymousDonationThreshold: 1000000,
     dac: {
       defaultId: 1
     },
@@ -209,7 +209,7 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 10000,
+    anonymousDonationThreshold: 1000000,
     dac: {
       defaultId: 1
     },
@@ -323,7 +323,7 @@ const configurations = {
     tokenExchangeRate: {
       updateInterval: 60000
     },
-    anonymousDonationThreshold: 10000,
+    anonymousDonationThreshold: 1000000,
     dac: {
       defaultId: 1
     },

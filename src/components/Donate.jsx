@@ -24,7 +24,6 @@ import { selectCurrentUser } from '../redux/reducers/currentUserSlice'
 import FiatAmountByToken from './FiatAmountByToken';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import { selectExchangeRateByToken } from '../redux/reducers/exchangeRatesSlice';
 import { Web3AppContext } from 'lib/blockchain/Web3App';
 import TokenUtils from 'utils/TokenUtils';
 import { dropShadowButton } from 'assets/jss/material-kit-react/components/customButtonStyle';
@@ -34,8 +33,10 @@ import ProfileCardMini from './ProfileCardMini';
 import { InputField } from '@acdi/efem-dapp';
 import OnlyCorrectNetwork from './OnlyCorrectNetwork';
 import { history } from '@acdi/efem-dapp';
+import BigNumber from 'bignumber.js';
+import exchangeRateUtils from "../redux/utils/exchangeRateUtils";
 
-const ANONYMOUS_DONATION_THRESHOLD = config.anonymousDonationThreshold;
+const ANONYMOUS_DONATION_THRESHOLD = new BigNumber(config.anonymousDonationThreshold);
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -49,6 +50,7 @@ class Donate extends Component {
     this.state = {
       open: false,
       tokenAddress: tokenConfig.address,
+      rate: exchangeRateUtils.getExchangeRateByTokenAddress(tokenConfig.address).rate,
       donateInputProps: {
         step: tokenConfig.donateStep,
         min: 0,
@@ -123,10 +125,12 @@ class Donate extends Component {
     let tokenAddress = event.target.value;
     let donateInputProps = this.state.donateInputProps;
     let tokenConfig = TokenUtils.getTokenConfig(tokenAddress);
+    let rate = exchangeRateUtils.getExchangeRateByTokenAddress(tokenAddress).rate;
     donateInputProps.step = tokenConfig.donateStep;
 
     this.setState({
       tokenAddress: tokenAddress,
+      rate: rate,
       amount: 0,
       donateInputProps: donateInputProps
     });
@@ -170,22 +174,22 @@ class Donate extends Component {
   };
 
   handleDonate() {
-    const { tokenAddress, amount } = this.state;
-    const { entityId, currentUser, addDonation, rate } = this.props;
+    const { tokenAddress, rate, amount } = this.state;
+    const { entityId, currentUser, addDonation } = this.props;
 
     const amountWei = web3Utils.etherToWei(amount);
     const centsFiatAmount = amountWei.dividedBy(rate);
-    const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
+    //const dollarsAmount = centsFiatAmount.dividedBy(100).toNumber();
 
-    console.log('handleDonate: amount', amount);
+    /*console.log('handleDonate: amount', amount);
     console.log('handleDonate: rate', rate);
     console.log('handleDonate: amountWei', amountWei);
     console.log('handleDonate: centsFiatAmount', centsFiatAmount);
     console.log('handleDonate: dollarsAmount', dollarsAmount);
     console.log('handleDonate: ANONYMOUS_DONATION_THRESHOLD', ANONYMOUS_DONATION_THRESHOLD);
-    console.log('handleDonate: currentUser.hasCompleteProfile()', currentUser.hasCompleteProfile());
+    console.log('handleDonate: currentUser.hasCompleteProfile()', currentUser.hasCompleteProfile());*/
 
-    if (dollarsAmount > ANONYMOUS_DONATION_THRESHOLD && !currentUser.hasCompleteProfile()) {
+    if (centsFiatAmount.isGreaterThan(ANONYMOUS_DONATION_THRESHOLD) && !currentUser.hasCompleteProfile()) {
       // Se requiere registración.
       history.push(`/profile`);
     } else {
@@ -400,8 +404,7 @@ const styles = theme => ({
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentUser: selectCurrentUser(state),
-    rate: (selectExchangeRateByToken(state, ownProps.tokenAddress || config.nativeToken.address))?.rate
+    currentUser: selectCurrentUser(state)
   }
 }
 
