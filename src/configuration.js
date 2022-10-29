@@ -52,7 +52,7 @@ const configurations = {
     sendErrors: true,
     analytics: {
       ga_UA: 'UA-136337883-3',
-      useGoogleAnalytics: true,
+      useGoogleAnalytics: false,
       useHotjar: false,
     },
     nativeTokenName: 'RBTC',
@@ -166,7 +166,7 @@ const configurations = {
     sendErrors: true,
     analytics: {
       ga_UA: 'UA-136337883-2',
-      useGoogleAnalytics: true,
+      useGoogleAnalytics: false,
       useHotjar: false,
     },
     nativeTokenName: 'RBTC',
@@ -279,7 +279,7 @@ const configurations = {
     ipfsPinningEnabled: true,
     sendErrors: true,
     analytics: {
-      ga_UA: 'UA-136337883-1',
+      ga_UA: 'GTM-WT6VFH7',
       useGoogleAnalytics: true,
       useHotjar: false,
     },
