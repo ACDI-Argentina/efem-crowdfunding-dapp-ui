@@ -34,15 +34,14 @@ class MilestonePage extends Component {
   constructor(props) {
     super(props);
 
-    const { currentUser, milestone } = this.props;
+    const { currentUser, campaign, milestone } = this.props;
 
     let milestoneInit = milestone;
     if (!milestone) {
       // Nuevo milestone
       milestoneInit = new Milestone({
-        //campaignReviewerAddress: campaign.reviewerAddress,
-        //campaignId: campaign.id,
-        managerAddress: currentUser.address,
+        // Se carga el campo manager y campaign reviewer, pero se toma el Campaign Manager y Campaign Reviewer
+        // para futuras referencias al Manager y Campaign Reviewer.
         status: Milestone.PENDING
       });
     }
@@ -292,6 +291,7 @@ class MilestonePage extends Component {
     if (campaign && !milestone.campaignId) {
       // Es un nuevo Milestone.
       milestone.campaignId = campaign.id;
+      milestone.managerAddress = campaign.managerAddress;
       milestone.campaignReviewerAddress = campaign.reviewerAddress;
     }
 
