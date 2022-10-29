@@ -315,6 +315,7 @@
     "menuSignup":"Sign up" ,
 
     "aboutUs":"ABOUT US",
+    "solutions":"SOLUTIONS",
     "faq": "FAQs",
 
     "sponsorTap1Title": "Partners",
@@ -492,6 +493,8 @@
     "createSolutionsTitle": "Create solutions",
     "createSolutionsDescription": "Soon you will be able to propose digital solutions to obtain financing through Give4Forest.",
 
+    "viewSolutionsTitle": "Solutions",
+    
     "newsTitle": "News",
     "newsDescription": ""
 }

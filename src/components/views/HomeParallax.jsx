@@ -10,10 +10,7 @@ import { container } from "assets/jss/material-kit-react.js";
 import parallaxBkg from "assets/img/landing-bg.jpg";
 
 const handleClickVerSoluciones = () => {
-    history.push({
-        pathname: ``,
-        hash: `#campaigns`
-    });
+    history.push('/view-solutions')
 };
 
 const handleClickCrearSoluciones = () => {

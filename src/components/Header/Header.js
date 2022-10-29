@@ -73,6 +73,10 @@ export default function Header(props) {
     history.push(`/about`);
   };
 
+  const handleClickSolutions = () => {
+    history.push(`/view-solutions`);
+  };
+
   const handleClickFAQ = () => {
     history.push(`/faq`);
   };
@@ -107,6 +111,14 @@ export default function Header(props) {
             sx={{ m: 2, color: 'white', display: 'block' }}
           >
             {t('aboutUs')}
+          </HeaderButton>
+          <HeaderButton
+            variant="text"
+            size="small"
+            onClick={handleClickSolutions}
+            sx={{ m: 2, color: 'white', display: 'block' }}
+          >
+            {t('solutions')}
           </HeaderButton>
           <HeaderButton
             variant="text"

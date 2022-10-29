@@ -14,6 +14,7 @@ import DacViewPage from 'components/Pages/DacViewPage';
 import UsersPage from 'components/Pages/UsersPage'
 import UserPage from 'components/Pages/UserPage'
 import CreateSolutionsPage from 'components/Pages/CreateSolutionsPage';
+import ViewSolutionsPage from 'components/Pages/ViewSolutionsPage';
 import NewsPage from 'components/Pages/NewsPage';
 
 const Profile = React.lazy(() => import('../components/views/Profile/Profile'));
@@ -36,6 +37,9 @@ const SwitchRoutes = ({ currentUser }) => (
 
       <Route path="/create-solutions"
         render={(props) => <CreateSolutionsPage {...props} />} />
+
+      <Route path="/view-solutions"
+        render={(props) => <ViewSolutionsPage {...props} />} />
 
       <Route path="/news"
         render={(props) => <NewsPage {...props} />} />
