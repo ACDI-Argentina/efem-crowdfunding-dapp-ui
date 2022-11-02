@@ -106,7 +106,7 @@ const configurations = {
     ],
     team: [
       {
-        name: "Mauricio M.",
+        name: "Mauricio Moresco",
         role: "Advisor",
         photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
@@ -220,7 +220,7 @@ const configurations = {
     ],
     team: [
       {
-        name: "Mauricio M.",
+        name: "Mauricio Moresco",
         role: "Advisor",
         photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
@@ -334,7 +334,7 @@ const configurations = {
     ],
     team: [
       {
-        name: "Mauricio M.",
+        name: "Mauricio Moresco",
         role: "Advisor",
         photoCid: "/ipfs/QmXn1X7oA4SukMUaFs8uswdAHPkLwAqeWwqbpJGnwANCwW",
         link: "https://www.linkedin.com/in/mauriciomoresco"
