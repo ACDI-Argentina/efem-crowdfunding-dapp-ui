@@ -53,7 +53,7 @@
     "react-dom": "^18.1.0",
     "react-easy-crop": "^3.5.3",
     "react-flagkit": "^2.0.3",
-    "react-ga": "^2.5.3",
+    "react-ga": "^3.3.1",
     "react-helmet": "^5.2.0",
     "react-html-parser": "^2.0.2",
     "react-i18next": "^11.7.2",

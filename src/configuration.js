@@ -51,8 +51,8 @@ const configurations = {
     ipfsPinningEnabled: true,
     sendErrors: true,
     analytics: {
-      ga_UA: 'UA-136337883-3',
-      useGoogleAnalytics: false,
+      ga_UA: 'G-6E07QXXD3E',
+      useGoogleAnalytics: true,
       useHotjar: false,
     },
     nativeTokenName: 'RBTC',
@@ -279,7 +279,7 @@ const configurations = {
     ipfsPinningEnabled: true,
     sendErrors: true,
     analytics: {
-      ga_UA: 'GTM-WT6VFH7',
+      ga_UA: 'G-6E07QXXD3E',
       useGoogleAnalytics: true,
       useHotjar: false,
     },
