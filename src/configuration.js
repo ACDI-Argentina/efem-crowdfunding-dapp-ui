@@ -52,7 +52,7 @@ const configurations = {
     sendErrors: true,
     analytics: {
       ga_UA: 'G-6E07QXXD3E',
-      useGoogleAnalytics: true,
+      useGoogleAnalytics: false,
       useHotjar: false,
     },
     nativeTokenName: 'RBTC',
@@ -280,7 +280,7 @@ const configurations = {
     sendErrors: true,
     analytics: {
       ga_UA: 'G-6E07QXXD3E',
-      useGoogleAnalytics: true,
+      useGoogleAnalytics: false,
       useHotjar: false,
     },
     nativeTokenName: 'RBTC',
