@@ -187,8 +187,8 @@ class UserProfilePage extends Component {
     let urlHelperText = '';
     const url = event.target.value;
     if (url === undefined || url === '') {
-      urlHelperText = t('errorRequired');
-      urlError = true;
+      //urlHelperText = t('errorRequired');
+      //urlError = true;
     } else if (!validatorUtils.isValidUrl(url)) {
       urlHelperText = t('errorInvalidUrl');
       urlError = true;
@@ -222,7 +222,7 @@ class UserProfilePage extends Component {
       formValid = false;
     }
     if (url === undefined || url === '') {
-      formValid = false;
+      //formValid = false;
     } else if (!validatorUtils.isValidUrl(url)) {
       formValid = false;
     }
@@ -374,7 +374,6 @@ class UserProfilePage extends Component {
                             shrink: true,
                           }}
                           error={urlError}
-                          required
                           inputProps={{ maxLength: 42 }}
                         />
                       </Grid>
