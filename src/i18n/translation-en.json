@@ -246,7 +246,7 @@
     "transactionCreatedSubtitleDonate": "Double check the details here – your donation can't be refunded.",
     "transactionPendingTitleDonate": "Donating...",
     "transactionConfirmedTitleDonate": "The donation has been confirmed",
-    "transactionConfirmedDescriptionDonate": "Thank you very much for your donation!",
+    "transactionConfirmedDescriptionDonate": "Thank you very much for your commitment! Remember to fill out your email in your profile to receive your Proof of Donation NFT.",
     "transactionFailuredTitleDonate": "The donation was not confirmed",
     "transactionFailuredDescriptionDonate": "A failure occurred during donation.",
 

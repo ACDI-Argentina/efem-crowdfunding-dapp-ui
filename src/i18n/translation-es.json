@@ -246,7 +246,7 @@
     "transactionCreatedSubtitleDonate": "Verifique los detalles aquí - su donación no puede ser reembolsada.",
     "transactionPendingTitleDonate": "Donando...",
     "transactionConfirmedTitleDonate": "La donación ha sido confirmada",
-    "transactionConfirmedDescriptionDonate": "¡Muchas gracias por su ayuda!",
+    "transactionConfirmedDescriptionDonate": "Muchas gracias por tu compromiso! Recordá completar tu mail en tu perfil para recibir tu NFT Prueba de Donación.",
     "transactionFailuredTitleDonate": "La donación no fue confirmada",
     "transactionFailuredDescriptionDonate": "Ocurrió una falla durante la donación.",
 
