@@ -23,7 +23,7 @@ class PlatformFeatures extends Component {
           direction="row"
           justifyContent="center"
           alignItems="flex-end"
-          spacing={10}
+          spacing={5}
           className={classes.container}>
 
           <Grid item xs={8}>
@@ -107,6 +107,32 @@ class PlatformFeatures extends Component {
               </Grid>
             </Grid>
           </Grid>
+
+          <Grid item xs={8}>
+
+            <Grid container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={5}>
+
+              <Grid item xs={5}>
+                <Typography variant="h4"
+                  className={classes.text}
+                  gutterBottom>
+                  {t('platformFeatures4Title')}
+                </Typography>
+                <Typography variant="body1"
+                  className={classes.text}>
+                  <Trans i18nKey="platformFeatures4Text" components={{ b: <b /> }} />
+                </Typography>
+              </Grid>
+
+              <Grid item xs={6} style={{ textAlign: 'right' }}>
+                <img src={require("assets/img/platformFeatures4.png")} className={classes.image} />
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
       </div>
     )
@@ -127,7 +153,7 @@ const styles = theme => ({
     color: theme.palette.common.white
   },
   image: {
-    width: "100%"
+    width: "80%"
   }
 });
 
