@@ -117,7 +117,7 @@ export default function Sponsors() {
             </Grid>
             <Grid item xs={12} sm={6} md={3} className={classes.sponsorGrid}>
               <Sponsor url="https://www.rsk.co"
-                logoPath={require("assets/img/logos/rsk.svg")}
+                logoPath={require("assets/img/logos/rootstock.svg")}
                 name={t('sponsorRsk')}
                 shadowRight={true}>
               </Sponsor>
